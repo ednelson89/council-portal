@@ -23,6 +23,38 @@
         </p>
       </b-col>
     </b-row>
+    <hr style="width:90%;" />
+    <b-row>
+      <b-col cols>
+        <p>To Do:</p>
+        <ul>
+          <li>
+            <p>Build a campaign list page</p>
+          </li>
+          <li>
+            <p>Build a character list page</p>
+          </li>
+          <li>
+            <p>Build a campaign creation page or form</p>
+          </li>
+          <li>
+            <p>Build a character creation component that can be used both at char summary and campaign page.</p>
+          </li>
+          <li>
+            <p>Build a campaign summary page</p>
+          </li>
+          <li>
+            <p>Build a character summary page</p>
+          </li>
+          <li>
+            <p>Implement basic users</p>
+          </li>
+          <li>
+            <p>Apply character and game data to users</p>
+          </li>
+        </ul>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
