@@ -1,12 +1,24 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
-    </div>
+    <v-app>
+      <navigation></navigation>
+      <v-content>
+        <v-container fluid>
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
+        </v-container>
+      </v-content>
+    </v-app>
   </div>
 </template>
+
+<script>
+import navigation from "@/components/common/Navigation.vue";
+export default {
+  components: { navigation }
+};
+</script>
 
 <style>
 #app {
