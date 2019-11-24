@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
+    absolute
     :height="'100vh'"
     :mini-variant.sync="mini"
     permanent

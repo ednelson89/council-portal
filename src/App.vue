@@ -1,13 +1,24 @@
 <template>
   <div id="app">
-    <v-app>
+    <v-app :style="{'background-image': 'url(' + require('./assets/background_texture.png') + ')'}">
       <navigation></navigation>
       <v-content>
-        <v-container fluid>
-          <keep-alive>
-            <router-view></router-view>
-          </keep-alive>
-        </v-container>
+        <b-container fluid>
+          <b-row align="center" justify="start">
+            <b-col md="9" offset-md="1" xs="11" offset-xs="1">
+              <div class="main-content">
+                <keep-alive>
+                  <router-view></router-view>
+                </keep-alive>
+              </div>
+            </b-col>
+            <b-col xs="11" offset-xs="1" md="2">
+              <div class="side-content">
+                <p>Right Column</p>
+              </div>
+            </b-col>
+          </b-row>
+        </b-container>
       </v-content>
     </v-app>
   </div>
@@ -15,8 +26,12 @@
 
 <script>
 import navigation from "@/components/common/Navigation.vue";
+
 export default {
-  components: { navigation }
+  components: { navigation },
+  data() {
+    return {};
+  }
 };
 </script>
 
@@ -28,17 +43,6 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+</style>
+<style src="./css/main.css">
 </style>
