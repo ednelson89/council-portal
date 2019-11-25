@@ -11,7 +11,7 @@
         <p>Here you can create campaigns. Select the system from the list below to get started.</p>
       </b-col>
       <b-col cols="4">
-        <router-link tag="b-button" class="cardButton" to="-">Go Back</router-link>
+        <router-link tag="b-button" class="cardButton" to="/campaigns">Go Back</router-link>
       </b-col>
     </b-row>
     <hr style="width:90%" />
@@ -121,15 +121,16 @@ export default {
     addGame() {
       this.gameModel.gameDate = this.getDate();
       this.$store.commit("addGame", this.gameModel);
-      this.clearModel();
       this.$router.push({ path: "/campaigns" });
     },
     clearModel() {
-      var game = this.gameModel;
-      game.gameType = "";
-      game.gameName = "";
-      game.gameDesc = "";
+      this.gameModel.gameType = "";
+      this.gameModel.gameName = "";
+      this.gameModel.gameDesc = "";
     }
+  },
+  mounted() {
+    this.clearModel();
   }
 };
 </script>

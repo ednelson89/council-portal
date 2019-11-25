@@ -6,9 +6,7 @@
         <b-row align="center" justify="start">
           <b-col md="9" offset-md="1" xs="11" offset-xs="1">
             <div class="main-content">
-              <keep-alive>
-                <router-view></router-view>
-              </keep-alive>
+              <router-view></router-view>
             </div>
           </b-col>
           <b-col xs="11" offset-xs="1" md="2">
