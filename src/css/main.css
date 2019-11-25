@@ -16,8 +16,26 @@ h1 {
   color: #000 !important;
   text-align: left !important;
 }
-
+h2 {
+  color: #000 !important;
+  text-align: left !important;
+}
 p {
   color: #000 !important;
   text-align: left !important;
+}
+
+/* UI Components */
+.b-cards {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.cardButton {
+  background-color: #183653 !important;
+  border: 1px #183653 solid !important;
+  color: #fff !important;
+}
+.cardButton:hover {
+  background-color: #fff !important;
+  border: 1px #183653 solid !important;
+  color: #183653 !important;
 }

@@ -26,11 +26,17 @@
 
 <script>
 import navigation from "@/components/common/Navigation.vue";
+import games from "@/data/campaignList.js";
 
 export default {
   components: { navigation },
   data() {
-    return {};
+    return {
+      gameList: games
+    };
+  },
+  created() {
+    this.$store.commit("setGames", this.gameList);
   }
 };
 </script>
