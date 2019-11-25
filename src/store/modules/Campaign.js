@@ -12,6 +12,9 @@ const mutations = {
     inputs.gameList.forEach(game => {
       state.push(game);
     });
+  },
+  addGame(state, input) {
+    state.push(input);
   }
 };
 

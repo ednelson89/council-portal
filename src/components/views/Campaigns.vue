@@ -11,7 +11,7 @@
         <p>Here you'll find a list of all the campaigns you're in. You can also create campaigns here.</p>
       </b-col>
       <b-col cols="4">
-        <router-link tag="b-button" class="cardButton" to="/createGame">Create a Game</router-link>
+        <router-link tag="b-button" class="cardButton" to="/new-campaigns">Create a Game</router-link>
       </b-col>
     </b-row>
     <hr style="width:90%" />

@@ -6,6 +6,7 @@ const gameList = [
     gameGM: "User 1",
     gameDate: "GameDate 1",
     gameCharList: [{ charID: "00001" }],
+    gameType: "",
     journalPosts: [
       {
         journalTitle: "JTitle 1",
@@ -22,6 +23,7 @@ const gameList = [
     gameGM: "User 2",
     gameDate: "GameDate 2",
     gameCharList: [{ charID: "00002" }],
+    gameType: "",
     journalPosts: [
       {
         journalTitle: "JTitle 2",
@@ -54,6 +56,7 @@ const gameList = [
     gameGM: "User 4",
     gameDate: "GameDate 4",
     gameCharList: [{ charID: "00004" }],
+    gameType: "",
     journalPosts: [
       {
         journalTitle: "JTitle 4",
