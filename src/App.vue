@@ -4,12 +4,18 @@
       <navigation></navigation>
       <b-container fluid>
         <b-row align="center" justify="start">
-          <b-col md="9" offset-md="1" xs="11" offset-xs="1">
+          <b-col
+            md="9"
+            offset-md="1"
+            xs="11"
+            offset-xs="1"
+            style="padding-top: 15px; padding-bottom: 15px;"
+          >
             <div class="main-content">
               <router-view></router-view>
             </div>
           </b-col>
-          <b-col xs="11" offset-xs="1" md="2">
+          <b-col xs="11" offset-xs="1" md="2" style="padding-top: 15px; padding-bottom: 15px;">
             <div class="side-content">
               <p>Right Column</p>
             </div>

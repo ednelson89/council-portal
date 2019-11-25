@@ -109,6 +109,16 @@ export default {
     };
   },
   methods: {
+    generateID() {
+      return (
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+        Math.random()
+          .toString(36)
+          .substring(2, 15)
+      );
+    },
     getDate() {
       var today = new Date();
       var dd = String(today.getDate()).padStart(2, "0");
@@ -120,6 +130,7 @@ export default {
     },
     addGame() {
       this.gameModel.gameDate = this.getDate();
+      this.gameModel.gameID = this.generateID();
       this.$store.commit("addGame", this.gameModel);
       this.$router.push({ path: "/campaigns" });
     },

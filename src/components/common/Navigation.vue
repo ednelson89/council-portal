@@ -1,5 +1,12 @@
 <template>
-  <v-navigation-drawer v-model="drawer" fixed :height="'100vh'" :mini-variant.sync="mini" permanent>
+  <v-navigation-drawer
+    v-model="drawer"
+    fixed
+    :height="'100vh'"
+    :mini-variant.sync="mini"
+    permanent
+    expand-on-hover
+  >
     <v-list-item>
       <v-list-item-avatar>
         <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
