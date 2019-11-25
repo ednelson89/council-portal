@@ -68,7 +68,7 @@
         <b-button class="cardButton" @click="addGame()" :disabled="!gameModel.gameName">Add Game</b-button>
       </b-col>
       <b-col cols="6">
-        <router-link tag="b-button" class="cardButton" to="/campaigns">Cancel</router-link>
+        <router-link tag="b-button" class="cardButton" to="/campaigns" @click="clearModel">Cancel</router-link>
       </b-col>
     </b-row>
   </div>
@@ -121,7 +121,14 @@ export default {
     addGame() {
       this.gameModel.gameDate = this.getDate();
       this.$store.commit("addGame", this.gameModel);
+      this.clearModel();
       this.$router.push({ path: "/campaigns" });
+    },
+    clearModel() {
+      var game = this.gameModel;
+      game.gameType = "";
+      game.gameName = "";
+      game.gameDesc = "";
     }
   }
 };
