@@ -54,7 +54,8 @@
           Game Summary:
           <b-form-textarea
             id="gameCreateSummaryTextArea"
-            v-model="gameModel.gameDesc"
+            v-model="gameSummaryTemp"
+            @change="toArray"
             placeholder="..."
             rows="3"
             max-rows="10"
@@ -89,10 +90,11 @@ export default {
         { value: "CoDGeist", text: "Chronicles of Darkness, Geist" },
         { value: "CoDWere", text: "Chronicles of Darkness, Werewolves" }
       ],
+      gameSummaryTemp: "",
       gameModel: {
         gameID: "",
         gameName: "",
-        gameDesc: "",
+        gameDesc: [""],
         gameGM: "",
         gameDate: "",
         gameType: "",
@@ -109,6 +111,15 @@ export default {
     };
   },
   methods: {
+    toArray() {
+      this.gameModel.gameDesc = [];
+      var stringArray = document
+        .getElementById("gameCreateSummaryTextArea")
+        .value.split("\n");
+      stringArray.forEach(element => {
+        this.gameModel.gameDesc.push(element);
+      });
+    },
     generateID() {
       return (
         Math.random()

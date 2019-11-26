@@ -23,7 +23,11 @@
     <b-row>
       <b-col>
         <h3>Game Summary:</h3>
-        <p style="font-style: italic; ">{{currentGame.gameDesc}}</p>
+        <p
+          style="font-style: italic; "
+          v-for="(desc, index) in currentGame.gameDesc"
+          :key="index"
+        >{{desc}}</p>
       </b-col>
     </b-row>
     <hr />
@@ -78,10 +82,9 @@ export default {
       activeGame: "getActiveGame"
     }),
     recentJournal() {
-      var journal = this.currentGame.journalPosts;
-      var jLength = journal.length;
-
-      return journal[jLength - 1];
+      return this.currentGame.journalPosts[
+        this.currentGame.journalPosts.length - 1
+      ];
     }
   },
   mounted() {

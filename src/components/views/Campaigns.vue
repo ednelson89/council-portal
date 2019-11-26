@@ -19,7 +19,12 @@
       <b-row>
         <b-col cols="6" v-for="(game, index) in gameList" :key="index">
           <b-card :title="game.gameName.substring(0,30)" style="margin:10px" class="b-cards">
-            <b-card-text>Description: {{game.gameDesc.substring(0,200) + '...'}}</b-card-text>
+            <b-card-text>
+              Description: {{game.gameDesc[0].substring(0,200)}}
+              <span
+                v-if="game.gameDesc[0].length > 200"
+              >...</span>
+            </b-card-text>
             <b-card-text>GM: {{game.gameGM}}</b-card-text>
             <b-card-text>Date Created: {{game.gameDate}}</b-card-text>
             <b-button @click="viewGame(game.gameID)" class="cardButton">Enter Game</b-button>
