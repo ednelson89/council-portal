@@ -18,11 +18,11 @@
     <div>
       <b-row>
         <b-col cols="6" v-for="(game, index) in gameList" :key="index">
-          <b-card :title="game.gameName" style="margin:10px" class="b-cards">
-            <b-card-text>Description: {{game.gameDesc}}</b-card-text>
+          <b-card :title="game.gameName.substring(0,30)" style="margin:10px" class="b-cards">
+            <b-card-text>Description: {{game.gameDesc.substring(0,200) + '...'}}</b-card-text>
             <b-card-text>GM: {{game.gameGM}}</b-card-text>
             <b-card-text>Date Created: {{game.gameDate}}</b-card-text>
-            <b-button href="#" class="cardButton">Enter Game</b-button>
+            <b-button @click="viewGame(game.gameID)" class="cardButton">Enter Game</b-button>
           </b-card>
         </b-col>
       </b-row>
@@ -36,6 +36,12 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {};
+  },
+  methods: {
+    viewGame(gameID) {
+      this.$store.commit("setActiveGame", gameID);
+      this.$router.push({ path: "/game-hub" });
+    }
   },
   computed: {
     ...mapGetters({

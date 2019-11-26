@@ -4,6 +4,7 @@ import Home from "../components/Home.vue";
 import Campaigns from "../components/views/Campaigns.vue";
 import Characters from "../components/views/Characters.vue";
 import CreateGame from "../components/views/CampaignModules/AddCampaign.vue";
+import GameHub from "../components/views/CampaignModules/GameHub.vue";
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,11 @@ const routes = [
     path: "/new-campaigns",
     name: "Create Campaign",
     component: CreateGame
+  },
+  {
+    path: "/game-hub",
+    name: "View Game",
+    component: GameHub
   },
   {
     path: "/characters",
