@@ -22,16 +22,41 @@
     <v-divider></v-divider>
 
     <v-list dense>
-      <v-list-item v-for="item in items" :key="item.title" link>
+      <v-list-item
+        v-for="item in items"
+        :key="item.title"
+        link
+        @click="$router.push({path: item.path })"
+      >
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
 
-        <v-list-item-content>
-          <router-link :to="item.path" tag="a">{{ item.title }}</router-link>
-        </v-list-item-content>
+        <v-list-item-content>{{ item.title }}</v-list-item-content>
       </v-list-item>
     </v-list>
+    <v-divider></v-divider>
+    <div
+      v-if="$route.path === '/game-hub' || $route.path === '/journal-view' || $route.path === '/game-wiki' || $route.path === '/game-characters' || $route.path === '/game-calendar'"
+    >
+      <v-list-item>
+        <v-list-item-title style="font-weight:bold">Game Links</v-list-item-title>
+      </v-list-item>
+      <v-list dense>
+        <v-list-item
+          v-for="item in gameItems"
+          :key="item.title"
+          link
+          @click="$router.push({path: item.path })"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>{{ item.title }}</v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </div>
   </v-navigation-drawer>
 </template>
 
@@ -53,6 +78,25 @@ export default {
           title: "Game Resources",
           icon: "mdi-notebook-multiple",
           path: "/Resources"
+        }
+      ],
+      gameItems: [
+        {
+          title: "Game Hub",
+          icon: "mdi-shield-edit-outline",
+          path: "/game-hub"
+        },
+        { title: "Journal", icon: "mdi-feather", path: "/journal-view" },
+        { title: "Wiki", icon: "mdi-library-books", path: "/game-wiki" },
+        {
+          title: "Characters",
+          icon: "mdi-account-star-outline",
+          path: "/game-characters"
+        },
+        {
+          title: "Calendar",
+          icon: "mdi-calendar-blank-multiple",
+          path: "/game-calendar"
         }
       ],
       mini: true
