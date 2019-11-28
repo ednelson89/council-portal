@@ -76,6 +76,8 @@
 </template>
 
 <script>
+import { game } from "@/components/modules/mixins/gameObject.js";
+
 export default {
   data() {
     return {
@@ -91,23 +93,7 @@ export default {
         { value: "CoDWere", text: "Chronicles of Darkness, Werewolves" }
       ],
       gameSummaryTemp: "",
-      gameModel: {
-        gameID: "",
-        gameName: "",
-        gameDesc: [""],
-        gameGM: "",
-        gameDate: "",
-        gameType: "",
-        gameCharList: [{ charID: "" }],
-        journalPosts: [
-          {
-            journalTitle: "",
-            journalDate: "",
-            journalContent: "",
-            journalAuthor: ""
-          }
-        ]
-      }
+      gameModel: game()
     };
   },
   methods: {
@@ -120,28 +106,10 @@ export default {
         this.gameModel.gameDesc.push(element);
       });
     },
-    generateID() {
-      return (
-        Math.random()
-          .toString(36)
-          .substring(2, 15) +
-        Math.random()
-          .toString(36)
-          .substring(2, 15)
-      );
-    },
-    getDate() {
-      var today = new Date();
-      var dd = String(today.getDate()).padStart(2, "0");
-      var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-      var yyyy = today.getFullYear();
-      today = mm + "/" + dd + "/" + yyyy;
 
-      return today;
-    },
     addGame() {
-      this.gameModel.gameDate = this.getDate();
-      this.gameModel.gameID = this.generateID();
+      // this.gameModel.gameDate = this.getDate();
+      // this.gameModel.gameID = this.generateID();
       this.$store.commit("addGame", this.gameModel);
       this.$router.push({ path: "/campaigns" });
     },
