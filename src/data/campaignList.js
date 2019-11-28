@@ -11,9 +11,36 @@ const gameList = [
     gameType: "",
     journalPosts: [
       {
+        journalID: "213567864",
+        journalTitle: "JTitle 3",
+        journalDate: "JDate 1",
+        journalContent: [
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Commodo viverra maecenas accumsan lacus vel. Montes nascetur ridiculus mus mauris vitae ultricies. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Erat velit scelerisque in dictum non consectetur. Morbi tristique senectus et netus et. In dictum non consectetur a erat nam at. Amet cursus sit amet dictum sit amet justo. Gravida in fermentum et sollicitudin ac orci phasellus. Eu sem integer vitae justo eget magna. Amet commodo nulla facilisi nullam vehicula ipsum a. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Est ullamcorper eget nulla facilisi etiam dignissim diam. Risus in hendrerit gravida rutrum quisque non.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Commodo viverra maecenas accumsan lacus vel. Montes nascetur ridiculus mus mauris vitae ultricies. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Erat velit scelerisque in dictum non consectetur. Morbi tristique senectus et netus et. In dictum non consectetur a erat nam at. Amet cursus sit amet dictum sit amet justo. Gravida in fermentum et sollicitudin ac orci phasellus. Eu sem integer vitae justo eget magna. Amet commodo nulla facilisi nullam vehicula ipsum a. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Est ullamcorper eget nulla facilisi etiam dignissim diam. Risus in hendrerit gravida rutrum quisque non.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Commodo viverra maecenas accumsan lacus vel. Montes nascetur ridiculus mus mauris vitae ultricies. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Erat velit scelerisque in dictum non consectetur. Morbi tristique senectus et netus et. In dictum non consectetur a erat nam at. Amet cursus sit amet dictum sit amet justo. Gravida in fermentum et sollicitudin ac orci phasellus. Eu sem integer vitae justo eget magna. Amet commodo nulla facilisi nullam vehicula ipsum a. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Est ullamcorper eget nulla facilisi etiam dignissim diam. Risus in hendrerit gravida rutrum quisque non."
+        ],
+        journalAuthor: "JAuthor 1"
+      },
+      {
+        journalID: "32567863",
+        journalTitle: "JTitle 2",
+        journalDate: "JDate 1",
+        journalContent: [
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Commodo viverra maecenas accumsan lacus vel. Montes nascetur ridiculus mus mauris vitae ultricies. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Erat velit scelerisque in dictum non consectetur. Morbi tristique senectus et netus et. In dictum non consectetur a erat nam at. Amet cursus sit amet dictum sit amet justo. Gravida in fermentum et sollicitudin ac orci phasellus. Eu sem integer vitae justo eget magna. Amet commodo nulla facilisi nullam vehicula ipsum a. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Est ullamcorper eget nulla facilisi etiam dignissim diam. Risus in hendrerit gravida rutrum quisque non.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Commodo viverra maecenas accumsan lacus vel. Montes nascetur ridiculus mus mauris vitae ultricies. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Erat velit scelerisque in dictum non consectetur. Morbi tristique senectus et netus et. In dictum non consectetur a erat nam at. Amet cursus sit amet dictum sit amet justo. Gravida in fermentum et sollicitudin ac orci phasellus. Eu sem integer vitae justo eget magna. Amet commodo nulla facilisi nullam vehicula ipsum a. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Est ullamcorper eget nulla facilisi etiam dignissim diam. Risus in hendrerit gravida rutrum quisque non.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Commodo viverra maecenas accumsan lacus vel. Montes nascetur ridiculus mus mauris vitae ultricies. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Erat velit scelerisque in dictum non consectetur. Morbi tristique senectus et netus et. In dictum non consectetur a erat nam at. Amet cursus sit amet dictum sit amet justo. Gravida in fermentum et sollicitudin ac orci phasellus. Eu sem integer vitae justo eget magna. Amet commodo nulla facilisi nullam vehicula ipsum a. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Est ullamcorper eget nulla facilisi etiam dignissim diam. Risus in hendrerit gravida rutrum quisque non."
+        ],
+        journalAuthor: "JAuthor 1"
+      },
+      {
+        journalID: "123123123",
         journalTitle: "JTitle 1",
         journalDate: "JDate 1",
-        journalContent: "JContent 1",
+        journalContent: [
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Commodo viverra maecenas accumsan lacus vel. Montes nascetur ridiculus mus mauris vitae ultricies. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Erat velit scelerisque in dictum non consectetur. Morbi tristique senectus et netus et. In dictum non consectetur a erat nam at. Amet cursus sit amet dictum sit amet justo. Gravida in fermentum et sollicitudin ac orci phasellus. Eu sem integer vitae justo eget magna. Amet commodo nulla facilisi nullam vehicula ipsum a. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Est ullamcorper eget nulla facilisi etiam dignissim diam. Risus in hendrerit gravida rutrum quisque non.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Commodo viverra maecenas accumsan lacus vel. Montes nascetur ridiculus mus mauris vitae ultricies. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Erat velit scelerisque in dictum non consectetur. Morbi tristique senectus et netus et. In dictum non consectetur a erat nam at. Amet cursus sit amet dictum sit amet justo. Gravida in fermentum et sollicitudin ac orci phasellus. Eu sem integer vitae justo eget magna. Amet commodo nulla facilisi nullam vehicula ipsum a. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Est ullamcorper eget nulla facilisi etiam dignissim diam. Risus in hendrerit gravida rutrum quisque non.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Commodo viverra maecenas accumsan lacus vel. Montes nascetur ridiculus mus mauris vitae ultricies. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Erat velit scelerisque in dictum non consectetur. Morbi tristique senectus et netus et. In dictum non consectetur a erat nam at. Amet cursus sit amet dictum sit amet justo. Gravida in fermentum et sollicitudin ac orci phasellus. Eu sem integer vitae justo eget magna. Amet commodo nulla facilisi nullam vehicula ipsum a. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Est ullamcorper eget nulla facilisi etiam dignissim diam. Risus in hendrerit gravida rutrum quisque non."
+        ],
         journalAuthor: "JAuthor 1"
       }
     ]
@@ -30,9 +57,10 @@ const gameList = [
     gameType: "",
     journalPosts: [
       {
-        journalTitle: "JTitle 2",
-        journalDate: "JDate 2",
-        journalContent: "JContent 2",
+        journalID: "56321342134",
+        journalTitle: "EBERRON: RISING FROM THE LAST WAR 1",
+        journalDate: "JDate 1",
+        journalContent: [""],
         journalAuthor: "JAuthor 2"
       }
     ]
@@ -49,9 +77,10 @@ const gameList = [
     gameCharList: [{ charID: "00003" }],
     journalPosts: [
       {
-        journalTitle: "JTitle 3",
-        journalDate: "JDate 3",
-        journalContent: "JContent 3",
+        journalID: "2534134123",
+        journalTitle: "ToD 1",
+        journalDate: "JDate 1",
+        journalContent: [""],
         journalAuthor: "JAuthor 3"
       }
     ]
@@ -70,9 +99,10 @@ const gameList = [
     gameType: "",
     journalPosts: [
       {
-        journalTitle: "JTitle 4",
+        journalID: "674645674567456",
+        journalTitle: "LOCATHAH RISING 1",
         journalDate: "JDate 4",
-        journalContent: "JContent 4",
+        journalContent: [""],
         journalAuthor: "JAuthor 4"
       }
     ]

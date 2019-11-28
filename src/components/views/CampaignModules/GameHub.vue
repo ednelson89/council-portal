@@ -2,10 +2,10 @@
   <div>
     <b-row>
       <b-col cols="12">
-        <h2>{{currentGame.gameName}}</h2>
+        <h2>{{activeGame.gameName}}</h2>
         <p>
           <span style="font-weight: bold">Game Master:</span>
-          <span style="font-style: italic">{{currentGame.gameGM}}</span>
+          <span style="font-style: italic">{{activeGame.gameGM}}</span>
         </p>
       </b-col>
     </b-row>
@@ -25,7 +25,7 @@
         <h3>Game Summary:</h3>
         <p
           style="font-style: italic; "
-          v-for="(desc, index) in currentGame.gameDesc"
+          v-for="(desc, index) in activeGame.gameDesc"
           :key="index"
         >{{desc}}</p>
       </b-col>
@@ -49,7 +49,7 @@
         </p>
       </b-col>
       <b-col cols="12">
-        <p>{{recentJournal.journalContent.substring(0,400)}}</p>
+        <p>{{recentJournal.journalContent[0].substring(0,400)}}</p>
       </b-col>
       <b-col cols="4">
         <router-link tag="b-button" class="cardButton" to="/journal-view">Read More</router-link>
@@ -63,18 +63,7 @@ import { mapGetters } from "vuex";
 
 export default {
   data() {
-    return {
-      currentGame: ""
-    };
-  },
-  methods: {
-    setLocalGame() {
-      this.gameList.forEach(game => {
-        if (game.gameID === this.activeGame) {
-          this.currentGame = game;
-        }
-      });
-    }
+    return {};
   },
   computed: {
     ...mapGetters({
@@ -82,13 +71,8 @@ export default {
       activeGame: "getActiveGame"
     }),
     recentJournal() {
-      return this.currentGame.journalPosts[
-        this.currentGame.journalPosts.length - 1
-      ];
+      return this.activeGame.journalPosts[0];
     }
-  },
-  mounted() {
-    this.setLocalGame();
   }
 };
 </script>

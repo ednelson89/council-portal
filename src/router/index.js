@@ -5,6 +5,7 @@ import Campaigns from "../components/views/Campaigns.vue";
 import Characters from "../components/views/Characters.vue";
 import CreateGame from "../components/views/CampaignModules/AddCampaign.vue";
 import GameHub from "../components/views/CampaignModules/GameHub.vue";
+import Journals from "../components/views/CampaignModules/JournalView.vue";
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,11 @@ const routes = [
     path: "/game-hub",
     name: "View Game",
     component: GameHub
+  },
+  {
+    path: "/journal-view",
+    name: "View Journals",
+    component: Journals
   },
   {
     path: "/characters",

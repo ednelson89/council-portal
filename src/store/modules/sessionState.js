@@ -1,6 +1,6 @@
 const state = {
   userName: "",
-  activeGameID: "",
+  activeGameID: {},
   activeJournal: "",
   activeCharacter: ""
 };

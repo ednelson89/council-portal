@@ -27,7 +27,7 @@
             </b-card-text>
             <b-card-text>GM: {{game.gameGM}}</b-card-text>
             <b-card-text>Date Created: {{game.gameDate}}</b-card-text>
-            <b-button @click="viewGame(game.gameID)" class="cardButton">Enter Game</b-button>
+            <b-button @click="viewGame(game)" class="cardButton">Enter Game</b-button>
           </b-card>
         </b-col>
       </b-row>
@@ -43,8 +43,8 @@ export default {
     return {};
   },
   methods: {
-    viewGame(gameID) {
-      this.$store.commit("setActiveGame", gameID);
+    viewGame(game) {
+      this.$store.commit("setActiveGame", game);
       this.$router.push({ path: "/game-hub" });
     }
   },
