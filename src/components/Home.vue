@@ -23,6 +23,17 @@
         </p>
       </b-col>
     </b-row>
+    <b-row>
+      <b-col>
+        <p>
+          * Simple Login has been implemented, though actual user accounts are not created yet. Content will be unavailable unless your
+          logged in. Any changes you make to the current system will not be permanent.
+        </p>
+        <p style="font-weight: bold;">To Login, use the following credentials:</p>
+        <p>Username: devUser1</p>
+        <p>Password: devPass</p>
+      </b-col>
+    </b-row>
     <hr style="width:90%;" />
     <b-row>
       <b-col cols>

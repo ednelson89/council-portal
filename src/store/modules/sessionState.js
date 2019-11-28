@@ -22,7 +22,11 @@ const getters = {
 
 const mutations = {
   setCurrUser(state, input) {
+    /* eslint-disable */
+    console.log(input);
+    console.log(state.userName);
     state.userName = input;
+    console.log(state.userName);
   },
   setActiveGame(state, input) {
     state.activeGameID = input;

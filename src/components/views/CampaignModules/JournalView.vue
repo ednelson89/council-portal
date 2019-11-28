@@ -26,7 +26,8 @@
         <b-col cols="12">
           <b-card class="b-cards">
             <h3>{{journal.journalTitle}}</h3>
-            <p style="font-style:italic;">{{journal.journalDate}}</p>
+            <p style="font-style:italic;">Date Created: {{journal.journalDate}}</p>
+            <p style="font-style:italic;">Author: {{journal.journalAuthor}}</p>
             <p>
               {{journal.journalContent[0].substring(0,600) }}
               <span
@@ -134,11 +135,13 @@
         </b-col>
       </b-row>
     </b-modal>
-    <!--Edit Modal -->
+    <!--Read Modal -->
     <b-modal ref="showJournalModal" id="showJournalModal" hide-header hide-footer size="xl">
       <b-row>
         <b-col>
           <h3>{{activeJournal.journalTitle}}</h3>
+          <p style="font-style:italic;">Date Created: {{activeJournal.journalDate}}</p>
+          <p style="font-style:italic;">Author: {{activeJournal.journalAuthor}}</p>
         </b-col>
       </b-row>
       <b-row>
@@ -245,7 +248,7 @@ export default {
         journalTitle: "",
         journalDate: this.getDate(),
         journalContent: [""],
-        journalAuthor: ""
+        journalAuthor: this.$store.getters.getCurrUser
       };
       this.$refs["addJournalModal"].show();
     },

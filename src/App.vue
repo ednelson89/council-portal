@@ -37,9 +37,38 @@ export default {
       gameList: games
     };
   },
+  methods: {
+    checkStore() {
+      var store = JSON.parse(localStorage.getItem("UserData"));
+      var expires = new Date(store.expires);
+      var now = new Date();
+
+      if (store.userName && now < expires) {
+        return true;
+      } else if (store.userName && now > expires) {
+        localStorage.removeItem("UserData");
+        return false;
+      } else if (!store.userName) {
+        return false;
+      }
+    },
+    getUserStore() {
+      var store = JSON.parse(localStorage.getItem("UserData"));
+      return store.userName;
+    }
+  },
   created() {
     this.$store.commit("setGames", this.gameList);
-  }
+
+    if (this.checkStore()) {
+      this.$store.commit("setCurrUser", this.getUserStore());
+      if (this.$route.path !== "/") {
+        this.$router.push({ path: "/" });
+      }
+      this.$forceUpdate();
+    }
+  },
+  mounted() {}
 };
 </script>
 

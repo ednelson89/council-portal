@@ -7,21 +7,33 @@
     permanent
     expand-on-hover
   >
-    <v-list-item>
+    <v-list-item v-if="currentUser">
       <v-list-item-avatar>
         <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
       </v-list-item-avatar>
 
-      <v-list-item-title>USER NAME</v-list-item-title>
-
-      <v-btn icon @click.stop="mini = !mini">
-        <v-icon>mdi-chevron-left</v-icon>
-      </v-btn>
+      <v-list-item-title>{{currentUser}}</v-list-item-title>
     </v-list-item>
-
+    <v-list-item v-if="!currentUser" @click="$router.push({path:'/sign-in'})">
+      <v-list-item-icon>
+        <v-icon>mdi-account</v-icon>
+      </v-list-item-icon>
+      <v-list-item-content>Sign In</v-list-item-content>
+    </v-list-item>
+    <v-list-item v-if="currentUser" link @click="logout">
+      <v-list-item-icon>
+        <v-icon>mdi-logout</v-icon>
+      </v-list-item-icon>
+      <v-list-item-content>Log Out</v-list-item-content>
+    </v-list-item>
     <v-divider></v-divider>
-
-    <v-list dense>
+    <v-list-item link @click="$router.push({path: '/'})">
+      <v-list-item-icon>
+        <v-icon>mdi-home-city</v-icon>
+      </v-list-item-icon>
+      <v-list-item-content>Home</v-list-item-content>
+    </v-list-item>
+    <v-list dense v-if="currentUser">
       <v-list-item
         v-for="item in items"
         :key="item.title"
@@ -42,6 +54,7 @@
       <v-list-item>
         <v-list-item-title style="font-weight:bold">Game Links</v-list-item-title>
       </v-list-item>
+
       <v-list dense>
         <v-list-item
           v-for="item in gameItems"
@@ -66,8 +79,6 @@ export default {
     return {
       drawer: true,
       items: [
-        { title: "Home", icon: "mdi-home-city", path: "/" },
-        { title: "User", icon: "mdi-account", path: "/" },
         { title: "Campaigns", icon: "mdi-chess-rook", path: "/campaigns" },
         {
           title: "Characters",
@@ -102,7 +113,21 @@ export default {
       mini: true
     };
   },
-  methods: {}
+  methods: {
+    logout() {
+      var input = "";
+      localStorage.removeItem("UserData");
+      this.$store.commit("setCurrUser", input);
+      if (this.$route.path !== "/") {
+        this.$router.push({ path: "/" });
+      }
+    }
+  },
+  computed: {
+    currentUser() {
+      return this.$store.getters.getCurrUser;
+    }
+  }
 };
 </script>
 

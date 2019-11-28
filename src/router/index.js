@@ -6,6 +6,7 @@ import Characters from "../components/views/Characters.vue";
 import CreateGame from "../components/views/CampaignModules/AddCampaign.vue";
 import GameHub from "../components/views/CampaignModules/GameHub.vue";
 import Journals from "../components/views/CampaignModules/JournalView.vue";
+import SignIn from "../components/common/SignIn.vue";
 
 Vue.use(VueRouter);
 
@@ -14,6 +15,11 @@ const routes = [
     path: "/",
     name: "home",
     component: Home
+  },
+  {
+    path: "/sign-in",
+    name: "Sign In",
+    component: SignIn
   },
   {
     path: "/campaigns",
