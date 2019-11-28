@@ -12,6 +12,11 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.row {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 /* General Font Rules */
 h1 {
   color: #000 !important;
@@ -40,8 +45,10 @@ hr {
 
 /* UI Components */
 .b-cards {
+  margin: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .cardButton {
   background-color: #183653 !important;
   border: 1px #183653 solid !important;

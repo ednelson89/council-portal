@@ -289,4 +289,10 @@ export default {
 .cardOption {
   margin: 30px;
 }
+.b-cards {
+  margin: 0 10px;
+}
+.cardButton {
+  margin: 10px 10px;
+}
 </style>
