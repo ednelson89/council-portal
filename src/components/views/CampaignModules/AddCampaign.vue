@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { game } from "@/components/modules/mixins/gameObject.js";
+import { game } from "@/components/modules/gameObject.js";
 
 export default {
   data() {
