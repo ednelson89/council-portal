@@ -7,7 +7,7 @@ import CreateGame from "../components/views/CampaignModules/AddCampaign.vue";
 import GameHub from "../components/views/CampaignModules/GameHub.vue";
 import Journals from "../components/views/CampaignModules/JournalView.vue";
 import GameChars from "../components/views/CampaignModules/GameChars.vue";
-import CharView from "../components/views/CampaignModules/CharacterView.vue";
+import CharView from "../components/views/CampaignModules/CharacterViews/CharacterView.vue";
 import SignIn from "../components/common/SignIn.vue";
 
 Vue.use(VueRouter);

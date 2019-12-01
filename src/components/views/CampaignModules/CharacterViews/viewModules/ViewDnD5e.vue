@@ -67,7 +67,11 @@
     <hr />
     <!-- Stat Block -->
     <b-row>
-      <b-col class="skillCols" cols="2">
+      <b-col
+        class="skillCols"
+        cols="2"
+        :style="{'background-image': 'url(' + require('./assets/StatCard.jpg') + ')'}"
+      >
         <p class="skillLabel">Strength:</p>
         <p class="score">{{char.statsBlock.str}}</p>
         <p class="skillLabel">Mod:</p>

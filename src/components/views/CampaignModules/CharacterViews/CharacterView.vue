@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import DnD5eView from "./CharacterViews/ViewDnD5e.vue";
+import DnD5eView from "./viewModules/ViewDnD5e.vue";
 
 export default {
   components: {
