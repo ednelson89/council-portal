@@ -5,27 +5,29 @@
         <h2>Sign In</h2>
       </b-col>
     </b-row>
-    <b-row>
-      <b-col xs="12" md="6">
-        <label>
-          Username:
-          <input type="text" v-model="userName" class="form-control" />
-        </label>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col xs="12" md="6">
-        <label>
-          Password:
-          <input type="text" v-model="passWord" class="form-control" />
-        </label>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col xs="12" md="6">
-        <b-button @click="logIn" class="cardButton">Log In</b-button>
-      </b-col>
-    </b-row>
+    <form @submit.prevent="logIn">
+      <b-row>
+        <b-col xs="12" md="6">
+          <label>
+            Username:
+            <input type="text" v-model="userName" class="form-control" />
+          </label>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col xs="12" md="6">
+          <label>
+            Password:
+            <input type="password" v-model="passWord" class="form-control" />
+          </label>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col xs="12" md="6">
+          <b-button type="submit" class="cardButton">Log In</b-button>
+        </b-col>
+      </b-row>
+    </form>
     <b-row>
       <b-col xs="12" md="6">
         <b-button class="cardButton">Create an Account</b-button>
@@ -51,12 +53,16 @@ export default {
       var expires = new Date(store.expires);
       var now = new Date();
 
-      if (store.userName && now < expires) {
-        return true;
-      } else if (store.userName && now > expires) {
-        localStorage.removeItem("UserData");
-        return false;
-      } else if (!store.userName) {
+      try {
+        if (store.userName && now <= expires) {
+          return true;
+        } else if (store.userName && now > expires) {
+          localStorage.removeItem("UserData");
+          return false;
+        } else if (!store.userName) {
+          return false;
+        }
+      } catch {
         return false;
       }
     },

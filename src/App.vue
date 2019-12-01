@@ -39,16 +39,20 @@ export default {
   },
   methods: {
     checkStore() {
-      var store = JSON.parse(localStorage.getItem("UserData"));
-      var expires = new Date(store.expires);
-      var now = new Date();
+      try {
+        var store = JSON.parse(localStorage.getItem("UserData"));
+        var expires = new Date(store.expires);
+        var now = new Date();
 
-      if (store.userName && now < expires) {
-        return true;
-      } else if (store.userName && now > expires) {
-        localStorage.removeItem("UserData");
-        return false;
-      } else if (!store.userName) {
+        if (store.userName && now <= expires) {
+          return true;
+        } else if (store.userName && now > expires) {
+          localStorage.removeItem("UserData");
+          return false;
+        } else if (!store.userName) {
+          return false;
+        }
+      } catch {
         return false;
       }
     },
@@ -66,6 +70,11 @@ export default {
         this.$router.push({ path: "/" });
       }
       this.$forceUpdate();
+    } else {
+      localStorage.removeItem("UserData");
+      if (this.$route.path !== "/") {
+        this.$router.push({ path: "/" });
+      }
     }
   },
   mounted() {}
