@@ -101,7 +101,7 @@ export default {
         { title: "Wiki", icon: "mdi-library-books", path: "/game-wiki" },
         {
           title: "Characters",
-          icon: "mdi-account-star-outline",
+          icon: "mdi-sword",
           path: "/game-characters"
         },
         {
