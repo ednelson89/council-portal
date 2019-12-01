@@ -24,26 +24,44 @@ const gameList = [
           charClassLvl: "1",
           charXP: " 0 / 0 "
         },
-        statsBlock: {
-          str: 15,
-          strMod: 2,
-          dex: 13,
-          dexMod: 1,
-          con: 15,
-          conMod: 2,
-          int: 12,
-          intMod: 1,
-          wis: 11,
-          wisMod: 0,
-          cha: 12,
-          chaMod: 1,
-          strSave: 2,
-          dexSave: 2,
-          conSave: 2,
-          intSave: 2,
-          wisSave: 2,
-          chaSave: 2
-        }
+        statsBlock: [
+          {
+            statName: "Strength",
+            stat: 15,
+            mod: 2,
+            save: 2
+          },
+          {
+            statName: "Dexterity",
+            stat: 14,
+            mod: 2,
+            save: 2
+          },
+          {
+            statName: "Constitution",
+            stat: 14,
+            mod: 2,
+            save: 2
+          },
+          {
+            statName: "Intelligence",
+            stat: 11,
+            mod: 0,
+            save: 0
+          },
+          {
+            statName: "Wisdom",
+            stat: 12,
+            mod: 1,
+            save: 0
+          },
+          {
+            statName: "Charisma",
+            stat: 13,
+            mod: 1,
+            save: 1
+          }
+        ]
       },
       {
         charUser: "enelson",
@@ -61,26 +79,44 @@ const gameList = [
           charClassLvl: "1",
           charXP: " 0 / 0 "
         },
-        statsBlock: {
-          str: 11,
-          strMod: 0,
-          dex: 11,
-          dexMod: 0,
-          con: 13,
-          conMod: 1,
-          int: 15,
-          intMod: 2,
-          wis: 15,
-          wisMod: 2,
-          cha: 9,
-          chaMod: -1,
-          strSave: 2,
-          dexSave: 2,
-          conSave: 2,
-          intSave: 2,
-          wisSave: 2,
-          chaSave: 2
-        }
+        statsBlock: [
+          {
+            statName: "Strength",
+            stat: 10,
+            mod: 0,
+            save: 0
+          },
+          {
+            statName: "Dexterity",
+            stat: 11,
+            mod: 0,
+            save: 0
+          },
+          {
+            statName: "Constitution",
+            stat: 12,
+            mod: 1,
+            save: 0
+          },
+          {
+            statName: "Intelligence",
+            stat: 15,
+            mod: 2,
+            save: 0
+          },
+          {
+            statName: "Wisdom",
+            stat: 15,
+            mod: 2,
+            save: 0
+          },
+          {
+            statName: "Charisma",
+            stat: 13,
+            mod: 1,
+            save: 0
+          }
+        ]
       },
       {
         charUser: "enelson",
@@ -98,26 +134,44 @@ const gameList = [
           charClassLvl: "1",
           charXP: " 0 / 0 "
         },
-        statsBlock: {
-          str: 12,
-          strMod: 0,
-          dex: 15,
-          dexMod: 2,
-          con: 12,
-          conMod: 1,
-          int: 13,
-          intMod: 1,
-          wis: 15,
-          wisMod: 2,
-          cha: 15,
-          chaMod: 2,
-          strSave: 2,
-          dexSave: 2,
-          conSave: 2,
-          intSave: 2,
-          wisSave: 2,
-          chaSave: 2
-        }
+        statsBlock: [
+          {
+            statName: "Strength",
+            stat: 12,
+            mod: 1,
+            save: 0
+          },
+          {
+            statName: "Dexterity",
+            stat: 17,
+            mod: 3,
+            save: 0
+          },
+          {
+            statName: "Constitution",
+            stat: 13,
+            mod: 1,
+            save: 0
+          },
+          {
+            statName: "Intelligence",
+            stat: 14,
+            mod: 1,
+            save: 0
+          },
+          {
+            statName: "Wisdom",
+            stat: 15,
+            mod: 2,
+            save: 0
+          },
+          {
+            statName: "Charisma",
+            stat: 13,
+            mod: 1,
+            save: 0
+          }
+        ]
       }
     ],
     gameSystem: "DnD5e",

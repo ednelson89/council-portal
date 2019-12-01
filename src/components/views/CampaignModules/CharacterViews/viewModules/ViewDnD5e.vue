@@ -70,54 +70,16 @@
       <b-col
         class="skillCols"
         cols="2"
-        :style="{'background-image': 'url(' + require('./assets/StatCard.jpg') + ')'}"
+        v-for="(stat, index) in char.statsBlock"
+        :key="index"
+        :style="{'background-image': 'url(' + require('@/assets/statCard.jpg') + ')'}"
       >
-        <p class="skillLabel">Strength:</p>
-        <p class="score">{{char.statsBlock.str}}</p>
+        <p class="skillLabel">{{stat.statName}}</p>
+        <p class="score">{{stat.stat}}</p>
         <p class="skillLabel">Mod:</p>
-        <p class="score">{{char.statsBlock.strMod}}</p>
+        <p class="score">{{stat.mod}}</p>
         <p class="skillLabel">Save:</p>
-        <p class="score">{{char.statsBlock.strSave}}</p>
-      </b-col>
-      <b-col class="skillCols" cols="2">
-        <p class="skillLabel">Dexterity:</p>
-        <p class="score">{{char.statsBlock.dex}}</p>
-        <p class="skillLabel">Mod:</p>
-        <p class="score">{{char.statsBlock.dexMod}}</p>
-        <p class="skillLabel">Save:</p>
-        <p class="score">{{char.statsBlock.dexSave}}</p>
-      </b-col>
-      <b-col class="skillCols" cols="2">
-        <p class="skillLabel">Constitution:</p>
-        <p class="score">{{char.statsBlock.con}}</p>
-        <p class="skillLabel">Mod:</p>
-        <p class="score">{{char.statsBlock.conMod}}</p>
-        <p class="skillLabel">Save:</p>
-        <p class="score">{{char.statsBlock.conSave}}</p>
-      </b-col>
-      <b-col class="skillCols" cols="2">
-        <p class="skillLabel">Intelligence:</p>
-        <p class="score">{{char.statsBlock.int}}</p>
-        <p class="skillLabel">Mod:</p>
-        <p class="score">{{char.statsBlock.intMod}}</p>
-        <p class="skillLabel">Save:</p>
-        <p class="score">{{char.statsBlock.intSave}}</p>
-      </b-col>
-      <b-col class="skillCols" cols="2">
-        <p class="skillLabel">Wisdom:</p>
-        <p class="score">{{char.statsBlock.wis}}</p>
-        <p class="skillLabel">Mod:</p>
-        <p class="score">{{char.statsBlock.wisMod}}</p>
-        <p class="skillLabel">Save:</p>
-        <p class="score">{{char.statsBlock.wisSave}}</p>
-      </b-col>
-      <b-col class="skillCols" cols="2">
-        <p class="skillLabel">Charisma:</p>
-        <p class="score">{{char.statsBlock.cha}}</p>
-        <p class="skillLabel">Mod:</p>
-        <p class="score">{{char.statsBlock.chaMod}}</p>
-        <p class="skillLabel">Save:</p>
-        <p class="score">{{char.statsBlock.chaSave}}</p>
+        <p class="score">{{stat.save}}</p>
       </b-col>
     </b-row>
     <hr />
@@ -139,6 +101,10 @@ export default {
 </script>
 
 <style scoped>
+p {
+  margin-bottom: 4px !important;
+  margin-top: 4px !important;
+}
 .charImg {
   width: 150px;
   height: 150px;
@@ -149,7 +115,8 @@ export default {
 }
 .skillCols {
   background-color: #fff;
-  border-radius: 5px;
+  background-size: 100% 100%;
+  border-radius: 7px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .score {

@@ -14,26 +14,44 @@ const charDnD5e = () => ({
     charClassLvl: "",
     charXP: ""
   },
-  statsBlock: {
-    str: 0,
-    strMod: 0,
-    strSave: 0,
-    dex: 0,
-    dexMod: 0,
-    dexSave: 0,
-    con: 0,
-    conMod: 0,
-    conSave: 0,
-    int: 0,
-    intMod: 0,
-    intSave: 0,
-    wis: 0,
-    wisMod: 0,
-    wisSave: 0,
-    cha: 0,
-    chaMod: 0,
-    chaSave: 0
-  }
+  statsBlock: [
+    {
+      statName: "Strength",
+      stat: 0,
+      mod: 0,
+      save: 0
+    },
+    {
+      statName: "Dexterity",
+      stat: 0,
+      mod: 0,
+      save: 0
+    },
+    {
+      statName: "Constitution",
+      stat: 0,
+      mod: 0,
+      save: 0
+    },
+    {
+      statName: "Intelligence",
+      stat: 0,
+      mod: 0,
+      save: 0
+    },
+    {
+      statName: "Wisdom",
+      stat: 0,
+      mod: 0,
+      save: 0
+    },
+    {
+      statName: "Charisma",
+      stat: 0,
+      mod: 0,
+      save: 0
+    }
+  ]
 });
 
 var generateID = function() {
