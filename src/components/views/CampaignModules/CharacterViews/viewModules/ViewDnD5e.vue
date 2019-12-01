@@ -53,7 +53,11 @@
                 <span class="italics">{{char.genBlock.charAlign}}</span>
               </p>
             </b-col>
-            <b-col cols>
+            <b-col
+              cols
+              class="skillCols"
+              :style="{'background-image': 'url(' + require('@/assets/statCard.jpg') + ')'}"
+            >
               <img
                 class="charImg"
                 :src="char.portraitSrc"
