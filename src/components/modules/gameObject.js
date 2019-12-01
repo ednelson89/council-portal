@@ -4,8 +4,8 @@ const game = () => ({
   gameDesc: [""],
   gameGM: "",
   gameDate: getDate(),
-  gameCharList: [{ charID: "" }],
-  gameType: "",
+  gameChars: [],
+  gameSystem: "",
   journalPosts: [
     {
       journalID: "",

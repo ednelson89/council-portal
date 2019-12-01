@@ -49,7 +49,10 @@
     </v-list>
     <v-divider></v-divider>
     <div
-      v-if="$route.path === '/game-hub' || $route.path === '/journal-view' || $route.path === '/game-wiki' || $route.path === '/game-characters' || $route.path === '/game-calendar'"
+      v-if="$route.path === '/edit-character'  || $route.path === '/view-character'  
+      || $route.path === '/game-characters'  || $route.path === '/game-hub' 
+      || $route.path === '/journal-view' || $route.path === '/game-wiki' 
+      || $route.path === '/game-characters' || $route.path === '/game-calendar'"
     >
       <v-list-item>
         <v-list-item-title style="font-weight:bold">Game Links</v-list-item-title>
@@ -97,13 +100,13 @@ export default {
           icon: "mdi-shield-edit-outline",
           path: "/game-hub"
         },
-        { title: "Journal", icon: "mdi-feather", path: "/journal-view" },
-        { title: "Wiki", icon: "mdi-library-books", path: "/game-wiki" },
         {
           title: "Characters",
           icon: "mdi-sword",
           path: "/game-characters"
         },
+        { title: "Journal", icon: "mdi-feather", path: "/journal-view" },
+        { title: "Wiki", icon: "mdi-library-books", path: "/game-wiki" },
         {
           title: "Calendar",
           icon: "mdi-calendar-blank-multiple",

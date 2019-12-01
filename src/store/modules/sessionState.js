@@ -2,7 +2,7 @@ const state = {
   userName: "",
   activeGameID: {},
   activeJournal: "",
-  activeCharacter: ""
+  activeCharacter: {}
 };
 
 const getters = {
@@ -12,21 +12,23 @@ const getters = {
   getActiveGame(state) {
     return state.activeGameID;
   },
+  getGameSystem() {
+    return state.activeGameID.gameSystem;
+  },
   getActiveJournal(state) {
     return state.activeJournal;
   },
   getActiveChar(state) {
     return state.activeCharacter;
+  },
+  getActiveGameCharList() {
+    return state.activeGameID.gameChars;
   }
 };
 
 const mutations = {
   setCurrUser(state, input) {
-    /* eslint-disable */
-    console.log(input);
-    console.log(state.userName);
     state.userName = input;
-    console.log(state.userName);
   },
   setActiveGame(state, input) {
     state.activeGameID = input;

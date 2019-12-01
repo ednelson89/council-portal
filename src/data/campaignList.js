@@ -7,8 +7,120 @@ const gameList = [
     ],
     gameGM: "User 1",
     gameDate: "GameDate 1",
-    gameCharList: [{ charID: "00001" }],
-    gameType: "",
+    gameChars: [
+      {
+        charUser: "enelson",
+        charID: "00000000001",
+        portraitSrc:
+          "https://live.mgm-tp.com/wp-content/uploads/2019/04/default-avatar.png",
+        genBlock: {
+          charName: "Test Char 1",
+          charRace: " Human",
+          charBackground: "Noble",
+          charAlign: "CE",
+          charLvl: 1,
+          charClass: "Fighter",
+          charSub: "Champion",
+          charClassLvl: "1",
+          charXP: " 0 / 0 "
+        },
+        statsBlock: {
+          str: 15,
+          strMod: 2,
+          dex: 13,
+          dexMod: 1,
+          con: 15,
+          conMod: 2,
+          int: 12,
+          intMod: 1,
+          wis: 11,
+          wisMod: 0,
+          cha: 12,
+          chaMod: 1,
+          strSave: 2,
+          dexSave: 2,
+          conSave: 2,
+          intSave: 2,
+          wisSave: 2,
+          chaSave: 2
+        }
+      },
+      {
+        charUser: "enelson",
+        charID: "00000000002",
+        portraitSrc:
+          "https://live.mgm-tp.com/wp-content/uploads/2019/04/default-avatar.png",
+        genBlock: {
+          charName: "Test Char 2",
+          charRace: "Human",
+          charBackground: "Noble",
+          charAlign: "CE",
+          charLvl: 1,
+          charClass: "Wizard",
+          charSub: "Transmutation",
+          charClassLvl: "1",
+          charXP: " 0 / 0 "
+        },
+        statsBlock: {
+          str: 11,
+          strMod: 0,
+          dex: 11,
+          dexMod: 0,
+          con: 13,
+          conMod: 1,
+          int: 15,
+          intMod: 2,
+          wis: 15,
+          wisMod: 2,
+          cha: 9,
+          chaMod: -1,
+          strSave: 2,
+          dexSave: 2,
+          conSave: 2,
+          intSave: 2,
+          wisSave: 2,
+          chaSave: 2
+        }
+      },
+      {
+        charUser: "enelson",
+        charID: "00000000003",
+        portraitSrc:
+          "https://live.mgm-tp.com/wp-content/uploads/2019/04/default-avatar.png",
+        genBlock: {
+          charName: "Test Char 3",
+          charRace: " Human",
+          charBackground: "Noble",
+          charAlign: "CE",
+          charLvl: 1,
+          charClass: "Monk",
+          charSub: "Cobalt Soul",
+          charClassLvl: "1",
+          charXP: " 0 / 0 "
+        },
+        statsBlock: {
+          str: 12,
+          strMod: 0,
+          dex: 15,
+          dexMod: 2,
+          con: 12,
+          conMod: 1,
+          int: 13,
+          intMod: 1,
+          wis: 15,
+          wisMod: 2,
+          cha: 15,
+          chaMod: 2,
+          strSave: 2,
+          dexSave: 2,
+          conSave: 2,
+          intSave: 2,
+          wisSave: 2,
+          chaSave: 2
+        }
+      }
+    ],
+    gameSystem: "DnD5e",
     journalPosts: [
       {
         journalID: "213567864",
@@ -53,8 +165,8 @@ const gameList = [
     ],
     gameGM: "User 2",
     gameDate: "GameDate 2",
-    gameCharList: [{ charID: "00002" }],
-    gameType: "",
+    gameChars: [{ charID: "00002" }],
+    gameSystem: "DnD5e",
     journalPosts: [
       {
         journalID: "56321342134",
@@ -74,7 +186,8 @@ const gameList = [
     ],
     gameGM: "User 3",
     gameDate: "GameDate 3",
-    gameCharList: [{ charID: "00003" }],
+    gameChars: [{ charID: "00003" }],
+    gameSystem: "DnD5e",
     journalPosts: [
       {
         journalID: "2534134123",
@@ -95,8 +208,8 @@ const gameList = [
     ],
     gameGM: "User 4",
     gameDate: "GameDate 4",
-    gameCharList: [{ charID: "00004" }],
-    gameType: "",
+    gameChars: [{ charID: "00004" }],
+    gameSystem: "DnD5e",
     journalPosts: [
       {
         journalID: "674645674567456",

@@ -1,0 +1,38 @@
+<template>
+  <div>
+    <b-row>
+      <b-col>
+        <h2>Campaign Characters</h2>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <p>Here you can view and edit the characters in the game.</p>
+      </b-col>
+    </b-row>
+    <hr />
+    <dn-d5e-preview v-if="activeGame.gameSystem === 'DnD5e'"></dn-d5e-preview>
+  </div>
+</template>
+
+<script>
+import { mapGetters } from "vuex";
+import DnD5ePreview from "./CharacterPreviews/PreviewD&D.vue";
+
+export default {
+  components: {
+    DnD5ePreview
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapGetters({
+      activeGame: "getActiveGame"
+    })
+  }
+};
+</script>
+
+<style>
+</style>

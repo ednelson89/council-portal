@@ -11,7 +11,6 @@ var signIn = function(userName, pass) {
         setStore("User", uName, 3);
         return uName;
       } else {
-        console.log("Login Failed");
         return "Incorrect Password";
       }
     } else {

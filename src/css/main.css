@@ -42,6 +42,9 @@ label {
 hr {
   width: 90%;
 }
+.italics {
+  font-style: italic;
+}
 
 /* UI Components */
 .b-cards {
