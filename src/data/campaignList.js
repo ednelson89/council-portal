@@ -12,7 +12,7 @@ const gameList = [
         charUser: "enelson",
         charID: "00000000001",
         portraitSrc:
-          "https://live.mgm-tp.com/wp-content/uploads/2019/04/default-avatar.png",
+          "http://d20pfsrd.opengamingnetwork.com/wp-content/uploads/sites/12/2017/01/kolvir_comm_by_yamao-d6uy0t8-320-2.png",
         genBlock: {
           charName: "Test Char 1",
           charRace: " Human",
@@ -66,8 +66,7 @@ const gameList = [
       {
         charUser: "enelson",
         charID: "00000000002",
-        portraitSrc:
-          "https://live.mgm-tp.com/wp-content/uploads/2019/04/default-avatar.png",
+        portraitSrc: "https://i.redd.it/jiuw9av5qzw21.jpg",
         genBlock: {
           charName: "Test Char 2",
           charRace: "Human",
@@ -122,7 +121,7 @@ const gameList = [
         charUser: "enelson",
         charID: "00000000003",
         portraitSrc:
-          "https://live.mgm-tp.com/wp-content/uploads/2019/04/default-avatar.png",
+          "https://i.pinimg.com/originals/de/8e/94/de8e94611d020c4cc97e93ba355a8049.png",
         genBlock: {
           charName: "Test Char 3",
           charRace: " Human",

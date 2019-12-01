@@ -106,8 +106,7 @@ p {
   margin-top: 4px !important;
 }
 .charImg {
-  width: 150px;
-  height: 150px;
+  width: 175px;
 }
 .skillLabel {
   text-align: center !important;
