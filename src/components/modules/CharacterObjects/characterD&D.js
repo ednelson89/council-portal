@@ -14,42 +14,54 @@ const charDnD5e = () => ({
     charClassLvl: "",
     charXP: ""
   },
+  movement: {
+    land: 0,
+    swim: 0,
+    fly: 0,
+    climb: 0
+  },
   statsBlock: [
     {
       statName: "Strength",
       stat: 0,
       mod: 0,
-      save: 0
+      save: 0,
+      prof: false
     },
     {
       statName: "Dexterity",
       stat: 0,
       mod: 0,
-      save: 0
+      save: 0,
+      prof: false
     },
     {
       statName: "Constitution",
       stat: 0,
       mod: 0,
-      save: 0
+      save: 0,
+      prof: false
     },
     {
       statName: "Intelligence",
       stat: 0,
       mod: 0,
-      save: 0
+      save: 0,
+      prof: false
     },
     {
       statName: "Wisdom",
       stat: 0,
       mod: 0,
-      save: 0
+      save: 0,
+      prof: false
     },
     {
       statName: "Charisma",
       stat: 0,
       mod: 0,
-      save: 0
+      save: 0,
+      prof: false
     }
   ],
   combatStats: {
@@ -100,6 +112,7 @@ const charDnD5e = () => ({
   attacksCantrips: [{ attackName: "", hitMod: 0, dmg: "", notes: "" }],
   equipment: [{ itemName: "", qty: 0, weight: 0 }],
   features: [""],
+  feats: [""],
   money: [
     {
       copper: 0,

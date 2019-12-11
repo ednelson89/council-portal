@@ -3,61 +3,58 @@
     <!-- Summary Block -->
     <b-row>
       <b-col cols="3">
-        <h3>{{ char.genBlock.charName }}</h3>
+        <label>
+          Character Name:
+          <input v-model=" char.genBlock.charName " class="form-control" />
+        </label>
         <p>
           User:
           <span class="italics">{{char.charUser}}</span>
         </p>
         <b-button
-          @click="$router.push({path: '/game-characters'})"
+          @click="saveCharEdits"
           class="cardButton"
           style="margin-top:10px;"
-        >Back to Characters</b-button>
-
-        <b-button
-          @click="$router.push({path: '/edit-character'})"
-          class="cardButton"
-          style="margin-top:10px;"
-        >Edit Character</b-button>
+        >Back to Character</b-button>
       </b-col>
       <b-col cols="9">
         <b-card class="b-cards">
           <b-row>
             <b-col cols="3">
-              <p>
+              <label>
                 Race:
-                <span class="italics">{{char.genBlock.charRace}}</span>
-              </p>
-              <p>
+                <input class="form-control" v-model="char.genBlock.charRace" />
+              </label>
+              <label>
                 Class:
-                <span class="italics">{{char.genBlock.charClass}}</span>
-              </p>
-              <p>
+                <input class="form-control" v-model="char.genBlock.charClass" />
+              </label>
+              <label>
                 Class Level:
-                <span class="italics">{{char.genBlock.charClassLvl}}</span>
-              </p>
-              <p>
+                <input class="form-control" v-model="char.genBlock.charClassLvl" />
+              </label>
+              <label>
                 Background:
-                <span class="italics">{{char.genBlock.charBackground}}</span>
-              </p>
+                <input class="form-control" v-model="char.genBlock.charBackground" />
+              </label>
             </b-col>
             <b-col cols="3">
-              <p>
+              <label>
                 Character Level:
-                <span class="italics">{{char.genBlock.charLvl}}</span>
-              </p>
-              <p>
+                <input class="form-control" v-model="char.genBlock.charLvl" />
+              </label>
+              <label>
                 Subclass:
-                <span class="italics">{{char.genBlock.charSub}}</span>
-              </p>
-              <p>
+                <input class="form-control" v-model="char.genBlock.charSub" />
+              </label>
+              <label>
                 Experience:
-                <span class="italics">{{char.genBlock.charXP}}</span>
-              </p>
-              <p>
+                <input class="form-control" v-model="char.genBlock.charXP" />
+              </label>
+              <label>
                 Alignment:
-                <span class="italics">{{char.genBlock.charAlign}}</span>
-              </p>
+                <input class="form-control" v-model="char.genBlock.charAlign" />
+              </label>
             </b-col>
             <b-col
               cols
@@ -70,6 +67,15 @@
                 :src="char.portraitSrc"
                 :alt="'Image of ' + char.genBlock.charName"
               />
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col col="6"></b-col>
+            <b-col>
+              <label>
+                Image Source URL:
+                <input v-model="char.portraitSrc" class="form-control" />
+              </label>
             </b-col>
           </b-row>
         </b-card>
@@ -415,6 +421,12 @@ export default {
       skillsOpen: false
     };
   },
+  methods: {
+    saveCharEdits() {
+      // TODO: Add remote update method
+      this.$router.push({ path: "/view-character" });
+    }
+  },
   computed: {
     char() {
       return this.$store.getters.getActiveChar;
@@ -424,6 +436,10 @@ export default {
 </script>
 
 <style scoped>
+label {
+  text-align: left;
+  display: inline-block !important;
+}
 p {
   margin-bottom: 4px !important;
   margin-top: 4px !important;

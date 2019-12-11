@@ -24,42 +24,54 @@ const gameList = [
           charClassLvl: "1",
           charXP: " 0 / 0 "
         },
+        movement: {
+          land: 0,
+          swim: 0,
+          fly: 0,
+          climb: 0
+        },
         statsBlock: [
           {
             statName: "Strength",
             stat: 15,
             mod: 2,
-            save: 2
+            save: 2,
+            prof: true
           },
           {
             statName: "Dexterity",
             stat: 14,
             mod: 2,
-            save: 2
+            save: 2,
+            prof: false
           },
           {
             statName: "Constitution",
             stat: 14,
             mod: 2,
-            save: 2
+            save: 2,
+            prof: true
           },
           {
             statName: "Intelligence",
             stat: 11,
             mod: 0,
-            save: 0
+            save: 0,
+            prof: false
           },
           {
             statName: "Wisdom",
             stat: 12,
             mod: 1,
-            save: 0
+            save: 0,
+            prof: false
           },
           {
             statName: "Charisma",
             stat: 13,
             mod: 1,
-            save: 1
+            save: 1,
+            prof: false
           }
         ],
         combatStats: {
@@ -120,6 +132,10 @@ const gameList = [
           "Fighting Style: You adopt a particular style of fighting as your specialty. Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again.",
           "Dueling:  When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon."
         ],
+        feats: [
+          "Alert - +5 Initiative, can't be surprised, no advantage for hidden attackers",
+          "Actor - +1 Charisma, skilled at mimicry and dramatic"
+        ],
         money: [
           {
             copper: 0,
@@ -171,42 +187,54 @@ const gameList = [
           charClassLvl: "1",
           charXP: " 0 / 0 "
         },
+        movement: {
+          land: 0,
+          swim: 0,
+          fly: 0,
+          climb: 0
+        },
         statsBlock: [
           {
             statName: "Strength",
             stat: 10,
             mod: 0,
-            save: 0
+            save: 0,
+            prof: false
           },
           {
             statName: "Dexterity",
             stat: 11,
             mod: 0,
-            save: 0
+            save: 0,
+            prof: false
           },
           {
             statName: "Constitution",
             stat: 12,
             mod: 1,
-            save: 0
+            save: 0,
+            prof: false
           },
           {
             statName: "Intelligence",
             stat: 15,
             mod: 2,
-            save: 0
+            save: 0,
+            prof: true
           },
           {
             statName: "Wisdom",
             stat: 15,
             mod: 2,
-            save: 0
+            save: 0,
+            prof: true
           },
           {
             statName: "Charisma",
             stat: 13,
             mod: 1,
-            save: 0
+            save: 0,
+            prof: false
           }
         ],
         combatStats: {
@@ -262,6 +290,14 @@ const gameList = [
           { itemName: "Arrows", qty: 20, weight: 5 },
           { itemName: "Fine Clothes", qty: 1, weight: 5 },
           { itemName: "Shield", qty: 1, weight: 5 }
+        ],
+        features: [
+          "Fighting Style: You adopt a particular style of fighting as your specialty. Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again.",
+          "Dueling:  When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon."
+        ],
+        feats: [
+          "Alert - +5 Initiative, can't be surprised, no advantage for hidden attackers",
+          "Actor - +1 Charisma, skilled at mimicry and dramatic"
         ],
         money: [
           {
@@ -315,42 +351,54 @@ const gameList = [
           charClassLvl: "1",
           charXP: " 0 / 0 "
         },
+        movement: {
+          land: 0,
+          swim: 0,
+          fly: 0,
+          climb: 0
+        },
         statsBlock: [
           {
             statName: "Strength",
             stat: 12,
             mod: 1,
-            save: 0
+            save: 0,
+            prof: false
           },
           {
             statName: "Dexterity",
             stat: 17,
             mod: 3,
-            save: 0
+            save: 0,
+            prof: true
           },
           {
             statName: "Constitution",
             stat: 13,
             mod: 1,
-            save: 0
+            save: 0,
+            prof: false
           },
           {
             statName: "Intelligence",
             stat: 14,
             mod: 1,
-            save: 0
+            save: 0,
+            prof: false
           },
           {
             statName: "Wisdom",
             stat: 15,
             mod: 2,
-            save: 0
+            save: 0,
+            prof: true
           },
           {
             statName: "Charisma",
             stat: 13,
             mod: 1,
-            save: 0
+            save: 0,
+            prof: false
           }
         ],
         combatStats: {
@@ -407,6 +455,11 @@ const gameList = [
           { itemName: "Fine Clothes", qty: 1, weight: 5 },
           { itemName: "Shield", qty: 1, weight: 5 }
         ],
+        features: [
+          "Fighting Style: You adopt a particular style of fighting as your specialty. Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again.",
+          "Dueling:  When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon."
+        ],
+        feats: [""],
         money: [
           {
             copper: 0,
