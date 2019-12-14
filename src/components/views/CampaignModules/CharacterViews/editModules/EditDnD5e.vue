@@ -463,8 +463,8 @@
                     v-model="tempFeatures"
                     @change="saveFeatures()"
                     placeholder="..."
-                    rows="3"
-                    max-rows="10"
+                    rows="5"
+                    max-rows="20"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -484,8 +484,8 @@
                     v-model="tempFeats"
                     @change="saveFeats()"
                     placeholder="..."
-                    rows="3"
-                    max-rows="10"
+                    rows="5"
+                    max-rows="20"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -597,8 +597,8 @@
                     v-model="tempBackstory"
                     @change="saveBackstory"
                     placeholder="..."
-                    rows="3"
-                    max-rows="10"
+                    rows="5"
+                    max-rows="20"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -618,8 +618,8 @@
                     v-model="tempNotes"
                     @change="saveNotes"
                     placeholder="..."
-                    rows="3"
-                    max-rows="10"
+                    rows="5"
+                    max-rows="20"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
