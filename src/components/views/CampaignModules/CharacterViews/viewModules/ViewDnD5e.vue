@@ -169,19 +169,19 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col col="4" class="skillCols">
+                <b-col cols="3" class="skillCols">
                   <p class="skillLabel">Land:</p>
                   <p>{{char.movement.land}}</p>
                 </b-col>
-                <b-col col="4" class="skillCols">
+                <b-col cols="3" class="skillCols">
                   <p class="skillLabel">Swim:</p>
                   <p>{{char.movement.swim}}</p>
                 </b-col>
-                <b-col col="4" class="skillCols">
+                <b-col cols="3" class="skillCols">
                   <p class="skillLabel">Climb:</p>
                   <p>{{char.movement.climb}}</p>
                 </b-col>
-                <b-col col="4" class="skillCols">
+                <b-col cols="3" class="skillCols">
                   <p class="skillLabel">Fly:</p>
                   <p>{{char.movement.fly}}</p>
                 </b-col>
@@ -379,25 +379,25 @@
                 <b-col>
                   <h4 style="font-weight:bold;">Spells:</h4>
                   <p class="sectionLabel">Cantrips:</p>
-                  <b-table striped hover :items="char.spells.cantrips"></b-table>
+                  <b-table striped hover :fields="spellTableFields" :items="char.spells.cantrips"></b-table>
                   <p class="sectionLabel">Level 1:</p>
-                  <b-table striped hover :items="char.spells.lvl1"></b-table>
+                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl1"></b-table>
                   <p class="sectionLabel">Level 2:</p>
-                  <b-table striped hover :items="char.spells.lvl2"></b-table>
+                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl2"></b-table>
                   <p class="sectionLabel">Level 3:</p>
-                  <b-table striped hover :items="char.spells.lvl3"></b-table>
+                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl3"></b-table>
                   <p class="sectionLabel">Level 4:</p>
-                  <b-table striped hover :items="char.spells.lvl4"></b-table>
+                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl4"></b-table>
                   <p class="sectionLabel">Level 5:</p>
-                  <b-table striped hover :items="char.spells.lvl5"></b-table>
+                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl5"></b-table>
                   <p class="sectionLabel">Level 6:</p>
-                  <b-table striped hover :items="char.spells.lvl6"></b-table>
+                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl6"></b-table>
                   <p class="sectionLabel">Level 7:</p>
-                  <b-table striped hover :items="char.spells.lvl7"></b-table>
+                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl7"></b-table>
                   <p class="sectionLabel">Level 8:</p>
-                  <b-table striped hover :items="char.spells.lvl8"></b-table>
+                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl8"></b-table>
                   <p class="sectionLabel">Level 9:</p>
-                  <b-table striped hover :items="char.spells.lvl9"></b-table>
+                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl9"></b-table>
                 </b-col>
               </b-row>
             </b-card>
@@ -412,7 +412,11 @@
 export default {
   data() {
     return {
-      skillsOpen: false
+      skillsOpen: false,
+      spellTableFields: [
+        { key: "spellName", label: "Spell Name" },
+        { key: "spellDescription", label: "Spell Description" }
+      ]
     };
   },
   computed: {

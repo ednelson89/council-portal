@@ -11,6 +11,9 @@
           User:
           <span class="italics">{{char.charUser}}</span>
         </p>
+        <hr />
+        <p>Editing is done in real time. There is no need to save.</p>
+        <hr />
         <b-button
           @click="saveCharEdits"
           class="cardButton"
@@ -70,7 +73,7 @@
             </b-col>
           </b-row>
           <b-row>
-            <b-col col="6"></b-col>
+            <b-col cols="6"></b-col>
             <b-col>
               <label>
                 Image Source URL:
@@ -273,25 +276,25 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col col="4" class="skillCols">
+                <b-col cols="3" class="skillCols">
                   <label>
                     Land:
                     <input class="form-control" v-model="char.movement.land" />
                   </label>
                 </b-col>
-                <b-col col="4" class="skillCols">
+                <b-col cols="3" class="skillCols">
                   <label>
                     Swim:
                     <input class="form-control" v-model="char.movement.swim" />
                   </label>
                 </b-col>
-                <b-col col="4" class="skillCols">
+                <b-col cols="3" class="skillCols">
                   <label>
                     Climb:
                     <input class="form-control" v-model="char.movement.climb" />
                   </label>
                 </b-col>
-                <b-col col="4" class="skillCols">
+                <b-col cols="3" class="skillCols">
                   <label>
                     Fly:
                     <input class="form-control" v-model="char.movement.fly" />
@@ -385,12 +388,28 @@
                     :key="index"
                     class="skillCols"
                   >
-                    <p class="sectionLabel">{{skill.skName}}</p>
-                    <p class="score">{{skill.mod}}</p>
-                    <p class="skillLabel">Skill Stat:</p>
-                    <p class="score">{{skill.skill}}</p>
-                    <p class="skillLabel">Proficient:</p>
-                    <p class="score">{{skill.proficient ? "Yes" : "No"}}</p>
+                    <p class="sectionLabel">
+                      <label>
+                        {{skill.skName}}:
+                        <input class="form-control" v-model="skill.mod" />
+                      </label>
+                    </p>
+                    <p class="sectionLabel">
+                      <label>
+                        Skill Stat:
+                        <input class="form-control" v-model="skill.skill" />
+                      </label>
+                    </p>
+                    <p class="sectionLabel">
+                      <label>
+                        Proficient:
+                        <input
+                          class="form-control"
+                          type="checkbox"
+                          v-model="skill.proficient"
+                        />
+                      </label>
+                    </p>
                   </b-col>
                 </b-row>
               </b-collapse>
@@ -405,11 +424,25 @@
               <b-row>
                 <b-col cols="6" style="border-right:1px solid #000;">
                   <p class="sectionLabel">Proficiencies</p>
-                  <p v-for="(prof, index) in char.proficiencies" :key="index">{{prof}}</p>
+                  <b-form-textarea
+                    id="charPoficieniesList"
+                    v-model="tempProf"
+                    @change="saveProfs()"
+                    placeholder="..."
+                    rows="3"
+                    max-rows="10"
+                  ></b-form-textarea>
                 </b-col>
                 <b-col cols="6">
                   <p class="sectionLabel">Languages</p>
-                  <p v-for="(lang, index) in char.languages" :key="index">{{lang}}</p>
+                  <b-form-textarea
+                    id="charLanguageList"
+                    v-model="tempLang"
+                    @change="saveLangs()"
+                    placeholder="..."
+                    rows="3"
+                    max-rows="10"
+                  ></b-form-textarea>
                 </b-col>
               </b-row>
             </b-card>
@@ -425,7 +458,14 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Features:</h4>
-                  <p v-for="(feature, index) in char.features" :key="index">{{feature}}</p>
+                  <b-form-textarea
+                    id="charFeaturesList"
+                    v-model="tempFeatures"
+                    @change="saveFeatures()"
+                    placeholder="..."
+                    rows="3"
+                    max-rows="10"
+                  ></b-form-textarea>
                 </b-col>
               </b-row>
             </b-card>
@@ -439,7 +479,14 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Feats:</h4>
-                  <p v-for="(feat, index) in char.feats" :key="index">{{feat}}</p>
+                  <b-form-textarea
+                    id="charFeatsList"
+                    v-model="tempFeats"
+                    @change="saveFeats()"
+                    placeholder="..."
+                    rows="3"
+                    max-rows="10"
+                  ></b-form-textarea>
                 </b-col>
               </b-row>
             </b-card>
@@ -453,13 +500,84 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Equipment:</h4>
-                  <b-table striped hover :items="char.equipment"></b-table>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="3">
+                  <label>
+                    Item Name:
+                    <input class="form-control" v-model="tempEquipment.itemName" />
+                  </label>
+                </b-col>
+                <b-col cols="2">
+                  <label>
+                    Quantity:
+                    <input class="form-control" v-model="tempEquipment.qty" />
+                  </label>
+                </b-col>
+                <b-col cols="2">
+                  <label>
+                    Weight:
+                    <input class="form-control" v-model="tempEquipment.weight" />
+                  </label>
+                </b-col>
+                <b-col cols="2">
+                  <br />
+                  <b-button @click="addItemsToRecord">Add to List</b-button>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <b-table striped hover :fields="equipmentTableFields" :items="char.equipment">
+                    <template v-slot:cell(delete)="row">
+                      <b-button size="sm" @click="deleteFromItems(row.index)">Delete Item</b-button>
+                    </template>
+                  </b-table>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Money:</h4>
-                  <b-table striped hover :items="char.money"></b-table>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="2">
+                  <label>
+                    Copper:
+                    <input type="text" v-model="char.money[0].copper" class="form-control" />
+                  </label>
+                </b-col>
+                <b-col cols="2">
+                  <label>
+                    Silver:
+                    <input type="text" v-model="char.money[0].silver" class="form-control" />
+                  </label>
+                </b-col>
+                <b-col cols="2">
+                  <label>
+                    Gold:
+                    <input type="text" v-model="char.money[0].gold" class="form-control" />
+                  </label>
+                </b-col>
+                <b-col cols="2">
+                  <label>
+                    Electrum:
+                    <input
+                      type="text"
+                      v-model="char.money[0].electrum"
+                      class="form-control"
+                    />
+                  </label>
+                </b-col>
+                <b-col cols="2">
+                  <label>
+                    Platinum:
+                    <input
+                      type="text"
+                      v-model="char.money[0].platinum"
+                      class="form-control"
+                    />
+                  </label>
                 </b-col>
               </b-row>
             </b-card>
@@ -474,7 +592,14 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Character Backstory:</h4>
-                  <p v-for="(story, index) in char.backstory" :key="index">{{story}}</p>
+                  <b-form-textarea
+                    id="charBackstoryList"
+                    v-model="tempBackstory"
+                    @change="saveBackstory"
+                    placeholder="..."
+                    rows="3"
+                    max-rows="10"
+                  ></b-form-textarea>
                 </b-col>
               </b-row>
             </b-card>
@@ -488,7 +613,14 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Additional Notes:</h4>
-                  <p v-for="(note, index) in char.notes" :key="index">{{note}}</p>
+                  <b-form-textarea
+                    id="charNotesList"
+                    v-model="tempNotes"
+                    @change="saveNotes"
+                    placeholder="..."
+                    rows="3"
+                    max-rows="10"
+                  ></b-form-textarea>
                 </b-col>
               </b-row>
             </b-card>
@@ -506,16 +638,40 @@
               </b-row>
               <b-row>
                 <b-col cols="4" style="border-right:1px solid #000;">
-                  <p class="skillLabel">Spell Ability:</p>
-                  <p class="score">{{char.spellMods.spellAbility}}</p>
+                  <p class="skillLabel">
+                    <label>
+                      Spell Ability:
+                      <input
+                        type="text"
+                        v-model="char.spellMods.spellAbility"
+                        class="form-control"
+                      />
+                    </label>
+                  </p>
                 </b-col>
                 <b-col cols="4" style="border-right:1px solid #000;">
-                  <p class="skillLabel">Spell Save DC:</p>
-                  <p class="score">{{char.spellMods.spellSave}}</p>
+                  <p class="skillLabel">
+                    <label>
+                      Spell Save DC:
+                      <input
+                        type="text"
+                        v-model="char.spellMods.spellSave"
+                        class="form-control"
+                      />
+                    </label>
+                  </p>
                 </b-col>
                 <b-col cols="4">
-                  <p class="skillLabel">Spell Attack Bonus:</p>
-                  <p class="score">{{char.spellMods.spellAttack}}</p>
+                  <p class="skillLabel">
+                    <label>
+                      Spell Attack Bonus:
+                      <input
+                        type="text"
+                        v-model="char.spellMods.spellAttack"
+                        class="form-control"
+                      />
+                    </label>
+                  </p>
                 </b-col>
               </b-row>
             </b-card>
@@ -528,26 +684,115 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Spells:</h4>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="6">
+                  <label>
+                    Spell Name:
+                    <input class="form-control" v-model="tempSpell.spellName" />
+                  </label>
+                </b-col>
+                <b-col cols="6">
+                  <label>
+                    Spell Level:
+                    <select class="form-control" v-model="tempSpell.lvl">
+                      <option value="cantrips">Cantrips</option>
+                      <option value="lvl1">Level 1</option>
+                      <option value="lvl2">Level 2</option>
+                      <option value="lvl3">Level 3</option>
+                      <option value="lvl4">Level 4</option>
+                      <option value="lvl5">Level 5</option>
+                      <option value="lvl6">Level 6</option>
+                      <option value="lvl7">Level 7</option>
+                      <option value="lvl8">Level 8</option>
+                      <option value="lvl9">Level 9</option>
+                    </select>
+                  </label>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <label>Spell Description:</label>
+                  <b-form-textarea
+                    v-model="tempSpell.spellDescription"
+                    placeholder="..."
+                    rows="3"
+                    max-rows="10"
+                  ></b-form-textarea>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="2">
+                  <br />
+                  <b-button @click="addSpellToRecord">Add to List</b-button>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
                   <p class="sectionLabel">Cantrips:</p>
-                  <b-table striped hover :items="char.spells.cantrips"></b-table>
+                  <b-table striped hover :items="char.spells.cantrips" :fields="spellTableFields">
+                    <template v-slot:cell(delete)="row">
+                      <b-button
+                        size="sm"
+                        @click="deleteFromSpells(row.index, 'cantrips')"
+                      >Delete Item</b-button>
+                    </template>
+                  </b-table>
                   <p class="sectionLabel">Level 1:</p>
-                  <b-table striped hover :items="char.spells.lvl1"></b-table>
+                  <b-table striped hover :items="char.spells.lvl1" :fields="spellTableFields">
+                    <template v-slot:cell(delete)="row">
+                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl1')">Delete Item</b-button>
+                    </template>
+                  </b-table>
                   <p class="sectionLabel">Level 2:</p>
-                  <b-table striped hover :items="char.spells.lvl2"></b-table>
+                  <b-table striped hover :items="char.spells.lvl2" :fields="spellTableFields">
+                    <template v-slot:cell(delete)="row">
+                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl2')">Delete Item</b-button>
+                    </template>
+                  </b-table>
                   <p class="sectionLabel">Level 3:</p>
-                  <b-table striped hover :items="char.spells.lvl3"></b-table>
+                  <b-table striped hover :items="char.spells.lvl3" :fields="spellTableFields">
+                    <template v-slot:cell(delete)="row">
+                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl3')">Delete Item</b-button>
+                    </template>
+                  </b-table>
                   <p class="sectionLabel">Level 4:</p>
-                  <b-table striped hover :items="char.spells.lvl4"></b-table>
+                  <b-table striped hover :items="char.spells.lvl4" :fields="spellTableFields">
+                    <template v-slot:cell(delete)="row">
+                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl4')">Delete Item</b-button>
+                    </template>
+                  </b-table>
                   <p class="sectionLabel">Level 5:</p>
-                  <b-table striped hover :items="char.spells.lvl5"></b-table>
+                  <b-table striped hover :items="char.spells.lvl5" :fields="spellTableFields">
+                    <template v-slot:cell(delete)="row">
+                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl5')">Delete Item</b-button>
+                    </template>
+                  </b-table>
                   <p class="sectionLabel">Level 6:</p>
-                  <b-table striped hover :items="char.spells.lvl6"></b-table>
+                  <b-table striped hover :items="char.spells.lvl6" :fields="spellTableFields">
+                    <template v-slot:cell(delete)="row">
+                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl6')">Delete Item</b-button>
+                    </template>
+                  </b-table>
                   <p class="sectionLabel">Level 7:</p>
-                  <b-table striped hover :items="char.spells.lvl7"></b-table>
+                  <b-table striped hover :items="char.spells.lvl7" :fields="spellTableFields">
+                    <template v-slot:cell(delete)="row">
+                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl7')">Delete Item</b-button>
+                    </template>
+                  </b-table>
                   <p class="sectionLabel">Level 8:</p>
-                  <b-table striped hover :items="char.spells.lvl8"></b-table>
+                  <b-table striped hover :items="char.spells.lvl8" :fields="spellTableFields">
+                    <template v-slot:cell(delete)="row">
+                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl8')">Delete Item</b-button>
+                    </template>
+                  </b-table>
                   <p class="sectionLabel">Level 9:</p>
-                  <b-table striped hover :items="char.spells.lvl9"></b-table>
+                  <b-table striped hover :items="char.spells.lvl9" :fields="spellTableFields">
+                    <template v-slot:cell(delete)="row">
+                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl9')">Delete Item</b-button>
+                    </template>
+                  </b-table>
                 </b-col>
               </b-row>
             </b-card>
@@ -563,6 +808,14 @@ export default {
   data() {
     return {
       skillsOpen: false,
+      // Text Areas
+      tempProf: "",
+      tempLang: "",
+      tempFeatures: "",
+      tempFeats: "",
+      tempBackstory: "",
+      tempNotes: "",
+      // Attack Table
       attack: {
         attackName: "",
         hitMod: "",
@@ -575,14 +828,86 @@ export default {
         { key: "dmg", label: "Damage" },
         { key: "notes", label: "Notes" },
         { key: "delete", label: "Delete" }
+      ],
+      // Equipment Table
+      tempEquipment: { itemName: "", qty: 0, weight: 0 },
+      equipmentTableFields: [
+        { key: "itemName", label: "Item Name" },
+        { key: "qty", label: "Quantity" },
+        { key: "weight", label: "Weight" },
+        { key: "delete", label: "Delete" }
+      ],
+      // Spell Tables
+      tempSpell: { spellName: "", spellDescription: "", lvl: "" },
+      spellTableFields: [
+        { key: "spellName", label: "Spell Name" },
+        { key: "spellDescription", label: "Spell Description" },
+        { key: "delete", label: "Delete" }
       ]
     };
   },
   methods: {
+    // The Following all parse the individual textAreas
+    saveProfs() {
+      this.char.proficiencies = [];
+      var stringArray = document
+        .getElementById("charPoficieniesList")
+        .value.split("\n");
+      stringArray.forEach(element => {
+        this.char.proficiencies.push(element);
+      });
+    },
+    saveLangs() {
+      this.char.languages = [];
+      var stringArray = document
+        .getElementById("charLanguageList")
+        .value.split("\n");
+      stringArray.forEach(element => {
+        this.char.languages.push(element);
+      });
+    },
+    saveFeatures() {
+      this.char.features = [];
+      var stringArray = document
+        .getElementById("charFeaturesList")
+        .value.split("\n");
+      stringArray.forEach(element => {
+        this.char.features.push(element);
+      });
+    },
+    saveFeats() {
+      this.char.feats = [];
+      var stringArray = document
+        .getElementById("charFeatsList")
+        .value.split("\n");
+      stringArray.forEach(element => {
+        this.char.feats.push(element);
+      });
+    },
+    saveBackstory() {
+      this.char.backstory = [];
+      var stringArray = document
+        .getElementById("charBackstoryList")
+        .value.split("\n");
+      stringArray.forEach(element => {
+        this.char.backstory.push(element);
+      });
+    },
+    saveNotes() {
+      this.char.notes = [];
+      var stringArray = document
+        .getElementById("charNotesList")
+        .value.split("\n");
+      stringArray.forEach(element => {
+        this.char.notes.push(element);
+      });
+    },
+    // Navigation Method
     saveCharEdits() {
       // TODO: Add remote update method
       this.$router.push({ path: "/view-character" });
     },
+    // The following are the methods for interacting with b-tables
     addAttacksToRecord() {
       this.char.attacksCantrips.push(this.attack);
       this.attack = {
@@ -594,12 +919,52 @@ export default {
     },
     deleteFromAttacks(index) {
       this.char.attacksCantrips.splice(index, 1);
+    },
+    addItemsToRecord() {
+      this.char.equipment.push(this.tempEquipment);
+      this.tempEquipment = { itemName: "", qty: 0, weight: 0 };
+    },
+    deleteFromItems(index) {
+      this.char.equipment.splice(index, 1);
+    },
+    addSpellToRecord() {
+      var spellLevel = this.tempSpell.lvl;
+      this.char.spells[spellLevel].push({
+        spellName: this.tempSpell.spellName,
+        spellDescription: this.tempSpell.spellDescription
+      });
+      this.tempSpell = { spellName: "", spellDescription: "", lvl: "" };
+    },
+    deleteFromSpells(index, level) {
+      var spellLevel = level;
+      this.char.spells[spellLevel].splice(index, 1);
     }
   },
   computed: {
     char() {
       return this.$store.getters.getActiveChar;
     }
+  },
+  mounted() {
+    // These ensure that the format of the textAreas remains correct
+    this.char.proficiencies.forEach(prof => {
+      this.tempProf += prof + "\n";
+    });
+    this.char.languages.forEach(lang => {
+      this.tempLang += lang + "\n";
+    });
+    this.char.features.forEach(feature => {
+      this.tempFeatures += feature + "\n";
+    });
+    this.char.feats.forEach(feat => {
+      this.tempFeats += feat + "\n";
+    });
+    this.char.backstory.forEach(story => {
+      this.tempBackstory += story + "\n";
+    });
+    this.char.notes.forEach(note => {
+      this.tempNotes += note + "\n";
+    });
   }
 };
 </script>
