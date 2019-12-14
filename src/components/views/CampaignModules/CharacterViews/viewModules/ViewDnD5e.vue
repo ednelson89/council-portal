@@ -13,7 +13,7 @@
           class="cardButton"
           style="margin-top:10px;"
         >Back to Characters</b-button>
-
+        <br />
         <b-button
           @click="$router.push({path: '/edit-character'})"
           class="cardButton"

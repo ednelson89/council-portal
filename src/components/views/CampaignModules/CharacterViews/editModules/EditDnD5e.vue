@@ -92,47 +92,134 @@
                 <b-col cols="3" class="skillCols">
                   <p class="sectionLabel">Hit Points</p>
                   <p class="score">
-                    <span class="skillLabel">Current:</span>
-                    {{char.combatStats.hitPoints.currHP}}
+                    <label>
+                      Current:
+                      <input
+                        class="form-control"
+                        v-model="char.combatStats.hitPoints.currHP"
+                      />
+                    </label>
                   </p>
                   <p class="score">
-                    <span class="skillLabel">Max:</span>
-                    {{char.combatStats.hitPoints.maxHP}}
+                    <label>
+                      Max:
+                      <input class="form-control" v-model="char.combatStats.hitPoints.maxHP" />
+                    </label>
                   </p>
                   <p class="score">
-                    <span class="skillLabel">Temporary:</span>
-                    {{char.combatStats.hitPoints.tempHP}}
+                    <label>
+                      Temporary:
+                      <input
+                        class="form-control"
+                        v-model="char.combatStats.hitPoints.tempHP"
+                      />
+                    </label>
                   </p>
                   <p class="score">
-                    <span class="skillLabel">Hit Dice:</span>
-                    {{char.combatStats.hitPoints.hitDice}}
+                    <label>
+                      Hit Dice:
+                      <input
+                        class="form-control"
+                        v-model="char.combatStats.hitPoints.hitDice"
+                      />
+                    </label>
                   </p>
                 </b-col>
                 <b-col cols="3" class="skillCols">
-                  <p class="skillLabel">Armor Class:</p>
-                  <p class="score">{{char.combatStats.armorClass}}</p>
-                  <p class="skillLabel">Initiative:</p>
-                  <p class="score">{{char.combatStats.initiative}}</p>
-                  <p class="skillLabel">Speed:</p>
-                  <p class="score">{{char.combatStats.speed}}</p>
+                  <p class="skillLabel">
+                    <label>
+                      Armor Class:
+                      <input class="form-control" v-model="char.combatStats.armorClass" />
+                    </label>
+                  </p>
+                  <p class="skillLabel">
+                    <label>
+                      Initiative:
+                      <input class="form-control" v-model="char.combatStats.initiative" />
+                    </label>
+                  </p>
+                  <p class="skillLabel">
+                    <label>
+                      Speed:
+                      <input class="form-control" v-model="char.combatStats.speed" />
+                    </label>
+                  </p>
                 </b-col>
                 <b-col cols="3" class="skillCols">
-                  <p class="skillLabel">Proficiency Bonus:</p>
-                  <p class="score">{{char.combatStats.proficiencyBonus}}</p>
-                  <p class="skillLabel">Inspiration:</p>
-                  <p class="score">{{char.combatStats.inspiration ? "Yes" : "No"}}</p>
+                  <p class="skillLabel">
+                    <label>
+                      Proficiency Bonus:
+                      <input
+                        class="form-control"
+                        v-model="char.combatStats.proficiencyBonus"
+                      />
+                    </label>
+                  </p>
+                  <p class="skillLabel">
+                    <label>
+                      Inspiration:
+                      <input
+                        class="form-control"
+                        type="checkbox"
+                        v-model="char.combatStats.inspiration"
+                      />
+                    </label>
+                  </p>
+                  <p class="skillLabel">
+                    <label>
+                      Speed:
+                      <input class="form-control" v-model="char.combatStats.speed" />
+                    </label>
+                  </p>
                   <p class="skillLabel">Death Saves:</p>
-                  <p class="score">Succeed: {{ char.combatStats.deathSaves.success }}</p>
-                  <p class="score">Failed: {{ char.combatStats.deathSaves.fails }}</p>
+                  <p class="skillLabel">
+                    <label>
+                      Succeed:
+                      <input
+                        class="form-control"
+                        v-model="char.combatStats.deathSaves.success"
+                      />
+                    </label>
+                  </p>
+                  <p class="skillLabel">
+                    <label>
+                      Failed:
+                      <input
+                        class="form-control"
+                        v-model="char.combatStats.deathSaves.fails"
+                      />
+                    </label>
+                  </p>
                 </b-col>
                 <b-col cols="3" class="skillCols">
                   <p class="sectionLabel">Passive Skills</p>
-                  <p class="skillLabel">Passive Perception:</p>
-                  <p class="score">{{char.passiveScores.passPercep}}</p>
-                  <p class="skillLabel">Passive Insight:</p>
-                  <p class="score">{{char.passiveScores.passInsight}}</p>
-                  <p class="skillLabel">Passive Investigation:</p>
-                  <p class="score">{{char.passiveScores.passInvest}}</p>
+                  <p class="skillLabel">
+                    <label>
+                      Passive Perception:
+                      <input
+                        class="form-control"
+                        v-model="char.passiveScores.passPercep"
+                      />
+                    </label>
+                  </p>
+                  <p class="skillLabel">
+                    <label>
+                      Passive Insight:
+                      <input
+                        class="form-control"
+                        v-model="char.passiveScores.passInsight"
+                      />
+                    </label>
+                  </p>
+                  <p class="skillLabel">
+                    <label>
+                      Passive Investigation:
+                      <input
+                        class="form-control"
+                        v-model="char.passiveScores.passInvest"
+                      />
+                    </label>
+                  </p>
                 </b-col>
               </b-row>
             </b-card>
@@ -150,15 +237,26 @@
                   v-for="(stat, index) in char.statsBlock"
                   :key="index"
                 >
-                  <p class="skillLabel">{{stat.statName}}</p>
-                  <p class="score">{{stat.stat}}</p>
-                  <p class="skillLabel">Mod:</p>
-                  <p class="score">{{stat.mod}}</p>
-                  <p class="skillLabel">Save:</p>
-                  <p class="score">
-                    <v-icon v-if="stat.prof">mdi-octagram</v-icon>
-                    {{stat.save}}
-                  </p>
+                  <label>
+                    {{stat.statName}}
+                    <input class="form-control" v-model="stat.stat" />
+                  </label>
+                  <label>
+                    Mod:
+                    <input class="form-control" v-model="stat.mod" />
+                  </label>
+                  <label>
+                    Save:
+                    <input class="form-control" v-model="stat.save" />
+                  </label>
+                  <label>
+                    Save Proficiency:
+                    <input
+                      class="form-control"
+                      type="checkbox"
+                      v-model="stat.prof"
+                    />
+                  </label>
                 </b-col>
               </b-row>
             </b-card>
@@ -176,20 +274,28 @@
               </b-row>
               <b-row>
                 <b-col col="4" class="skillCols">
-                  <p class="skillLabel">Land:</p>
-                  <p>{{char.movement.land}}</p>
+                  <label>
+                    Land:
+                    <input class="form-control" v-model="char.movement.land" />
+                  </label>
                 </b-col>
                 <b-col col="4" class="skillCols">
-                  <p class="skillLabel">Swim:</p>
-                  <p>{{char.movement.swim}}</p>
+                  <label>
+                    Swim:
+                    <input class="form-control" v-model="char.movement.swim" />
+                  </label>
                 </b-col>
                 <b-col col="4" class="skillCols">
-                  <p class="skillLabel">Climb:</p>
-                  <p>{{char.movement.climb}}</p>
+                  <label>
+                    Climb:
+                    <input class="form-control" v-model="char.movement.climb" />
+                  </label>
                 </b-col>
                 <b-col col="4" class="skillCols">
-                  <p class="skillLabel">Fly:</p>
-                  <p>{{char.movement.fly}}</p>
+                  <label>
+                    Fly:
+                    <input class="form-control" v-model="char.movement.fly" />
+                  </label>
                 </b-col>
               </b-row>
             </b-card>
@@ -203,7 +309,45 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Attacks and Cantrips:</h4>
-                  <b-table striped hover :items="char.attacksCantrips"></b-table>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="3">
+                  <label>
+                    Attack Name:
+                    <input class="form-control" v-model="attack.attackName" />
+                  </label>
+                </b-col>
+                <b-col cols="2">
+                  <label>
+                    Hit Mod:
+                    <input class="form-control" v-model="attack.hitMod" />
+                  </label>
+                </b-col>
+                <b-col cols="2">
+                  <label>
+                    Damage:
+                    <input class="form-control" v-model="attack.dmg" />
+                  </label>
+                </b-col>
+                <b-col cols="2">
+                  <label>
+                    Notes:
+                    <input class="form-control" v-model="attack.notes" />
+                  </label>
+                </b-col>
+                <b-col cols="2">
+                  <br />
+                  <b-button @click="addAttacksToRecord">Add to List</b-button>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <b-table striped hover :fields="attacksTableFields" :items="char.attacksCantrips">
+                    <template v-slot:cell(delete)="row">
+                      <b-button size="sm" @click="deleteFromAttacks(row.index)">Delete Attack</b-button>
+                    </template>
+                  </b-table>
                 </b-col>
               </b-row>
             </b-card>
@@ -418,13 +562,38 @@
 export default {
   data() {
     return {
-      skillsOpen: false
+      skillsOpen: false,
+      attack: {
+        attackName: "",
+        hitMod: "",
+        dmg: "",
+        notes: ""
+      },
+      attacksTableFields: [
+        { key: "attackName", label: "Attack Name" },
+        { key: "hitMod", label: "Hit Modifier" },
+        { key: "dmg", label: "Damage" },
+        { key: "notes", label: "Notes" },
+        { key: "delete", label: "Delete" }
+      ]
     };
   },
   methods: {
     saveCharEdits() {
       // TODO: Add remote update method
       this.$router.push({ path: "/view-character" });
+    },
+    addAttacksToRecord() {
+      this.char.attacksCantrips.push(this.attack);
+      this.attack = {
+        attackName: "",
+        hitMod: "",
+        dmg: "",
+        notes: ""
+      };
+    },
+    deleteFromAttacks(index) {
+      this.char.attacksCantrips.splice(index, 1);
     }
   },
   computed: {
