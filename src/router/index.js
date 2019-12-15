@@ -9,6 +9,7 @@ import Journals from "../components/views/CampaignModules/JournalView.vue";
 import GameChars from "../components/views/CampaignModules/GameChars.vue";
 import CharView from "../components/views/CampaignModules/CharacterViews/CharacterView.vue";
 import CharEdit from "../components/views/CampaignModules/CharacterViews/CharacterEdit.vue";
+import CharAdd from "../components/views/CampaignModules/CharacterViews/CharacterAdd.vue";
 import SignIn from "../components/common/SignIn.vue";
 
 Vue.use(VueRouter);
@@ -58,6 +59,11 @@ const routes = [
     path: "/edit-character",
     name: "Character Edit",
     component: CharEdit
+  },
+  {
+    path: "/add-character",
+    name: "Character Add",
+    component: CharAdd
   },
   {
     path: "/characters",

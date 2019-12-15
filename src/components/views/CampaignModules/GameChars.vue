@@ -10,6 +10,11 @@
         <p>Here you can view and edit the characters in the game.</p>
       </b-col>
     </b-row>
+    <b-row>
+      <b-col cols="2">
+        <b-button class="cardButton" @click="$router.push({path: '/add-character'})">Add a Character</b-button>
+      </b-col>
+    </b-row>
     <hr />
     <dn-d5e-preview v-if="activeGame.gameSystem === 'DnD5e'"></dn-d5e-preview>
   </div>

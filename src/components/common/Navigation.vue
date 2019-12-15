@@ -49,10 +49,11 @@
     </v-list>
     <v-divider></v-divider>
     <div
-      v-if="$route.path === '/edit-character'  || $route.path === '/view-character'  
+      v-if="$route.path === '/edit-character'  || $route.path === '/view-character' 
       || $route.path === '/game-characters'  || $route.path === '/game-hub' 
       || $route.path === '/journal-view' || $route.path === '/game-wiki' 
-      || $route.path === '/game-characters' || $route.path === '/game-calendar'"
+      || $route.path === '/game-characters' || $route.path === '/game-calendar'  
+      || $route.path === '/add-character'"
     >
       <v-list-item>
         <v-list-item-title style="font-weight:bold">Game Links</v-list-item-title>
