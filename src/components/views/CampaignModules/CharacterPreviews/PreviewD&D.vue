@@ -39,7 +39,11 @@
                 <b-button class="cardButton" @click="viewCharacter(char)">View Character</b-button>
               </b-col>
               <b-col cols="3">
-                <b-button class="cardButton" @click="deleteCharacter(index)">Delete Character</b-button>
+                <b-button
+                  :disabled="activeChar !== char.charUser"
+                  class="cardButton"
+                  @click="deleteCharacter(index)"
+                >Delete Character</b-button>
               </b-col>
             </b-row>
           </b-card>
@@ -75,6 +79,9 @@ export default {
   computed: {
     activeGame() {
       return this.$store.getters.getActiveGameCharList;
+    },
+    activeChar() {
+      return this.$store.getters.getCurrUser;
     }
   }
 };

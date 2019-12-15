@@ -336,7 +336,7 @@ const gameList = [
         }
       },
       {
-        charUser: "enelson",
+        charUser: "testUser1",
         charID: "00000000003",
         portraitSrc:
           "https://i.pinimg.com/originals/de/8e/94/de8e94611d020c4cc97e93ba355a8049.png",
