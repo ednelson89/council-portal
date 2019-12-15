@@ -41,6 +41,9 @@ const mutations = {
   },
   setNewCharacter(state, input) {
     state.activeGameID.gameChars.push(input);
+  },
+  deleteChar(state, input) {
+    state.activeGameID.gameChars.splice(input, 1);
   }
 };
 

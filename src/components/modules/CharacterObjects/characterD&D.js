@@ -109,8 +109,8 @@ const charDnD5e = () => ({
     passInsight: 0,
     passInvest: 0
   },
-  attacksCantrips: [{ attackName: "", hitMod: 0, dmg: "", notes: "" }],
-  equipment: [{ itemName: "", qty: 0, weight: 0 }],
+  attacksCantrips: [],
+  equipment: [],
   features: [""],
   feats: [""],
   money: [

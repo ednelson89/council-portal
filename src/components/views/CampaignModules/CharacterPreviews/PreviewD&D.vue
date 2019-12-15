@@ -35,8 +35,11 @@
               </b-col>
             </b-row>
             <b-row>
-              <b-col>
+              <b-col cols="3">
                 <b-button class="cardButton" @click="viewCharacter(char)">View Character</b-button>
+              </b-col>
+              <b-col cols="3">
+                <b-button class="cardButton" @click="deleteCharacter(index)">Delete Character</b-button>
               </b-col>
             </b-row>
           </b-card>
@@ -50,6 +53,7 @@
         </b-col>
       </b-row>
     </div>
+    <b-modal></b-modal>
   </div>
 </template>
 
@@ -62,6 +66,10 @@ export default {
     viewCharacter(character) {
       this.$store.commit("setActiveChar", character);
       this.$router.push({ path: "/view-character" });
+    },
+    deleteCharacter(index) {
+      this.activeGame.splice(index, 0);
+      this.$store.commit("deleteChar", index);
     }
   },
   computed: {
