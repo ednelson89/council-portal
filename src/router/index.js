@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../components/Home.vue";
 import Campaigns from "../components/views/Campaigns.vue";
 import Characters from "../components/views/Characters.vue";
+import Resources from "../components/views/Resources.vue";
 import CreateGame from "../components/views/CampaignModules/AddCampaign.vue";
 import GameHub from "../components/views/CampaignModules/GameHub.vue";
 import Journals from "../components/views/CampaignModules/JournalView.vue";
@@ -69,6 +70,11 @@ const routes = [
     path: "/characters",
     name: "Characters",
     component: Characters
+  },
+  {
+    path: "/resources",
+    name: "Resources",
+    component: Resources
   }
 ];
 

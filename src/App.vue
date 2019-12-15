@@ -17,7 +17,7 @@
           </b-col>
           <b-col xs="11" offset-xs="1" md="2" style="padding-top: 15px; padding-bottom: 15px;">
             <div class="side-content">
-              <p>Right Column</p>
+              <resourceMin></resourceMin>
             </div>
           </b-col>
         </b-row>
@@ -29,9 +29,10 @@
 <script>
 import navigation from "@/components/common/Navigation.vue";
 import games from "@/data/campaignList.js";
+import resourceMin from "@/components/views/SideBar/ResourceMin.vue";
 
 export default {
-  components: { navigation },
+  components: { navigation, resourceMin },
   data() {
     return {
       gameList: games
