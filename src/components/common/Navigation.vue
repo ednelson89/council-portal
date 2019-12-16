@@ -107,12 +107,7 @@ export default {
           path: "/game-characters"
         },
         { title: "Journal", icon: "mdi-feather", path: "/journal-view" },
-        { title: "Wiki", icon: "mdi-library-books", path: "/wiki-view" },
-        {
-          title: "Calendar",
-          icon: "mdi-calendar-blank-multiple",
-          path: "/game-calendar"
-        }
+        { title: "Wiki", icon: "mdi-library-books", path: "/wiki-view" }
       ],
       mini: true
     };
