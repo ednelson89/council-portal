@@ -17,7 +17,7 @@ export default {
   methods: {},
   computed: {
     activeGameType() {
-      return this.$store.getters.getGameSystem;
+      return this.$store.getters.getGameType;
     }
   }
 };

@@ -12,8 +12,8 @@ const getters = {
   getActiveGame(state) {
     return state.activeGameID;
   },
-  getGameSystem() {
-    return state.activeGameID.gameSystem;
+  getGameType() {
+    return state.activeGameID.gameType;
   },
   getActiveJournal(state) {
     return state.activeJournal;

@@ -16,7 +16,7 @@
       </b-col>
     </b-row>
     <hr />
-    <dn-d5e-preview v-if="activeGame.gameSystem === 'DnD5e'"></dn-d5e-preview>
+    <dn-d5e-preview v-if="activeGame.gameType === 'D&D5e'"></dn-d5e-preview>
   </div>
 </template>
 

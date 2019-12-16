@@ -14,7 +14,7 @@
     <hr />
     <b-row>
       <b-col>
-        <addDnD5e v-if="activeGame.gameSystem === 'DnD5e'"></addDnD5e>
+        <addDnD5e v-if="activeGame.gameType === 'D&D5e'"></addDnD5e>
       </b-col>
     </b-row>
   </div>

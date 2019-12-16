@@ -5,7 +5,7 @@ const game = () => ({
   gameGM: "",
   gameDate: getDate(),
   gameChars: [],
-  gameSystem: "",
+  gameType: "",
   journalPosts: [
     {
       journalID: generateID(),

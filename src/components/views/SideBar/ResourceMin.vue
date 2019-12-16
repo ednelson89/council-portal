@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     activeGameType() {
-      return this.$store.getters.getGameSystem;
+      return this.$store.getters.getGameType;
     },
     showBooks() {
       return (
