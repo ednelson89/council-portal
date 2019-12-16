@@ -7,6 +7,7 @@ import Resources from "../components/views/Resources.vue";
 import CreateGame from "../components/views/CampaignModules/AddCampaign.vue";
 import GameHub from "../components/views/CampaignModules/GameHub.vue";
 import Journals from "../components/views/CampaignModules/JournalView.vue";
+import Wikis from "../components/views/CampaignModules/WikiView.vue";
 import GameChars from "../components/views/CampaignModules/GameChars.vue";
 import CharView from "../components/views/CampaignModules/CharacterViews/CharacterView.vue";
 import CharEdit from "../components/views/CampaignModules/CharacterViews/CharacterEdit.vue";
@@ -45,6 +46,11 @@ const routes = [
     path: "/journal-view",
     name: "View Journals",
     component: Journals
+  },
+  {
+    path: "/wiki-view",
+    name: "View Wiki",
+    component: Wikis
   },
   {
     path: "/game-characters",

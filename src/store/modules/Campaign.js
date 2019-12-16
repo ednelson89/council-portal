@@ -38,6 +38,29 @@ const mutations = {
         });
       }
     });
+  },
+  updateWiki(state, inputPack) {
+    var wiki = inputPack.wikiEntry;
+    var gameId = inputPack.activeGameID;
+    var typeUpdate = inputPack.updateType;
+
+    state.forEach(game => {
+      if (game.gameID === gameId && typeUpdate === 1) {
+        game.wikiPosts.unshift(wiki);
+      } else if (game.gameID === gameId && typeUpdate === 2) {
+        game.wikiPosts.forEach(gameWiki => {
+          if (gameWiki.wikiID === wiki.wikiID) {
+            gameWiki = wiki;
+          }
+        });
+      } else if (game.gameID === gameId && typeUpdate === 3) {
+        game.wikiPosts.forEach((wikiEntry, index) => {
+          if (wikiEntry.journalID === wiki.journalID) {
+            game.wikiPosts.splice(index, 1);
+          }
+        });
+      }
+    });
   }
 };
 

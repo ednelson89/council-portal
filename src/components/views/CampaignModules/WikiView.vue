@@ -4,12 +4,12 @@
   <div>
     <b-row>
       <b-col cols="12">
-        <h2>{{activeGame.gameName}} Journals</h2>
+        <h2>{{activeGame.gameName}} Wiki</h2>
       </b-col>
     </b-row>
     <b-row>
       <b-col cols="8">
-        <p style="font-style: italic">Here you can read, add, and edit journal entries.</p>
+        <p style="font-style: italic">Here you can read, add, and edit wiki entries.</p>
       </b-col>
       <b-col cols="4">
         <router-link tag="b-button" class="cardButton" to="/game-hub">Back to Game</router-link>
@@ -18,28 +18,25 @@
     <hr />
     <b-row>
       <b-col xs="12" md="6" offset-md="6">
-        <b-button class="cardButton" @click="addEntryModalOpen">Add a Journal Entry</b-button>
+        <b-button class="cardButton" @click="addEntryModalOpen">Add a Wiki Entry</b-button>
       </b-col>
     </b-row>
-    <div v-if="journalList.length >= 1">
-      <b-row v-for="(journal, index) in journalList" :key="index">
+    <div v-if="wikiList.length >= 1">
+      <b-row v-for="(wiki, index) in wikiList" :key="index">
         <b-col cols="12">
           <b-card class="b-cards">
-            <h3>{{journal.journalTitle}}</h3>
-            <p style="font-style:italic;">Date Created: {{journal.journalDate}}</p>
-            <p style="font-style:italic;">Author: {{journal.journalAuthor}}</p>
+            <h3>{{wiki.wikiTitle}}</h3>
+            <p style="font-style:italic;">Date Created: {{wiki.wikiDate}}</p>
+            <p style="font-style:italic;">Author: {{wiki.wikiAuthor}}</p>
             <p>
-              {{journal.journalContent[0].substring(0,600) }}
+              {{wiki.wikiContent[0].substring(0,600) }}
               <span
-                v-if="journal.journalContent[0].length > 600"
+                v-if="wiki.wikiContent[0].length > 600"
               >...</span>
             </p>
 
-            <b-button
-              @click="showJournalEntry(index)"
-              class="cardButton cardOption"
-            >Read Journal Entry</b-button>
-            <b-button @click="editJournalModalOpen(index)" class="cardButton cardOption">Edit Entry</b-button>
+            <b-button @click="showwikiEntry(index)" class="cardButton cardOption">Read Wiki Entry</b-button>
+            <b-button @click="editWikiModalOpen(index)" class="cardButton cardOption">Edit Entry</b-button>
             <b-button @click="deleteEntry(index)" class="cardButton cardOption">Delete Entry</b-button>
           </b-card>
         </b-col>
@@ -47,8 +44,8 @@
     </div>
     <!--Add Modal -->
     <b-modal
-      ref="addJournalModal"
-      id="addJournalModal"
+      ref="addWikiModal"
+      id="addWikiModal"
       hide-header
       hide-footer
       no-close-on-backdrop
@@ -58,7 +55,7 @@
         <b-col xs="12" md="6">
           <label>
             Title:
-            <input class="form-control" type="text" v-model="activeJournal.journalTitle" />
+            <input class="form-control" type="text" v-model="activeWiki.wikiTitle" />
           </label>
         </b-col>
       </b-row>
@@ -68,7 +65,7 @@
             Text:
             <b-form-textarea
               class="form-control"
-              id="journalTextArea"
+              id="wikiTextArea"
               @change="toArray"
               placeholder="..."
               rows="3"
@@ -79,7 +76,7 @@
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
-          <b-button class="cardButton" @click="saveJournalEntry">Save Entry</b-button>
+          <b-button class="cardButton" @click="savewikiEntry">Save Entry</b-button>
         </b-col>
       </b-row>
       <b-row>
@@ -90,8 +87,8 @@
     </b-modal>
     <!--Edit Modal -->
     <b-modal
-      ref="editJournalModal"
-      id="editJournalModal"
+      ref="editWikiModal"
+      id="editWikiModal"
       hide-header
       hide-footer
       no-close-on-backdrop
@@ -109,7 +106,7 @@
         <b-col xs="12" md="6">
           <label>
             Title:
-            <input class="form-control" type="text" v-model="activeJournal.journalTitle" />
+            <input class="form-control" type="text" v-model="activeWiki.wikiTitle" />
           </label>
         </b-col>
       </b-row>
@@ -119,8 +116,8 @@
             Text:
             <b-form-textarea
               class="form-control"
-              id="journalTextArea"
-              v-model="tempJournalContent"
+              id="wikiTextArea"
+              v-model="tempwikiContent"
               @input="toArray"
               placeholder="..."
               rows="3"
@@ -136,17 +133,17 @@
       </b-row>
     </b-modal>
     <!--Read Modal -->
-    <b-modal ref="showJournalModal" id="showJournalModal" hide-header hide-footer size="xl">
+    <b-modal ref="showWikiModal" id="showWikiModal" hide-header hide-footer size="xl">
       <b-row>
         <b-col>
-          <h3>{{activeJournal.journalTitle}}</h3>
-          <p style="font-style:italic;">Date Created: {{activeJournal.journalDate}}</p>
-          <p style="font-style:italic;">Author: {{activeJournal.journalAuthor}}</p>
+          <h3>{{activeWiki.wikiTitle}}</h3>
+          <p style="font-style:italic;">Date Created: {{activeWiki.wikiDate}}</p>
+          <p style="font-style:italic;">Author: {{activeWiki.wikiAuthor}}</p>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <p v-for="(para, index) in activeJournal.journalContent" :key="index">{{para}}</p>
+          <p v-for="(para, index) in activeWiki.wikiContent" :key="index">{{para}}</p>
         </b-col>
       </b-row>
       <b-row>
@@ -164,28 +161,28 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      journalList: [],
-      tempJournalContent: "",
-      activeJournal: {}
+      wikiList: [],
+      tempwikiContent: "",
+      activeWiki: {}
     };
   },
   methods: {
     toArray() {
-      this.activeJournal.journalContent = [];
+      this.activeWiki.wikiContent = [];
       var stringArray = document
-        .getElementById("journalTextArea")
+        .getElementById("wikiTextArea")
         .value.split("\n");
       stringArray.forEach(element => {
-        this.activeJournal.journalContent.push(element);
+        this.activeWiki.wikiContent.push(element);
       });
     },
     saveEditedContent() {
-      this.activeJournal.journalContent = [];
+      this.activeWiki.wikiContent = [];
       var stringArray = document
-        .getElementById("journalTextArea")
+        .getElementById("wikiTextArea")
         .value.split("\n");
       stringArray.forEach(element => {
-        this.activeJournal.journalContent.push(element);
+        this.activeWiki.wikiContent.push(element);
       });
     },
     generateID() {
@@ -208,63 +205,63 @@ export default {
       return today;
     },
     cancelAdd() {
-      this.$refs["addJournalModal"].hide();
-      this.activeJournal = {};
-      this.tempJournalContent = "";
+      this.$refs["addWikiModal"].hide();
+      this.activeWiki = {};
+      this.tempwikiContent = "";
     },
     closeEdit() {
       var input = {
-        journalEntry: this.activeJournal,
+        wikiEntry: this.activeWiki,
         activeGameID: this.activeGame.gameID,
         updateType: 2
       };
-      this.$store.commit("updateJournal", input);
+      this.$store.commit("updateWiki", input);
 
-      this.$refs["editJournalModal"].hide();
-      this.activeJournal = {};
-      this.tempJournalContent = "";
+      this.$refs["editWikiModal"].hide();
+      this.activeWiki = {};
+      this.tempwikiContent = "";
       this.$forceUpdate();
     },
     closeShow() {
-      this.$refs["showJournalModal"].hide();
-      this.activeJournal = {};
+      this.$refs["showWikiModal"].hide();
+      this.activeWiki = {};
     },
-    saveJournalEntry() {
+    savewikiEntry() {
       var input = {
-        journalEntry: this.activeJournal,
+        wikiEntry: this.activeWiki,
         activeGameID: this.activeGame.gameID,
         updateType: 1
       };
-      this.$store.commit("updateJournal", input);
+      this.$store.commit("updateWiki", input);
 
-      this.$refs["addJournalModal"].hide();
-      this.activeJournal = {};
-      this.tempJournalContent = "";
+      this.$refs["addWikiModal"].hide();
+      this.activeWiki = {};
+      this.tempwikiContent = "";
       this.$forceUpdate();
     },
     addEntryModalOpen() {
-      this.activeJournal = {
-        journalID: this.generateID(),
-        journalTitle: "",
-        journalDate: this.getDate(),
-        journalContent: [""],
-        journalAuthor: this.$store.getters.getCurrUser
+      this.activeWiki = {
+        wikiID: this.generateID(),
+        wikiTitle: "",
+        wikiDate: this.getDate(),
+        wikiContent: [""],
+        wikiAuthor: this.$store.getters.getCurrUser
       };
-      this.$refs["addJournalModal"].show();
+      this.$refs["addWikiModal"].show();
     },
-    editJournalModalOpen(index) {
-      this.$refs["editJournalModal"].show();
-      this.activeJournal = this.journalList[index];
-      this.activeJournal.journalContent.forEach(journal => {
-        this.tempJournalContent += journal + "\n";
+    editWikiModalOpen(index) {
+      this.$refs["editWikiModal"].show();
+      this.activeWiki = this.wikiList[index];
+      this.activeWiki.wikiContent.forEach(journal => {
+        this.tempwikiContent += journal + "\n";
       });
     },
-    showJournalEntry(index) {
-      this.$refs["showJournalModal"].show();
-      this.activeJournal = this.journalList[index];
+    showwikiEntry(index) {
+      this.$refs["showWikiModal"].show();
+      this.activeWiki = this.wikiList[index];
     },
     deleteEntry(index) {
-      this.activeGame.journalPosts.splice(index, 1);
+      this.activeGame.wikiPosts.splice(index, 1);
     }
   },
   computed: {
@@ -273,12 +270,12 @@ export default {
     })
   },
   created() {
-    this.activeGame.journalPosts.forEach(journal => {
-      this.journalList.push(journal);
+    this.activeGame.wikiPosts.forEach(wiki => {
+      this.wikiList.push(wiki);
     });
   },
   mounted() {
-    this.journalList = this.activeGame.journalPosts;
+    this.wikiList = this.activeGame.wikiPosts;
   }
 };
 </script>

@@ -38,7 +38,8 @@ export default {
         this.$route.path === "/add-character" ||
         this.$route.path === "/game-characters" ||
         this.$route.path === "/game-calendar" ||
-        this.$route.path === "/game-hub"
+        this.$route.path === "/game-hub" ||
+        this.$route.path === "/wiki-view"
       );
     }
   }

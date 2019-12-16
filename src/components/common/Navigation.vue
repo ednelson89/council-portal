@@ -53,7 +53,7 @@
       || $route.path === '/game-characters'  || $route.path === '/game-hub' 
       || $route.path === '/journal-view' || $route.path === '/game-wiki' 
       || $route.path === '/game-characters' || $route.path === '/game-calendar'  
-      || $route.path === '/add-character'"
+      || $route.path === '/add-character' || $route.path === '/wiki-view'"
     >
       <v-list-item>
         <v-list-item-title style="font-weight:bold">Game Links</v-list-item-title>
@@ -107,7 +107,7 @@ export default {
           path: "/game-characters"
         },
         { title: "Journal", icon: "mdi-feather", path: "/journal-view" },
-        { title: "Wiki", icon: "mdi-library-books", path: "/game-wiki" },
+        { title: "Wiki", icon: "mdi-library-books", path: "/wiki-view" },
         {
           title: "Calendar",
           icon: "mdi-calendar-blank-multiple",
