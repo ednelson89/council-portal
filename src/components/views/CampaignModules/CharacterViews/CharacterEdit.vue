@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DnD5eEdit v-if="activeGameType === 'DnD5e'"></DnD5eEdit>
+    <DnD5eEdit v-if="activeGameType === 'D&D5e'"></DnD5eEdit>
   </div>
 </template>
 

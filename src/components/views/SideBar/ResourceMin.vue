@@ -4,7 +4,7 @@
       <b-col>
         <div v-if="showBooks">
           <p v-if="activeGameType" style="font-weight: bold">Common Resources:</p>
-          <div v-if="activeGameType === 'DnD5e'">
+          <div v-if="activeGameType === 'D&D5e'">
             <p v-for="(link, index) in dnd5e.sourceBooks" :key="index">
               <a v-if="link.core" :href="link.link" target="_blank">-{{link.title}}</a>
             </p>
