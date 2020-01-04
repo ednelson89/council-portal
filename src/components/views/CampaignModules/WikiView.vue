@@ -245,7 +245,7 @@ export default {
         wikiTitle: "",
         wikiDate: this.getDate(),
         wikiContent: [""],
-        wikiAuthor: this.$store.getters.getCurrUser
+        wikiAuthor: this.$store.getters.getCurrUserName
       };
       this.$refs["addWikiModal"].show();
     },

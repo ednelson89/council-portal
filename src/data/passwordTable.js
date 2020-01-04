@@ -1,7 +1,7 @@
-var password = [
+const password = [
   { user: "devAdmin1", password: "adminPass" },
-  { user: "devUser1", password: "devPass" },
-  { user: "devUser2", password: "devPass" },
+  { user: "testUser1", password: "testPass" },
+  { user: "testUser2", password: "testPass" },
   { user: "enelson", password: "enelson" }
 ];
 

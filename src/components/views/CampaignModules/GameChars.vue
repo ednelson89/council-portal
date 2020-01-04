@@ -12,7 +12,7 @@
     </b-row>
     <b-row>
       <b-col cols="2">
-        <b-button class="cardButton" @click="$router.push({path: '/add-character'})">Add a Character</b-button>
+        <b-button class="cardButton" @click="setAppRoute">Add a Character</b-button>
       </b-col>
     </b-row>
     <hr />
@@ -22,7 +22,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import DnD5ePreview from "./CharacterPreviews/PreviewD&D.vue";
+import DnD5ePreview from "@/components/views/CampaignModules/CharacterPreviews/PreviewD&D.vue";
 
 export default {
   components: {
@@ -30,6 +30,12 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    setAppRoute() {
+      this.$store.commit("setAppRoute", "Campaigns");
+      this.$router.push({ path: "/add-game-character" });
+    }
   },
   computed: {
     ...mapGetters({

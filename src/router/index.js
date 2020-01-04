@@ -3,15 +3,18 @@ import VueRouter from "vue-router";
 import Home from "../components/Home.vue";
 import Campaigns from "../components/views/Campaigns.vue";
 import Characters from "../components/views/Characters.vue";
+import UserCharView from "../components/views/UserCharacters/CharacterViews/CharacterView.vue";
+import UserCharEdit from "../components/views/UserCharacters/CharacterViews/CharacterEdit.vue";
+import UserCharAdd from "../components/views/UserCharacters/CharacterViews/CharacterAdd.vue";
 import Resources from "../components/views/Resources.vue";
 import CreateGame from "../components/views/CampaignModules/AddCampaign.vue";
 import GameHub from "../components/views/CampaignModules/GameHub.vue";
-import Journals from "../components/views/CampaignModules/JournalView.vue";
-import Wikis from "../components/views/CampaignModules/WikiView.vue";
+import GameJournals from "../components/views/CampaignModules/JournalView.vue";
+import GameWikis from "../components/views/CampaignModules/WikiView.vue";
 import GameChars from "../components/views/CampaignModules/GameChars.vue";
-import CharView from "../components/views/CampaignModules/CharacterViews/CharacterView.vue";
-import CharEdit from "../components/views/CampaignModules/CharacterViews/CharacterEdit.vue";
-import CharAdd from "../components/views/CampaignModules/CharacterViews/CharacterAdd.vue";
+import GameCharView from "../components/views/CampaignModules/CharacterViews/CharacterView.vue";
+import GameCharEdit from "../components/views/CampaignModules/CharacterViews/CharacterEdit.vue";
+import GameCharAdd from "../components/views/CampaignModules/CharacterViews/CharacterAdd.vue";
 import SignIn from "../components/common/SignIn.vue";
 
 Vue.use(VueRouter);
@@ -43,14 +46,14 @@ const routes = [
     component: GameHub
   },
   {
-    path: "/journal-view",
+    path: "/game-journal-view",
     name: "View Journals",
-    component: Journals
+    component: GameJournals
   },
   {
-    path: "/wiki-view",
+    path: "/game-wiki-view",
     name: "View Wiki",
-    component: Wikis
+    component: GameWikis
   },
   {
     path: "/game-characters",
@@ -58,24 +61,39 @@ const routes = [
     component: GameChars
   },
   {
-    path: "/view-character",
-    name: "Character Details",
-    component: CharView
+    path: "/view-game-character",
+    name: "Campaign Character Details",
+    component: GameCharView
   },
   {
-    path: "/edit-character",
-    name: "Character Edit",
-    component: CharEdit
+    path: "/edit-game-character",
+    name: "Campaign Character Edit",
+    component: GameCharEdit
   },
   {
-    path: "/add-character",
-    name: "Character Add",
-    component: CharAdd
+    path: "/add-game-character",
+    name: "Campaign Character Add",
+    component: GameCharAdd
   },
   {
     path: "/characters",
     name: "Characters",
     component: Characters
+  },
+  {
+    path: "/view-user-character",
+    name: "User Character Details",
+    component: UserCharView
+  },
+  {
+    path: "/edit-user-character",
+    name: "User Character Edit",
+    component: UserCharEdit
+  },
+  {
+    path: "/add-user-character",
+    name: "User Character Add",
+    component: UserCharAdd
   },
   {
     path: "/resources",

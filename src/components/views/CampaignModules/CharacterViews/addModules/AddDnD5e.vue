@@ -828,6 +828,7 @@
 
 <script>
 import { charDnD5e } from "@/components/modules/CharacterObjects/characterD&D.js";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -871,6 +872,11 @@ export default {
         { key: "delete", label: "Delete" }
       ]
     };
+  },
+  computed: {
+    ...mapGetters({
+      appRoute: "getAppRoute"
+    })
   },
   methods: {
     // The Following all parse the individual textAreas
@@ -931,8 +937,9 @@ export default {
     // Navigation Method
     addNewChar() {
       // TODO: Add remote update method
-      this.tempChar.charUser = this.$store.getters.getCurrUser;
-      this.$store.commit("setNewCharacter", this.tempChar);
+      this.tempChar.charUser = this.$store.getters.getCurrUserName;
+
+      this.$store.commit("setNewGameCharacter", this.tempChar);
       this.$router.push({ path: "/game-characters" });
     },
     // The following are the methods for interacting with b-tables

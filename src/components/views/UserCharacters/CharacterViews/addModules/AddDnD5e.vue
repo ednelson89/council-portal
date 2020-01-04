@@ -5,20 +5,16 @@
       <b-col cols="3">
         <label>
           Character Name:
-          <input v-model=" char.genBlock.charName " class="form-control" />
+          <input v-model="tempChar.genBlock.charName " class="form-control" />
         </label>
         <p>
           User:
-          <span class="italics">{{char.charUser}}</span>
+          <span class="italics">{{tempChar.charUser}}</span>
         </p>
         <hr />
         <p>Editing is done in real time. There is no need to save.</p>
         <hr />
-        <b-button
-          @click="saveCharEdits"
-          class="cardButton"
-          style="margin-top:10px;"
-        >Back to Character</b-button>
+        <b-button @click="addNewChar" class="cardButton" style="margin-top:10px;">Add Character</b-button>
       </b-col>
       <b-col cols="9">
         <b-card class="b-cards">
@@ -26,37 +22,37 @@
             <b-col cols="3">
               <label>
                 Race:
-                <input class="form-control" v-model="char.genBlock.charRace" />
+                <input class="form-control" v-model="tempChar.genBlock.charRace" />
               </label>
               <label>
                 Class:
-                <input class="form-control" v-model="char.genBlock.charClass" />
+                <input class="form-control" v-model="tempChar.genBlock.charClass" />
               </label>
               <label>
                 Class Level:
-                <input class="form-control" v-model="char.genBlock.charClassLvl" />
+                <input class="form-control" v-model="tempChar.genBlock.charClassLvl" />
               </label>
               <label>
                 Background:
-                <input class="form-control" v-model="char.genBlock.charBackground" />
+                <input class="form-control" v-model="tempChar.genBlock.charBackground" />
               </label>
             </b-col>
             <b-col cols="3">
               <label>
                 Character Level:
-                <input class="form-control" v-model="char.genBlock.charLvl" />
+                <input class="form-control" v-model="tempChar.genBlock.charLvl" />
               </label>
               <label>
                 Subclass:
-                <input class="form-control" v-model="char.genBlock.charSub" />
+                <input class="form-control" v-model="tempChar.genBlock.charSub" />
               </label>
               <label>
                 Experience:
-                <input class="form-control" v-model="char.genBlock.charXP" />
+                <input class="form-control" v-model="tempChar.genBlock.charXP" />
               </label>
               <label>
                 Alignment:
-                <input class="form-control" v-model="char.genBlock.charAlign" />
+                <input class="form-control" v-model="tempChar.genBlock.charAlign" />
               </label>
             </b-col>
             <b-col
@@ -67,8 +63,8 @@
               <img
                 class="charImg"
                 style="margin: 25px 0px;"
-                :src="char.portraitSrc"
-                :alt="'Image of ' + char.genBlock.charName"
+                :src="tempChar.portraitSrc"
+                :alt="'Image of ' + tempChar.genBlock.charName"
               />
             </b-col>
           </b-row>
@@ -77,7 +73,7 @@
             <b-col>
               <label>
                 Image Source URL:
-                <input v-model="char.portraitSrc" class="form-control" />
+                <input v-model="tempChar.portraitSrc" class="form-control" />
               </label>
             </b-col>
           </b-row>
@@ -99,14 +95,17 @@
                       Current:
                       <input
                         class="form-control"
-                        v-model="char.combatStats.hitPoints.currHP"
+                        v-model="tempChar.combatStats.hitPoints.currHP"
                       />
                     </label>
                   </p>
                   <p class="score">
                     <label>
                       Max:
-                      <input class="form-control" v-model="char.combatStats.hitPoints.maxHP" />
+                      <input
+                        class="form-control"
+                        v-model="tempChar.combatStats.hitPoints.maxHP"
+                      />
                     </label>
                   </p>
                   <p class="score">
@@ -114,7 +113,7 @@
                       Temporary:
                       <input
                         class="form-control"
-                        v-model="char.combatStats.hitPoints.tempHP"
+                        v-model="tempChar.combatStats.hitPoints.tempHP"
                       />
                     </label>
                   </p>
@@ -123,7 +122,7 @@
                       Hit Dice:
                       <input
                         class="form-control"
-                        v-model="char.combatStats.hitPoints.hitDice"
+                        v-model="tempChar.combatStats.hitPoints.hitDice"
                       />
                     </label>
                   </p>
@@ -132,19 +131,25 @@
                   <p class="skillLabel">
                     <label>
                       Armor Class:
-                      <input class="form-control" v-model="char.combatStats.armorClass" />
+                      <input
+                        class="form-control"
+                        v-model="tempChar.combatStats.armorClass"
+                      />
                     </label>
                   </p>
                   <p class="skillLabel">
                     <label>
                       Initiative:
-                      <input class="form-control" v-model="char.combatStats.initiative" />
+                      <input
+                        class="form-control"
+                        v-model="tempChar.combatStats.initiative"
+                      />
                     </label>
                   </p>
                   <p class="skillLabel">
                     <label>
                       Speed:
-                      <input class="form-control" v-model="char.combatStats.speed" />
+                      <input class="form-control" v-model="tempChar.combatStats.speed" />
                     </label>
                   </p>
                 </b-col>
@@ -154,7 +159,7 @@
                       Proficiency Bonus:
                       <input
                         class="form-control"
-                        v-model="char.combatStats.proficiencyBonus"
+                        v-model="tempChar.combatStats.proficiencyBonus"
                       />
                     </label>
                   </p>
@@ -164,14 +169,14 @@
                       <input
                         class="form-control"
                         type="checkbox"
-                        v-model="char.combatStats.inspiration"
+                        v-model="tempChar.combatStats.inspiration"
                       />
                     </label>
                   </p>
                   <p class="skillLabel">
                     <label>
                       Speed:
-                      <input class="form-control" v-model="char.combatStats.speed" />
+                      <input class="form-control" v-model="tempChar.combatStats.speed" />
                     </label>
                   </p>
                   <p class="skillLabel">Death Saves:</p>
@@ -180,7 +185,7 @@
                       Succeed:
                       <input
                         class="form-control"
-                        v-model="char.combatStats.deathSaves.success"
+                        v-model="tempChar.combatStats.deathSaves.success"
                       />
                     </label>
                   </p>
@@ -189,7 +194,7 @@
                       Failed:
                       <input
                         class="form-control"
-                        v-model="char.combatStats.deathSaves.fails"
+                        v-model="tempChar.combatStats.deathSaves.fails"
                       />
                     </label>
                   </p>
@@ -201,7 +206,7 @@
                       Passive Perception:
                       <input
                         class="form-control"
-                        v-model="char.passiveScores.passPercep"
+                        v-model="tempChar.passiveScores.passPercep"
                       />
                     </label>
                   </p>
@@ -210,7 +215,7 @@
                       Passive Insight:
                       <input
                         class="form-control"
-                        v-model="char.passiveScores.passInsight"
+                        v-model="tempChar.passiveScores.passInsight"
                       />
                     </label>
                   </p>
@@ -219,7 +224,7 @@
                       Passive Investigation:
                       <input
                         class="form-control"
-                        v-model="char.passiveScores.passInvest"
+                        v-model="tempChar.passiveScores.passInvest"
                       />
                     </label>
                   </p>
@@ -237,7 +242,7 @@
                 <b-col
                   class="skillCols"
                   cols="2"
-                  v-for="(stat, index) in char.statsBlock"
+                  v-for="(stat, index) in tempChar.statsBlock"
                   :key="index"
                 >
                   <label>
@@ -279,25 +284,25 @@
                 <b-col cols="3" class="skillCols">
                   <label>
                     Land:
-                    <input class="form-control" v-model="char.movement.land" />
+                    <input class="form-control" v-model="tempChar.movement.land" />
                   </label>
                 </b-col>
                 <b-col cols="3" class="skillCols">
                   <label>
                     Swim:
-                    <input class="form-control" v-model="char.movement.swim" />
+                    <input class="form-control" v-model="tempChar.movement.swim" />
                   </label>
                 </b-col>
                 <b-col cols="3" class="skillCols">
                   <label>
                     Climb:
-                    <input class="form-control" v-model="char.movement.climb" />
+                    <input class="form-control" v-model="tempChar.movement.climb" />
                   </label>
                 </b-col>
                 <b-col cols="3" class="skillCols">
                   <label>
                     Fly:
-                    <input class="form-control" v-model="char.movement.fly" />
+                    <input class="form-control" v-model="tempChar.movement.fly" />
                   </label>
                 </b-col>
               </b-row>
@@ -346,7 +351,12 @@
               </b-row>
               <b-row>
                 <b-col>
-                  <b-table striped hover :fields="attacksTableFields" :items="char.attacksCantrips">
+                  <b-table
+                    striped
+                    hover
+                    :fields="attacksTableFields"
+                    :items="tempChar.attacksCantrips"
+                  >
                     <template v-slot:cell(delete)="row">
                       <b-button size="sm" @click="deleteFromAttacks(row.index)">Delete Attack</b-button>
                     </template>
@@ -384,7 +394,7 @@
                 <b-row>
                   <b-col
                     cols="2"
-                    v-for="(skill, index) in char.skillsList"
+                    v-for="(skill, index) in this.tempChar.skillsList"
                     :key="index"
                     class="skillCols"
                   >
@@ -528,7 +538,7 @@
               </b-row>
               <b-row>
                 <b-col>
-                  <b-table striped hover :fields="equipmentTableFields" :items="char.equipment">
+                  <b-table striped hover :fields="equipmentTableFields" :items="tempChar.equipment">
                     <template v-slot:cell(delete)="row">
                       <b-button size="sm" @click="deleteFromItems(row.index)">Delete Item</b-button>
                     </template>
@@ -544,19 +554,27 @@
                 <b-col cols="2">
                   <label>
                     Copper:
-                    <input type="text" v-model="char.money[0].copper" class="form-control" />
+                    <input
+                      type="text"
+                      v-model="tempChar.money[0].copper"
+                      class="form-control"
+                    />
                   </label>
                 </b-col>
                 <b-col cols="2">
                   <label>
                     Silver:
-                    <input type="text" v-model="char.money[0].silver" class="form-control" />
+                    <input
+                      type="text"
+                      v-model="tempChar.money[0].silver"
+                      class="form-control"
+                    />
                   </label>
                 </b-col>
                 <b-col cols="2">
                   <label>
                     Gold:
-                    <input type="text" v-model="char.money[0].gold" class="form-control" />
+                    <input type="text" v-model="tempChar.money[0].gold" class="form-control" />
                   </label>
                 </b-col>
                 <b-col cols="2">
@@ -564,7 +582,7 @@
                     Electrum:
                     <input
                       type="text"
-                      v-model="char.money[0].electrum"
+                      v-model="tempChar.money[0].electrum"
                       class="form-control"
                     />
                   </label>
@@ -574,7 +592,7 @@
                     Platinum:
                     <input
                       type="text"
-                      v-model="char.money[0].platinum"
+                      v-model="tempChar.money[0].platinum"
                       class="form-control"
                     />
                   </label>
@@ -643,7 +661,7 @@
                       Spell Ability:
                       <input
                         type="text"
-                        v-model="char.spellMods.spellAbility"
+                        v-model="tempChar.spellMods.spellAbility"
                         class="form-control"
                       />
                     </label>
@@ -655,7 +673,7 @@
                       Spell Save DC:
                       <input
                         type="text"
-                        v-model="char.spellMods.spellSave"
+                        v-model="tempChar.spellMods.spellSave"
                         class="form-control"
                       />
                     </label>
@@ -667,7 +685,7 @@
                       Spell Attack Bonus:
                       <input
                         type="text"
-                        v-model="char.spellMods.spellAttack"
+                        v-model="tempChar.spellMods.spellAttack"
                         class="form-control"
                       />
                     </label>
@@ -731,7 +749,12 @@
               <b-row>
                 <b-col>
                   <p class="sectionLabel">Cantrips:</p>
-                  <b-table striped hover :items="char.spells.cantrips" :fields="spellTableFields">
+                  <b-table
+                    striped
+                    hover
+                    :items="tempChar.spells.cantrips"
+                    :fields="spellTableFields"
+                  >
                     <template v-slot:cell(delete)="row">
                       <b-button
                         size="sm"
@@ -740,55 +763,55 @@
                     </template>
                   </b-table>
                   <p class="sectionLabel">Level 1:</p>
-                  <b-table striped hover :items="char.spells.lvl1" :fields="spellTableFields">
+                  <b-table striped hover :items="tempChar.spells.lvl1" :fields="spellTableFields">
                     <template v-slot:cell(delete)="row">
                       <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl1')">Delete Item</b-button>
                     </template>
                   </b-table>
                   <p class="sectionLabel">Level 2:</p>
-                  <b-table striped hover :items="char.spells.lvl2" :fields="spellTableFields">
+                  <b-table striped hover :items="tempChar.spells.lvl2" :fields="spellTableFields">
                     <template v-slot:cell(delete)="row">
                       <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl2')">Delete Item</b-button>
                     </template>
                   </b-table>
                   <p class="sectionLabel">Level 3:</p>
-                  <b-table striped hover :items="char.spells.lvl3" :fields="spellTableFields">
+                  <b-table striped hover :items="tempChar.spells.lvl3" :fields="spellTableFields">
                     <template v-slot:cell(delete)="row">
                       <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl3')">Delete Item</b-button>
                     </template>
                   </b-table>
                   <p class="sectionLabel">Level 4:</p>
-                  <b-table striped hover :items="char.spells.lvl4" :fields="spellTableFields">
+                  <b-table striped hover :items="tempChar.spells.lvl4" :fields="spellTableFields">
                     <template v-slot:cell(delete)="row">
                       <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl4')">Delete Item</b-button>
                     </template>
                   </b-table>
                   <p class="sectionLabel">Level 5:</p>
-                  <b-table striped hover :items="char.spells.lvl5" :fields="spellTableFields">
+                  <b-table striped hover :items="tempChar.spells.lvl5" :fields="spellTableFields">
                     <template v-slot:cell(delete)="row">
                       <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl5')">Delete Item</b-button>
                     </template>
                   </b-table>
                   <p class="sectionLabel">Level 6:</p>
-                  <b-table striped hover :items="char.spells.lvl6" :fields="spellTableFields">
+                  <b-table striped hover :items="tempChar.spells.lvl6" :fields="spellTableFields">
                     <template v-slot:cell(delete)="row">
                       <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl6')">Delete Item</b-button>
                     </template>
                   </b-table>
                   <p class="sectionLabel">Level 7:</p>
-                  <b-table striped hover :items="char.spells.lvl7" :fields="spellTableFields">
+                  <b-table striped hover :items="tempChar.spells.lvl7" :fields="spellTableFields">
                     <template v-slot:cell(delete)="row">
                       <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl7')">Delete Item</b-button>
                     </template>
                   </b-table>
                   <p class="sectionLabel">Level 8:</p>
-                  <b-table striped hover :items="char.spells.lvl8" :fields="spellTableFields">
+                  <b-table striped hover :items="tempChar.spells.lvl8" :fields="spellTableFields">
                     <template v-slot:cell(delete)="row">
                       <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl8')">Delete Item</b-button>
                     </template>
                   </b-table>
                   <p class="sectionLabel">Level 9:</p>
-                  <b-table striped hover :items="char.spells.lvl9" :fields="spellTableFields">
+                  <b-table striped hover :items="tempChar.spells.lvl9" :fields="spellTableFields">
                     <template v-slot:cell(delete)="row">
                       <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl9')">Delete Item</b-button>
                     </template>
@@ -804,9 +827,13 @@
 </template>
 
 <script>
+import { charDnD5e } from "@/components/modules/CharacterObjects/characterD&D.js";
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
+      tempChar: charDnD5e(),
       skillsOpen: false,
       // Text Areas
       tempProf: "",
@@ -846,70 +873,78 @@ export default {
       ]
     };
   },
+  computed: {
+    ...mapGetters({
+      appRoute: "getAppRoute"
+    })
+  },
   methods: {
     // The Following all parse the individual textAreas
     saveProfs() {
-      this.char.proficiencies = [];
+      this.tempChar.proficiencies = [];
       var stringArray = document
         .getElementById("charPoficieniesList")
         .value.split("\n");
       stringArray.forEach(element => {
-        this.char.proficiencies.push(element);
+        this.tempChar.proficiencies.push(element);
       });
     },
     saveLangs() {
-      this.char.languages = [];
+      this.tempChar.languages = [];
       var stringArray = document
         .getElementById("charLanguageList")
         .value.split("\n");
       stringArray.forEach(element => {
-        this.char.languages.push(element);
+        this.tempChar.languages.push(element);
       });
     },
     saveFeatures() {
-      this.char.features = [];
+      this.tempChar.features = [];
       var stringArray = document
         .getElementById("charFeaturesList")
         .value.split("\n");
       stringArray.forEach(element => {
-        this.char.features.push(element);
+        this.tempChar.features.push(element);
       });
     },
     saveFeats() {
-      this.char.feats = [];
+      this.tempChar.feats = [];
       var stringArray = document
         .getElementById("charFeatsList")
         .value.split("\n");
       stringArray.forEach(element => {
-        this.char.feats.push(element);
+        this.tempChar.feats.push(element);
       });
     },
     saveBackstory() {
-      this.char.backstory = [];
+      this.tempChar.backstory = [];
       var stringArray = document
         .getElementById("charBackstoryList")
         .value.split("\n");
       stringArray.forEach(element => {
-        this.char.backstory.push(element);
+        this.tempChar.backstory.push(element);
       });
     },
     saveNotes() {
-      this.char.notes = [];
+      this.tempChar.notes = [];
       var stringArray = document
         .getElementById("charNotesList")
         .value.split("\n");
       stringArray.forEach(element => {
-        this.char.notes.push(element);
+        this.tempChar.notes.push(element);
       });
     },
     // Navigation Method
-    saveCharEdits() {
+    addNewChar() {
       // TODO: Add remote update method
-      this.$router.push({ path: "/view-game-character" });
+      this.tempChar.charUser = this.$store.getters.getCurrUserName;
+
+      this.$store.commit("setNewUserCharacter", this.tempChar);
+      this.$router.push({ path: "/characters" });
     },
     // The following are the methods for interacting with b-tables
     addAttacksToRecord() {
-      this.char.attacksCantrips.push(this.attack);
+      this.tempChar.attacksCantrips.push(this.attack);
       this.attack = {
         attackName: "",
         hitMod: "",
@@ -918,18 +953,18 @@ export default {
       };
     },
     deleteFromAttacks(index) {
-      this.char.attacksCantrips.splice(index, 1);
+      this.tempChar.attacksCantrips.splice(index, 1);
     },
     addItemsToRecord() {
-      this.char.equipment.push(this.tempEquipment);
+      this.tempChar.equipment.push(this.tempEquipment);
       this.tempEquipment = { itemName: "", qty: 0, weight: 0 };
     },
     deleteFromItems(index) {
-      this.char.equipment.splice(index, 1);
+      this.tempChar.equipment.splice(index, 1);
     },
     addSpellToRecord() {
       var spellLevel = this.tempSpell.lvl;
-      this.char.spells[spellLevel].push({
+      this.tempChar.spells[spellLevel].push({
         spellName: this.tempSpell.spellName,
         spellDescription: this.tempSpell.spellDescription
       });
@@ -937,34 +972,8 @@ export default {
     },
     deleteFromSpells(index, level) {
       var spellLevel = level;
-      this.char.spells[spellLevel].splice(index, 1);
+      this.tempChar.spells[spellLevel].splice(index, 1);
     }
-  },
-  computed: {
-    char() {
-      return this.$store.getters.getActiveChar;
-    }
-  },
-  mounted() {
-    // These ensure that the format of the textAreas remains correct
-    this.char.proficiencies.forEach(prof => {
-      this.tempProf += prof + "\n";
-    });
-    this.char.languages.forEach(lang => {
-      this.tempLang += lang + "\n";
-    });
-    this.char.features.forEach(feature => {
-      this.tempFeatures += feature + "\n";
-    });
-    this.char.feats.forEach(feat => {
-      this.tempFeats += feat + "\n";
-    });
-    this.char.backstory.forEach(story => {
-      this.tempBackstory += story + "\n";
-    });
-    this.char.notes.forEach(note => {
-      this.tempNotes += note + "\n";
-    });
   }
 };
 </script>

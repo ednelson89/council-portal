@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="activeGame.length > 0">
-      <b-row v-for="(char, index) in activeGame" :key="index">
+    <div v-if="activeUserChars.length > 0">
+      <b-row v-for="(char, index) in activeUserChars" :key="index">
         <b-col>
           <b-card class="b-cards">
             <b-row>
@@ -53,7 +53,7 @@
     <div v-else>
       <b-row>
         <b-col>
-          <p>There are currently no characters in the campaign.</p>
+          <p>There are currently no Dungeons and Dragons 5e characters .</p>
         </b-col>
       </b-row>
     </div>
@@ -69,17 +69,14 @@ export default {
   methods: {
     viewCharacter(character) {
       this.$store.commit("setActiveChar", character);
-      this.$router.push({ path: "/view-game-character" });
+      this.$router.push({ path: "/view-user-character" });
     },
     deleteCharacter(index) {
-      this.activeGame.splice(index, 0);
-      this.$store.commit("deleteGameChar", index);
+      this.activeUserChars.splice(index, 0);
+      this.$store.commit("deleteUserChar", index);
     }
   },
   computed: {
-    activeGame() {
-      return this.$store.getters.getActiveGameCharList;
-    },
     activeChar() {
       return this.$store.getters.getCurrUserName;
     },

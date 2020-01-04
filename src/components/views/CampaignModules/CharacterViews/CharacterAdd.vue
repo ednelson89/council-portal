@@ -8,7 +8,7 @@
     </b-row>
     <b-row>
       <b-col cols="2">
-        <b-button class="cardButton" @click="$router.push({path: '/game-characters'})">Go Back</b-button>
+        <b-button class="cardButton" @click="$router.go(-1)">Go Back</b-button>
       </b-col>
     </b-row>
     <hr />

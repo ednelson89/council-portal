@@ -1,13 +1,18 @@
 const state = {
   userName: "",
+  activeUser: {},
   activeGameID: {},
   activeJournal: "",
-  activeCharacter: {}
+  activeCharacter: {},
+  appRoute: ""
 };
 
 const getters = {
-  getCurrUser(state) {
+  getCurrUserName(state) {
     return state.userName;
+  },
+  getActiveUser(state) {
+    return state.activeUser;
   },
   getActiveGame(state) {
     return state.activeGameID;
@@ -23,12 +28,21 @@ const getters = {
   },
   getActiveGameCharList() {
     return state.activeGameID.gameChars;
+  },
+  getAppRoute() {
+    return state.appRoute;
   }
 };
 
 const mutations = {
-  setCurrUser(state, input) {
+  setCurrUserName(state, input) {
     state.userName = input;
+  },
+  setActiveUser(state, input) {
+    state.activeUser = input;
+  },
+  clearActiveUser(state) {
+    state.activeUser = {};
   },
   setActiveGame(state, input) {
     state.activeGameID = input;
@@ -39,11 +53,20 @@ const mutations = {
   setActiveChar(state, input) {
     state.activeCharacter = input;
   },
-  setNewCharacter(state, input) {
+  setNewGameCharacter(state, input) {
     state.activeGameID.gameChars.push(input);
   },
-  deleteChar(state, input) {
+  setNewUserCharacter(state, input) {
+    state.activeUser.userChars.push(input);
+  },
+  deleteGameChar(state, input) {
     state.activeGameID.gameChars.splice(input, 1);
+  },
+  deleteUserChar(state, input) {
+    state.activeUser.userChars.splice(input, 1);
+  },
+  setAppRoute(state, input) {
+    state.appRoute = input;
   }
 };
 

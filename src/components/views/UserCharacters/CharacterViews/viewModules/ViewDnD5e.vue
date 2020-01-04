@@ -9,13 +9,13 @@
           <span class="italics">{{char.charUser}}</span>
         </p>
         <b-button
-          @click="$router.push({path: '/game-characters'})"
+          @click="$router.push({path: '/characters'})"
           class="cardButton"
           style="margin-top:10px;"
         >Back to Characters</b-button>
         <br />
         <b-button
-          @click="$router.push({path: '/edit-game-character'})"
+          @click="$router.push({path: '/edit-user-character'})"
           class="cardButton"
           style="margin-top:10px;"
         >Edit Character</b-button>

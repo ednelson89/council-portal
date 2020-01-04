@@ -30,12 +30,14 @@
 import navigation from "@/components/common/Navigation.vue";
 import games from "@/data/campaignList.js";
 import resourceMin from "@/components/views/SideBar/ResourceMin.vue";
+import { userTable } from "@/data/userTable.js";
 
 export default {
   components: { navigation, resourceMin },
   data() {
     return {
-      gameList: games
+      gameList: games,
+      userTable
     };
   },
   methods: {
@@ -66,7 +68,13 @@ export default {
     this.$store.commit("setGames", this.gameList);
 
     if (this.checkStore()) {
-      this.$store.commit("setCurrUser", this.getUserStore());
+      const userData = this.getUserStore();
+      this.userTable.forEach(user => {
+        if (user.userName === userData) {
+          this.$store.commit("setActiveUser", user);
+        }
+      });
+      this.$store.commit("setCurrUserName", userData);
       if (this.$route.path !== "/") {
         this.$router.push({ path: "/" });
       }

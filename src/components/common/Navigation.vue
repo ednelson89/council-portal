@@ -115,8 +115,11 @@ export default {
   methods: {
     logout() {
       var input = "";
+
       localStorage.removeItem("UserData");
-      this.$store.commit("setCurrUser", input);
+      this.$store.commit("setCurrUserName", input);
+      this.$store.commit("clearActiveUser");
+
       if (this.$route.path !== "/") {
         this.$router.push({ path: "/" });
       }
@@ -124,7 +127,7 @@ export default {
   },
   computed: {
     currentUser() {
-      return this.$store.getters.getCurrUser;
+      return this.$store.getters.getCurrUserName;
     }
   }
 };

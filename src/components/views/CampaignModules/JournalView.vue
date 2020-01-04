@@ -248,7 +248,7 @@ export default {
         journalTitle: "",
         journalDate: this.getDate(),
         journalContent: [""],
-        journalAuthor: this.$store.getters.getCurrUser
+        journalAuthor: this.$store.getters.getCurrUserName
       };
       this.$refs["addJournalModal"].show();
     },

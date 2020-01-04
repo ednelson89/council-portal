@@ -1,5 +1,6 @@
 const charDnD5e = () => ({
   charUser: "",
+  system: "D&D5e",
   charID: generateID(),
   portraitSrc:
     "https://live.mgm-tp.com/wp-content/uploads/2019/04/default-avatar.png",

@@ -905,7 +905,7 @@ export default {
     // Navigation Method
     saveCharEdits() {
       // TODO: Add remote update method
-      this.$router.push({ path: "/view-game-character" });
+      this.$router.push({ path: "/view-user-character" });
     },
     // The following are the methods for interacting with b-tables
     addAttacksToRecord() {

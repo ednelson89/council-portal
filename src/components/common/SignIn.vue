@@ -38,12 +38,14 @@
 
 <script>
 import { signIn } from "@/components/modules/signIn.js";
+import { userTable } from "@/data/userTable.js";
 
 export default {
   data() {
     return {
       userName: "",
-      passWord: ""
+      passWord: "",
+      userTable
     };
   },
   methods: {
@@ -73,7 +75,13 @@ export default {
     logIn() {
       this.signIn(this.userName, this.passWord);
       if (this.checkStore()) {
-        this.$store.commit("setCurrUser", this.getUserStore());
+        const userData = this.getUserStore();
+        this.userTable.forEach(user => {
+          if (user.userName === userData) {
+            this.$store.commit("setActiveUser", user);
+          }
+        });
+        this.$store.commit("setCurrUserName", userData);
         this.$router.push({ path: "/" });
       }
     }
