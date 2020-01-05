@@ -30,16 +30,14 @@ export default {
     },
     showBooks() {
       return (
-        this.$route.path === "/edit-character" ||
-        this.$route.path === "/view-character" ||
-        this.$route.path === "/game-characters" ||
-        this.$route.path === "/journal-view" ||
-        this.$route.path === "/game-wiki" ||
-        this.$route.path === "/add-character" ||
-        this.$route.path === "/game-characters" ||
-        this.$route.path === "/game-calendar" ||
         this.$route.path === "/game-hub" ||
-        this.$route.path === "/wiki-view"
+        this.$route.path === "/game-characters" ||
+        this.$route.path === "/add-game-character" ||
+        this.$route.path === "/edit-game-character" ||
+        this.$route.path === "/view-game-character" ||
+        this.$route.path === "/game-journal-view" ||
+        this.$route.path === "/game-wiki-view" ||
+        this.$route.path === "/game-calendar"
       );
     }
   }

@@ -48,13 +48,7 @@
       </v-list-item>
     </v-list>
     <v-divider></v-divider>
-    <div
-      v-if="$route.path === '/edit-character'  || $route.path === '/view-character' 
-      || $route.path === '/game-characters'  || $route.path === '/game-hub' 
-      || $route.path === '/journal-view' || $route.path === '/game-wiki' 
-      || $route.path === '/game-characters' || $route.path === '/game-calendar'  
-      || $route.path === '/add-character' || $route.path === '/wiki-view'"
-    >
+    <div v-if="showSubMenu">
       <v-list-item>
         <v-list-item-title style="font-weight:bold">Game Links</v-list-item-title>
       </v-list-item>
@@ -106,8 +100,8 @@ export default {
           icon: "mdi-sword",
           path: "/game-characters"
         },
-        { title: "Journal", icon: "mdi-feather", path: "/journal-view" },
-        { title: "Wiki", icon: "mdi-library-books", path: "/wiki-view" }
+        { title: "Journal", icon: "mdi-feather", path: "/game-journal-view" },
+        { title: "Wiki", icon: "mdi-library-books", path: "/game-wiki-view" }
       ],
       mini: true
     };
@@ -128,6 +122,18 @@ export default {
   computed: {
     currentUser() {
       return this.$store.getters.getCurrUserName;
+    },
+    showSubMenu() {
+      return (
+        this.$route.path === "/game-hub" ||
+        this.$route.path === "/game-characters" ||
+        this.$route.path === "/add-game-character" ||
+        this.$route.path === "/edit-game-character" ||
+        this.$route.path === "/view-game-character" ||
+        this.$route.path === "/game-journal-view" ||
+        this.$route.path === "/game-wiki-view" ||
+        this.$route.path === "/game-calendar"
+      );
     }
   }
 };
