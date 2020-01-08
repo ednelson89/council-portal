@@ -37,7 +37,8 @@
 </template>
 
 <script>
-import { signIn } from "@/components/modules/signIn.js";
+import { signIn } from "@/components/modules/utilities/signIn.js";
+import { getCampaigns } from "@/components/modules/utilities/dataFunctions.js";
 import { userTable } from "@/data/userTable.js";
 
 export default {
@@ -50,6 +51,7 @@ export default {
   },
   methods: {
     signIn,
+    getCampaigns,
     checkStore() {
       var store = JSON.parse(localStorage.getItem("UserData"));
       var expires = new Date(store.expires);
@@ -76,6 +78,10 @@ export default {
       this.signIn(this.userName, this.passWord);
       if (this.checkStore()) {
         const userData = this.getUserStore();
+
+        var gameList = this.getCampaigns();
+        this.$store.commit("setGames", gameList);
+
         this.userTable.forEach(user => {
           if (user.userName === userData) {
             this.$store.commit("setActiveUser", user);
