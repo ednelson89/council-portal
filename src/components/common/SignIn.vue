@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { signIn } from "@/components/modules/utilities/signIn.js";
+import { postSignInOut } from "@/components/modules/utilities/postSignInOut.js";
 import { getCampaigns } from "@/components/modules/utilities/dataFunctions.js";
 import { userTable } from "@/data/userTable.js";
 
@@ -50,7 +50,7 @@ export default {
     };
   },
   methods: {
-    signIn,
+    postSignInOut,
     getCampaigns,
     checkStore() {
       var store = JSON.parse(localStorage.getItem("UserData"));
@@ -58,12 +58,12 @@ export default {
       var now = new Date();
 
       try {
-        if (store.userName && now <= expires) {
+        if (store.user && now <= expires) {
           return true;
-        } else if (store.userName && now > expires) {
+        } else if (store.user && now > expires) {
           localStorage.removeItem("UserData");
           return false;
-        } else if (!store.userName) {
+        } else if (!store.user) {
           return false;
         }
       } catch {
@@ -72,28 +72,40 @@ export default {
     },
     getUserStore() {
       var store = JSON.parse(localStorage.getItem("UserData"));
-      return store.userName;
+      return store.user;
     },
     logIn() {
-      this.signIn(this.userName, this.passWord);
-      if (this.checkStore()) {
-        const userData = this.getUserStore();
+      // Login on 'server'
+      var certs = { username: this.userName, password: this.passWord };
+      this.postSignInOut(certs, 1).then(() => {
+        if (this.checkStore()) {
+          // Get username
+          const userData = this.getUserStore();
+          // Get GamesList
+          var gameList = [];
+          this.getCampaigns()
+            .then(response => {
+              response.forEach(entry => {
+                gameList.push(entry);
+              });
+            })
+            .then(() => {
+              this.$store.commit("setGames", gameList);
+            });
 
-        var gameList = this.getCampaigns();
-        this.$store.commit("setGames", gameList);
-
-        this.userTable.forEach(user => {
-          if (user.userName === userData) {
-            this.$store.commit("setActiveUser", user);
-          }
-        });
-        this.$store.commit("setCurrUserName", userData);
-        this.$router.push({ path: "/" });
-      }
+          // Get UserTables
+          this.userTable.forEach(user => {
+            if (user.userName === userData) {
+              this.$store.commit("setActiveUser", user);
+            }
+          });
+          this.$store.commit("setCurrUserName", userData);
+          this.$router.push({ path: "/" });
+        }
+      });
     }
   }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

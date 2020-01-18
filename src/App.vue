@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <v-app :style="{'background-image': 'url(' + require('./assets/background_texture.png') + ')'}">
+    <v-app
+      :style="{
+        'background-image':
+          'url(' + require('./assets/background_texture.png') + ')'
+      }"
+    >
       <navigation></navigation>
       <b-container fluid>
         <b-row align="center" justify="start">
@@ -47,12 +52,12 @@ export default {
         var expires = new Date(store.expires);
         var now = new Date();
 
-        if (store.userName && now <= expires) {
+        if (store.user && now <= expires) {
           return true;
-        } else if (store.userName && now > expires) {
+        } else if (store.user && now > expires) {
           localStorage.removeItem("UserData");
           return false;
-        } else if (!store.userName) {
+        } else if (!store.user) {
           return false;
         }
       } catch {
@@ -61,16 +66,27 @@ export default {
     },
     getUserStore() {
       var store = JSON.parse(localStorage.getItem("UserData"));
-      return store.userName;
+      return store.user;
     }
   },
   created() {
     if (this.checkStore()) {
+      // Get Username
       const userData = this.getUserStore();
 
-      var gameList = this.getCampaigns();
-      this.$store.commit("setGames", gameList);
+      // Get GamesList
+      var gameList = [];
+      this.getCampaigns()
+        .then(response => {
+          response.forEach(entry => {
+            gameList.push(entry);
+          });
+        })
+        .then(() => {
+          this.$store.commit("setGames", gameList);
+        });
 
+      // Get UserTables
       this.userTable.forEach(user => {
         if (user.userName === userData) {
           this.$store.commit("setActiveUser", user);
@@ -101,5 +117,4 @@ export default {
   color: #1d2935;
 }
 </style>
-<style src="./css/main.css">
-</style>
+<style src="./css/main.css"></style>

@@ -9,7 +9,7 @@ const getters = {
 
 const mutations = {
   setGames(state, inputs) {
-    inputs.gameList.forEach(game => {
+    inputs.forEach(game => {
       state.push(game);
     });
   },

@@ -72,6 +72,8 @@
 </template>
 
 <script>
+import { postSignInOut } from "@/components/modules/utilities/postSignInOut.js";
+
 export default {
   data() {
     return {
@@ -107,13 +109,21 @@ export default {
     };
   },
   methods: {
+    postSignInOut,
     logout() {
       var input = "";
 
+      // sign out from the 'server'
+      var store = JSON.parse(localStorage.getItem("UserData"));
+      var certs = { username: store.user, password: store.uid };
+      this.postSignInOut(certs, 2);
+
+      // clear local certs
       localStorage.removeItem("UserData");
       this.$store.commit("setCurrUserName", input);
       this.$store.commit("clearActiveUser");
 
+      // reroute
       if (this.$route.path !== "/") {
         this.$router.push({ path: "/" });
       }
