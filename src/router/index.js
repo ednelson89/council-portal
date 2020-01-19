@@ -16,6 +16,7 @@ import GameCharView from "../components/views/CampaignModules/CharacterViews/Cha
 import GameCharEdit from "../components/views/CampaignModules/CharacterViews/CharacterEdit.vue";
 import GameCharAdd from "../components/views/CampaignModules/CharacterViews/CharacterAdd.vue";
 import SignIn from "../components/common/SignIn.vue";
+import CreateAccount from "../components/common/CreateAccount.vue";
 
 Vue.use(VueRouter);
 
@@ -29,6 +30,11 @@ const routes = [
     path: "/sign-in",
     name: "Sign In",
     component: SignIn
+  },
+  {
+    path: "/create-account",
+    name: "Create Account",
+    component: CreateAccount
   },
   {
     path: "/campaigns",

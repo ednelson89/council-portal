@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-if="activeUserChars.length > 0">
-      <b-row v-for="(char, index) in activeUserChars" :key="index">
-        <b-col>
+    <div v-if="activeUser.userChars.length > 0 ">
+      <b-row v-for="(char, index) in activeUser.userChars" :key="index">
+        <b-col v-if="char.charUser === activeChar">
           <b-card class="b-cards">
             <b-row>
               <b-col cols="4">
@@ -80,9 +80,8 @@ export default {
       postUserCharUpdate(localStore, 2, tempChar).then(data => {
         this.activeUser.userChars = data;
         this.$forceUpdate();
+        // this.$store.commit("deleteUserChar", index);
       });
-      // this.activeUserChars.splice(index, 0);
-      // this.$store.commit("deleteUserChar", index);
     }
   },
   computed: {
