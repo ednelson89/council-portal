@@ -30,7 +30,7 @@
     <v-list-item
       link
       @click="$router.push({path: '/create-account'})"
-      v-if="currentUser !== '' && currentUser !== 'testUser1'"
+      v-if="currentUser !== '' || currentUser !== 'testUser1'"
     >
       <v-list-item-icon>
         <v-icon>mdi-account-plus-outline</v-icon>
