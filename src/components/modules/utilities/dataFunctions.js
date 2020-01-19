@@ -26,14 +26,35 @@ var getUsersList = function() {
     });
 };
 
-// Actions 1:Add, 2:Update, 3:Delete
-var postUserUpdate = function(userCert, actionCode) {
-  var message = { cert: userCert, action: actionCode };
+// Actions 1:Add, 2:Delete, 3:Update
+var postUserCharUpdate = function(userCert, actionCode, updateChar) {
+  var message = {
+    cert: userCert,
+    data: { code: actionCode, data: updateChar }
+  };
   return axios
-    .post(process.env.VUE_APP_API_URL + "postCampaignTable", message)
+    .post(process.env.VUE_APP_API_URL + "updateUserCharacters", message)
     .then(response => {
       return response.data;
     });
 };
 
-export { getCampaigns, postCampaigns, getUsersList, postUserUpdate };
+// Actions 1:Add, 2:Delete, 3:Update
+var getUserChars = function(userCert) {
+  var message = {
+    cert: userCert
+  };
+  return axios
+    .post(process.env.VUE_APP_API_URL + "getUserCharacters", message)
+    .then(response => {
+      return response.data;
+    });
+};
+
+export {
+  getCampaigns,
+  postCampaigns,
+  getUsersList,
+  postUserCharUpdate,
+  getUserChars
+};

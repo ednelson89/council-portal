@@ -35,7 +35,11 @@
 import navigation from "@/components/common/Navigation.vue";
 import resourceMin from "@/components/views/SideBar/ResourceMin.vue";
 import { userTable } from "@/data/userTable.js";
-import { getCampaigns } from "@/components/modules/utilities/dataFunctions.js";
+import {
+  getCampaigns,
+  getUserChars
+} from "@/components/modules/utilities/dataFunctions.js";
+import { mapGetters } from "vuex";
 
 export default {
   components: { navigation, resourceMin },
@@ -69,6 +73,11 @@ export default {
       return store.user;
     }
   },
+  computed: {
+    ...mapGetters({
+      activeUser: "getActiveUser"
+    })
+  },
   created() {
     if (this.checkStore()) {
       // Get Username
@@ -96,6 +105,13 @@ export default {
       if (this.$route.path !== "/") {
         this.$router.push({ path: "/" });
       }
+
+      // Get user Characters
+      var localStore = JSON.parse(localStorage.getItem("UserData"));
+      getUserChars(localStore).then(data => {
+        this.activeUser.userChars = data;
+      });
+
       this.$forceUpdate();
     } else {
       localStorage.removeItem("UserData");

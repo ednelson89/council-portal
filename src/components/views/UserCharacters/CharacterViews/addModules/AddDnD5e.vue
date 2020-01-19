@@ -828,6 +828,7 @@
 
 <script>
 import { charDnD5e } from "@/components/modules/CharacterObjects/characterD&D.js";
+import { postUserCharUpdate } from "@/components/modules/utilities/dataFunctions.js";
 import { mapGetters } from "vuex";
 
 export default {
@@ -875,7 +876,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      appRoute: "getAppRoute"
+      appRoute: "getAppRoute",
+      activeUser: "getActiveUser"
     })
   },
   methods: {
@@ -938,9 +940,13 @@ export default {
     addNewChar() {
       // TODO: Add remote update method
       this.tempChar.charUser = this.$store.getters.getCurrUserName;
+      var localStore = JSON.parse(localStorage.getItem("UserData"));
 
       this.$store.commit("setNewUserCharacter", this.tempChar);
-      this.$router.push({ path: "/characters" });
+      postUserCharUpdate(localStore, 1, this.tempChar).then(data => {
+        this.activeUser.userChars = data;
+        this.$router.push({ path: "/characters" });
+      });
     },
     // The following are the methods for interacting with b-tables
     addAttacksToRecord() {

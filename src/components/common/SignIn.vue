@@ -37,8 +37,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import { postSignInOut } from "@/components/modules/utilities/postSignInOut.js";
-import { getCampaigns } from "@/components/modules/utilities/dataFunctions.js";
+import {
+  getCampaigns,
+  getUserChars
+} from "@/components/modules/utilities/dataFunctions.js";
 import { userTable } from "@/data/userTable.js";
 
 export default {
@@ -48,6 +52,11 @@ export default {
       passWord: "",
       userTable
     };
+  },
+  computed: {
+    ...mapGetters({
+      activeUser: "getActiveUser"
+    })
   },
   methods: {
     postSignInOut,
@@ -100,6 +109,13 @@ export default {
             }
           });
           this.$store.commit("setCurrUserName", userData);
+
+          // Get user Characters
+          var localStore = JSON.parse(localStorage.getItem("UserData"));
+          getUserChars(localStore).then(data => {
+            this.activeUser.userChars = data;
+          });
+
           this.$router.push({ path: "/" });
         }
       });
