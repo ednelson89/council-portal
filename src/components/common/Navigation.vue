@@ -27,7 +27,11 @@
       <v-list-item-content>Log Out</v-list-item-content>
     </v-list-item>
     <v-divider></v-divider>
-    <v-list-item link @click="$router.push({path: '/create-account'})" v-if="currentUser !== ''">
+    <v-list-item
+      link
+      @click="$router.push({path: '/create-account'})"
+      v-if="currentUser !== '' && currentUser !== 'testUser1'"
+    >
       <v-list-item-icon>
         <v-icon>mdi-account-plus-outline</v-icon>
       </v-list-item-icon>
