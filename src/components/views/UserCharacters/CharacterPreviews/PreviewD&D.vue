@@ -62,6 +62,9 @@
 </template>
 
 <script>
+import { postUserCharUpdate } from "@/components/modules/utilities/dataFunctions.js";
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {};
@@ -72,11 +75,20 @@ export default {
       this.$router.push({ path: "/view-user-character" });
     },
     deleteCharacter(index) {
-      this.activeUserChars.splice(index, 0);
-      this.$store.commit("deleteUserChar", index);
+      var localStore = JSON.parse(localStorage.getItem("UserData"));
+      var tempChar = this.activeUserChars[index];
+      postUserCharUpdate(localStore, 2, tempChar).then(data => {
+        this.activeUser.userChars = data;
+        this.$forceUpdate();
+      });
+      // this.activeUserChars.splice(index, 0);
+      // this.$store.commit("deleteUserChar", index);
     }
   },
   computed: {
+    ...mapGetters({
+      activeUser: "getActiveUser"
+    }),
     activeChar() {
       return this.$store.getters.getCurrUserName;
     },

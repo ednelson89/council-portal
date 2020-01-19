@@ -39,7 +39,6 @@ var postUserCharUpdate = function(userCert, actionCode, updateChar) {
     });
 };
 
-// Actions 1:Add, 2:Delete, 3:Update
 var getUserChars = function(userCert) {
   var message = {
     cert: userCert
