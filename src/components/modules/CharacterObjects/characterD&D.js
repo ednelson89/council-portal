@@ -110,8 +110,15 @@ const charDnD5e = () => ({
     passInsight: 0,
     passInvest: 0
   },
-  attacksCantrips: [],
-  equipment: [],
+  attacksCantrips: [
+    {
+      attackName: "",
+      hitMod: 0,
+      dmg: "",
+      notes: ""
+    }
+  ],
+  equipment: [{ itemName: "", qty: 0, weight: 0 }],
   features: [""],
   feats: [""],
   money: [
@@ -126,16 +133,16 @@ const charDnD5e = () => ({
   backstory: [""],
   note: [""],
   spells: {
-    cantrips: [],
-    lvl1: [],
-    lvl2: [],
-    lvl3: [],
-    lvl4: [],
-    lvl5: [],
-    lvl6: [],
-    lvl7: [],
-    lvl8: [],
-    lvl9: []
+    cantrips: [{ spellName: "", spellDescription: "" }],
+    lvl1: [{ spellName: "", spellDescription: "" }],
+    lvl2: [{ spellName: "", spellDescription: "" }],
+    lvl3: [{ spellName: "", spellDescription: "" }],
+    lvl4: [{ spellName: "", spellDescription: "" }],
+    lvl5: [{ spellName: "", spellDescription: "" }],
+    lvl6: [{ spellName: "", spellDescription: "" }],
+    lvl7: [{ spellName: "", spellDescription: "" }],
+    lvl8: [{ spellName: "", spellDescription: "" }],
+    lvl9: [{ spellName: "", spellDescription: "" }]
   },
   spellMods: {
     spellAbility: "",

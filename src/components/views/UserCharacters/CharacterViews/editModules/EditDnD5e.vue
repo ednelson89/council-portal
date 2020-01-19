@@ -11,14 +11,13 @@
           User:
           <span class="italics">{{char.charUser}}</span>
         </p>
-        <hr />
-        <p>Editing is done in real time. There is no need to save.</p>
+
         <hr />
         <b-button
           @click="saveCharEdits"
           class="cardButton"
           style="margin-top:10px;"
-        >Back to Character</b-button>
+        >Save Character Edits</b-button>
       </b-col>
       <b-col cols="9">
         <b-card class="b-cards">
@@ -684,6 +683,11 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Spells:</h4>
+                  <p>
+                    Here is a list of your spells; please note that if you delete the last of your spells,
+                    it will be replaced by a blank spell so that the listing system doesnt break. This will
+                    be fixed in a later patch.
+                  </p>
                 </b-col>
               </b-row>
               <b-row>
@@ -804,6 +808,9 @@
 </template>
 
 <script>
+import { postUserCharUpdate } from "@/components/modules/utilities/dataFunctions.js";
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -905,7 +912,11 @@ export default {
     // Navigation Method
     saveCharEdits() {
       // TODO: Add remote update method
-      this.$router.push({ path: "/view-user-character" });
+      var localStore = JSON.parse(localStorage.getItem("UserData"));
+      postUserCharUpdate(localStore, 3, this.char).then(data => {
+        this.activeUser.userChars = data;
+        this.$router.push({ path: "/view-user-character" });
+      });
     },
     // The following are the methods for interacting with b-tables
     addAttacksToRecord() {
@@ -919,6 +930,14 @@ export default {
     },
     deleteFromAttacks(index) {
       this.char.attacksCantrips.splice(index, 1);
+      if (this.char.attacksCantrips.length === 0) {
+        this.char.attacksCantrips.push({
+          attackName: "",
+          hitMod: "",
+          dmg: "",
+          notes: ""
+        });
+      }
     },
     addItemsToRecord() {
       this.char.equipment.push(this.tempEquipment);
@@ -926,6 +945,9 @@ export default {
     },
     deleteFromItems(index) {
       this.char.equipment.splice(index, 1);
+      if (this.char.equipment.length === 0) {
+        this.char.equipment.push({ itemName: "", qty: 0, weight: 0 });
+      }
     },
     addSpellToRecord() {
       var spellLevel = this.tempSpell.lvl;
@@ -938,12 +960,19 @@ export default {
     deleteFromSpells(index, level) {
       var spellLevel = level;
       this.char.spells[spellLevel].splice(index, 1);
+      if (this.char.spells[spellLevel].length === 0) {
+        this.char.spells[spellLevel].push({
+          spellName: "",
+          spellDescription: ""
+        });
+      }
     }
   },
   computed: {
-    char() {
-      return this.$store.getters.getActiveChar;
-    }
+    ...mapGetters({
+      activeUser: "getActiveUser",
+      char: "getActiveChar"
+    })
   },
   mounted() {
     // These ensure that the format of the textAreas remains correct
