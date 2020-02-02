@@ -8,10 +8,18 @@ var postSignInOut = function(userCert, actionCode) {
     method: "post",
     url: process.env.VUE_APP_API_URL + "postSignInOut",
     data: { cert: userCert, action: actionCode }
-  }).then(response => {
-    setStore(response.data);
-    return response.data;
-  });
+  })
+    .then(response => {
+      if (response.data) {
+        setStore(response.data);
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
 };
 
 function setStore(userData) {

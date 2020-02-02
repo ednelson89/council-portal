@@ -24,13 +24,16 @@
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
-          <b-button type="submit" class="cardButton">Log In</b-button>
+          <b-button type="submit" class="cardButton">
+            {{ !loading ? "Log In" : "Loading..." }}
+            <b-spinner label="Loading..." v-if="loading"></b-spinner
+          ></b-button>
         </b-col>
       </b-row>
     </form>
     <b-row>
       <b-col xs="12" md="6">
-        <b-button class="cardButton">Create an Account</b-button>
+        <b-button class="cardButton"> Create an Account </b-button>
       </b-col>
     </b-row>
   </div>
@@ -50,7 +53,8 @@ export default {
     return {
       userName: "",
       passWord: "",
-      userTable
+      userTable,
+      loading: false
     };
   },
   computed: {
@@ -86,39 +90,49 @@ export default {
     logIn() {
       // Login on 'server'
       var certs = { username: this.userName, password: this.passWord };
-      this.postSignInOut(certs, 1).then(() => {
-        if (this.checkStore()) {
-          // Get username
-          const userData = this.getUserStore();
-          // Get GamesList
-          var gameList = [];
-          this.getCampaigns()
-            .then(response => {
-              response.forEach(entry => {
-                gameList.push(entry);
+      this.postSignInOut(certs, 1)
+        .then(response => {
+          this.loading = true;
+          if (response === true) {
+            if (this.checkStore()) {
+              // Get username
+              const userData = this.getUserStore();
+              // Get GamesList
+              var gameList = [];
+              this.getCampaigns()
+                .then(response => {
+                  response.forEach(entry => {
+                    gameList.push(entry);
+                  });
+                })
+                .then(() => {
+                  this.$store.commit("setGames", gameList);
+                });
+
+              // Get UserTables
+              this.userTable.forEach(user => {
+                if (user.userName === userData) {
+                  this.$store.commit("setActiveUser", user);
+                }
               });
-            })
-            .then(() => {
-              this.$store.commit("setGames", gameList);
-            });
+              this.$store.commit("setCurrUserName", userData);
 
-          // Get UserTables
-          this.userTable.forEach(user => {
-            if (user.userName === userData) {
-              this.$store.commit("setActiveUser", user);
+              // Get user Characters
+              var localStore = JSON.parse(localStorage.getItem("UserData"));
+              getUserChars(localStore).then(data => {
+                this.activeUser.userChars = data;
+              });
+              this.loading = false;
+              this.$router.push({ path: "/" });
             }
-          });
-          this.$store.commit("setCurrUserName", userData);
-
-          // Get user Characters
-          var localStore = JSON.parse(localStorage.getItem("UserData"));
-          getUserChars(localStore).then(data => {
-            this.activeUser.userChars = data;
-          });
-
-          this.$router.push({ path: "/" });
-        }
-      });
+          } else {
+            this.loading = false;
+            alert("Login Failed");
+          }
+        })
+        .catch(() => {
+          this.loading = false;
+        });
     }
   }
 };
