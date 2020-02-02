@@ -28,7 +28,7 @@
               </b-col>
               <b-col cols="4">
                 <img
-                  class="charImg"
+                  class="charImg b-cards"
                   :src="char.portraitSrc"
                   :alt="'Image of ' + char.genBlock.charName"
                 />
@@ -42,7 +42,7 @@
                 <b-button
                   :disabled="activeChar !== char.charUser"
                   class="cardButton"
-                  @click="deleteCharacter(index)"
+                  @click="deleteCharacterModal(index)"
                 >Delete Character</b-button>
               </b-col>
             </b-row>
@@ -57,7 +57,23 @@
         </b-col>
       </b-row>
     </div>
-    <b-modal></b-modal>
+    <b-modal ref="deleteModal" hide-header hide-footer>
+      <div>
+        <b-row>
+          <b-col>
+            <p>Are you sure you want to delete this character?</p>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <b-button class="cardButton" @click="deleteCharacter(1)">Yes</b-button>
+          </b-col>
+          <b-col>
+            <b-button class="cardButton" @click="deleteCharacter(2)">No</b-button>
+          </b-col>
+        </b-row>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -67,21 +83,34 @@ import { mapGetters } from "vuex";
 
 export default {
   data() {
-    return {};
+    return {
+      delIndex: null
+    };
   },
   methods: {
     viewCharacter(character) {
       this.$store.commit("setActiveChar", character);
       this.$router.push({ path: "/view-user-character" });
     },
-    deleteCharacter(index) {
-      var localStore = JSON.parse(localStorage.getItem("UserData"));
-      var tempChar = this.activeUserChars[index];
-      postUserCharUpdate(localStore, 2, tempChar).then(data => {
-        this.activeUser.userChars = data;
-        this.$forceUpdate();
-        // this.$store.commit("deleteUserChar", index);
-      });
+    deleteCharacterModal(index) {
+      this.$refs["deleteModal"].show();
+      this.delIndex = index;
+    },
+    deleteCharacter(actionCode) {
+      if (actionCode === 1) {
+        var localStore = JSON.parse(localStorage.getItem("UserData"));
+        var tempChar = this.activeUserChars[this.delIndex];
+        postUserCharUpdate(localStore, 2, tempChar).then(data => {
+          this.activeUser.userChars = data;
+          this.$forceUpdate();
+          // this.$store.commit("deleteUserChar", index);
+        });
+        this.$refs["deleteModal"].hide();
+        this.delIndex = null;
+      } else if (actionCode === 2) {
+        this.$refs["deleteModal"].hide();
+        this.delIndex = null;
+      }
     }
   },
   computed: {
@@ -101,7 +130,10 @@ export default {
 
 <style scoped>
 .charImg {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  border-radius: 8px;
+  border: 2px ridge #ddd;
+  border-radius: 4px;
+  padding: 5px;
 }
 </style>
