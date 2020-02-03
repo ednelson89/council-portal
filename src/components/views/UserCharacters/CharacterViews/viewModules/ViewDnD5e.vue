@@ -62,6 +62,7 @@
             <b-col cols class="skillCols">
               <img
                 class="charImg"
+                style="margin: 25px 0px;"
                 :src="char.portraitSrc"
                 :alt="'Image of ' + char.genBlock.charName"
               />

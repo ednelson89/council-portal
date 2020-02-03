@@ -59,11 +59,7 @@
                 <span class="italics">{{char.genBlock.charAlign}}</span>
               </p>
             </b-col>
-            <b-col
-              cols
-              class="skillCols"
-              :style="{'background-image': 'url(' + require('@/assets/statCard.jpg') + ')'}"
-            >
+            <b-col cols class="skillCols">
               <img
                 class="charImg"
                 style="margin: 25px 0px;"
@@ -433,7 +429,11 @@ p {
   margin-top: 4px !important;
 }
 .charImg {
-  width: 175px;
+  width: 350px;
+  border-radius: 8px;
+  border: 2px ridge #ddd;
+  border-radius: 4px;
+  padding: 5px;
 }
 .sectionLabel {
   text-align: center !important;

@@ -11,6 +11,18 @@
                   User:
                   <span class="italics">{{char.charUser}}</span>
                 </p>
+                <b-row>
+                  <b-col cols="4">
+                    <b-button class="cardButton" @click="viewCharacter(char)">View Character</b-button>
+                  </b-col>
+                  <b-col cols="4">
+                    <b-button
+                      :disabled="activeChar !== char.charUser"
+                      class="cardButton"
+                      @click="deleteCharacterModal(index)"
+                    >Delete Character</b-button>
+                  </b-col>
+                </b-row>
               </b-col>
               <b-col cols="4">
                 <p>
@@ -32,18 +44,6 @@
                   :src="char.portraitSrc"
                   :alt="'Image of ' + char.genBlock.charName"
                 />
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col cols="3">
-                <b-button class="cardButton" @click="viewCharacter(char)">View Character</b-button>
-              </b-col>
-              <b-col cols="3">
-                <b-button
-                  :disabled="activeChar !== char.charUser"
-                  class="cardButton"
-                  @click="deleteCharacterModal(index)"
-                >Delete Character</b-button>
               </b-col>
             </b-row>
           </b-card>

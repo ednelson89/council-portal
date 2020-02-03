@@ -33,6 +33,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { getUserChars } from "@/components/modules/utilities/dataFunctions.js";
 import DnD5ePreview from "@/components/views/UserCharacters/CharacterPreviews/PreviewD&D.vue";
 
 export default {
@@ -64,6 +65,12 @@ export default {
         return false;
       }
     }
+  },
+  beforeMount() {
+    var localStore = JSON.parse(localStorage.getItem("UserData"));
+    getUserChars(localStore).then(data => {
+      this.activeUser.userChars = data;
+    });
   }
 };
 </script>
