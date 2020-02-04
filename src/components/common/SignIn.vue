@@ -31,11 +31,6 @@
         </b-col>
       </b-row>
     </form>
-    <b-row>
-      <b-col xs="12" md="6">
-        <b-button class="cardButton">Create an Account</b-button>
-      </b-col>
-    </b-row>
   </div>
 </template>
 
