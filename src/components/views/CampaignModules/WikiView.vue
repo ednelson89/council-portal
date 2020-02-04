@@ -267,7 +267,6 @@ export default {
           this.updateGame();
         })
         .then(() => {
-          this.$refs["addWikiModal"].hide();
           this.activeWiki = {};
           this.tempwikiContent = "";
           this.$forceUpdate();

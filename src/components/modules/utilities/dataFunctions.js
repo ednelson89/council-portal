@@ -30,6 +30,17 @@ var updateWikis = function(actionCode, wiki, activeID) {
     });
 };
 
+var updateJournals = function(actionCode, journal, activeID) {
+  var message = {
+    data: { code: actionCode, data: journal, gameID: activeID }
+  };
+  return axios
+    .post(process.env.VUE_APP_API_URL + "updateJournals", message)
+    .then(response => {
+      return response.data;
+    });
+};
+
 // 1:Add, 2: Delete, 3: Update
 var updateGameChar = function(userCert, actionCode, updateChar, activeID) {
   var message = {
@@ -83,5 +94,6 @@ export {
   postUserCharUpdate,
   getUserChars,
   updateGameChar,
-  updateWikis
+  updateWikis,
+  updateJournals
 };

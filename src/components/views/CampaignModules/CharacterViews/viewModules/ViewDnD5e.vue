@@ -18,6 +18,7 @@
           @click="$router.push({path: '/edit-game-character'})"
           class="cardButton"
           style="margin-top:10px;"
+          :disabled="char.charUser !==  userName"
         >Edit Character</b-button>
       </b-col>
       <b-col cols="9">
@@ -418,6 +419,9 @@ export default {
   computed: {
     char() {
       return this.$store.getters.getActiveChar;
+    },
+    userName() {
+      return this.$store.getters.getCurrUserName;
     }
   }
 };

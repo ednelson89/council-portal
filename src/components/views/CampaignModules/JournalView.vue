@@ -160,12 +160,14 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { getCampaigns } from "@/components/modules/utilities/dataFunctions.js";
+import {
+  getCampaigns,
+  updateJournals
+} from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   data() {
     return {
-      journalList: [],
       tempJournalContent: "",
       activeJournal: {}
     };
@@ -214,34 +216,32 @@ export default {
       this.tempJournalContent = "";
     },
     closeEdit() {
-      var input = {
-        journalEntry: this.activeJournal,
-        activeGameID: this.activeGame.gameID,
-        updateType: 2
-      };
-      this.$store.commit("updateJournal", input);
-
-      this.$refs["editJournalModal"].hide();
-      this.activeJournal = {};
-      this.tempJournalContent = "";
-      this.$forceUpdate();
+      updateJournals(3, this.activeJournal, this.activeGame.gameID)
+        .then(() => {
+          this.updateGame();
+        })
+        .then(() => {
+          this.$refs["editJournalModal"].hide();
+          this.activeJournal = {};
+          this.tempjournalContent = "";
+          this.$forceUpdate();
+        });
     },
     closeShow() {
       this.$refs["showJournalModal"].hide();
       this.activeJournal = {};
     },
     saveJournalEntry() {
-      var input = {
-        journalEntry: this.activeJournal,
-        activeGameID: this.activeGame.gameID,
-        updateType: 1
-      };
-      this.$store.commit("updateJournal", input);
-
-      this.$refs["addJournalModal"].hide();
-      this.activeJournal = {};
-      this.tempJournalContent = "";
-      this.$forceUpdate();
+      updateJournals(1, this.activeJournal, this.activeGame.gameID)
+        .then(() => {
+          this.updateGame();
+        })
+        .then(() => {
+          this.$refs["addJournalModal"].hide();
+          this.activeJournal = {};
+          this.tempjournalContent = "";
+          this.$forceUpdate();
+        });
     },
     addEntryModalOpen() {
       this.activeJournal = {
@@ -265,39 +265,46 @@ export default {
       this.activeJournal = this.journalList[index];
     },
     deleteEntry(index) {
-      this.activeGame.journalPosts.splice(index, 1);
+      updateJournals(2, this.journalList[index], this.activeGame.gameID)
+        .then(() => {
+          this.updateGame();
+        })
+        .then(() => {
+          this.activeJournal = {};
+          this.tempjournalContent = "";
+          this.$forceUpdate();
+        });
+    },
+    updateGame() {
+      let gameList = [];
+      getCampaigns()
+        .then(response => {
+          let currGame;
+          response.forEach(entry => {
+            gameList.push(entry);
+            if (entry.gameID === this.activeGame.gameID) {
+              currGame = entry;
+            }
+          });
+          return currGame;
+        })
+        .then(game => {
+          game.journalPosts = game.journalPosts.reverse();
+          this.$store.commit("setActiveGame", game);
+          this.$store.commit("setGames", gameList);
+        });
     }
   },
   computed: {
     ...mapGetters({
       activeGame: "getActiveGame"
-    })
-  },
-  created() {
-    this.activeGame.journalPosts.forEach(journal => {
-      this.journalList.push(journal);
-    });
+    }),
+    journalList() {
+      return this.activeGame.journalPosts;
+    }
   },
   beforeMount() {
-    let gameList = [];
-    getCampaigns()
-      .then(response => {
-        let currGame;
-        response.forEach(entry => {
-          gameList.push(entry);
-          if (entry.gameID === this.activeGame.gameID) {
-            currGame = entry;
-          }
-        });
-        return currGame;
-      })
-      .then(game => {
-        this.$store.commit("setActiveGame", game);
-        this.$store.commit("setGames", gameList);
-      });
-  },
-  mounted() {
-    this.journalList = this.activeGame.journalPosts;
+    this.updateGame();
   }
 };
 </script>
