@@ -157,12 +157,14 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { getCampaigns } from "@/components/modules/utilities/dataFunctions.js";
+import {
+  getCampaigns,
+  updateWikis
+} from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   data() {
     return {
-      wikiList: [],
       tempwikiContent: "",
       activeWiki: {}
     };
@@ -211,34 +213,32 @@ export default {
       this.tempwikiContent = "";
     },
     closeEdit() {
-      var input = {
-        wikiEntry: this.activeWiki,
-        activeGameID: this.activeGame.gameID,
-        updateType: 2
-      };
-      this.$store.commit("updateWiki", input);
-
-      this.$refs["editWikiModal"].hide();
-      this.activeWiki = {};
-      this.tempwikiContent = "";
-      this.$forceUpdate();
+      updateWikis(3, this.activeWiki, this.activeGame.gameID)
+        .then(() => {
+          this.updateGame();
+        })
+        .then(() => {
+          this.$refs["editWikiModal"].hide();
+          this.activeWiki = {};
+          this.tempwikiContent = "";
+          this.$forceUpdate();
+        });
     },
     closeShow() {
       this.$refs["showWikiModal"].hide();
       this.activeWiki = {};
     },
     savewikiEntry() {
-      var input = {
-        wikiEntry: this.activeWiki,
-        activeGameID: this.activeGame.gameID,
-        updateType: 1
-      };
-      this.$store.commit("updateWiki", input);
-
-      this.$refs["addWikiModal"].hide();
-      this.activeWiki = {};
-      this.tempwikiContent = "";
-      this.$forceUpdate();
+      updateWikis(1, this.activeWiki, this.activeGame.gameID)
+        .then(() => {
+          this.updateGame();
+        })
+        .then(() => {
+          this.$refs["addWikiModal"].hide();
+          this.activeWiki = {};
+          this.tempwikiContent = "";
+          this.$forceUpdate();
+        });
     },
     addEntryModalOpen() {
       this.activeWiki = {
@@ -262,39 +262,47 @@ export default {
       this.activeWiki = this.wikiList[index];
     },
     deleteEntry(index) {
-      this.activeGame.wikiPosts.splice(index, 1);
+      updateWikis(2, this.wikiList[index], this.activeGame.gameID)
+        .then(() => {
+          this.updateGame();
+        })
+        .then(() => {
+          this.$refs["addWikiModal"].hide();
+          this.activeWiki = {};
+          this.tempwikiContent = "";
+          this.$forceUpdate();
+        });
+    },
+    updateGame() {
+      let gameList = [];
+      getCampaigns()
+        .then(response => {
+          let currGame;
+          response.forEach(entry => {
+            gameList.push(entry);
+            if (entry.gameID === this.activeGame.gameID) {
+              currGame = entry;
+            }
+          });
+          return currGame;
+        })
+        .then(game => {
+          game.wikiPosts = game.wikiPosts.reverse();
+          this.$store.commit("setActiveGame", game);
+          this.$store.commit("setGames", gameList);
+        });
     }
   },
   computed: {
     ...mapGetters({
       activeGame: "getActiveGame"
-    })
-  },
-  created() {
-    this.activeGame.wikiPosts.forEach(wiki => {
-      this.wikiList.push(wiki);
-    });
+    }),
+    wikiList() {
+      return this.activeGame.wikiPosts;
+    }
   },
   beforeMount() {
-    let gameList = [];
-    getCampaigns()
-      .then(response => {
-        let currGame;
-        response.forEach(entry => {
-          gameList.push(entry);
-          if (entry.gameID === this.activeGame.gameID) {
-            currGame = entry;
-          }
-        });
-        return currGame;
-      })
-      .then(game => {
-        this.$store.commit("setActiveGame", game);
-        this.$store.commit("setGames", gameList);
-      });
-  },
-  mounted() {
-    this.wikiList = this.activeGame.wikiPosts;
+    this.updateGame();
   }
 };
 </script>

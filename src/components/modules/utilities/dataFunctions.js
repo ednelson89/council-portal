@@ -19,6 +19,17 @@ var addCampaigns = function(campaignData) {
     });
 };
 
+var updateWikis = function(actionCode, wiki, activeID) {
+  var message = {
+    data: { code: actionCode, data: wiki, gameID: activeID }
+  };
+  return axios
+    .post(process.env.VUE_APP_API_URL + "updateWikis", message)
+    .then(response => {
+      return response.data;
+    });
+};
+
 // 1:Add, 2: Delete, 3: Update
 var updateGameChar = function(userCert, actionCode, updateChar, activeID) {
   var message = {
@@ -71,5 +82,6 @@ export {
   getUsersList,
   postUserCharUpdate,
   getUserChars,
-  updateGameChar
+  updateGameChar,
+  updateWikis
 };
