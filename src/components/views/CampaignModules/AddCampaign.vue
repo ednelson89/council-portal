@@ -83,7 +83,8 @@ export default {
   data() {
     return {
       systemTypes: [
-        { value: "D&D5e", text: "Dungeons & Dragons 5e" },
+        { value: "D&D5e", text: "Dungeons & Dragons 5e" }
+        /*
         { value: "D&D4e", text: "Dungeons & Dragons 4e" },
         { value: "D&D2e", text: "Dungeons & Dragons 2e" },
         { value: "CoDMortal", text: "Chronicles of Darkness, Mortals" },
@@ -91,7 +92,7 @@ export default {
         { value: "CoDMage", text: "Chronicles of Darkness, Mage" },
         { value: "CoDVamp", text: "Chronicles of Darkness, Vampire" },
         { value: "CoDGeist", text: "Chronicles of Darkness, Geist" },
-        { value: "CoDWere", text: "Chronicles of Darkness, Werewolves" }
+        { value: "CoDWere", text: "Chronicles of Darkness, Werewolves" } */
       ],
       gameSummaryTemp: "",
       gameModel: game()
