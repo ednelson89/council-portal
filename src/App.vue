@@ -102,9 +102,6 @@ export default {
         }
       });
       this.$store.commit("setCurrUserName", userData);
-      if (this.$route.path !== "/") {
-        this.$router.push({ path: "/" });
-      }
 
       // Get user Characters
       var localStore = JSON.parse(localStorage.getItem("UserData"));
@@ -112,7 +109,9 @@ export default {
         this.activeUser.userChars = data;
       });
 
-      this.$forceUpdate();
+      if (this.$route.path !== "/characters") {
+        this.$router.push({ path: "/characters" });
+      }
     } else {
       localStorage.removeItem("UserData");
       if (this.$route.path !== "/") {

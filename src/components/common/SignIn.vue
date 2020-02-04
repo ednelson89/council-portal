@@ -26,14 +26,14 @@
         <b-col xs="12" md="6">
           <b-button type="submit" class="cardButton">
             {{ !loading ? "Log In" : "Loading..." }}
-            <b-spinner label="Loading..." v-if="loading"></b-spinner
-          ></b-button>
+            <b-spinner label="Loading..." v-if="loading"></b-spinner>
+          </b-button>
         </b-col>
       </b-row>
     </form>
     <b-row>
       <b-col xs="12" md="6">
-        <b-button class="cardButton"> Create an Account </b-button>
+        <b-button class="cardButton">Create an Account</b-button>
       </b-col>
     </b-row>
   </div>
@@ -123,7 +123,7 @@ export default {
                 this.activeUser.userChars = data;
               });
               this.loading = false;
-              this.$router.push({ path: "/" });
+              this.$router.push({ path: "/characters" });
             }
           } else {
             this.loading = false;
