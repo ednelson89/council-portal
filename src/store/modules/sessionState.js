@@ -56,6 +56,14 @@ const mutations = {
   setNewGameCharacter(state, input) {
     state.activeGameID.gameChars.push(input);
   },
+  setCurrentGameCharacters(state, input) {
+    state.activeGameID.gameChars = [];
+    // eslint-disable-next-line no-console
+    console.log(input);
+    input.forEach(element => {
+      state.activeGameID.gameChars.push(element);
+    });
+  },
   setNewUserCharacter(state, input) {
     state.activeUser.userChars.push(input);
   },

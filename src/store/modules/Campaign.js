@@ -17,6 +17,16 @@ const mutations = {
   addGame(state, input) {
     state.push(input);
   },
+  updateChars(state, input) {
+    var chars = input.gameChars;
+    var gameID = input.gameID;
+
+    state.filter(game => {
+      if (game.gameID === gameID) {
+        game.gameChars = chars;
+      }
+    });
+  },
   updateJournal(state, inputPack) {
     var journal = inputPack.journalEntry;
     var gameId = inputPack.activeGameID;

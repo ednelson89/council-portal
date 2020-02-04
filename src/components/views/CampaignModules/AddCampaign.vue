@@ -77,6 +77,7 @@
 
 <script>
 import { game } from "@/components/modules/gameObject.js";
+import { addCampaigns } from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   data() {
@@ -106,12 +107,17 @@ export default {
         this.gameModel.gameDesc.push(element);
       });
     },
-
     addGame() {
       // this.gameModel.gameDate = this.getDate();
       // this.gameModel.gameID = this.generateID();
+      this.gameModel.gameGM = this.$store.getters.getCurrUserName;
+      if (!this.gameModel.gameDesc) {
+        this.toArray(this.gameModel.gameDesc);
+      }
       this.$store.commit("addGame", this.gameModel);
-      this.$router.push({ path: "/campaigns" });
+      addCampaigns(this.gameModel).then(() => {
+        this.$router.push({ path: "/campaigns" });
+      });
     },
     clearModel() {
       this.gameModel.gameType = "";

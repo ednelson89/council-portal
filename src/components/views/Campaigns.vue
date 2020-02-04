@@ -37,6 +37,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { getCampaigns } from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   data() {
@@ -52,6 +53,18 @@ export default {
     ...mapGetters({
       gameList: "getGames"
     })
+  },
+  beforeMount() {
+    let gameList = [];
+    getCampaigns()
+      .then(response => {
+        response.forEach(entry => {
+          gameList.push(entry);
+        });
+      })
+      .then(() => {
+        this.$store.commit("setGames", gameList);
+      });
   }
 };
 </script>

@@ -71,6 +71,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { getCampaigns } from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   data() {
@@ -84,6 +85,24 @@ export default {
     recentJournal() {
       return this.activeGame.journalPosts[0];
     }
+  },
+  beforeMount() {
+    let gameList = [];
+    getCampaigns()
+      .then(response => {
+        let currGame;
+        response.forEach(entry => {
+          gameList.push(entry);
+          if (entry.gameID === this.activeGame.gameID) {
+            currGame = entry;
+          }
+        });
+        return currGame;
+      })
+      .then(game => {
+        this.$store.commit("setActiveGame", game);
+        this.$store.commit("setGames", gameList);
+      });
   }
 };
 </script>

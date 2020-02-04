@@ -160,6 +160,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { getCampaigns } from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   data() {
@@ -276,6 +277,24 @@ export default {
     this.activeGame.journalPosts.forEach(journal => {
       this.journalList.push(journal);
     });
+  },
+  beforeMount() {
+    let gameList = [];
+    getCampaigns()
+      .then(response => {
+        let currGame;
+        response.forEach(entry => {
+          gameList.push(entry);
+          if (entry.gameID === this.activeGame.gameID) {
+            currGame = entry;
+          }
+        });
+        return currGame;
+      })
+      .then(game => {
+        this.$store.commit("setActiveGame", game);
+        this.$store.commit("setGames", gameList);
+      });
   },
   mounted() {
     this.journalList = this.activeGame.journalPosts;

@@ -23,6 +23,7 @@
 <script>
 import { mapGetters } from "vuex";
 import DnD5ePreview from "@/components/views/CampaignModules/CharacterPreviews/PreviewD&D.vue";
+import { getCampaigns } from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   components: {
@@ -39,8 +40,27 @@ export default {
   },
   computed: {
     ...mapGetters({
-      activeGame: "getActiveGame"
+      activeGame: "getActiveGame",
+      activeChars: "getActiveGameCharList"
     })
+  },
+  beforeMount() {
+    let gameList = [];
+    getCampaigns()
+      .then(response => {
+        let currGame;
+        response.forEach(entry => {
+          gameList.push(entry);
+          if (entry.gameID === this.activeGame.gameID) {
+            currGame = entry;
+          }
+        });
+        return currGame;
+      })
+      .then(game => {
+        this.$store.commit("setActiveGame", game);
+        this.$store.commit("setGames", gameList);
+      });
   }
 };
 </script>

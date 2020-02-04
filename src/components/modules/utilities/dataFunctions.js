@@ -1,26 +1,41 @@
 /* eslint-disable */
 import axios from "axios";
 
+// CAMPAIGN FUNCTIONS
 var getCampaigns = function() {
   return axios
-    .get(process.env.VUE_APP_API_URL + "getCampaignTable")
+    .get(process.env.VUE_APP_API_URL + "getCampaignTable?pass=cob2019")
     .then(result => {
       return result.data;
     });
 };
 
-var postCampaigns = function(campaignData, userCert) {
-  var message = { data: campaignData, cert: userCert };
+var addCampaigns = function(campaignData) {
+  var message = { data: campaignData };
   return axios
-    .post(process.env.VUE_APP_API_URL + "postCampaignTable", message)
+    .post(process.env.VUE_APP_API_URL + "addCampaigns", message)
     .then(response => {
       return response.data;
     });
 };
 
+// 1:Add, 2: Delete, 3: Update
+var updateGameChar = function(userCert, actionCode, updateChar, activeID) {
+  var message = {
+    cert: userCert,
+    data: { code: actionCode, data: updateChar, gameID: activeID }
+  };
+  return axios
+    .post(process.env.VUE_APP_API_URL + "updateUserCharacters", message)
+    .then(response => {
+      return response.data;
+    });
+};
+
+// USER FUNCTIONS
 var getUsersList = function() {
   return axios
-    .get(process.env.VUE_APP_API_URL + "getUserNames")
+    .get(process.env.VUE_APP_API_URL + "getUserNames?pass=cob2019")
     .then(result => {
       return result.data;
     });
@@ -52,8 +67,9 @@ var getUserChars = function(userCert) {
 
 export {
   getCampaigns,
-  postCampaigns,
+  addCampaigns,
   getUsersList,
   postUserCharUpdate,
-  getUserChars
+  getUserChars,
+  updateGameChar
 };
