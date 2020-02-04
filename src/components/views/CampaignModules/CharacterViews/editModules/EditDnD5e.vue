@@ -18,7 +18,7 @@
           @click="saveCharEdits"
           class="cardButton"
           style="margin-top:10px;"
-        >Back to Character</b-button>
+        >Save Character Edits</b-button>
       </b-col>
       <b-col cols="9">
         <b-card class="b-cards">
@@ -804,6 +804,11 @@
 </template>
 
 <script>
+import {
+  getCampaigns,
+  updateGameChar
+} from "@/components/modules/utilities/dataFunctions.js";
+
 export default {
   data() {
     return {
@@ -904,7 +909,9 @@ export default {
     },
     // Navigation Method
     saveCharEdits() {
-      // TODO: Add remote update method
+      updateGameChar(3, this.char, this.activeGame.gameID).then(() => {
+        this.updateGame();
+      });
       this.$router.push({ path: "/view-game-character" });
     },
     // The following are the methods for interacting with b-tables
@@ -938,11 +945,36 @@ export default {
     deleteFromSpells(index, level) {
       var spellLevel = level;
       this.char.spells[spellLevel].splice(index, 1);
+    },
+    updateGame() {
+      let gameList = [];
+      getCampaigns()
+        .then(response => {
+          let currGame;
+          response.forEach(entry => {
+            gameList.push(entry);
+            if (entry.gameID === this.activeGame.gameID) {
+              currGame = entry;
+            }
+          });
+          return currGame;
+        })
+        .then(game => {
+          game.wikiPosts = game.wikiPosts.reverse();
+          this.$store.commit("setActiveGame", game);
+          this.$store.commit("setGames", gameList);
+        });
     }
   },
   computed: {
     char() {
       return this.$store.getters.getActiveChar;
+    },
+    activeGame() {
+      return this.$store.getters.getActiveGame;
+    },
+    activeUser() {
+      return this.$store.getters.getCurrUserName;
     }
   },
   mounted() {

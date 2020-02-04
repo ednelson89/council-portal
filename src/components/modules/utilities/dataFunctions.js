@@ -42,13 +42,12 @@ var updateJournals = function(actionCode, journal, activeID) {
 };
 
 // 1:Add, 2: Delete, 3: Update
-var updateGameChar = function(userCert, actionCode, updateChar, activeID) {
+var updateGameChar = function(actionCode, updateChar, activeID) {
   var message = {
-    cert: userCert,
     data: { code: actionCode, data: updateChar, gameID: activeID }
   };
   return axios
-    .post(process.env.VUE_APP_API_URL + "updateUserCharacters", message)
+    .post(process.env.VUE_APP_API_URL + "updateGameCharacters", message)
     .then(response => {
       return response.data;
     });

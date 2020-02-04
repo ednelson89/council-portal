@@ -78,6 +78,10 @@
 </template>
 
 <script>
+import {
+  getCampaigns,
+  updateGameChar
+} from "@/components/modules/utilities/dataFunctions.js";
 export default {
   data() {
     return {
@@ -95,14 +99,42 @@ export default {
     },
     deleteCharacter(actionCode) {
       if (actionCode === 1) {
-        this.activeGame.splice(this.delIndex, 0);
-        this.$store.commit("deleteGameChar", this.delIndex);
-        this.$refs["deleteModal"].hide();
-        this.delIndex = null;
+        updateGameChar(
+          2,
+          this.currGame.gameChars[this.delIndex],
+          this.currGame.gameID
+        )
+          .then(() => {
+            this.updateGame();
+          })
+          .then(() => {
+            this.$forceUpdate();
+
+            this.$refs["deleteModal"].hide();
+            this.delIndex = null;
+          });
       } else if (actionCode === 2) {
         this.$refs["deleteModal"].hide();
         this.delIndex = null;
       }
+    },
+    updateGame() {
+      let gameList = [];
+      getCampaigns()
+        .then(response => {
+          let currGame;
+          response.forEach(entry => {
+            gameList.push(entry);
+            if (entry.gameID === this.currGame.gameID) {
+              currGame = entry;
+            }
+          });
+          return currGame;
+        })
+        .then(game => {
+          this.$store.commit("setActiveGame", game);
+          this.$store.commit("setGames", gameList);
+        });
     }
   },
   computed: {
@@ -115,7 +147,13 @@ export default {
     activeUserChars() {
       var user = this.$store.getters.getActiveUser;
       return user.userChars;
+    },
+    currGame() {
+      return this.$store.getters.getActiveGame;
     }
+  },
+  beforeMount() {
+    this.updateGame();
   }
 };
 </script>
