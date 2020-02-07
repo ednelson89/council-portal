@@ -41,14 +41,12 @@ import {
   getCampaigns,
   getUserChars
 } from "@/components/modules/utilities/dataFunctions.js";
-import { userTable } from "@/data/userTable.js";
 
 export default {
   data() {
     return {
       userName: "",
       passWord: "",
-      userTable,
       loading: false
     };
   },
@@ -85,9 +83,9 @@ export default {
     logIn() {
       // Login on 'server'
       var certs = { username: this.userName, password: this.passWord };
+      this.loading = true;
       this.postSignInOut(certs, 1)
         .then(response => {
-          this.loading = true;
           if (response === true) {
             if (this.checkStore()) {
               // Get username
@@ -104,21 +102,16 @@ export default {
                   this.$store.commit("setGames", gameList);
                 });
 
-              // Get UserTables
-              this.userTable.forEach(user => {
-                if (user.userName === userData) {
-                  this.$store.commit("setActiveUser", user);
-                }
-              });
               this.$store.commit("setCurrUserName", userData);
 
               // Get user Characters
               var localStore = JSON.parse(localStorage.getItem("UserData"));
               getUserChars(localStore).then(data => {
                 this.activeUser.userChars = data;
+
+                this.loading = false;
+                this.$router.push({ path: "/characters" });
               });
-              this.loading = false;
-              this.$router.push({ path: "/characters" });
             }
           } else {
             this.loading = false;

@@ -34,7 +34,6 @@
 <script>
 import navigation from "@/components/common/Navigation.vue";
 import resourceMin from "@/components/views/SideBar/ResourceMin.vue";
-import { userTable } from "@/data/userTable.js";
 import {
   getCampaigns,
   getUserChars
@@ -44,9 +43,7 @@ import { mapGetters } from "vuex";
 export default {
   components: { navigation, resourceMin },
   data() {
-    return {
-      userTable
-    };
+    return {};
   },
   methods: {
     getCampaigns,
@@ -95,23 +92,17 @@ export default {
           this.$store.commit("setGames", gameList);
         });
 
-      // Get UserTables
-      this.userTable.forEach(user => {
-        if (user.userName === userData) {
-          this.$store.commit("setActiveUser", user);
-        }
-      });
       this.$store.commit("setCurrUserName", userData);
 
       // Get user Characters
       var localStore = JSON.parse(localStorage.getItem("UserData"));
       getUserChars(localStore).then(data => {
         this.activeUser.userChars = data;
-      });
 
-      if (this.$route.path !== "/characters") {
-        this.$router.push({ path: "/characters" });
-      }
+        if (this.$route.path !== "/characters") {
+          this.$router.push({ path: "/characters" });
+        }
+      });
     } else {
       localStorage.removeItem("UserData");
       if (this.$route.path !== "/") {

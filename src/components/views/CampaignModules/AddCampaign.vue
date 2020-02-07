@@ -66,7 +66,10 @@
     <!-- Buttons -->
     <b-row>
       <b-col cols="6">
-        <b-button class="cardButton" @click="addGame()" :disabled="!gameModel.gameName">Add Game</b-button>
+        <b-button class="cardButton" @click="addGame()" :disabled="!gameModel.gameName || loading">
+          {{ !loading ? "Add Game" : "Loading... " }}
+          <b-spinner label="Loading..." v-if="loading"></b-spinner>
+        </b-button>
       </b-col>
       <b-col cols="6">
         <router-link tag="b-button" class="cardButton" to="/campaigns" @click="clearModel">Cancel</router-link>
@@ -82,6 +85,7 @@ import { addCampaigns } from "@/components/modules/utilities/dataFunctions.js";
 export default {
   data() {
     return {
+      loading: false,
       systemTypes: [
         { value: "D&D5e", text: "Dungeons & Dragons 5e" }
         /*
@@ -111,14 +115,20 @@ export default {
     addGame() {
       // this.gameModel.gameDate = this.getDate();
       // this.gameModel.gameID = this.generateID();
+      this.loading = true;
       this.gameModel.gameGM = this.$store.getters.getCurrUserName;
       if (!this.gameModel.gameDesc) {
         this.toArray(this.gameModel.gameDesc);
       }
       this.$store.commit("addGame", this.gameModel);
-      addCampaigns(this.gameModel).then(() => {
-        this.$router.push({ path: "/campaigns" });
-      });
+      addCampaigns(this.gameModel)
+        .then(() => {
+          this.$router.push({ path: "/campaigns" });
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
     },
     clearModel() {
       this.gameModel.gameType = "";

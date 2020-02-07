@@ -168,12 +168,6 @@
                       />
                     </label>
                   </p>
-                  <p class="skillLabel">
-                    <label>
-                      Speed:
-                      <input class="form-control" v-model="char.combatStats.speed" />
-                    </label>
-                  </p>
                   <p class="skillLabel">Death Saves:</p>
                   <p class="skillLabel">
                     <label>
