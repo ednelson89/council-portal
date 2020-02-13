@@ -264,7 +264,28 @@
         </b-row>
         <hr />
       </b-tab>
-      <b-tab :title="'Features, Feats, & Equipment'">
+      <b-tab :title="'Equipment & Money'">
+        <!-- Equipment  -->
+        <b-row>
+          <b-col>
+            <b-card class="b-cards">
+              <b-row>
+                <b-col>
+                  <h4 style="font-weight:bold;">Equipment:</h4>
+                  <b-table striped hover :items="char.equipment" :fields="equipmentTableFields"></b-table>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <h4 style="font-weight:bold;">Money:</h4>
+                  <b-table striped hover :items="char.money"></b-table>
+                </b-col>
+              </b-row>
+            </b-card>
+          </b-col>
+        </b-row>
+      </b-tab>
+      <b-tab :title="'Feats & Features'">
         <!-- Features -->
         <b-row>
           <b-col>
@@ -287,26 +308,6 @@
                 <b-col>
                   <h4 style="font-weight:bold;">Feats:</h4>
                   <p v-for="(feat, index) in char.feats" :key="index">{{feat}}</p>
-                </b-col>
-              </b-row>
-            </b-card>
-          </b-col>
-        </b-row>
-        <hr />
-        <!-- Equipment  -->
-        <b-row>
-          <b-col>
-            <b-card class="b-cards">
-              <b-row>
-                <b-col>
-                  <h4 style="font-weight:bold;">Equipment:</h4>
-                  <b-table striped hover :items="char.equipment"></b-table>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col>
-                  <h4 style="font-weight:bold;">Money:</h4>
-                  <b-table striped hover :items="char.money"></b-table>
                 </b-col>
               </b-row>
             </b-card>
@@ -411,8 +412,14 @@ export default {
     return {
       skillsOpen: false,
       spellTableFields: [
-        { key: "spellName", label: "Spell Name" },
+        { key: "spellName", label: "Spell Name", sortable: true },
         { key: "spellDescription", label: "Spell Description" }
+      ],
+      equipmentTableFields: [
+        { key: "itemName", label: "Item Name", sortable: true },
+        { key: "qty", label: "Quantity" },
+        { key: "weight", label: "Weight" },
+        { key: "details", label: "Details" }
       ]
     };
   },

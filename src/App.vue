@@ -10,7 +10,7 @@
       <b-container fluid>
         <b-row align="center" justify="start">
           <b-col
-            md="9"
+            :md="showSidebar ? 9 : 11"
             offset-md="1"
             xs="11"
             offset-xs="1"
@@ -20,7 +20,13 @@
               <router-view></router-view>
             </div>
           </b-col>
-          <b-col xs="11" offset-xs="1" md="2" style="padding-top: 15px; padding-bottom: 15px;">
+          <b-col
+            xs="11"
+            offset-xs="1"
+            md="2"
+            style="padding-top: 15px; padding-bottom: 15px;"
+            v-if="showSidebar"
+          >
             <div class="side-content">
               <resourceMin></resourceMin>
             </div>
@@ -73,7 +79,19 @@ export default {
   computed: {
     ...mapGetters({
       activeUser: "getActiveUser"
-    })
+    }),
+    showSidebar() {
+      return (
+        this.$route.path === "/game-hub" ||
+        this.$route.path === "/game-characters" ||
+        this.$route.path === "/add-game-character" ||
+        this.$route.path === "/edit-game-character" ||
+        this.$route.path === "/view-game-character" ||
+        this.$route.path === "/game-journal-view" ||
+        this.$route.path === "/game-wiki-view" ||
+        this.$route.path === "/game-calendar"
+      );
+    }
   },
   created() {
     if (this.checkStore()) {

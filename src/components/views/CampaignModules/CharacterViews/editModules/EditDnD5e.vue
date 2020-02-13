@@ -444,49 +444,7 @@
         </b-row>
         <hr />
       </b-tab>
-      <b-tab :title="'Features, Feats, & Equipment'">
-        <!-- Features -->
-        <b-row>
-          <b-col>
-            <b-card class="b-cards">
-              <b-row>
-                <b-col>
-                  <h4 style="font-weight:bold;">Features:</h4>
-                  <b-form-textarea
-                    id="charFeaturesList"
-                    v-model="tempFeatures"
-                    @change="saveFeatures()"
-                    placeholder="..."
-                    rows="5"
-                    max-rows="20"
-                  ></b-form-textarea>
-                </b-col>
-              </b-row>
-            </b-card>
-          </b-col>
-        </b-row>
-        <hr />
-        <!--Feats-->
-        <b-row>
-          <b-col>
-            <b-card class="b-cards">
-              <b-row>
-                <b-col>
-                  <h4 style="font-weight:bold;">Feats:</h4>
-                  <b-form-textarea
-                    id="charFeatsList"
-                    v-model="tempFeats"
-                    @change="saveFeats()"
-                    placeholder="..."
-                    rows="5"
-                    max-rows="20"
-                  ></b-form-textarea>
-                </b-col>
-              </b-row>
-            </b-card>
-          </b-col>
-        </b-row>
-        <hr />
+      <b-tab :title="'Equipment & Money'">
         <!-- Equipment  -->
         <b-row>
           <b-col>
@@ -513,6 +471,12 @@
                   <label>
                     Weight:
                     <input class="form-control" v-model="tempEquipment.weight" />
+                  </label>
+                </b-col>
+                <b-col cols="2">
+                  <label>
+                    Details:
+                    <input class="form-control" v-model="tempEquipment.details" />
                   </label>
                 </b-col>
                 <b-col cols="2">
@@ -577,6 +541,50 @@
             </b-card>
           </b-col>
         </b-row>
+      </b-tab>
+      <b-tab :title="'Feats & Features'">
+        <!-- Features -->
+        <b-row>
+          <b-col>
+            <b-card class="b-cards">
+              <b-row>
+                <b-col>
+                  <h4 style="font-weight:bold;">Features:</h4>
+                  <b-form-textarea
+                    id="charFeaturesList"
+                    v-model="tempFeatures"
+                    @change="saveFeatures()"
+                    placeholder="..."
+                    rows="5"
+                    max-rows="20"
+                  ></b-form-textarea>
+                </b-col>
+              </b-row>
+            </b-card>
+          </b-col>
+        </b-row>
+        <hr />
+        <!--Feats-->
+        <b-row>
+          <b-col>
+            <b-card class="b-cards">
+              <b-row>
+                <b-col>
+                  <h4 style="font-weight:bold;">Feats:</h4>
+                  <b-form-textarea
+                    id="charFeatsList"
+                    v-model="tempFeats"
+                    @change="saveFeats()"
+                    placeholder="..."
+                    rows="5"
+                    max-rows="20"
+                  ></b-form-textarea>
+                </b-col>
+              </b-row>
+            </b-card>
+          </b-col>
+        </b-row>
+        <hr />
       </b-tab>
       <b-tab :title="'Biography & Notes'">
         <!-- Biography -->
@@ -822,18 +830,19 @@ export default {
         notes: ""
       },
       attacksTableFields: [
-        { key: "attackName", label: "Attack Name" },
+        { key: "attackName", label: "Attack Name", sortable: true },
         { key: "hitMod", label: "Hit Modifier" },
         { key: "dmg", label: "Damage" },
         { key: "notes", label: "Notes" },
         { key: "delete", label: "Delete" }
       ],
       // Equipment Table
-      tempEquipment: { itemName: "", qty: 0, weight: 0 },
+      tempEquipment: { itemName: "", qty: 0, weight: 0, details: "" },
       equipmentTableFields: [
-        { key: "itemName", label: "Item Name" },
+        { key: "itemName", label: "Item Name", sortable: true },
         { key: "qty", label: "Quantity" },
         { key: "weight", label: "Weight" },
+        { key: "details", label: "Details" },
         { key: "delete", label: "Delete" }
       ],
       // Spell Tables
@@ -923,7 +932,7 @@ export default {
     },
     addItemsToRecord() {
       this.char.equipment.push(this.tempEquipment);
-      this.tempEquipment = { itemName: "", qty: 0, weight: 0 };
+      this.tempEquipment = { itemName: "", qty: 0, weight: 0, details: "" };
     },
     deleteFromItems(index) {
       this.char.equipment.splice(index, 1);

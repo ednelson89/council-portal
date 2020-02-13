@@ -118,7 +118,7 @@ const charDnD5e = () => ({
       notes: ""
     }
   ],
-  equipment: [{ itemName: "", qty: 0, weight: 0 }],
+  equipment: [{ itemName: "", qty: 0, weight: 0, details: "" }],
   features: [""],
   feats: [""],
   money: [

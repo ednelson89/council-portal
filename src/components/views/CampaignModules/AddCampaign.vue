@@ -113,8 +113,6 @@ export default {
       });
     },
     addGame() {
-      // this.gameModel.gameDate = this.getDate();
-      // this.gameModel.gameID = this.generateID();
       this.loading = true;
       this.gameModel.gameGM = this.$store.getters.getCurrUserName;
       if (!this.gameModel.gameDesc) {

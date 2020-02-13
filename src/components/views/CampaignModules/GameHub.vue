@@ -54,7 +54,7 @@
           <p>{{recentJournal.journalContent[0].substring(0,400)}}</p>
         </b-col>
         <b-col cols="4">
-          <router-link tag="b-button" class="cardButton" to="/journal-view">Read More</router-link>
+          <router-link tag="b-button" class="cardButton" to="/game-journal-view">Read More</router-link>
         </b-col>
       </b-row>
     </b-card>
@@ -62,7 +62,7 @@
       <b-row>
         <b-col>
           <p style="font-style: italic;">No current Journal Entries</p>
-          <router-link tag="b-button" class="cardButton" to="/journal-view">Game Journals</router-link>
+          <router-link tag="b-button" class="cardButton" to="/game-journal-view">Game Journals</router-link>
         </b-col>
       </b-row>
     </b-card>
