@@ -12,15 +12,22 @@
                   <span class="italics">{{char.charUser}}</span>
                 </p>
                 <b-row>
-                  <b-col cols="4">
+                  <b-col cols="5">
                     <b-button class="cardButton" @click="viewCharacter(char)">View Character</b-button>
                   </b-col>
-                  <b-col cols="4">
+                  <b-col cols="5">
                     <b-button
                       :disabled="activeChar !== char.charUser"
                       class="cardButton"
                       @click="deleteCharacterModal(index)"
                     >Delete Character</b-button>
+                  </b-col>
+                  <b-col cols="5">
+                    <b-button
+                      :disabled="activeChar !== char.charUser"
+                      class="cardButton"
+                      @click="assignToGame(index)"
+                    >Assign Character</b-button>
                   </b-col>
                 </b-row>
               </b-col>
@@ -74,17 +81,51 @@
         </b-row>
       </div>
     </b-modal>
+
+    <b-modal ref="assignModal" hide-header hide-footer>
+      <div>
+        <b-row>
+          <b-col>
+            <p>To which game would you like to assign this character?</p>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <select id="gameAssign" v-model="gameSelection" class="form-control">
+              <option
+                v-for="(game, index) in gameList"
+                :key="index"
+                :value="game.gameID"
+              >{{game.gameName}}</option>
+            </select>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <b-button class="cardButton" @click="assignCharacter(1)">Yes</b-button>
+          </b-col>
+          <b-col>
+            <b-button class="cardButton" @click="assignCharacter(2)">No</b-button>
+          </b-col>
+        </b-row>
+      </div>
+    </b-modal>
   </div>
 </template>
 
 <script>
-import { postUserCharUpdate } from "@/components/modules/utilities/dataFunctions.js";
+import {
+  postUserCharUpdate,
+  updateGameChar
+} from "@/components/modules/utilities/dataFunctions.js";
 import { mapGetters } from "vuex";
 
 export default {
   data() {
     return {
-      delIndex: null
+      delIndex: null,
+      gameSelection: null,
+      assignIndex: null
     };
   },
   methods: {
@@ -106,10 +147,37 @@ export default {
           // this.$store.commit("deleteUserChar", index);
         });
         this.$refs["deleteModal"].hide();
-        this.delIndex = null;
-      } else if (actionCode === 2) {
+      } else {
         this.$refs["deleteModal"].hide();
-        this.delIndex = null;
+      }
+      this.delIndex = null;
+    },
+    assignToGame(index) {
+      this.$refs["assignModal"].show();
+      this.assignIndex = index;
+    },
+    assignCharacter(actionCode) {
+      if (actionCode === 1) {
+        var tempChar = this.activeUserChars[this.assignIndex];
+        updateGameChar(1, tempChar, this.gameSelection).then(() => {
+          this.delIndex = this.assignIndex;
+          this.deleteCharacter(1);
+
+          var localStore = JSON.parse(localStorage.getItem("UserData"));
+          postUserCharUpdate(localStore, 2, tempChar).then(data => {
+            this.activeUser.userChars = data;
+            this.$forceUpdate();
+          });
+        });
+
+        this.$refs["assignModal"].hide();
+        this.assignIndex = null;
+        this.gameSelection = null;
+        this.$forceUpdate();
+      } else if (actionCode === 2) {
+        this.$refs["assignModal"].hide();
+        this.assignIndex = null;
+        this.gameSelection = null;
       }
     }
   },
@@ -123,6 +191,9 @@ export default {
     activeUserChars() {
       var user = this.$store.getters.getActiveUser;
       return user.userChars;
+    },
+    gameList() {
+      return this.$store.getters.getGames;
     }
   }
 };

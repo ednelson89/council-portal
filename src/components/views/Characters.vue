@@ -16,18 +16,29 @@
       </b-col>
     </b-row>
     <hr />
-    <b-row>
-      <b-col>
-        <h3>D&D 5e Characters:</h3>
-      </b-col>
-    </b-row>
-    <DnD5ePreview v-if="hasDND5e"></DnD5ePreview>
+    <b-tabs>
+      <b-tab title="Unassigned Characters">
+        <b-row>
+          <b-col>
+            <h3>D&D 5e Characters:</h3>
+          </b-col>
+        </b-row>
+        <DnD5ePreview v-if="hasDND5e"></DnD5ePreview>
 
-    <b-row v-if="!hasChars">
-      <b-col>
-        <p>Sorry, there are no characters to view for this user.</p>
-      </b-col>
-    </b-row>
+        <b-row v-if="!hasChars">
+          <b-col>
+            <p>Sorry, there are no characters to view for this user.</p>
+          </b-col>
+        </b-row>
+      </b-tab>
+      <b-tab title="Assigned Characters">
+        <b-row>
+          <b-col>
+            <p>Feature Currently Unavailable</p>
+          </b-col>
+        </b-row>
+      </b-tab>
+    </b-tabs>
   </div>
 </template>
 
