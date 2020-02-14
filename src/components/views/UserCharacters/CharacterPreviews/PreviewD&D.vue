@@ -207,4 +207,7 @@ export default {
   border-radius: 4px;
   padding: 5px;
 }
+button {
+  margin-top: 5px;
+}
 </style>
