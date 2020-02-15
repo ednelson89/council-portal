@@ -12,15 +12,23 @@
                   <span class="italics">{{char.charUser}}</span>
                 </p>
                 <b-row>
-                  <b-col cols="4">
+                  <b-col cols="5">
                     <b-button class="cardButton" @click="viewCharacter(char)">View Character</b-button>
                   </b-col>
-                  <b-col cols="4">
+                  <b-col cols="5">
                     <b-button
                       :disabled="activeChar !== char.charUser"
                       class="cardButton"
                       @click="deleteCharacterModal(index)"
                     >Delete Character</b-button>
+                  </b-col>
+
+                  <b-col cols="5">
+                    <b-button
+                      :disabled="activeChar !== char.charUser"
+                      class="cardButton"
+                      @click="unassignModal(index)"
+                    >Un-Assign Character</b-button>
                   </b-col>
                 </b-row>
               </b-col>
@@ -61,7 +69,12 @@
       <div>
         <b-row>
           <b-col>
-            <p>Are you sure you want to delete this character?</p>
+            <p>
+              Are you sure you want to delete this character (
+              <span
+                style="font-weight:bold"
+              >{{ charName }}</span> )?
+            </p>
           </b-col>
         </b-row>
         <b-row>
@@ -74,18 +87,47 @@
         </b-row>
       </div>
     </b-modal>
+    <b-modal ref="unassignModal" hide-header hide-footer>
+      <div>
+        <b-row>
+          <b-col>
+            <p>
+              Are you sure you would like to unassign this character (
+              <span
+                style="font-weight:bold"
+              >{{ charName }}</span> )? This
+              will remove the character from the game and return them to your un-assigned character bank.
+            </p>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <b-button class="cardButton" @click="unassign(1)">
+              {{ !loading ? "Yes" : "Loading..." }}
+              <b-spinner label="Loading..." v-if="loading"></b-spinner>
+            </b-button>
+          </b-col>
+          <b-col>
+            <b-button class="cardButton" @click="unassign(2)">No</b-button>
+          </b-col>
+        </b-row>
+      </div>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import {
   getCampaigns,
-  updateGameChar
+  updateGameChar,
+  postUserCharUpdate
 } from "@/components/modules/utilities/dataFunctions.js";
 export default {
   data() {
     return {
-      delIndex: null
+      delIndex: null,
+      loading: false,
+      charName: ""
     };
   },
   methods: {
@@ -94,8 +136,58 @@ export default {
       this.$router.push({ path: "/view-game-character" });
     },
     deleteCharacterModal(index) {
-      this.$refs["deleteModal"].show();
       this.delIndex = index;
+      this.charName = this.currGame.gameChars[this.delIndex].genBlock.charName;
+
+      this.$refs["deleteModal"].show();
+      this.$forceUpdate();
+    },
+    unassignModal(index) {
+      this.delIndex = index;
+      this.charName = this.currGame.gameChars[this.delIndex].genBlock.charName;
+
+      this.$refs["unassignModal"].show();
+      this.$forceUpdate();
+    },
+    unassign(code) {
+      if (code === 1) {
+        this.loading = true;
+        var localStore = JSON.parse(localStorage.getItem("UserData"));
+
+        this.$store.commit(
+          "setNewUserCharacter",
+          this.currGame.gameChars[this.delIndex]
+        );
+        // Add char to User
+        postUserCharUpdate(
+          localStore,
+          1,
+          this.currGame.gameChars[this.delIndex]
+        )
+          .then(() => {
+            // Delete from game
+            updateGameChar(
+              2,
+              this.currGame.gameChars[this.delIndex],
+              this.currGame.gameID
+            ).then(() => {
+              // update Game
+              this.updateGame();
+            });
+          })
+          .then(() => {
+            this.$refs["unassignModal"].hide();
+            this.$forceUpdate();
+
+            this.delIndex = null;
+            this.loading = false;
+            this.charName = "";
+          });
+      } else if (code === 2) {
+        this.$refs["unassignModal"].hide();
+        this.delIndex = null;
+        this.charName = "";
+      }
     },
     deleteCharacter(actionCode) {
       if (actionCode === 1) {
@@ -112,10 +204,12 @@ export default {
 
             this.$refs["deleteModal"].hide();
             this.delIndex = null;
+            this.charName = "";
           });
       } else if (actionCode === 2) {
         this.$refs["deleteModal"].hide();
         this.delIndex = null;
+        this.charName = "";
       }
     },
     updateGame() {

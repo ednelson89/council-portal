@@ -945,9 +945,7 @@ export default {
         this.tempChar.notes.push(element);
       });
     },
-    // Navigation Method
     addNewChar() {
-      // TODO: Add remote update method
       this.tempChar.charUser = this.$store.getters.getCurrUserName;
       var localStore = JSON.parse(localStorage.getItem("UserData"));
 

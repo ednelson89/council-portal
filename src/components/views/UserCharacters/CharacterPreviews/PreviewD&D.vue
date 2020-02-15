@@ -68,7 +68,12 @@
       <div>
         <b-row>
           <b-col>
-            <p>Are you sure you want to delete this character?</p>
+            <p>
+              Are you sure you want to delete this character (
+              <span
+                style="font-weight:bold"
+              >{{ charName }}</span> )?
+            </p>
           </b-col>
         </b-row>
         <b-row>
@@ -86,7 +91,12 @@
       <div>
         <b-row>
           <b-col>
-            <p>To which game would you like to assign this character?</p>
+            <p>
+              To which game would you like to assign this character (
+              <span
+                style="font-weight:bold"
+              >{{ charName }}</span> )?
+            </p>
           </b-col>
         </b-row>
         <b-row>
@@ -102,7 +112,10 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-button class="cardButton" @click="assignCharacter(1)">Yes</b-button>
+            <b-button class="cardButton" @click="assignCharacter(1)">
+              {{ !loading ? "Yes" : "Loading..." }}
+              <b-spinner label="Loading..." v-if="loading"></b-spinner>
+            </b-button>
           </b-col>
           <b-col>
             <b-button class="cardButton" @click="assignCharacter(2)">No</b-button>
@@ -125,7 +138,9 @@ export default {
     return {
       delIndex: null,
       gameSelection: null,
-      assignIndex: null
+      assignIndex: null,
+      loading: false,
+      charName: ""
     };
   },
   methods: {
@@ -134,8 +149,10 @@ export default {
       this.$router.push({ path: "/view-user-character" });
     },
     deleteCharacterModal(index) {
-      this.$refs["deleteModal"].show();
       this.delIndex = index;
+      this.charName = this.activeUserChars[this.delIndex].genBlock.charName;
+
+      this.$refs["deleteModal"].show();
     },
     deleteCharacter(actionCode) {
       if (actionCode === 1) {
@@ -151,32 +168,41 @@ export default {
         this.$refs["deleteModal"].hide();
       }
       this.delIndex = null;
+      this.charName = "";
     },
     assignToGame(index) {
-      this.$refs["assignModal"].show();
       this.assignIndex = index;
+      this.charName = this.activeUserChars[this.assignIndex].genBlock.charName;
+
+      this.$refs["assignModal"].show();
     },
     assignCharacter(actionCode) {
       if (actionCode === 1) {
+        this.loading = true;
         var tempChar = this.activeUserChars[this.assignIndex];
         updateGameChar(1, tempChar, this.gameSelection).then(() => {
           this.delIndex = this.assignIndex;
           this.deleteCharacter(1);
 
           var localStore = JSON.parse(localStorage.getItem("UserData"));
-          postUserCharUpdate(localStore, 2, tempChar).then(data => {
-            this.activeUser.userChars = data;
-            this.$forceUpdate();
-          });
+          postUserCharUpdate(localStore, 2, tempChar)
+            .then(data => {
+              this.activeUser.userChars = data;
+            })
+            .then(() => {
+              this.$refs["assignModal"].hide();
+              this.assignIndex = null;
+              this.delIndex;
+              this.gameSelection = null;
+              this.loading = false;
+              this.charName = "";
+              this.$forceUpdate();
+            });
         });
-
-        this.$refs["assignModal"].hide();
-        this.assignIndex = null;
-        this.gameSelection = null;
-        this.$forceUpdate();
       } else if (actionCode === 2) {
         this.$refs["assignModal"].hide();
         this.assignIndex = null;
+        this.charName = "";
         this.gameSelection = null;
       }
     }
