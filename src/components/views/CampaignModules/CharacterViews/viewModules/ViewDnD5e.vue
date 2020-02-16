@@ -293,7 +293,10 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Features:</h4>
-                  <p v-for="(feature, index) in char.features" :key="index">{{feature}}</p>
+                  <div v-for="(feature, index) in char.features" :key="index">
+                    <p v-if="feature">{{feature}}</p>
+                    <br v-else />
+                  </div>
                 </b-col>
               </b-row>
             </b-card>
@@ -307,7 +310,10 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Feats:</h4>
-                  <p v-for="(feat, index) in char.feats" :key="index">{{feat}}</p>
+                  <div v-for="(feat, index) in char.feats" :key="index">
+                    <p v-if="feat">{{feat}}</p>
+                    <br v-else />
+                  </div>
                 </b-col>
               </b-row>
             </b-card>
@@ -322,7 +328,10 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Character Backstory:</h4>
-                  <p v-for="(story, index) in char.backstory" :key="index">{{story}}</p>
+                  <div v-for="(story, index) in char.backstory" :key="index">
+                    <p v-if="story">{{story}}</p>
+                    <br v-else />
+                  </div>
                 </b-col>
               </b-row>
             </b-card>
@@ -336,7 +345,10 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Additional Notes:</h4>
-                  <p v-for="(note, index) in char.notes" :key="index">{{note}}</p>
+                  <div v-for="(note, index) in char.notes" :key="index">
+                    <p v-if="note">{{note}}</p>
+                    <br v-else />
+                  </div>
                 </b-col>
               </b-row>
             </b-card>
