@@ -52,6 +52,17 @@ var updateGameChar = function(actionCode, updateChar, activeID) {
       return response.data;
     });
 };
+// 1:Add, 2: Delete
+var updateGameUsers = function(actionCode, playerName, activeID) {
+  var message = {
+    data: { code: actionCode, data: playerName, gameID: activeID }
+  };
+  return axios
+    .post(process.env.VUE_APP_API_URL + "updateGameUsers", message)
+    .then(response => {
+      return response.data;
+    });
+};
 
 // USER FUNCTIONS
 var getUsersList = function() {
@@ -94,5 +105,6 @@ export {
   getUserChars,
   updateGameChar,
   updateWikis,
-  updateJournals
+  updateJournals,
+  updateGameUsers
 };
