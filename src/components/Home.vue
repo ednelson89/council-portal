@@ -33,12 +33,6 @@
             <p>Allow GMs to edit games.</p>
           </li>
           <li>
-            <p>Allow transferring characters to games.</p>
-          </li>
-          <li>
-            <p>Allow assigning users to games.</p>
-          </li>
-          <li>
             <p>Add responsive sizing.</p>
           </li>
         </ul>
