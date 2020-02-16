@@ -18,7 +18,11 @@
           @click="saveCharEdits"
           class="cardButton"
           style="margin-top:10px;"
-        >Save Character Edits</b-button>
+          :disabled="loading"
+        >
+          {{ !loading ? "Save Character Edits" : "Loading..." }}
+          <b-spinner label="Loading..." v-if="loading"></b-spinner>
+        </b-button>
       </b-col>
       <b-col cols="9">
         <b-card class="b-cards">
@@ -814,6 +818,7 @@ import {
 export default {
   data() {
     return {
+      loading: false,
       skillsOpen: false,
       // Text Areas
       tempProf: "",
@@ -912,8 +917,10 @@ export default {
     },
     // Navigation Method
     saveCharEdits() {
+      this.loading = true;
       updateGameChar(3, this.char, this.activeGame.gameID).then(() => {
         this.updateGame();
+        this.loading = false;
       });
       this.$router.push({ path: "/view-game-character" });
     },

@@ -76,7 +76,10 @@
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
-          <b-button class="cardButton" @click="savewikiEntry">Save Entry</b-button>
+          <b-button class="cardButton" @click="savewikiEntry" :disabled="loading">
+            {{ !loading ? "Save New Entry" : "Loading..." }}
+            <b-spinner label="Loading..." v-if="loading"></b-spinner>
+          </b-button>
         </b-col>
       </b-row>
       <b-row>
@@ -128,7 +131,10 @@
       </b-row>
       <b-row>
         <b-col cols="12">
-          <b-button class="cardButton" @click="closeEdit">Close</b-button>
+          <b-button class="cardButton" @click="closeEdit" :disabled="loading">
+            {{ !loading ? "Close" : "Loading..." }}
+            <b-spinner label="Loading..." v-if="loading"></b-spinner>
+          </b-button>
         </b-col>
       </b-row>
     </b-modal>
@@ -166,7 +172,8 @@ export default {
   data() {
     return {
       tempwikiContent: "",
-      activeWiki: {}
+      activeWiki: {},
+      loading: false
     };
   },
   methods: {
@@ -213,6 +220,7 @@ export default {
       this.tempwikiContent = "";
     },
     closeEdit() {
+      this.loading = true;
       updateWikis(3, this.activeWiki, this.activeGame.gameID)
         .then(() => {
           this.updateGame();
@@ -221,6 +229,7 @@ export default {
           this.$refs["editWikiModal"].hide();
           this.activeWiki = {};
           this.tempwikiContent = "";
+          this.loading = false;
           this.$forceUpdate();
         });
     },
@@ -229,6 +238,7 @@ export default {
       this.activeWiki = {};
     },
     savewikiEntry() {
+      this.loading = true;
       updateWikis(1, this.activeWiki, this.activeGame.gameID)
         .then(() => {
           this.updateGame();
@@ -237,6 +247,7 @@ export default {
           this.$refs["addWikiModal"].hide();
           this.activeWiki = {};
           this.tempwikiContent = "";
+          this.loading = false;
           this.$forceUpdate();
         });
     },

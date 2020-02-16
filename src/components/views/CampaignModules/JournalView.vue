@@ -79,7 +79,10 @@
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
-          <b-button class="cardButton" @click="saveJournalEntry">Save Entry</b-button>
+          <b-button class="cardButton" @click="saveJournalEntry" :disabled="loading">
+            {{ !loading ? "Save New Entry" : "Loading..." }}
+            <b-spinner label="Loading..." v-if="loading"></b-spinner>
+          </b-button>
         </b-col>
       </b-row>
       <b-row>
@@ -131,7 +134,10 @@
       </b-row>
       <b-row>
         <b-col cols="12">
-          <b-button class="cardButton" @click="closeEdit">Close</b-button>
+          <b-button class="cardButton" @click="closeEdit" :disabled="loading">
+            {{ !loading ? "Close" : "Loading..." }}
+            <b-spinner label="Loading..." v-if="loading"></b-spinner>
+          </b-button>
         </b-col>
       </b-row>
     </b-modal>
@@ -169,7 +175,8 @@ export default {
   data() {
     return {
       tempJournalContent: "",
-      activeJournal: {}
+      activeJournal: {},
+      loading: false
     };
   },
   methods: {
@@ -216,6 +223,7 @@ export default {
       this.tempJournalContent = "";
     },
     closeEdit() {
+      this.loading = true;
       updateJournals(3, this.activeJournal, this.activeGame.gameID)
         .then(() => {
           this.updateGame();
@@ -224,6 +232,7 @@ export default {
           this.$refs["editJournalModal"].hide();
           this.activeJournal = {};
           this.tempjournalContent = "";
+          this.loading = false;
           this.$forceUpdate();
         });
     },
@@ -232,6 +241,7 @@ export default {
       this.activeJournal = {};
     },
     saveJournalEntry() {
+      this.loading = true;
       updateJournals(1, this.activeJournal, this.activeGame.gameID)
         .then(() => {
           this.updateGame();
@@ -240,6 +250,7 @@ export default {
           this.$refs["addJournalModal"].hide();
           this.activeJournal = {};
           this.tempjournalContent = "";
+          this.loading = false;
           this.$forceUpdate();
         });
     },

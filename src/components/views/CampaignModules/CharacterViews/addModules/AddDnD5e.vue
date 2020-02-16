@@ -14,7 +14,15 @@
         <hr />
         <p>Editing is done in real time. There is no need to save.</p>
         <hr />
-        <b-button @click="addNewChar" class="cardButton" style="margin-top:10px;">Add Character</b-button>
+        <b-button
+          @click="addNewChar"
+          class="cardButton"
+          style="margin-top:10px;"
+          :disabled="loading"
+        >
+          {{ !loading ? "Save New Character" : "Loading..." }}
+          <b-spinner label="Loading..." v-if="loading"></b-spinner>
+        </b-button>
       </b-col>
       <b-col cols="9">
         <b-card class="b-cards">
@@ -841,6 +849,7 @@ import { updateGameChar } from "@/components/modules/utilities/dataFunctions.js"
 export default {
   data() {
     return {
+      loading: false,
       tempChar: charDnD5e(),
       skillsOpen: false,
       // Text Areas
@@ -951,8 +960,10 @@ export default {
     },
     // Navigation Method
     addNewChar() {
+      this.loading = true;
       this.tempChar.charUser = this.activeUser;
       updateGameChar(1, this.tempChar, this.activeGame.gameID).then(() => {
+        this.loading = false;
         this.$router.push({ path: "/game-characters" });
       });
     },

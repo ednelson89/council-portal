@@ -79,7 +79,10 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-button class="cardButton" @click="deleteCharacter(1)">Yes</b-button>
+            <b-button class="cardButton" @click="deleteCharacter(1)" :disabled="loading">
+              {{ !loading ? "Yes" : "Loading..." }}
+              <b-spinner label="Loading..." v-if="loading"></b-spinner>
+            </b-button>
           </b-col>
           <b-col>
             <b-button class="cardButton" @click="deleteCharacter(2)">No</b-button>
@@ -102,7 +105,7 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-button class="cardButton" @click="unassign(1)">
+            <b-button class="cardButton" @click="unassign(1)" :disabled="loading">
               {{ !loading ? "Yes" : "Loading..." }}
               <b-spinner label="Loading..." v-if="loading"></b-spinner>
             </b-button>
@@ -191,6 +194,7 @@ export default {
     },
     deleteCharacter(actionCode) {
       if (actionCode === 1) {
+        this.loading = true;
         updateGameChar(
           2,
           this.currGame.gameChars[this.delIndex],
@@ -203,6 +207,7 @@ export default {
             this.$forceUpdate();
 
             this.$refs["deleteModal"].hide();
+            this.loading = false;
             this.delIndex = null;
             this.charName = "";
           });

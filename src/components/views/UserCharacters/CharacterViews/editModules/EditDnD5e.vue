@@ -17,7 +17,11 @@
           @click="saveCharEdits"
           class="cardButton"
           style="margin-top:10px;"
-        >Save Character Edits</b-button>
+          :disabled="loading"
+        >
+          {{ !loading ? "Save Character Edits" : "Loading..." }}
+          <b-spinner label="Loading..." v-if="loading"></b-spinner>
+        </b-button>
       </b-col>
       <b-col cols="9">
         <b-card class="b-cards">
@@ -816,6 +820,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      loading: false,
       skillsOpen: false,
       // Text Areas
       tempProf: "",
@@ -914,10 +919,11 @@ export default {
     },
     // Navigation Method
     saveCharEdits() {
-      // TODO: Add remote update method
+      this.loading = true;
       var localStore = JSON.parse(localStorage.getItem("UserData"));
       postUserCharUpdate(localStore, 3, this.char).then(data => {
         this.activeUser.userChars = data;
+        this.loading = false;
         this.$router.push({ path: "/view-user-character" });
       });
     },

@@ -14,7 +14,15 @@
         <hr />
         <p>Editing is done in real time. There is no need to save.</p>
         <hr />
-        <b-button @click="addNewChar" class="cardButton" style="margin-top:10px;">Add Character</b-button>
+        <b-button
+          @click="addNewChar"
+          class="cardButton"
+          style="margin-top:10px;"
+          :disabled="loading"
+        >
+          {{ !loading ? "Save New Character" : "Loading..." }}
+          <b-spinner label="Loading..." v-if="loading"></b-spinner>
+        </b-button>
       </b-col>
       <b-col cols="9">
         <b-card class="b-cards">
@@ -842,6 +850,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      loading: false,
       tempChar: charDnD5e(),
       skillsOpen: false,
       // Text Areas
@@ -946,12 +955,14 @@ export default {
       });
     },
     addNewChar() {
+      this.loading = true;
       this.tempChar.charUser = this.$store.getters.getCurrUserName;
       var localStore = JSON.parse(localStorage.getItem("UserData"));
 
       this.$store.commit("setNewUserCharacter", this.tempChar);
       postUserCharUpdate(localStore, 1, this.tempChar).then(data => {
         this.activeUser.userChars = data;
+        this.loading = false;
         this.$router.push({ path: "/characters" });
       });
     },

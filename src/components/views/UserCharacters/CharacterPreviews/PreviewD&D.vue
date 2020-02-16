@@ -78,7 +78,10 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-button class="cardButton" @click="deleteCharacter(1)">Yes</b-button>
+            <b-button class="cardButton" @click="deleteCharacter(1)" :disabled="loading">
+              {{ !loading ? "Yes" : "Loading..." }}
+              <b-spinner label="Loading..." v-if="loading"></b-spinner>
+            </b-button>
           </b-col>
           <b-col>
             <b-button class="cardButton" @click="deleteCharacter(2)">No</b-button>
@@ -112,7 +115,7 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-button class="cardButton" @click="assignCharacter(1)">
+            <b-button class="cardButton" @click="assignCharacter(1)" :disabled="loading">
               {{ !loading ? "Yes" : "Loading..." }}
               <b-spinner label="Loading..." v-if="loading"></b-spinner>
             </b-button>
