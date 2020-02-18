@@ -92,7 +92,14 @@ const dnd5eResources = {
     },
     {
       title: "Mystara Player Guide",
-      link: "https://drive.google.com/open?id=1l1jN1FLMNNu71ohpBy6J0WCB-ukqwP_r"
+      link: "https://drive.oogle.com/open?id=1l1jN1FLMNNu71ohpBy6J0WCB-ukqwP_r",
+      core: false
+    },
+    {
+      title: "Council Of Bros - Common House Rules",
+      link:
+        "https://drive.google.com/open?id=1aZyr_0cFfsX7eO1ijAI2YNEnJzrsRFs5Hw7HVau75Xc",
+      core: false
     }
   ]
 };

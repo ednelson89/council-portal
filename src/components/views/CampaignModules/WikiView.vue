@@ -37,7 +37,10 @@
 
             <b-button @click="showwikiEntry(index)" class="cardButton cardOption">Read Wiki Entry</b-button>
             <b-button @click="editWikiModalOpen(index)" class="cardButton cardOption">Edit Entry</b-button>
-            <b-button @click="deleteEntry(index)" class="cardButton cardOption">Delete Entry</b-button>
+            <b-button @click="deleteEntry(index)" class="cardButton cardOption" :disabled="loading">
+              {{ !loading ? "Delete Entry" : "Loading..." }}
+              <b-spinner label="Loading..." v-if="loading"></b-spinner>
+            </b-button>
           </b-card>
         </b-col>
       </b-row>
@@ -273,11 +276,13 @@ export default {
       this.activeWiki = this.wikiList[index];
     },
     deleteEntry(index) {
+      this.loading = true;
       updateWikis(2, this.wikiList[index], this.activeGame.gameID)
         .then(() => {
           this.updateGame();
         })
         .then(() => {
+          this.loading = false;
           this.activeWiki = {};
           this.tempwikiContent = "";
           this.$forceUpdate();

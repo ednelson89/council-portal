@@ -159,14 +159,15 @@ export default {
     },
     deleteCharacter(actionCode) {
       if (actionCode === 1) {
+        this.loading = true;
         var localStore = JSON.parse(localStorage.getItem("UserData"));
         var tempChar = this.activeUserChars[this.delIndex];
         postUserCharUpdate(localStore, 2, tempChar).then(data => {
           this.activeUser.userChars = data;
           this.$forceUpdate();
-          // this.$store.commit("deleteUserChar", index);
+          this.loading = false;
+          this.$refs["deleteModal"].hide();
         });
-        this.$refs["deleteModal"].hide();
       } else {
         this.$refs["deleteModal"].hide();
       }
