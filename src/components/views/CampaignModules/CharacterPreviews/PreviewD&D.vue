@@ -233,6 +233,7 @@ export default {
         .then(game => {
           this.$store.commit("setActiveGame", game);
           this.$store.commit("setGames", gameList);
+          this.$forceUpdate();
         });
     }
   },

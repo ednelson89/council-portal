@@ -7,12 +7,12 @@
     </b-row>
     <b-row>
       <b-col>
-        <p>Here you can view and edit the characters in the game.</p>
+        <p>Here you can view and edit the characters in the game. To add a character, you must have joined the game or be the game's GM.</p>
       </b-col>
     </b-row>
     <b-row>
       <b-col cols="2">
-        <b-button class="cardButton" @click="setAppRoute">Add a Character</b-button>
+        <b-button class="cardButton" @click="setAppRoute" :disabled="!inGame">Add a Character</b-button>
       </b-col>
     </b-row>
     <hr />
@@ -41,8 +41,15 @@ export default {
   computed: {
     ...mapGetters({
       activeGame: "getActiveGame",
-      activeChars: "getActiveGameCharList"
-    })
+      activeChars: "getActiveGameCharList",
+      currUser: "getCurrUserName"
+    }),
+    inGame() {
+      return (
+        this.activeGame.gamePlayers.includes(this.currUser) ||
+        this.activeGame.gameGM === this.currUser
+      );
+    }
   },
   beforeMount() {
     let gameList = [];

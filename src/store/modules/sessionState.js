@@ -1,6 +1,6 @@
 const state = {
   userName: "",
-  activeUser: {},
+  activeUser: { userChars: [] },
   activeGameID: {},
   activeJournal: "",
   activeCharacter: {},
@@ -40,6 +40,12 @@ const mutations = {
   },
   setActiveUser(state, input) {
     state.activeUser = input;
+  },
+  setUserChars(state, input) {
+    state.activeUser.userChars = [];
+    input.forEach(element => {
+      state.activeUser.userChars.push(element);
+    });
   },
   clearActiveUser(state) {
     state.activeUser = {};

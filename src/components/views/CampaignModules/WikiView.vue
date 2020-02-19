@@ -4,40 +4,56 @@
   <div>
     <b-row>
       <b-col cols="12">
-        <h2>{{activeGame.gameName}} Wiki</h2>
+        <h2>{{ activeGame.gameName }} Wiki</h2>
       </b-col>
     </b-row>
     <b-row>
       <b-col cols="8">
-        <p style="font-style: italic">Here you can read, add, and edit wiki entries.</p>
+        <p style="font-style: italic">
+          Here you can read, add, and edit wiki entries.
+        </p>
       </b-col>
       <b-col cols="4">
-        <router-link tag="b-button" class="cardButton" to="/game-hub">Back to Game</router-link>
+        <router-link tag="b-button" class="cardButton" to="/game-hub"
+          >Back to Game</router-link
+        >
       </b-col>
     </b-row>
     <hr />
     <b-row>
       <b-col xs="12" md="6" offset-md="6">
-        <b-button class="cardButton" @click="addEntryModalOpen">Add a Wiki Entry</b-button>
+        <b-button class="cardButton" @click="addEntryModalOpen"
+          >Add a Wiki Entry</b-button
+        >
       </b-col>
     </b-row>
     <div v-if="wikiList.length >= 1">
       <b-row v-for="(wiki, index) in wikiList" :key="index">
         <b-col cols="12">
           <b-card class="b-cards">
-            <h3>{{wiki.wikiTitle}}</h3>
-            <p style="font-style:italic;">Date Created: {{wiki.wikiDate}}</p>
-            <p style="font-style:italic;">Author: {{wiki.wikiAuthor}}</p>
+            <h3>{{ wiki.wikiTitle }}</h3>
+            <p style="font-style:italic;">Date Created: {{ wiki.wikiDate }}</p>
+            <p style="font-style:italic;">Author: {{ wiki.wikiAuthor }}</p>
             <p>
-              {{wiki.wikiContent[0].substring(0,600) }}
-              <span
-                v-if="wiki.wikiContent[0].length > 600"
-              >...</span>
+              {{ wiki.wikiContent[0].substring(0, 600) }}
+              <span v-if="wiki.wikiContent[0].length > 600">...</span>
             </p>
 
-            <b-button @click="showwikiEntry(index)" class="cardButton cardOption">Read Wiki Entry</b-button>
-            <b-button @click="editWikiModalOpen(index)" class="cardButton cardOption">Edit Entry</b-button>
-            <b-button @click="deleteEntry(index)" class="cardButton cardOption" :disabled="loading">
+            <b-button
+              @click="showwikiEntry(index)"
+              class="cardButton cardOption"
+              >Read Wiki Entry</b-button
+            >
+            <b-button
+              @click="editWikiModalOpen(index)"
+              class="cardButton cardOption"
+              >Edit Entry</b-button
+            >
+            <b-button
+              @click="deleteEntry(index)"
+              class="cardButton cardOption"
+              :disabled="loading"
+            >
               {{ !loading ? "Delete Entry" : "Loading..." }}
               <b-spinner label="Loading..." v-if="loading"></b-spinner>
             </b-button>
@@ -58,7 +74,11 @@
         <b-col xs="12" md="6">
           <label>
             Title:
-            <input class="form-control" type="text" v-model="activeWiki.wikiTitle" />
+            <input
+              class="form-control"
+              type="text"
+              v-model="activeWiki.wikiTitle"
+            />
           </label>
         </b-col>
       </b-row>
@@ -79,7 +99,11 @@
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
-          <b-button class="cardButton" @click="savewikiEntry" :disabled="loading">
+          <b-button
+            class="cardButton"
+            @click="savewikiEntry"
+            :disabled="loading"
+          >
             {{ !loading ? "Save New Entry" : "Loading..." }}
             <b-spinner label="Loading..." v-if="loading"></b-spinner>
           </b-button>
@@ -102,17 +126,21 @@
     >
       <b-row>
         <b-col>
-          <b-alert
-            show
-            style="color:#000"
-          >*Note: Editing is done in real time to your journal, so there is no need to save.</b-alert>
+          <b-alert show style="color:#000"
+            >*Note: Editing is done in real time to your journal, so there is no
+            need to save.</b-alert
+          >
         </b-col>
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
           <label>
             Title:
-            <input class="form-control" type="text" v-model="activeWiki.wikiTitle" />
+            <input
+              class="form-control"
+              type="text"
+              v-model="activeWiki.wikiTitle"
+            />
           </label>
         </b-col>
       </b-row>
@@ -142,17 +170,27 @@
       </b-row>
     </b-modal>
     <!--Read Modal -->
-    <b-modal ref="showWikiModal" id="showWikiModal" hide-header hide-footer size="xl">
+    <b-modal
+      ref="showWikiModal"
+      id="showWikiModal"
+      hide-header
+      hide-footer
+      size="xl"
+    >
       <b-row>
         <b-col>
-          <h3>{{activeWiki.wikiTitle}}</h3>
-          <p style="font-style:italic;">Date Created: {{activeWiki.wikiDate}}</p>
-          <p style="font-style:italic;">Author: {{activeWiki.wikiAuthor}}</p>
+          <h3>{{ activeWiki.wikiTitle }}</h3>
+          <p style="font-style:italic;">
+            Date Created: {{ activeWiki.wikiDate }}
+          </p>
+          <p style="font-style:italic;">Author: {{ activeWiki.wikiAuthor }}</p>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <p v-for="(para, index) in activeWiki.wikiContent" :key="index">{{para}}</p>
+          <p v-for="(para, index) in activeWiki.wikiContent" :key="index">
+            {{ para }}
+          </p>
         </b-col>
       </b-row>
       <b-row>
@@ -276,17 +314,27 @@ export default {
       this.activeWiki = this.wikiList[index];
     },
     deleteEntry(index) {
-      this.loading = true;
-      updateWikis(2, this.wikiList[index], this.activeGame.gameID)
-        .then(() => {
-          this.updateGame();
-        })
-        .then(() => {
-          this.loading = false;
-          this.activeWiki = {};
-          this.tempwikiContent = "";
-          this.$forceUpdate();
-        });
+      this.$swal({
+        text: "Are you sure you wish to delete this entry?",
+        confirmButtonText: "Delete",
+        icon: "info",
+        buttons: true,
+        dangerMode: true
+      }).then(result => {
+        if (result) {
+          this.loading = true;
+          updateWikis(2, this.wikiList[index], this.activeGame.gameID)
+            .then(() => {
+              this.updateGame();
+            })
+            .then(() => {
+              this.loading = false;
+              this.activeWiki = {};
+              this.tempwikiContent = "";
+              this.$forceUpdate();
+            });
+        }
+      });
     },
     updateGame() {
       let gameList = [];

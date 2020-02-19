@@ -11,13 +11,15 @@ import vuetify from "./plugins/vuetify";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
+import VueSwal from "vue-swal";
+
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 
 // Includes
 Vue.use(vuetify);
 Vue.use(BootstrapVue);
-
+Vue.use(VueSwal);
 new Vue({
   router,
   store,

@@ -109,6 +109,9 @@
                 v-for="(game, index) in gameList"
                 :key="index"
                 :value="game.gameID"
+                style="color: black;"
+                :class="!game.gamePlayers.includes(currUser) && game.gameGM !== currUser ? 'disOption' : ''"
+                :disabled="!game.gamePlayers.includes(currUser) && game.gameGM !== currUser"
               >{{game.gameName}}</option>
             </select>
           </b-col>
@@ -213,7 +216,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      activeUser: "getActiveUser"
+      activeUser: "getActiveUser",
+      currUser: "getCurrUserName"
     }),
     activeChar() {
       return this.$store.getters.getCurrUserName;
@@ -239,5 +243,8 @@ export default {
 }
 button {
   margin-top: 5px;
+}
+.disOption {
+  color: rgb(92, 87, 87) !important;
 }
 </style>

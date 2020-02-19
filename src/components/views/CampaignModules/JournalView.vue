@@ -4,43 +4,60 @@
   <div>
     <b-row>
       <b-col cols="12">
-        <h2>{{activeGame.gameName}} Journals</h2>
+        <h2>{{ activeGame.gameName }} Journals</h2>
       </b-col>
     </b-row>
     <b-row>
       <b-col cols="8">
-        <p style="font-style: italic">Here you can read, add, and edit journal entries.</p>
+        <p style="font-style: italic">
+          Here you can read, add, and edit journal entries.
+        </p>
       </b-col>
       <b-col cols="4">
-        <router-link tag="b-button" class="cardButton" to="/game-hub">Back to Game</router-link>
+        <router-link tag="b-button" class="cardButton" to="/game-hub"
+          >Back to Game</router-link
+        >
       </b-col>
     </b-row>
     <hr />
     <b-row>
       <b-col xs="12" md="6" offset-md="6">
-        <b-button class="cardButton" @click="addEntryModalOpen">Add a Journal Entry</b-button>
+        <b-button class="cardButton" @click="addEntryModalOpen"
+          >Add a Journal Entry</b-button
+        >
       </b-col>
     </b-row>
     <div v-if="journalList.length >= 1">
       <b-row v-for="(journal, index) in journalList" :key="index">
         <b-col cols="12">
           <b-card class="b-cards">
-            <h3>{{journal.journalTitle}}</h3>
-            <p style="font-style:italic;">Date Created: {{journal.journalDate}}</p>
-            <p style="font-style:italic;">Author: {{journal.journalAuthor}}</p>
+            <h3>{{ journal.journalTitle }}</h3>
+            <p style="font-style:italic;">
+              Date Created: {{ journal.journalDate }}
+            </p>
+            <p style="font-style:italic;">
+              Author: {{ journal.journalAuthor }}
+            </p>
             <p>
-              {{journal.journalContent[0].substring(0,600) }}
-              <span
-                v-if="journal.journalContent[0].length > 600"
-              >...</span>
+              {{ journal.journalContent[0].substring(0, 600) }}
+              <span v-if="journal.journalContent[0].length > 600">...</span>
             </p>
 
             <b-button
               @click="showJournalEntry(index)"
               class="cardButton cardOption"
-            >Read Journal Entry</b-button>
-            <b-button @click="editJournalModalOpen(index)" class="cardButton cardOption">Edit Entry</b-button>
-            <b-button @click="deleteEntry(index)" class="cardButton cardOption" :disabled="loading">
+              >Read Journal Entry</b-button
+            >
+            <b-button
+              @click="editJournalModalOpen(index)"
+              class="cardButton cardOption"
+              >Edit Entry</b-button
+            >
+            <b-button
+              @click="deleteEntry(index)"
+              class="cardButton cardOption"
+              :disabled="loading"
+            >
               {{ !loading ? "Delete Entry" : "Loading..." }}
               <b-spinner label="Loading..." v-if="loading"></b-spinner>
             </b-button>
@@ -61,7 +78,11 @@
         <b-col xs="12" md="6">
           <label>
             Title:
-            <input class="form-control" type="text" v-model="activeJournal.journalTitle" />
+            <input
+              class="form-control"
+              type="text"
+              v-model="activeJournal.journalTitle"
+            />
           </label>
         </b-col>
       </b-row>
@@ -82,7 +103,11 @@
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
-          <b-button class="cardButton" @click="saveJournalEntry" :disabled="loading">
+          <b-button
+            class="cardButton"
+            @click="saveJournalEntry"
+            :disabled="loading"
+          >
             {{ !loading ? "Save New Entry" : "Loading..." }}
             <b-spinner label="Loading..." v-if="loading"></b-spinner>
           </b-button>
@@ -105,17 +130,21 @@
     >
       <b-row>
         <b-col>
-          <b-alert
-            show
-            style="color:#000"
-          >*Note: Editing is done in real time to your journal, so there is no need to save.</b-alert>
+          <b-alert show style="color:#000"
+            >*Note: Editing is done in real time to your journal, so there is no
+            need to save.</b-alert
+          >
         </b-col>
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
           <label>
             Title:
-            <input class="form-control" type="text" v-model="activeJournal.journalTitle" />
+            <input
+              class="form-control"
+              type="text"
+              v-model="activeJournal.journalTitle"
+            />
           </label>
         </b-col>
       </b-row>
@@ -145,17 +174,29 @@
       </b-row>
     </b-modal>
     <!--Read Modal -->
-    <b-modal ref="showJournalModal" id="showJournalModal" hide-header hide-footer size="xl">
+    <b-modal
+      ref="showJournalModal"
+      id="showJournalModal"
+      hide-header
+      hide-footer
+      size="xl"
+    >
       <b-row>
         <b-col>
-          <h3>{{activeJournal.journalTitle}}</h3>
-          <p style="font-style:italic;">Date Created: {{activeJournal.journalDate}}</p>
-          <p style="font-style:italic;">Author: {{activeJournal.journalAuthor}}</p>
+          <h3>{{ activeJournal.journalTitle }}</h3>
+          <p style="font-style:italic;">
+            Date Created: {{ activeJournal.journalDate }}
+          </p>
+          <p style="font-style:italic;">
+            Author: {{ activeJournal.journalAuthor }}
+          </p>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <p v-for="(para, index) in activeJournal.journalContent" :key="index">{{para}}</p>
+          <p v-for="(para, index) in activeJournal.journalContent" :key="index">
+            {{ para }}
+          </p>
         </b-col>
       </b-row>
       <b-row>
@@ -279,17 +320,27 @@ export default {
       this.activeJournal = this.journalList[index];
     },
     deleteEntry(index) {
-      this.loading = true;
-      updateJournals(2, this.journalList[index], this.activeGame.gameID)
-        .then(() => {
-          this.updateGame();
-        })
-        .then(() => {
-          this.loading = false;
-          this.activeJournal = {};
-          this.tempjournalContent = "";
-          this.$forceUpdate();
-        });
+      this.$swal({
+        text: "Are you sure you wish to delete this entry?",
+        confirmButtonText: "Delete",
+        icon: "info",
+        buttons: true,
+        dangerMode: true
+      }).then(result => {
+        if (result) {
+          this.loading = true;
+          updateJournals(2, this.journalList[index], this.activeGame.gameID)
+            .then(() => {
+              this.updateGame();
+            })
+            .then(() => {
+              this.loading = false;
+              this.activeJournal = {};
+              this.tempjournalContent = "";
+              this.$forceUpdate();
+            });
+        }
+      });
     },
     updateGame() {
       let gameList = [];

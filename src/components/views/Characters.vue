@@ -7,7 +7,10 @@
     </b-row>
     <b-row>
       <b-col>
-        <p>Here you can view, edit, and reassign all of your characters.</p>
+        <p>
+          Here you can view, edit, and reassign all of your characters. You can only reassign characters to games which you
+          have joined or are the GM for.
+        </p>
       </b-col>
     </b-row>
     <b-row>
@@ -79,9 +82,13 @@ export default {
   },
   beforeMount() {
     var localStore = JSON.parse(localStorage.getItem("UserData"));
-    getUserChars(localStore).then(data => {
-      this.activeUser.userChars = data;
-    });
+    getUserChars(localStore)
+      .then(data => {
+        this.$store.commit("setUserChars", data);
+      })
+      .then(() => {
+        this.$forceUpdate();
+      });
   }
 };
 </script>
