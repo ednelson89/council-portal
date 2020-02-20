@@ -30,6 +30,7 @@
             <div class="side-content">
               <resourceMin></resourceMin>
               <charList></charList>
+              <gameButtons></gameButtons>
             </div>
           </b-col>
         </b-row>
@@ -42,6 +43,7 @@
 import navigation from "@/components/common/Navigation.vue";
 import resourceMin from "@/components/views/SideBar/ResourceMin.vue";
 import charList from "@/components/views/SideBar/CharacterList.vue";
+import gameButtons from "@/components/views/SideBar/GameTableFunctions.vue";
 import {
   getCampaigns,
   getUserChars
@@ -49,7 +51,7 @@ import {
 import { mapGetters } from "vuex";
 
 export default {
-  components: { navigation, resourceMin, charList },
+  components: { navigation, resourceMin, charList, gameButtons },
   data() {
     return {};
   },
@@ -91,7 +93,8 @@ export default {
         this.$route.path === "/view-game-character" ||
         this.$route.path === "/game-journal-view" ||
         this.$route.path === "/game-wiki-view" ||
-        this.$route.path === "/game-calendar"
+        this.$route.path === "/game-calendar" ||
+        this.$route.path === "/game-table"
       );
     }
   },

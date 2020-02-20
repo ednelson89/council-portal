@@ -1,7 +1,7 @@
 <template>
   <div>
     <img
-      :src="mapSrc"
+      :src="activeGame.gameMap"
       id="mapImg"
       :style="' width: ' + (tableWidth - 50) + 'px !important; '"
       class="imageBorder"
@@ -20,8 +20,11 @@
       :parentLimitation="true"
       @resizing="resize($event, index)"
       @dragging="resize($event, index)"
+      @resizestop="onDragStop($event, index)"
+      @dragstop="onDragStop($event, index)"
     >
       <img :src="token.imgSrc" :width="token.width" :height="token.height" />
+      <p style="background-color: white">{{token.tokenName}}</p>
     </VueDragResize>
   </div>
 </template>
@@ -29,6 +32,11 @@
 <script>
 import VueDragResize from "vue-drag-resize";
 import { mapGetters } from "vuex";
+
+import {
+  getCampaigns,
+  updateTokens
+} from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   components: {
@@ -38,9 +46,7 @@ export default {
     return {
       gridOn: true,
       tableHeight: 1100,
-      tableWidth: 600,
-      mapSrc:
-        "https://i.pinimg.com/originals/c4/23/58/c423582e6bbf4369636aaaad417703ab.jpg"
+      tableWidth: 600
     };
   },
   methods: {
@@ -53,11 +59,49 @@ export default {
       let gameTableEl = document.getElementById("main-content");
       this.tableWidth = gameTableEl.offsetWidth;
       this.tableHeight = gameTableEl.offsetHeight;
+    },
+    onDragStop(newRect, index) {
+      this.resize(newRect, index);
+      if (!this.deleting) {
+        updateTokens(3, this.gameTokens[index], this.activeGame.gameID).then(
+          () => {
+            this.updateGame();
+          }
+        );
+      } else {
+        updateTokens(2, this.gameTokens[index], this.activeGame.gameID).then(
+          () => {
+            this.updateGame();
+            this.$store.commit("setDeletingToken", false);
+          }
+        );
+      }
+    },
+    updateGame() {
+      let gameList = [];
+      getCampaigns()
+        .then(response => {
+          let currGame;
+          response.forEach(entry => {
+            gameList.push(entry);
+            if (entry.gameID === this.activeGame.gameID) {
+              currGame = entry;
+            }
+          });
+          return currGame;
+        })
+        .then(game => {
+          this.$store.commit("setActiveGame", game);
+          this.$store.commit("setGames", gameList);
+          this.$forceUpdate();
+        });
     }
   },
   computed: {
     ...mapGetters({
-      gameTokens: "getActiveGameTokens"
+      gameTokens: "getActiveGameTokens",
+      activeGame: "getActiveGame",
+      deleting: "getDeletingToken"
     })
   },
   mounted() {
@@ -69,6 +113,8 @@ export default {
       this.tableWidth = gameTableEl.offsetWidth;
       this.tableHeight = gameTableEl.offsetHeight;
     });
+
+    setInterval(this.updateGame(), 15000);
   }
 };
 </script>

@@ -19,6 +19,28 @@ var addCampaigns = function(campaignData) {
     });
 };
 
+var updateTokens = function(actionCode, token, activeID) {
+  var message = {
+    data: { code: actionCode, data: token, gameID: activeID }
+  };
+  return axios
+    .post(process.env.VUE_APP_API_URL + "updateTokens", message)
+    .then(response => {
+      return response.data;
+    });
+};
+
+var updateMap = function(map, activeID) {
+  var message = {
+    data: { data: map, gameID: activeID }
+  };
+  return axios
+    .post(process.env.VUE_APP_API_URL + "updateMap", message)
+    .then(response => {
+      return response.data;
+    });
+};
+
 var updateWikis = function(actionCode, wiki, activeID) {
   var message = {
     data: { code: actionCode, data: wiki, gameID: activeID }
@@ -106,5 +128,7 @@ export {
   updateGameChar,
   updateWikis,
   updateJournals,
-  updateGameUsers
+  updateGameUsers,
+  updateTokens,
+  updateMap
 };

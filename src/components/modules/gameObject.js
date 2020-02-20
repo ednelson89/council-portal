@@ -8,6 +8,7 @@ const game = () => ({
   gameChars: [],
   gameTokens: [],
   gameType: "",
+  gameMap: "",
   journalPosts: [
     {
       journalID: generateID(),

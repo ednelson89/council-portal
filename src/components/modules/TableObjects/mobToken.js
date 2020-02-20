@@ -6,18 +6,8 @@ const mobToken = () => ({
   left: 0,
   width: 150,
   height: 150,
-  tokenID: generateID()
+  tokenID: "",
+  tokenName: ""
 });
-
-var generateID = function() {
-  return (
-    Math.random()
-      .toString(36)
-      .substring(2, 15) +
-    Math.random()
-      .toString(36)
-      .substring(2, 15)
-  );
-};
 
 export { mobToken };

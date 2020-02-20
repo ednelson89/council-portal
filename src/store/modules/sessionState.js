@@ -4,7 +4,8 @@ const state = {
   activeGameID: {},
   activeJournal: "",
   activeCharacter: {},
-  appRoute: ""
+  appRoute: "",
+  deletingToken: false
 };
 
 const getters = {
@@ -16,6 +17,9 @@ const getters = {
   },
   getActiveGame(state) {
     return state.activeGameID;
+  },
+  getDeletingToken(state) {
+    return state.deletingToken;
   },
   getGameType() {
     return state.activeGameID.gameType;
@@ -38,6 +42,9 @@ const getters = {
 };
 
 const mutations = {
+  setDeletingToken(state, input) {
+    state.deletingToken = input;
+  },
   setCurrUserName(state, input) {
     state.userName = input;
   },
