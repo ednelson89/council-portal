@@ -10,21 +10,19 @@
     <b-row>
       <b-col cols="8">
         <p style="font-style: italic">
-          Here you can read, add, and edit journal entries.
+          Here you can read, add, and edit journal entries. To add an image, simply copy and paste the url, including the 'http' of
+          the image into it's own line.
         </p>
+        <p style="font-style: italic">(ex. 'http://www.imagesource.com/imageidnumber')</p>
       </b-col>
       <b-col cols="4">
-        <router-link tag="b-button" class="cardButton" to="/game-hub"
-          >Back to Game</router-link
-        >
+        <router-link tag="b-button" class="cardButton" to="/game-hub">Back to Game</router-link>
       </b-col>
     </b-row>
     <hr />
     <b-row>
       <b-col xs="12" md="6" offset-md="6">
-        <b-button class="cardButton" @click="addEntryModalOpen"
-          >Add a Journal Entry</b-button
-        >
+        <b-button class="cardButton" @click="addEntryModalOpen">Add a Journal Entry</b-button>
       </b-col>
     </b-row>
     <div v-if="journalList.length >= 1">
@@ -32,32 +30,21 @@
         <b-col cols="12">
           <b-card class="b-cards">
             <h3>{{ journal.journalTitle }}</h3>
-            <p style="font-style:italic;">
-              Date Created: {{ journal.journalDate }}
-            </p>
-            <p style="font-style:italic;">
-              Author: {{ journal.journalAuthor }}
-            </p>
+            <p style="font-style:italic;">Date Created: {{ journal.journalDate }}</p>
+            <p style="font-style:italic;">Author: {{ journal.journalAuthor }}</p>
             <p>
               {{ journal.journalContent[0].substring(0, 600) }}
-              <span v-if="journal.journalContent[0].length > 600">...</span>
+              <span
+                v-if="journal.journalContent[0].length > 600"
+              >...</span>
             </p>
 
             <b-button
               @click="showJournalEntry(index)"
               class="cardButton cardOption"
-              >Read Journal Entry</b-button
-            >
-            <b-button
-              @click="editJournalModalOpen(index)"
-              class="cardButton cardOption"
-              >Edit Entry</b-button
-            >
-            <b-button
-              @click="deleteEntry(index)"
-              class="cardButton cardOption"
-              :disabled="loading"
-            >
+            >Read Journal Entry</b-button>
+            <b-button @click="editJournalModalOpen(index)" class="cardButton cardOption">Edit Entry</b-button>
+            <b-button @click="deleteEntry(index)" class="cardButton cardOption" :disabled="loading">
               {{ !loading ? "Delete Entry" : "Loading..." }}
               <b-spinner label="Loading..." v-if="loading"></b-spinner>
             </b-button>
@@ -78,11 +65,7 @@
         <b-col xs="12" md="6">
           <label>
             Title:
-            <input
-              class="form-control"
-              type="text"
-              v-model="activeJournal.journalTitle"
-            />
+            <input class="form-control" type="text" v-model="activeJournal.journalTitle" />
           </label>
         </b-col>
       </b-row>
@@ -103,11 +86,7 @@
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
-          <b-button
-            class="cardButton"
-            @click="saveJournalEntry"
-            :disabled="loading"
-          >
+          <b-button class="cardButton" @click="saveJournalEntry" :disabled="loading">
             {{ !loading ? "Save New Entry" : "Loading..." }}
             <b-spinner label="Loading..." v-if="loading"></b-spinner>
           </b-button>
@@ -130,21 +109,17 @@
     >
       <b-row>
         <b-col>
-          <b-alert show style="color:#000"
-            >*Note: Editing is done in real time to your journal, so there is no
-            need to save.</b-alert
-          >
+          <b-alert show style="color:#000">
+            *Note: Editing is done in real time to your journal, so there is no
+            need to save.
+          </b-alert>
         </b-col>
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
           <label>
             Title:
-            <input
-              class="form-control"
-              type="text"
-              v-model="activeJournal.journalTitle"
-            />
+            <input class="form-control" type="text" v-model="activeJournal.journalTitle" />
           </label>
         </b-col>
       </b-row>
@@ -174,29 +149,23 @@
       </b-row>
     </b-modal>
     <!--Read Modal -->
-    <b-modal
-      ref="showJournalModal"
-      id="showJournalModal"
-      hide-header
-      hide-footer
-      size="xl"
-    >
+    <b-modal ref="showJournalModal" id="showJournalModal" hide-header hide-footer size="xl">
       <b-row>
         <b-col>
           <h3>{{ activeJournal.journalTitle }}</h3>
-          <p style="font-style:italic;">
-            Date Created: {{ activeJournal.journalDate }}
-          </p>
-          <p style="font-style:italic;">
-            Author: {{ activeJournal.journalAuthor }}
-          </p>
+          <p style="font-style:italic;">Date Created: {{ activeJournal.journalDate }}</p>
+          <p style="font-style:italic;">Author: {{ activeJournal.journalAuthor }}</p>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <p v-for="(para, index) in activeJournal.journalContent" :key="index">
-            {{ para }}
-          </p>
+          <div v-for="(para, index) in activeJournal.journalContent" :key="index">
+            <br v-if="!para" />
+            <p v-else-if="!para.includes('http')">{{para}}</p>
+            <p v-else-if="para.includes('http')">
+              <img :src="para" style="width: 50% " />
+            </p>
+          </div>
         </b-col>
       </b-row>
       <b-row>
@@ -225,15 +194,6 @@ export default {
   },
   methods: {
     toArray() {
-      this.activeJournal.journalContent = [];
-      var stringArray = document
-        .getElementById("journalTextArea")
-        .value.split("\n");
-      stringArray.forEach(element => {
-        this.activeJournal.journalContent.push(element);
-      });
-    },
-    saveEditedContent() {
       this.activeJournal.journalContent = [];
       var stringArray = document
         .getElementById("journalTextArea")
@@ -275,7 +235,7 @@ export default {
         .then(() => {
           this.$refs["editJournalModal"].hide();
           this.activeJournal = {};
-          this.tempjournalContent = "";
+          this.tempJournalContent = "";
           this.loading = false;
           this.$forceUpdate();
         });
@@ -293,7 +253,7 @@ export default {
         .then(() => {
           this.$refs["addJournalModal"].hide();
           this.activeJournal = {};
-          this.tempjournalContent = "";
+          this.tempJournalContent = "";
           this.loading = false;
           this.$forceUpdate();
         });
@@ -336,7 +296,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.activeJournal = {};
-              this.tempjournalContent = "";
+              this.tempJournalContent = "";
               this.$forceUpdate();
             });
         }
@@ -359,6 +319,7 @@ export default {
           game.journalPosts = game.journalPosts.reverse();
           this.$store.commit("setActiveGame", game);
           this.$store.commit("setGames", gameList);
+          this.$forceUpdate();
         });
     }
   },

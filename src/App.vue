@@ -29,6 +29,7 @@
           >
             <div class="side-content">
               <resourceMin></resourceMin>
+              <charList></charList>
             </div>
           </b-col>
         </b-row>
@@ -40,6 +41,7 @@
 <script>
 import navigation from "@/components/common/Navigation.vue";
 import resourceMin from "@/components/views/SideBar/ResourceMin.vue";
+import charList from "@/components/views/SideBar/CharacterList.vue";
 import {
   getCampaigns,
   getUserChars
@@ -47,7 +49,7 @@ import {
 import { mapGetters } from "vuex";
 
 export default {
-  components: { navigation, resourceMin },
+  components: { navigation, resourceMin, charList },
   data() {
     return {};
   },

@@ -10,21 +10,19 @@
     <b-row>
       <b-col cols="8">
         <p style="font-style: italic">
-          Here you can read, add, and edit wiki entries.
+          Here you can read, add, and edit journal entries. To add an image, simply copy and paste the url, including the 'http' of
+          the image into it's own line.
         </p>
+        <p style="font-style: italic">(ex. 'http://www.imagesource.com/imageidnumber')</p>
       </b-col>
       <b-col cols="4">
-        <router-link tag="b-button" class="cardButton" to="/game-hub"
-          >Back to Game</router-link
-        >
+        <router-link tag="b-button" class="cardButton" to="/game-hub">Back to Game</router-link>
       </b-col>
     </b-row>
     <hr />
     <b-row>
       <b-col xs="12" md="6" offset-md="6">
-        <b-button class="cardButton" @click="addEntryModalOpen"
-          >Add a Wiki Entry</b-button
-        >
+        <b-button class="cardButton" @click="addEntryModalOpen">Add a Wiki Entry</b-button>
       </b-col>
     </b-row>
     <div v-if="wikiList.length >= 1">
@@ -36,24 +34,14 @@
             <p style="font-style:italic;">Author: {{ wiki.wikiAuthor }}</p>
             <p>
               {{ wiki.wikiContent[0].substring(0, 600) }}
-              <span v-if="wiki.wikiContent[0].length > 600">...</span>
+              <span
+                v-if="wiki.wikiContent[0].length > 600"
+              >...</span>
             </p>
 
-            <b-button
-              @click="showwikiEntry(index)"
-              class="cardButton cardOption"
-              >Read Wiki Entry</b-button
-            >
-            <b-button
-              @click="editWikiModalOpen(index)"
-              class="cardButton cardOption"
-              >Edit Entry</b-button
-            >
-            <b-button
-              @click="deleteEntry(index)"
-              class="cardButton cardOption"
-              :disabled="loading"
-            >
+            <b-button @click="showwikiEntry(index)" class="cardButton cardOption">Read Wiki Entry</b-button>
+            <b-button @click="editWikiModalOpen(index)" class="cardButton cardOption">Edit Entry</b-button>
+            <b-button @click="deleteEntry(index)" class="cardButton cardOption" :disabled="loading">
               {{ !loading ? "Delete Entry" : "Loading..." }}
               <b-spinner label="Loading..." v-if="loading"></b-spinner>
             </b-button>
@@ -74,11 +62,7 @@
         <b-col xs="12" md="6">
           <label>
             Title:
-            <input
-              class="form-control"
-              type="text"
-              v-model="activeWiki.wikiTitle"
-            />
+            <input class="form-control" type="text" v-model="activeWiki.wikiTitle" />
           </label>
         </b-col>
       </b-row>
@@ -99,11 +83,7 @@
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
-          <b-button
-            class="cardButton"
-            @click="savewikiEntry"
-            :disabled="loading"
-          >
+          <b-button class="cardButton" @click="savewikiEntry" :disabled="loading">
             {{ !loading ? "Save New Entry" : "Loading..." }}
             <b-spinner label="Loading..." v-if="loading"></b-spinner>
           </b-button>
@@ -126,21 +106,17 @@
     >
       <b-row>
         <b-col>
-          <b-alert show style="color:#000"
-            >*Note: Editing is done in real time to your journal, so there is no
-            need to save.</b-alert
-          >
+          <b-alert show style="color:#000">
+            *Note: Editing is done in real time to your journal, so there is no
+            need to save.
+          </b-alert>
         </b-col>
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
           <label>
             Title:
-            <input
-              class="form-control"
-              type="text"
-              v-model="activeWiki.wikiTitle"
-            />
+            <input class="form-control" type="text" v-model="activeWiki.wikiTitle" />
           </label>
         </b-col>
       </b-row>
@@ -151,7 +127,7 @@
             <b-form-textarea
               class="form-control"
               id="wikiTextArea"
-              v-model="tempwikiContent"
+              v-model="tempWikiContent"
               @input="toArray"
               placeholder="..."
               rows="3"
@@ -170,27 +146,23 @@
       </b-row>
     </b-modal>
     <!--Read Modal -->
-    <b-modal
-      ref="showWikiModal"
-      id="showWikiModal"
-      hide-header
-      hide-footer
-      size="xl"
-    >
+    <b-modal ref="showWikiModal" id="showWikiModal" hide-header hide-footer size="xl">
       <b-row>
         <b-col>
           <h3>{{ activeWiki.wikiTitle }}</h3>
-          <p style="font-style:italic;">
-            Date Created: {{ activeWiki.wikiDate }}
-          </p>
+          <p style="font-style:italic;">Date Created: {{ activeWiki.wikiDate }}</p>
           <p style="font-style:italic;">Author: {{ activeWiki.wikiAuthor }}</p>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <p v-for="(para, index) in activeWiki.wikiContent" :key="index">
-            {{ para }}
-          </p>
+          <div v-for="(para, index) in activeWiki.wikiContent" :key="index">
+            <br v-if="!para" />
+            <p v-else-if="!para.includes('http')">{{para}}</p>
+            <p v-else-if="para.includes('http')">
+              <img :src="para" style="width: 50% " />
+            </p>
+          </div>
         </b-col>
       </b-row>
       <b-row>
@@ -212,22 +184,13 @@ import {
 export default {
   data() {
     return {
-      tempwikiContent: "",
+      tempWikiContent: "",
       activeWiki: {},
       loading: false
     };
   },
   methods: {
     toArray() {
-      this.activeWiki.wikiContent = [];
-      var stringArray = document
-        .getElementById("wikiTextArea")
-        .value.split("\n");
-      stringArray.forEach(element => {
-        this.activeWiki.wikiContent.push(element);
-      });
-    },
-    saveEditedContent() {
       this.activeWiki.wikiContent = [];
       var stringArray = document
         .getElementById("wikiTextArea")
@@ -258,7 +221,7 @@ export default {
     cancelAdd() {
       this.$refs["addWikiModal"].hide();
       this.activeWiki = {};
-      this.tempwikiContent = "";
+      this.tempWikiContent = "";
     },
     closeEdit() {
       this.loading = true;
@@ -269,7 +232,7 @@ export default {
         .then(() => {
           this.$refs["editWikiModal"].hide();
           this.activeWiki = {};
-          this.tempwikiContent = "";
+          this.tempWikiContent = "";
           this.loading = false;
           this.$forceUpdate();
         });
@@ -287,7 +250,7 @@ export default {
         .then(() => {
           this.$refs["addWikiModal"].hide();
           this.activeWiki = {};
-          this.tempwikiContent = "";
+          this.tempWikiContent = "";
           this.loading = false;
           this.$forceUpdate();
         });
@@ -306,7 +269,7 @@ export default {
       this.$refs["editWikiModal"].show();
       this.activeWiki = this.wikiList[index];
       this.activeWiki.wikiContent.forEach(journal => {
-        this.tempwikiContent += journal + "\n";
+        this.tempWikiContent += journal + "\n";
       });
     },
     showwikiEntry(index) {
@@ -330,7 +293,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.activeWiki = {};
-              this.tempwikiContent = "";
+              this.tempWikiContent = "";
               this.$forceUpdate();
             });
         }
@@ -353,6 +316,7 @@ export default {
           game.wikiPosts = game.wikiPosts.reverse();
           this.$store.commit("setActiveGame", game);
           this.$store.commit("setGames", gameList);
+          this.$forceUpdate();
         });
     }
   },

@@ -157,7 +157,9 @@ export default {
       currUser: "getCurrUserName"
     }),
     recentJournal() {
-      return this.activeGame.journalPosts[0];
+      return this.activeGame.journalPosts[
+        this.activeGame.journalPosts.length - 1
+      ];
     },
     inGame() {
       return this.activeGame.gamePlayers.includes(this.currUser);
