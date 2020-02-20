@@ -6,6 +6,7 @@ const game = () => ({
   gameDate: getDate(),
   gamePlayers: [],
   gameChars: [],
+  gameTokens: [],
   gameType: "",
   journalPosts: [
     {

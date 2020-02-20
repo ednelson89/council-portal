@@ -16,7 +16,7 @@
             offset-xs="1"
             style="padding-top: 15px; padding-bottom: 15px;"
           >
-            <div class="main-content">
+            <div class="main-content" id="main-content">
               <router-view></router-view>
             </div>
           </b-col>

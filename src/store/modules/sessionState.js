@@ -29,6 +29,9 @@ const getters = {
   getActiveGameCharList() {
     return state.activeGameID.gameChars;
   },
+  getActiveGameTokens() {
+    return state.activeGameID.gameTokens;
+  },
   getAppRoute() {
     return state.appRoute;
   }
@@ -68,6 +71,14 @@ const mutations = {
     console.log(input);
     input.forEach(element => {
       state.activeGameID.gameChars.push(element);
+    });
+  },
+  setCurrentGameTokens(state, input) {
+    state.activeGameID.gameTokens = [];
+    // eslint-disable-next-line no-console
+    console.log(input);
+    input.forEach(element => {
+      state.activeGameID.gameTokens.push(element);
     });
   },
   setNewUserCharacter(state, input) {

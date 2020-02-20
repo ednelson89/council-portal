@@ -12,9 +12,12 @@
         <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
       </v-list-item-avatar>
 
-      <v-list-item-title>{{currentUser}}</v-list-item-title>
+      <v-list-item-title>{{ currentUser }}</v-list-item-title>
     </v-list-item>
-    <v-list-item v-if="!currentUser" @click="$router.push({path:'/sign-in'})">
+    <v-list-item
+      v-if="!currentUser"
+      @click="$router.push({ path: '/sign-in' })"
+    >
       <v-list-item-icon>
         <v-icon>mdi-account</v-icon>
       </v-list-item-icon>
@@ -29,7 +32,7 @@
     <v-divider></v-divider>
     <v-list-item
       link
-      @click="$router.push({path: '/create-account'})"
+      @click="$router.push({ path: '/create-account' })"
       v-if="currentUser !== '' && currentUser !== 'testUser1'"
     >
       <v-list-item-icon>
@@ -37,7 +40,7 @@
       </v-list-item-icon>
       <v-list-item-content>Create User Account</v-list-item-content>
     </v-list-item>
-    <v-list-item link @click="$router.push({path: '/'})">
+    <v-list-item link @click="$router.push({ path: '/' })">
       <v-list-item-icon>
         <v-icon>mdi-home-city</v-icon>
       </v-list-item-icon>
@@ -48,7 +51,7 @@
         v-for="item in items"
         :key="item.title"
         link
-        @click="$router.push({path: item.path })"
+        @click="$router.push({ path: item.path })"
       >
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
@@ -60,7 +63,9 @@
     <v-divider></v-divider>
     <div v-if="showSubMenu">
       <v-list-item>
-        <v-list-item-title style="font-weight:bold">Game Links</v-list-item-title>
+        <v-list-item-title style="font-weight:bold"
+          >Game Links</v-list-item-title
+        >
       </v-list-item>
 
       <v-list dense>
@@ -68,7 +73,7 @@
           v-for="item in gameItems"
           :key="item.title"
           link
-          @click="$router.push({path: item.path })"
+          @click="$router.push({ path: item.path })"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -83,6 +88,7 @@
 
 <script>
 import { postSignInOut } from "@/components/modules/utilities/postSignInOut.js";
+import { mdiDiceD20Outline } from "@mdi/js";
 
 export default {
   data() {
@@ -113,7 +119,12 @@ export default {
           path: "/game-characters"
         },
         { title: "Journal", icon: "mdi-feather", path: "/game-journal-view" },
-        { title: "Wiki", icon: "mdi-library-books", path: "/game-wiki-view" }
+        { title: "Wiki", icon: "mdi-library-books", path: "/game-wiki-view" },
+        {
+          title: "Game Table",
+          icon: mdiDiceD20Outline,
+          path: "/game-table"
+        }
       ],
       mini: true
     };
@@ -152,7 +163,8 @@ export default {
         this.$route.path === "/view-game-character" ||
         this.$route.path === "/game-journal-view" ||
         this.$route.path === "/game-wiki-view" ||
-        this.$route.path === "/game-calendar"
+        this.$route.path === "/game-calendar" ||
+        this.$route.path === "/game-table"
       );
     }
   }

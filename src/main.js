@@ -12,6 +12,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
 import VueSwal from "vue-swal";
+import VueDragResize from "vue-drag-resize";
 
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
@@ -20,6 +21,8 @@ Vue.config.productionTip = false;
 Vue.use(vuetify);
 Vue.use(BootstrapVue);
 Vue.use(VueSwal);
+Vue.component("vue-drag-resize", VueDragResize);
+
 new Vue({
   router,
   store,

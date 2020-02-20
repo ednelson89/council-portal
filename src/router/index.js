@@ -17,6 +17,7 @@ import GameCharEdit from "../components/views/CampaignModules/CharacterViews/Cha
 import GameCharAdd from "../components/views/CampaignModules/CharacterViews/CharacterAdd.vue";
 import SignIn from "../components/common/SignIn.vue";
 import CreateAccount from "../components/common/CreateAccount.vue";
+import GameTable from "../components/views/CampaignModules/GameTable.vue";
 
 Vue.use(VueRouter);
 
@@ -50,6 +51,11 @@ const routes = [
     path: "/game-hub",
     name: "View Game",
     component: GameHub
+  },
+  {
+    path: "/game-table",
+    name: "Game Table",
+    component: GameTable
   },
   {
     path: "/game-journal-view",
