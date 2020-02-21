@@ -1,21 +1,16 @@
 <template>
   <div>
-    <img
-      :src="activeGame.gameMap"
-      id="mapImg"
-      :style="' width: ' + (tableWidth - 50) + 'px !important; '"
-      class="imageBorder"
-    />
+    <img :src="activeGame.gameMap" id="mapImg" :style="'width: 100%;'" class="imageBorder" />
     <VueDragResize
       v-for="(token, index) in gameTokens"
       :key="index"
       :isActive="true"
       :w="token.width"
       :h="token.height"
-      :x="token.left"
-      :y="token.top"
-      :parentW="tableWidth - 25"
-      :parentH="tableHeight - 25"
+      :x="(token.left * (tableWidth)) / token.fieldLength"
+      :y="(token.top * (tableHeight)) / token.fieldHeight"
+      :parentW="tableWidth "
+      :parentH="tableHeight"
       :aspectRatio="true"
       :parentLimitation="true"
       @resizing="resize($event, index)"
@@ -24,7 +19,11 @@
       @dragstop="onDragStop($event, index)"
     >
       <img :src="token.imgSrc" :width="token.width" :height="token.height" />
-      <p style="background-color: white">{{token.tokenName}}</p>
+      <p
+        v-if="token.tokenName"
+        :width="token.width"
+        style="background-color: white"
+      >{{ token.tokenName }}</p>
     </VueDragResize>
   </div>
 </template>
@@ -56,12 +55,16 @@ export default {
       this.gameTokens[index].top = newRect.top;
       this.gameTokens[index].left = newRect.left;
 
-      let gameTableEl = document.getElementById("main-content");
+      let gameTableEl = document.getElementById("mapImg");
       this.tableWidth = gameTableEl.offsetWidth;
       this.tableHeight = gameTableEl.offsetHeight;
+
+      this.gameTokens[index].fieldLength = this.tableWidth;
+      this.gameTokens[index].fieldHeight = this.tableHeight;
     },
     onDragStop(newRect, index) {
       this.resize(newRect, index);
+
       if (!this.deleting) {
         updateTokens(3, this.gameTokens[index], this.activeGame.gameID).then(
           () => {
@@ -78,6 +81,8 @@ export default {
       }
     },
     updateGame() {
+      // eslint-disable-next-line no-console
+      console.log("Update Game");
       let gameList = [];
       getCampaigns()
         .then(response => {
@@ -105,16 +110,25 @@ export default {
     })
   },
   mounted() {
-    let gameTableEl = document.getElementById("main-content");
+    let gameTableEl = document.getElementById("mapImg");
     this.tableWidth = gameTableEl.offsetWidth;
     this.tableHeight = gameTableEl.offsetHeight;
 
     window.addEventListener("resize", () => {
       this.tableWidth = gameTableEl.offsetWidth;
       this.tableHeight = gameTableEl.offsetHeight;
+
+      this.gameTokens.forEach(token => {
+        token.top = (token.top * this.tableHeight) / token.fieldHeight;
+        token.left = (token.left * this.tableWidth) / token.fieldLength;
+        token.fieldLength = this.tableWidth;
+        token.fieldHeight = this.tableHeight;
+      });
     });
 
-    setInterval(this.updateGame(), 15000);
+    setInterval(() => {
+      this.updateGame();
+    }, 12000);
   }
 };
 </script>

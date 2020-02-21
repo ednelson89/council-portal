@@ -5,8 +5,14 @@
         <div v-if="playing">
           <p style="font-weight:bold; margin-right:5px;">Game Board Tools:</p>
           <p style="margin-right:5px;">
-            You can change the map and add/remove tokens from the board by following the steps below.
-            The board will automatically update every 20 seconds.
+            Welcome to the table! Here, you can play with others on a digital
+            battlemap, or load images to show your group. The shared positioning may not
+            be perfectly accurate, but it should be fairly close.
+          </p>
+          <p style="margin-right:5px;">
+            You can change the map and add/remove tokens from the board by
+            following the steps below. The board will automatically update every
+            12 seconds.
           </p>
 
           <b-button
@@ -18,8 +24,16 @@
           <b-button
             class="cardButton"
             style="margin-bottom:10px; margin-right:5px;"
-            @click="!deleting ? $store.commit('setDeletingToken', true) : $store.commit('setDeletingToken', false)"
-          >{{!deleting ? 'Delete a Token': 'Deleting, Click Again to Cancel'}}</b-button>
+            @click="
+              !deleting
+                ? $store.commit('setDeletingToken', true)
+                : $store.commit('setDeletingToken', false)
+            "
+          >
+            {{
+            !deleting ? "Delete a Token" : "Deleting, Click Again to Cancel"
+            }}
+          </b-button>
           <p style="font-style:italic; margin-right:5px;">The next token you move will be deleted.</p>
 
           <label>
@@ -83,7 +97,8 @@
       <b-row>
         <b-col>
           <label style="width:100%">
-            Please provide a name for this token ( mutiples will be automatically numbered):
+            Please provide a name for this token ( mutiples will be
+            automatically numbered):
             <input
               type="text"
               class="form-control"
@@ -92,7 +107,8 @@
             />
           </label>
           <label style="width:100%">
-            Please provide the url for the image you would like to use on this token:
+            Please provide the url for the image you would like to use on this
+            token:
             <input
               type="text"
               class="form-control"
@@ -143,12 +159,15 @@ export default {
     },
     async addTokens() {
       this.loading = true;
+      if (this.tempToken.tokenName) {
+        var baseName = this.tempToken.tokenName;
+      }
       for (var i = 0; i < this.tokenNum; i++) {
         // eslint-disable-next-line no-console
         console.log(this.tempToken.tokenID);
         this.tempToken.tokenID = this.generateID();
-        if (this.tokenNum > 1) {
-          this.tempToken.tokenName = this.tempToken.tokenName + (i + 1);
+        if (this.tokenNum > 1 && this.tempToken.tokenName) {
+          this.tempToken.tokenName = baseName + (i + 1);
         }
 
         await updateTokens(1, this.tempToken, this.activeGame.gameID)
@@ -210,5 +229,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

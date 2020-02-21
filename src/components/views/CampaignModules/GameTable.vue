@@ -5,14 +5,19 @@
         <h2
           v-if="windowWidth < 700"
           style="font-size:22px; font-weight:bold; padding:2px; margin:0px;"
-        >
-          Game Table
-        </h2>
+        >Game Table</h2>
+
         <p v-if="windowWidth < 700">
-          Welcome to the game table. This feature is only available if your
-          screen width is at least 1200px.
+          Welcome to the table! Here, you can play with others on a digital
+          battlemap, or load images to show your group. The shared positioning may not
+          be perfectly accurate, but it should be fairly close.
         </p>
-        <tableBase v-if="windowWidth >= 700"> </tableBase>
+        <p v-if="windowWidth < 700">
+          You can change the map and add/remove tokens from the board by
+          following the steps below. The board will automatically update every
+          12 seconds.
+        </p>
+        <tableBase v-if="windowWidth >= 700"></tableBase>
       </b-col>
     </b-row>
   </div>

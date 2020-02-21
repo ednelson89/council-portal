@@ -6,6 +6,8 @@ const mobToken = () => ({
   left: 0,
   width: 150,
   height: 150,
+  fieldLength: 1000,
+  fieldHeight: 1000,
   tokenID: "",
   tokenName: ""
 });
