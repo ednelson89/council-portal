@@ -5,20 +5,26 @@
       v-for="(token, index) in gameTokens"
       :key="index"
       :isActive="true"
-      :w="token.width"
-      :h="token.height"
-      :x="(token.left * (tableWidth)) / token.fieldLength"
-      :y="(token.top * (tableHeight)) / token.fieldHeight"
+      :w="(token.width * (tableWidth)) / token.fieldLength"
+      :h="(token.width * (tableWidth)) / token.fieldLength"
+      :x="(token.left * tableWidth) / token.fieldLength"
+      :y="(token.top * tableHeight) / token.fieldHeight"
+      :minw="2"
+      :minh="2"
+      :aspectRatio="true"
       :parentW="tableWidth "
       :parentH="tableHeight"
-      :aspectRatio="true"
       :parentLimitation="true"
       @resizing="resize($event, index)"
       @dragging="resize($event, index)"
       @resizestop="onDragStop($event, index)"
       @dragstop="onDragStop($event, index)"
     >
-      <img :src="token.imgSrc" :width="token.width" :height="token.height" />
+      <img
+        :src="token.imgSrc"
+        :width="(token.width * (tableWidth)) / token.fieldLength"
+        :height="(token.width * (tableWidth)) / token.fieldLength"
+      />
       <p
         v-if="token.tokenName"
         :width="token.width"
@@ -45,7 +51,8 @@ export default {
     return {
       gridOn: true,
       tableHeight: 1100,
-      tableWidth: 600
+      tableWidth: 600,
+      timer: ""
     };
   },
   methods: {
@@ -98,6 +105,12 @@ export default {
         .then(game => {
           this.$store.commit("setActiveGame", game);
           this.$store.commit("setGames", gameList);
+
+          let gameTableEl = document.getElementById("mapImg");
+
+          this.tableWidth = gameTableEl.offsetWidth;
+          this.tableHeight = gameTableEl.offsetHeight;
+
           this.$forceUpdate();
         });
     }
@@ -109,10 +122,34 @@ export default {
       deleting: "getDeletingToken"
     })
   },
+  beforeMount() {
+    let gameTableEl = document.getElementById("mapImg");
+    this.tableWidth = gameTableEl.offsetWidth;
+    this.tableHeight = gameTableEl.offsetHeight;
+
+    this.gameTokens.forEach(token => {
+      token.top = (token.top * this.tableHeight) / token.fieldHeight;
+      token.left = (token.left * this.tableWidth) / token.fieldLength;
+      token.width = (token.width * this.tableWidth) / token.fieldLength;
+      token.height = (token.height * this.tableHeight) / token.fieldHeight;
+      token.fieldLength = this.tableWidth;
+      token.fieldHeight = this.tableHeight;
+    });
+  },
   mounted() {
     let gameTableEl = document.getElementById("mapImg");
     this.tableWidth = gameTableEl.offsetWidth;
     this.tableHeight = gameTableEl.offsetHeight;
+
+    this.gameTokens.forEach(token => {
+      token.top = (token.top * this.tableHeight) / token.fieldHeight;
+      token.left = (token.left * this.tableWidth) / token.fieldLength;
+      token.width = (token.width * this.tableWidth) / token.fieldLength;
+      token.height = (token.height * this.tableHeight) / token.fieldHeight;
+      token.fieldLength = this.tableWidth;
+      token.fieldHeight = this.tableHeight;
+    });
+    this.$forceUpdate();
 
     window.addEventListener("resize", () => {
       this.tableWidth = gameTableEl.offsetWidth;
@@ -121,14 +158,23 @@ export default {
       this.gameTokens.forEach(token => {
         token.top = (token.top * this.tableHeight) / token.fieldHeight;
         token.left = (token.left * this.tableWidth) / token.fieldLength;
+        token.width = (token.width * this.tableWidth) / token.fieldLength;
+        token.height = (token.height * this.tableHeight) / token.fieldHeight;
         token.fieldLength = this.tableWidth;
         token.fieldHeight = this.tableHeight;
       });
     });
 
-    setInterval(() => {
+    this.timer = setInterval(() => {
       this.updateGame();
-    }, 12000);
+    }, 10000);
+    // eslint-disable-next-line no-console
+    console.log("Timer Set");
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    // eslint-disable-next-line no-console
+    console.log("Timer Cleared");
   }
 };
 </script>
