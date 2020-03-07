@@ -694,6 +694,7 @@
                     it will be replaced by a blank spell so that the listing system doesnt break. This will
                     be fixed in a later patch.
                   </p>
+                  <p>To add a link to the spell description, add the html link on it's own line.</p>
                 </b-col>
               </b-row>
               <b-row>
@@ -740,69 +741,214 @@
               </b-row>
               <b-row>
                 <b-col>
-                  <p class="sectionLabel">Cantrips:</p>
-                  <b-table striped hover :items="char.spells.cantrips" :fields="spellTableFields">
-                    <template v-slot:cell(delete)="row">
-                      <b-button
-                        size="sm"
-                        @click="deleteFromSpells(row.index, 'cantrips')"
-                      >Delete Item</b-button>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 1:</p>
-                  <b-table striped hover :items="char.spells.lvl1" :fields="spellTableFields">
-                    <template v-slot:cell(delete)="row">
-                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl1')">Delete Item</b-button>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 2:</p>
-                  <b-table striped hover :items="char.spells.lvl2" :fields="spellTableFields">
-                    <template v-slot:cell(delete)="row">
-                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl2')">Delete Item</b-button>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 3:</p>
-                  <b-table striped hover :items="char.spells.lvl3" :fields="spellTableFields">
-                    <template v-slot:cell(delete)="row">
-                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl3')">Delete Item</b-button>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 4:</p>
-                  <b-table striped hover :items="char.spells.lvl4" :fields="spellTableFields">
-                    <template v-slot:cell(delete)="row">
-                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl4')">Delete Item</b-button>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 5:</p>
-                  <b-table striped hover :items="char.spells.lvl5" :fields="spellTableFields">
-                    <template v-slot:cell(delete)="row">
-                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl5')">Delete Item</b-button>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 6:</p>
-                  <b-table striped hover :items="char.spells.lvl6" :fields="spellTableFields">
-                    <template v-slot:cell(delete)="row">
-                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl6')">Delete Item</b-button>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 7:</p>
-                  <b-table striped hover :items="char.spells.lvl7" :fields="spellTableFields">
-                    <template v-slot:cell(delete)="row">
-                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl7')">Delete Item</b-button>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 8:</p>
-                  <b-table striped hover :items="char.spells.lvl8" :fields="spellTableFields">
-                    <template v-slot:cell(delete)="row">
-                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl8')">Delete Item</b-button>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 9:</p>
-                  <b-table striped hover :items="char.spells.lvl9" :fields="spellTableFields">
-                    <template v-slot:cell(delete)="row">
-                      <b-button size="sm" @click="deleteFromSpells(row.index, 'lvl9')">Delete Item</b-button>
-                    </template>
-                  </b-table>
+                  <h4>Spell Book:</h4>
+                  <b-tabs content-class="mt-3">
+                    <b-tab title="Cantrips" active>
+                      <p class="sectionLabel">Cantrips:</p>
+                      <b-table
+                        striped
+                        hover
+                        :items="char.spells.cantrips"
+                        :fields="spellTableFields"
+                      >
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                        <template v-slot:cell(delete)="row">
+                          <b-button
+                            size="sm"
+                            @click="deleteFromSpells(row.index, 'cantrips')"
+                          >Delete Item</b-button>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 1">
+                      <p class="sectionLabel">Level 1:</p>
+                      <b-table striped hover :items="char.spells.lvl1" :fields="spellTableFields">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                        <template v-slot:cell(delete)="row">
+                          <b-button
+                            size="sm"
+                            @click="deleteFromSpells(row.index, 'lvl1')"
+                          >Delete Item</b-button>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 2">
+                      <p class="sectionLabel">Level 2:</p>
+                      <b-table striped hover :items="char.spells.lvl2" :fields="spellTableFields">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                        <template v-slot:cell(delete)="row">
+                          <b-button
+                            size="sm"
+                            @click="deleteFromSpells(row.index, 'lvl2')"
+                          >Delete Item</b-button>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 3">
+                      <p class="sectionLabel">Level 3:</p>
+                      <b-table striped hover :items="char.spells.lvl3" :fields="spellTableFields">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                        <template v-slot:cell(delete)="row">
+                          <b-button
+                            size="sm"
+                            @click="deleteFromSpells(row.index, 'lvl3')"
+                          >Delete Item</b-button>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 4">
+                      <p class="sectionLabel">Level 4:</p>
+                      <b-table striped hover :items="char.spells.lvl4" :fields="spellTableFields">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                        <template v-slot:cell(delete)="row">
+                          <b-button
+                            size="sm"
+                            @click="deleteFromSpells(row.index, 'lvl4')"
+                          >Delete Item</b-button>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 5">
+                      <p class="sectionLabel">Level 5:</p>
+                      <b-table striped hover :items="char.spells.lvl5" :fields="spellTableFields">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                        <template v-slot:cell(delete)="row">
+                          <b-button
+                            size="sm"
+                            @click="deleteFromSpells(row.index, 'lvl5')"
+                          >Delete Item</b-button>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 6">
+                      <p class="sectionLabel">Level 6:</p>
+                      <b-table striped hover :items="char.spells.lvl6" :fields="spellTableFields">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                        <template v-slot:cell(delete)="row">
+                          <b-button
+                            size="sm"
+                            @click="deleteFromSpells(row.index, 'lvl6')"
+                          >Delete Item</b-button>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 7">
+                      <p class="sectionLabel">Level 7:</p>
+                      <b-table striped hover :items="char.spells.lvl7" :fields="spellTableFields">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                        <template v-slot:cell(delete)="row">
+                          <b-button
+                            size="sm"
+                            @click="deleteFromSpells(row.index, 'lvl7')"
+                          >Delete Item</b-button>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 8">
+                      <p class="sectionLabel">Level 8:</p>
+                      <b-table striped hover :items="char.spells.lvl8" :fields="spellTableFields">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                        <template v-slot:cell(delete)="row">
+                          <b-button
+                            size="sm"
+                            @click="deleteFromSpells(row.index, 'lvl8')"
+                          >Delete Item</b-button>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 9">
+                      <p class="sectionLabel">Level 9:</p>
+                      <b-table striped hover :items="char.spells.lvl9" :fields="spellTableFields">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                        <template v-slot:cell(delete)="row">
+                          <b-button
+                            size="sm"
+                            @click="deleteFromSpells(row.index, 'lvl9')"
+                          >Delete Item</b-button>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                  </b-tabs>
                 </b-col>
               </b-row>
             </b-card>
@@ -989,6 +1135,26 @@ export default {
     })
   },
   mounted() {
+    var count = [
+      "cantrips",
+      "lvl1",
+      "lvl2",
+      "lvl3",
+      "lvl4",
+      "lvl5",
+      "lvl6",
+      "lvl7",
+      "lvl8",
+      "lvl9"
+    ];
+    count.forEach(element => {
+      this.char.spells[element].forEach(spell => {
+        if (!Array.isArray(spell.spellDescription)) {
+          spell.spellDescription = spell.spellDescription.split("\n");
+        }
+      });
+    });
+
     // These ensure that the format of the textAreas remains correct
     this.char.proficiencies.forEach(prof => {
       this.tempProf += prof + "\n";

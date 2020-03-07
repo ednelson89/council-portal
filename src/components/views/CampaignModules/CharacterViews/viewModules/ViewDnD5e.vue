@@ -387,7 +387,7 @@
             <b-card class="b-cards">
               <b-row>
                 <b-col>
-                  <h4 style="font-weight:bold;">Spells:</h4>
+                  <h4 style="font-weight:bold;">Spell Book:</h4>
                   <b-tabs content-class="mt-3">
                     <b-tab title="Cantrips" active>
                       <p class="sectionLabel">Cantrips:</p>
