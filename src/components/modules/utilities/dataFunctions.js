@@ -41,6 +41,7 @@ var updateMap = function(map, activeID) {
     });
 };
 
+// 1 add, 2 delete, 3 update, 4 overwrite
 var updateWikis = function(actionCode, wiki, activeID) {
   var message = {
     data: { code: actionCode, data: wiki, gameID: activeID }

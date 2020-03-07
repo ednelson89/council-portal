@@ -387,66 +387,153 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Spells:</h4>
-                  <p class="sectionLabel">Cantrips:</p>
-                  <b-table striped hover :fields="spellTableFields" :items="char.spells.cantrips">
-                    <template v-slot:cell(spellDescription)="data">
-                      <p v-for="(par, index) in data.value" :key="index">{{par}}</p>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 1:</p>
-                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl1">
-                    <template v-slot:cell(spellDescription)="data">
-                      <p v-for="(par, index) in data.value" :key="index">{{par}}</p>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 2:</p>
-                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl2">
-                    <template v-slot:cell(spellDescription)="data">
-                      <p v-for="(par, index) in data.value" :key="index">{{par}}</p>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 3:</p>
-                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl3">
-                    <template v-slot:cell(spellDescription)="data">
-                      <p v-for="(par, index) in data.value" :key="index">{{par}}</p>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 4:</p>
-                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl4">
-                    <template v-slot:cell(spellDescription)="data">
-                      <p v-for="(par, index) in data.value" :key="index">{{par}}</p>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 5:</p>
-                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl5">
-                    <template v-slot:cell(spellDescription)="data">
-                      <p v-for="(par, index) in data.value" :key="index">{{par}}</p>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 6:</p>
-                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl6">
-                    <template v-slot:cell(spellDescription)="data">
-                      <p v-for="(par, index) in data.value" :key="index">{{par}}</p>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 7:</p>
-                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl7">
-                    <template v-slot:cell(spellDescription)="data">
-                      <p v-for="(par, index) in data.value" :key="index">{{par}}</p>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 8:</p>
-                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl8">
-                    <template v-slot:cell(spellDescription)="data">
-                      <p v-for="(par, index) in data.value" :key="index">{{par}}</p>
-                    </template>
-                  </b-table>
-                  <p class="sectionLabel">Level 9:</p>
-                  <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl9">
-                    <template v-slot:cell(spellDescription)="data">
-                      <p v-for="(par, index) in data.value" :key="index">{{par}}</p>
-                    </template>
-                  </b-table>
+                  <b-tabs content-class="mt-3">
+                    <b-tab title="Cantrips" active>
+                      <p class="sectionLabel">Cantrips:</p>
+                      <b-table
+                        striped
+                        hover
+                        :fields="spellTableFields"
+                        :items="char.spells.cantrips"
+                      >
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 1">
+                      <p class="sectionLabel">Level 1:</p>
+                      <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl1">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 2">
+                      <p class="sectionLabel">Level 2:</p>
+                      <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl2">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 3">
+                      <p class="sectionLabel">Level 3:</p>
+                      <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl3">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 4">
+                      <p class="sectionLabel">Level 4:</p>
+                      <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl4">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 5">
+                      <p class="sectionLabel">Level 5:</p>
+                      <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl5">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 6">
+                      <p class="sectionLabel">Level 6:</p>
+                      <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl6">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 7">
+                      <p class="sectionLabel">Level 7:</p>
+                      <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl7">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 8">
+                      <p class="sectionLabel">Level 8:</p>
+                      <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl8">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                    <b-tab title="Level 9">
+                      <p class="sectionLabel">Level 9:</p>
+                      <b-table striped hover :fields="spellTableFields" :items="char.spells.lvl9">
+                        <template v-slot:cell(spellDescription)="data">
+                          <div v-for="(para, index) in data.value" :key="index">
+                            <br v-if="!para" />
+                            <p v-else-if="!para.includes('http')">{{para}}</p>
+                            <p v-else-if="para.includes('http')">
+                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
+                            </p>
+                          </div>
+                        </template>
+                      </b-table>
+                    </b-tab>
+                  </b-tabs>
                 </b-col>
               </b-row>
             </b-card>

@@ -18,6 +18,9 @@ const getters = {
   getActiveGame(state) {
     return state.activeGameID;
   },
+  getActiveGameWikiList(state) {
+    return state.activeGameID.wikiPosts;
+  },
   getDeletingToken(state) {
     return state.deletingToken;
   },
@@ -74,16 +77,14 @@ const mutations = {
   },
   setCurrentGameCharacters(state, input) {
     state.activeGameID.gameChars = [];
-    // eslint-disable-next-line no-console
-    console.log(input);
+
     input.forEach(element => {
       state.activeGameID.gameChars.push(element);
     });
   },
   setCurrentGameTokens(state, input) {
     state.activeGameID.gameTokens = [];
-    // eslint-disable-next-line no-console
-    console.log(input);
+
     input.forEach(element => {
       state.activeGameID.gameTokens.push(element);
     });
@@ -99,6 +100,12 @@ const mutations = {
   },
   setAppRoute(state, input) {
     state.appRoute = input;
+  },
+  updateWiki(state, input) {
+    state.activeGameID.wikiPosts = input.reverse();
+  },
+  updateJournals(state, input) {
+    state.activeGameID.journalPosts = input.reverse();
   }
 };
 

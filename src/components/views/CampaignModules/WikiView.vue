@@ -14,6 +14,10 @@
           the image into it's own line.
         </p>
         <p style="font-style: italic">(ex. 'http://www.imagesource.com/imageidnumber')</p>
+        <p
+          style="font-style: italic"
+          v-if="activeGame.gameGM === currUser"
+        >If you are the game master, you can also rearrange the entries by dragging and dropping them with your mouse.</p>
       </b-col>
       <b-col cols="4">
         <router-link tag="b-button" class="cardButton" to="/game-hub">Back to Game</router-link>
@@ -26,28 +30,41 @@
       </b-col>
     </b-row>
     <div v-if="wikiList.length >= 1">
-      <b-row v-for="(wiki, index) in wikiList" :key="index">
-        <b-col cols="12">
-          <b-card class="b-cards">
-            <h3>{{ wiki.wikiTitle }}</h3>
-            <p style="font-style:italic;">Date Created: {{ wiki.wikiDate }}</p>
-            <p style="font-style:italic;">Author: {{ wiki.wikiAuthor }}</p>
-            <p>
-              {{ wiki.wikiContent[0].substring(0, 600) }}
-              <span
-                v-if="wiki.wikiContent[0].length > 600"
-              >...</span>
-            </p>
+      <draggable
+        v-model="wikiList"
+        :disabled="activeGame.gameGM !== currUser"
+        group="wikis"
+        @start="drag=true"
+        @end="drag=false"
+        ghost-class="ghost"
+      >
+        <b-row v-for="(wiki, index) in wikiList" :key="index">
+          <b-col cols="12">
+            <b-card class="b-cards">
+              <h3>{{ wiki.wikiTitle }}</h3>
+              <p style="font-style:italic;">Date Created: {{ wiki.wikiDate }}</p>
+              <p style="font-style:italic;">Author: {{ wiki.wikiAuthor }}</p>
+              <p>
+                {{ wiki.wikiContent[0].substring(0, 600) }}
+                <span
+                  v-if="wiki.wikiContent[0].length > 600"
+                >...</span>
+              </p>
 
-            <b-button @click="showwikiEntry(index)" class="cardButton cardOption">Read Wiki Entry</b-button>
-            <b-button @click="editWikiModalOpen(index)" class="cardButton cardOption">Edit Entry</b-button>
-            <b-button @click="deleteEntry(index)" class="cardButton cardOption" :disabled="loading">
-              {{ !loading ? "Delete Entry" : "Loading..." }}
-              <b-spinner label="Loading..." v-if="loading"></b-spinner>
-            </b-button>
-          </b-card>
-        </b-col>
-      </b-row>
+              <b-button @click="showwikiEntry(index)" class="cardButton cardOption">Read Wiki Entry</b-button>
+              <b-button @click="editWikiModalOpen(index)" class="cardButton cardOption">Edit Entry</b-button>
+              <b-button
+                @click="deleteEntry(index)"
+                class="cardButton cardOption"
+                :disabled="loading"
+              >
+                {{ !loading ? "Delete Entry" : "Loading..." }}
+                <b-spinner label="Loading..." v-if="loading"></b-spinner>
+              </b-button>
+            </b-card>
+          </b-col>
+        </b-row>
+      </draggable>
     </div>
     <!--Add Modal -->
     <b-modal
@@ -180,8 +197,12 @@ import {
   getCampaigns,
   updateWikis
 } from "@/components/modules/utilities/dataFunctions.js";
+import draggable from "vuedraggable";
 
 export default {
+  components: {
+    draggable
+  },
   data() {
     return {
       tempWikiContent: "",
@@ -322,10 +343,27 @@ export default {
   },
   computed: {
     ...mapGetters({
-      activeGame: "getActiveGame"
+      activeGame: "getActiveGame",
+      currUser: "getCurrUserName"
     }),
-    wikiList() {
-      return this.activeGame.wikiPosts;
+    wikiList: {
+      get() {
+        return this.activeGame.wikiPosts;
+      },
+      set(value) {
+        this.$store.commit("updateWiki", value);
+        this.loading = true;
+        updateWikis(4, this.wikiList, this.activeGame.gameID)
+          .then(() => {
+            this.updateGame();
+          })
+          .then(() => {
+            this.activeWiki = {};
+            this.tempWikiContent = "";
+            this.loading = false;
+            this.$forceUpdate();
+          });
+      }
     }
   },
   beforeMount() {
@@ -343,5 +381,9 @@ export default {
 }
 .cardButton {
   margin: 10px 10px;
+}
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
 }
 </style>

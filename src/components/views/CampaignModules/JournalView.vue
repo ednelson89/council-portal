@@ -14,6 +14,10 @@
           the image into it's own line.
         </p>
         <p style="font-style: italic">(ex. 'http://www.imagesource.com/imageidnumber')</p>
+        <p
+          style="font-style: italic"
+          v-if="activeGame.gameGM === currUser"
+        >If you are the game master, you can also rearrange the entries by dragging and dropping them with your mouse.</p>
       </b-col>
       <b-col cols="4">
         <router-link tag="b-button" class="cardButton" to="/game-hub">Back to Game</router-link>
@@ -26,31 +30,47 @@
       </b-col>
     </b-row>
     <div v-if="journalList.length >= 1">
-      <b-row v-for="(journal, index) in journalList" :key="index">
-        <b-col cols="12">
-          <b-card class="b-cards">
-            <h3>{{ journal.journalTitle }}</h3>
-            <p style="font-style:italic;">Date Created: {{ journal.journalDate }}</p>
-            <p style="font-style:italic;">Author: {{ journal.journalAuthor }}</p>
-            <p>
-              {{ journal.journalContent[0].substring(0, 600) }}
-              <span
-                v-if="journal.journalContent[0].length > 600"
-              >...</span>
-            </p>
+      <draggable
+        v-model="journalList"
+        :disabled="activeGame.gameGM !== currUser"
+        group="journals"
+        @start="drag=true"
+        @end="drag=false"
+        ghost-class="ghost"
+      >
+        <b-row v-for="(journal, index) in journalList" :key="index">
+          <b-col cols="12">
+            <b-card class="b-cards">
+              <h3>{{ journal.journalTitle }}</h3>
+              <p style="font-style:italic;">Date Created: {{ journal.journalDate }}</p>
+              <p style="font-style:italic;">Author: {{ journal.journalAuthor }}</p>
+              <p>
+                {{ journal.journalContent[0].substring(0, 600) }}
+                <span
+                  v-if="journal.journalContent[0].length > 600"
+                >...</span>
+              </p>
 
-            <b-button
-              @click="showJournalEntry(index)"
-              class="cardButton cardOption"
-            >Read Journal Entry</b-button>
-            <b-button @click="editJournalModalOpen(index)" class="cardButton cardOption">Edit Entry</b-button>
-            <b-button @click="deleteEntry(index)" class="cardButton cardOption" :disabled="loading">
-              {{ !loading ? "Delete Entry" : "Loading..." }}
-              <b-spinner label="Loading..." v-if="loading"></b-spinner>
-            </b-button>
-          </b-card>
-        </b-col>
-      </b-row>
+              <b-button
+                @click="showJournalEntry(index)"
+                class="cardButton cardOption"
+              >Read Journal Entry</b-button>
+              <b-button
+                @click="editJournalModalOpen(index)"
+                class="cardButton cardOption"
+              >Edit Entry</b-button>
+              <b-button
+                @click="deleteEntry(index)"
+                class="cardButton cardOption"
+                :disabled="loading"
+              >
+                {{ !loading ? "Delete Entry" : "Loading..." }}
+                <b-spinner label="Loading..." v-if="loading"></b-spinner>
+              </b-button>
+            </b-card>
+          </b-col>
+        </b-row>
+      </draggable>
     </div>
     <!--Add Modal -->
     <b-modal
@@ -183,8 +203,12 @@ import {
   getCampaigns,
   updateJournals
 } from "@/components/modules/utilities/dataFunctions.js";
+import draggable from "vuedraggable";
 
 export default {
+  components: {
+    draggable
+  },
   data() {
     return {
       tempJournalContent: "",
@@ -325,10 +349,27 @@ export default {
   },
   computed: {
     ...mapGetters({
-      activeGame: "getActiveGame"
+      activeGame: "getActiveGame",
+      currUser: "getCurrUserName"
     }),
-    journalList() {
-      return this.activeGame.journalPosts;
+    journalList: {
+      get() {
+        return this.activeGame.journalPosts;
+      },
+      set(value) {
+        this.$store.commit("updateJournals", value);
+        this.loading = true;
+        updateJournals(4, this.journalList, this.activeGame.gameID)
+          .then(() => {
+            this.updateGame();
+          })
+          .then(() => {
+            this.activeJournal = {};
+            this.tempJournalContent = "";
+            this.loading = false;
+            this.$forceUpdate();
+          });
+      }
     }
   },
   beforeMount() {
@@ -346,5 +387,10 @@ export default {
 }
 .cardButton {
   margin: 10px 10px;
+}
+
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
 }
 </style>
