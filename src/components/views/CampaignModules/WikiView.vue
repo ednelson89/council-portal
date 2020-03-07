@@ -10,10 +10,18 @@
     <b-row>
       <b-col cols="8">
         <p style="font-style: italic">
-          Here you can read, add, and edit journal entries. To add an image, simply copy and paste the url, including the 'http' of
-          the image into it's own line.
+          Here you can read, add, and edit wiki entries. To add an image or link, simply copy and paste the url
+          <span
+            style="font-weight: bold;"
+          >on it's own line</span> ,
+          preceeded by either 'img-' or 'link-'.
         </p>
-        <p style="font-style: italic">(ex. 'http://www.imagesource.com/imageidnumber')</p>
+        <p
+          style="font-style: italic; font-weight:bold;"
+        >(ex. 'img-http://www.imagesource.com/imageidnumber')</p>
+        <p
+          style="font-style: italic; font-weight:bold;"
+        >(ex. 'link-http://www.link-source.com/linkID')</p>
         <p
           style="font-style: italic"
           v-if="activeGame.gameGM === currUser"
@@ -175,10 +183,16 @@
         <b-col>
           <div v-for="(para, index) in activeWiki.wikiContent" :key="index">
             <br v-if="!para" />
-            <p v-else-if="!para.includes('http')">{{para}}</p>
-            <p v-else-if="para.includes('http')">
-              <img :src="para" style="width: 50% " />
+            <p v-else-if="para.includes('img-')">
+              <img :src="para.substring(4)" style="width: 50% " />
             </p>
+            <a
+              v-else-if="para.includes('link-')"
+              :href="para.substring(5)"
+              style="width: 50% "
+              target="_blank"
+            >{{para.substring(5)}}</a>
+            <p v-else>{{para}}</p>
           </div>
         </b-col>
       </b-row>
