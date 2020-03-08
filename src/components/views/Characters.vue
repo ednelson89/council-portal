@@ -29,6 +29,7 @@
         </b-row>
       </b-tab>
       <b-tab title="Chronicles of Darkness">
+        <CoDPreview v-if="hasCoD"></CoDPreview>
         <b-row v-if="!hasCoD">
           <b-col>
             <p>Sorry, there are no characters to view for this system.</p>
@@ -43,9 +44,10 @@
 import { mapGetters } from "vuex";
 import { getUserChars } from "@/components/modules/utilities/dataFunctions.js";
 import DnD5ePreview from "@/components/views/UserCharacters/CharacterPreviews/PreviewD&D.vue";
+import CoDPreview from "@/components/views/UserCharacters/CharacterPreviews/PreviewCoD.vue";
 
 export default {
-  components: { DnD5ePreview },
+  components: { DnD5ePreview, CoDPreview },
   data() {
     return {};
   },
