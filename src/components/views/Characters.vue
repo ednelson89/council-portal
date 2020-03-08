@@ -20,24 +20,18 @@
     </b-row>
     <hr />
     <b-tabs>
-      <b-tab title="Unassigned Characters">
-        <b-row>
-          <b-col>
-            <h3>D&D 5e Characters:</h3>
-          </b-col>
-        </b-row>
+      <b-tab :title="'Dungeons & Dragons 5e'">
         <DnD5ePreview v-if="hasDND5e"></DnD5ePreview>
-
-        <b-row v-if="!hasChars">
+        <b-row v-if="!hasDND5e">
           <b-col>
-            <p>Sorry, there are no characters to view for this user.</p>
+            <p>Sorry, there are no characters to view for this system.</p>
           </b-col>
         </b-row>
       </b-tab>
-      <b-tab title="Assigned Characters">
-        <b-row>
+      <b-tab title="Chronicles of Darkness">
+        <b-row v-if="!hasCoD">
           <b-col>
-            <p>Feature Currently Unavailable</p>
+            <p>Sorry, there are no characters to view for this system.</p>
           </b-col>
         </b-row>
       </b-tab>
@@ -75,6 +69,17 @@ export default {
             return char.system;
           })
           .includes("D&D5e");
+      } else {
+        return false;
+      }
+    },
+    hasCoD() {
+      if (this.activeUser.userChars) {
+        return this.activeUser.userChars
+          .flatMap(char => {
+            return char.system;
+          })
+          .includes("CoD");
       } else {
         return false;
       }

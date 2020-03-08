@@ -2,7 +2,7 @@
   <div>
     <div v-if="activeUser.userChars.length > 0 ">
       <b-row v-for="(char, index) in activeUser.userChars" :key="index">
-        <b-col v-if="char.charUser === activeChar">
+        <b-col v-if="char.charUser === activeChar && char.system === 'D&D5e'">
           <b-card class="b-cards">
             <b-row>
               <b-col cols="4">
