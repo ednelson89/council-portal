@@ -13,6 +13,9 @@
           <b-tab title="Dungeons and Dragons 5e" active>
             <dnd5eView></dnd5eView>
           </b-tab>
+          <b-tab title="Chronicles of Darkness">
+            <codView></codView>
+          </b-tab>
         </b-tabs>
       </b-col>
     </b-row>
@@ -21,9 +24,12 @@
 
 <script>
 import dnd5eView from "./ResourcesModules/dndResources.vue";
+import codView from "./ResourcesModules/codResources.vue";
+
 export default {
   components: {
-    dnd5eView
+    dnd5eView,
+    codView
   },
   data() {
     return {};

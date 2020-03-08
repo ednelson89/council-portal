@@ -87,11 +87,12 @@ export default {
     return {
       loading: false,
       systemTypes: [
-        { value: "D&D5e", text: "Dungeons & Dragons 5e" }
+        { value: "D&D5e", text: "Dungeons & Dragons 5e" },
+        { value: "CoDMortal", text: "Chronicles of Darkness" }
+
         /*
         { value: "D&D4e", text: "Dungeons & Dragons 4e" },
         { value: "D&D2e", text: "Dungeons & Dragons 2e" },
-        { value: "CoDMortal", text: "Chronicles of Darkness, Mortals" },
         { value: "CoDHunter", text: "Chronicles of Darkness, Hunters" },
         { value: "CoDMage", text: "Chronicles of Darkness, Mage" },
         { value: "CoDVamp", text: "Chronicles of Darkness, Vampire" },

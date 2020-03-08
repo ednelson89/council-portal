@@ -12,8 +12,6 @@
           <span class="italics">{{tempChar.charUser}}</span>
         </p>
         <hr />
-        <p>Editing is done in real time. There is no need to save.</p>
-        <hr />
         <b-button
           @click="addNewChar"
           class="cardButton"
@@ -63,11 +61,7 @@
                 <input class="form-control" v-model="tempChar.genBlock.charAlign" />
               </label>
             </b-col>
-            <b-col
-              cols
-              class="skillCols"
-              :style="{'background-image': 'url(' + require('@/assets/statCard.jpg') + ')'}"
-            >
+            <b-col cols class="skillCols">
               <img
                 class="charImg"
                 style="margin: 25px 0px;"
@@ -501,7 +495,7 @@
                 <b-col cols="2">
                   <label>
                     Details:
-                    <input class="form-control" v-model="tempEquipment.deatils" />
+                    <input class="form-control" v-model="tempEquipment.details" />
                   </label>
                 </b-col>
                 <b-col cols="2">
