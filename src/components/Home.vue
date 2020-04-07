@@ -11,17 +11,12 @@
       <b-col cols="12">
         <p>Welcome to the Dev Build of the Council of Bros Web Portal.</p>
         <p>
-          This application is a single page app designed to provide a collaboration hub for character sheets and game materials
-          for commonly played Tabletop RPGs. Users can add characters to a private character bank, as well as add characters,
-          journal entries, and wikis to custom games.
+          This application is a single page app designed to provide a
+          collaboration hub for character sheets and game materials for commonly
+          played Tabletop RPGs. Users can add characters to a private character
+          bank, as well as add characters, journal entries, and wikis to custom
+          games.
         </p>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <p style="font-weight: bold;">To Login, use the following credentials:</p>
-        <p>Username: testUser1</p>
-        <p>Password: testPass</p>
       </b-col>
     </b-row>
     <hr style="width:90%;" />
@@ -47,5 +42,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

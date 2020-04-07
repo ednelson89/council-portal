@@ -62,11 +62,7 @@
                 <input class="form-control" v-model="char.genBlock.charAlign" />
               </label>
             </b-col>
-            <b-col
-              cols
-              class="skillCols"
-              :style="{'background-image': 'url(' + require('@/assets/statCard.jpg') + ')'}"
-            >
+            <b-col cols class="skillCols">
               <img
                 class="charImg"
                 style="margin: 25px 0px;"

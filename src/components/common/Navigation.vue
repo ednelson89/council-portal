@@ -19,13 +19,13 @@
       @click="$router.push({ path: '/sign-in' })"
     >
       <v-list-item-icon>
-        <v-icon>mdi-account</v-icon>
+        <v-icon>{{ mdiAccount }}</v-icon>
       </v-list-item-icon>
       <v-list-item-content>Sign In</v-list-item-content>
     </v-list-item>
     <v-list-item v-if="currentUser" link @click="logout">
       <v-list-item-icon>
-        <v-icon>mdi-logout</v-icon>
+        <v-icon>{{ mdiLogout }}</v-icon>
       </v-list-item-icon>
       <v-list-item-content>Log Out</v-list-item-content>
     </v-list-item>
@@ -36,13 +36,13 @@
       v-if="currentUser !== '' && currentUser !== 'testUser1'"
     >
       <v-list-item-icon>
-        <v-icon>mdi-account-plus-outline</v-icon>
+        <v-icon>{{ mdiAccountPlusOutline }}</v-icon>
       </v-list-item-icon>
       <v-list-item-content>Create User Account</v-list-item-content>
     </v-list-item>
     <v-list-item link @click="$router.push({ path: '/' })">
       <v-list-item-icon>
-        <v-icon>mdi-home-city</v-icon>
+        <v-icon>{{ mdiHomeCity }}</v-icon>
       </v-list-item-icon>
       <v-list-item-content>Home</v-list-item-content>
     </v-list-item>
@@ -88,38 +88,55 @@
 
 <script>
 import { postSignInOut } from "@/components/modules/utilities/postSignInOut.js";
-import { mdiDiceD20Outline } from "@mdi/js";
+import {
+  mdiAccount,
+  mdiLogout,
+  mdiAccountPlusOutline,
+  mdiHomeCity,
+  mdiSwordCross,
+  mdiChessRook,
+  mdiNotebookMultiple,
+  mdiShieldOutline,
+  mdiSword,
+  mdiFeather,
+  mdiLibraryBooks,
+  mdiDiceD20Outline
+} from "@mdi/js";
 
 export default {
   data() {
     return {
+      mdiAccountPlusOutline,
+      mdiHomeCity,
+      mdiAccount,
+      mdiLogout,
       drawer: true,
       items: [
-        { title: "Campaigns", icon: "mdi-chess-rook", path: "/campaigns" },
+        { title: "Campaigns", icon: mdiChessRook, path: "/campaigns" },
         {
           title: "Characters",
-          icon: "mdi-sword-cross",
+          icon: mdiSwordCross,
           path: "/characters"
         },
         {
           title: "Game Resources",
-          icon: "mdi-notebook-multiple",
+          icon: mdiNotebookMultiple,
           path: "/Resources"
         }
       ],
       gameItems: [
         {
           title: "Game Hub",
-          icon: "mdi-shield-edit-outline",
+          icon: mdiShieldOutline,
           path: "/game-hub"
         },
         {
           title: "Characters",
-          icon: "mdi-sword",
+          icon: mdiSword,
           path: "/game-characters"
         },
-        { title: "Journal", icon: "mdi-feather", path: "/game-journal-view" },
-        { title: "Wiki", icon: "mdi-library-books", path: "/game-wiki-view" },
+        { title: "Journal", icon: mdiFeather, path: "/game-journal-view" },
+        { title: "Wiki", icon: mdiLibraryBooks, path: "/game-wiki-view" },
         {
           title: "Game Table",
           icon: mdiDiceD20Outline,

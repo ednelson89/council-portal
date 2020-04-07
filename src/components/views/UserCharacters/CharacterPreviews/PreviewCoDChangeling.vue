@@ -1,53 +1,53 @@
 <template>
   <div>
-    <div v-if="activeUser.userChars.length > 0">
+    <div v-if="activeUser.userChars.length > 0 ">
       <b-row v-for="(char, index) in activeUser.userChars" :key="index">
-        <b-col v-if="char.charUser === activeChar && char.system === 'CoD'">
+        <b-col v-if="char.charUser === activeChar && char.system === 'CoDChangeling'">
           <b-card class="b-cards">
             <b-row>
               <b-col cols="4">
                 <h3>{{ char.genBlock.charName }}</h3>
                 <p>
                   User:
-                  <span class="italics">{{ char.charUser }}</span>
+                  <span class="italics">{{char.charUser}}</span>
                 </p>
                 <b-row>
                   <b-col cols="5">
-                    <b-button class="cardButton" @click="viewCharacter(char)"
-                      >View Character</b-button
-                    >
+                    <b-button class="cardButton" @click="viewCharacter(char)">View Character</b-button>
                   </b-col>
                   <b-col cols="5">
                     <b-button
                       :disabled="activeChar !== char.charUser"
                       class="cardButton"
                       @click="deleteCharacterModal(index)"
-                      >Delete Character</b-button
-                    >
+                    >Delete Character</b-button>
                   </b-col>
                   <b-col cols="5">
                     <b-button
                       :disabled="activeChar !== char.charUser"
                       class="cardButton"
                       @click="assignToGame(index)"
-                      >Assign Character</b-button
-                    >
+                    >Assign Character</b-button>
                   </b-col>
                 </b-row>
               </b-col>
               <b-col cols="4">
-                <p>System: Chronicles of Darkness</p>
+                <p>System: Changeling the Lost, 2nd edt.</p>
                 <p>
                   Chronicle:
-                  <span class="italics">{{ char.genBlock.chronicle }}</span>
+                  <span class="italics">{{char.genBlock.chronicle}}</span>
                 </p>
                 <p>
-                  Faction:
-                  <span class="italics">{{ char.genBlock.faction }}</span>
+                  Seeming:
+                  <span class="italics">{{char.genBlock.seeming}}</span>
                 </p>
                 <p>
-                  Concept:
-                  <span class="italics">{{ char.genBlock.concept }}</span>
+                  Kith:
+                  <span class="italics">{{char.genBlock.kith}}</span>
+                </p>
+                <p>
+                  Court:
+                  <span class="italics">{{char.genBlock.court}}</span>
                 </p>
               </b-col>
               <b-col cols="4">
@@ -75,25 +75,21 @@
           <b-col>
             <p>
               Are you sure you want to delete this character (
-              <span style="font-weight:bold">{{ charName }}</span> )?
+              <span
+                style="font-weight:bold"
+              >{{ charName }}</span> )?
             </p>
           </b-col>
         </b-row>
         <b-row>
           <b-col>
-            <b-button
-              class="cardButton"
-              @click="deleteCharacter(1)"
-              :disabled="loading"
-            >
+            <b-button class="cardButton" @click="deleteCharacter(1)" :disabled="loading">
               {{ !loading ? "Yes" : "Loading..." }}
               <b-spinner label="Loading..." v-if="loading"></b-spinner>
             </b-button>
           </b-col>
           <b-col>
-            <b-button class="cardButton" @click="deleteCharacter(2)"
-              >No</b-button
-            >
+            <b-button class="cardButton" @click="deleteCharacter(2)">No</b-button>
           </b-col>
         </b-row>
       </div>
@@ -105,52 +101,35 @@
           <b-col>
             <p>
               To which game would you like to assign this character (
-              <span style="font-weight:bold">{{ charName }}</span> )?
+              <span
+                style="font-weight:bold"
+              >{{ charName }}</span> )?
             </p>
           </b-col>
         </b-row>
         <b-row>
           <b-col>
-            <select
-              id="gameAssign"
-              v-model="gameSelection"
-              class="form-control"
-            >
+            <select id="gameAssign" v-model="gameSelection" class="form-control">
               <option
                 v-for="(game, index) in gameList"
                 :key="index"
                 :value="game.gameID"
                 style="color: black;"
-                :class="
-                  !game.gamePlayers.includes(currUser) &&
-                  game.gameGM !== currUser
-                    ? 'disOption'
-                    : ''
-                "
-                :disabled="
-                  !game.gamePlayers.includes(currUser) &&
-                    game.gameGM !== currUser
-                "
-                >{{ game.gameName }}</option
-              >
+                :class="!game.gamePlayers.includes(currUser) && game.gameGM !== currUser ? 'disOption' : ''"
+                :disabled="!game.gamePlayers.includes(currUser) && game.gameGM !== currUser"
+              >{{game.gameName}}</option>
             </select>
           </b-col>
         </b-row>
         <b-row>
           <b-col>
-            <b-button
-              class="cardButton"
-              @click="assignCharacter(1)"
-              :disabled="loading"
-            >
+            <b-button class="cardButton" @click="assignCharacter(1)" :disabled="loading">
               {{ !loading ? "Yes" : "Loading..." }}
               <b-spinner label="Loading..." v-if="loading"></b-spinner>
             </b-button>
           </b-col>
           <b-col>
-            <b-button class="cardButton" @click="assignCharacter(2)"
-              >No</b-button
-            >
+            <b-button class="cardButton" @click="assignCharacter(2)">No</b-button>
           </b-col>
         </b-row>
       </div>

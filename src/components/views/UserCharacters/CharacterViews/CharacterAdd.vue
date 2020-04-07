@@ -31,6 +31,7 @@
       <b-col>
         <addDnD5e v-if="pickedSystem === 'D&D5e'"></addDnD5e>
         <addCoD v-if="pickedSystem === 'CoD'"></addCoD>
+        <addCoDChange v-if="pickedSystem === 'CoDChangeling'"></addCoDChange>
       </b-col>
     </b-row>
   </div>
@@ -39,16 +40,21 @@
 <script>
 import addDnD5e from "./addModules/AddDnD5e.vue";
 import addCoD from "./addModules/AddCoD.vue";
+import addCoDChange from "./addModules/AddCoDChangeling.vue";
+
 export default {
   components: {
     addDnD5e,
-    addCoD
+    addCoD,
+    addCoDChange
   },
   data() {
     return {
       systemTypes: [
         { value: "D&D5e", text: "Dungeons & Dragons 5e" },
-        { value: "CoD", text: "Chronicles of Darkness" }
+        { value: "CoD", text: "Chronicles of Darkness" },
+        { value: "CoDChangeling", text: "Chronicles of Darkness, Changeling" }
+
         /* 
         { value: "D&D4e", text: "Dungeons & Dragons 4e" },
         { value: "D&D2e", text: "Dungeons & Dragons 2e" },

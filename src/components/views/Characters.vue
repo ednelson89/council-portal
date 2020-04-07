@@ -21,6 +21,7 @@
     <hr />
     <b-tabs>
       <b-tab :title="'Dungeons & Dragons 5e'">
+        <h2>Dungeons & Dragons 5e</h2>
         <DnD5ePreview v-if="hasDND5e"></DnD5ePreview>
         <b-row v-if="!hasDND5e">
           <b-col>
@@ -30,7 +31,8 @@
       </b-tab>
       <b-tab title="Chronicles of Darkness">
         <CoDPreview v-if="hasCoD"></CoDPreview>
-        <b-row v-if="!hasCoD">
+        <CoDChangePreview v-if="hasChangeling"></CoDChangePreview>
+        <b-row v-if="!hasCoD && !hasChangeling">
           <b-col>
             <p>Sorry, there are no characters to view for this system.</p>
           </b-col>
@@ -45,9 +47,10 @@ import { mapGetters } from "vuex";
 import { getUserChars } from "@/components/modules/utilities/dataFunctions.js";
 import DnD5ePreview from "@/components/views/UserCharacters/CharacterPreviews/PreviewD&D.vue";
 import CoDPreview from "@/components/views/UserCharacters/CharacterPreviews/PreviewCoD.vue";
+import CoDChangePreview from "@/components/views/UserCharacters/CharacterPreviews/PreviewCoDChangeling.vue";
 
 export default {
-  components: { DnD5ePreview, CoDPreview },
+  components: { DnD5ePreview, CoDPreview, CoDChangePreview },
   data() {
     return {};
   },
@@ -82,6 +85,17 @@ export default {
             return char.system;
           })
           .includes("CoD");
+      } else {
+        return false;
+      }
+    },
+    hasChangeling() {
+      if (this.activeUser.userChars) {
+        return this.activeUser.userChars
+          .flatMap(char => {
+            return char.system;
+          })
+          .includes("CoDChangeling");
       } else {
         return false;
       }
