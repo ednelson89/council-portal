@@ -370,7 +370,9 @@
                     </select>
                   </label>
                   <br />
-                  <b-button @click="char.merits.push(tempMerit)">Add Merit</b-button>
+                  <b-button
+                    @click="char.merits.push(JSON.parse(JSON.stringify(tempMerit)))"
+                  >Add Merit</b-button>
                   <hr />
                   <ul>
                     <li

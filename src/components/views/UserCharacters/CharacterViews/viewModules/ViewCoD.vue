@@ -279,7 +279,6 @@
                       class="list-item"
                       v-for="(merit, index) in char.merits"
                       :key="index"
-                      @click="char.merits.splice(index, 1)"
                     >Merit Name: {{ merit.name }} - Score: {{ merit.score }}</li>
                   </ul>
                 </b-col>
