@@ -5,11 +5,11 @@
       <b-col cols="3">
         <label>
           Character Name:
-          <input v-model="tempChar.genBlock.charName " class="form-control" />
+          <input v-model="tempChar.genBlock.charName" class="form-control" />
         </label>
         <p>
           User:
-          <span class="italics">{{tempChar.charUser}}</span>
+          <span class="italics">{{ tempChar.charUser }}</span>
         </p>
         <hr />
         <b-button
@@ -33,7 +33,10 @@
               </label>
               <label>
                 Virtue:
-                <input class="form-control" v-model="tempChar.genBlock.virtue" />
+                <input
+                  class="form-control"
+                  v-model="tempChar.genBlock.virtue"
+                />
               </label>
               <label>
                 Vice:
@@ -41,21 +44,33 @@
               </label>
               <label>
                 Concept:
-                <input class="form-control" v-model="tempChar.genBlock.concept" />
+                <input
+                  class="form-control"
+                  v-model="tempChar.genBlock.concept"
+                />
               </label>
             </b-col>
             <b-col cols="3">
               <label>
                 Chronicle:
-                <input class="form-control" v-model="tempChar.genBlock.chronicle" />
+                <input
+                  class="form-control"
+                  v-model="tempChar.genBlock.chronicle"
+                />
               </label>
               <label>
                 Faction:
-                <input class="form-control" v-model="tempChar.genBlock.faction" />
+                <input
+                  class="form-control"
+                  v-model="tempChar.genBlock.faction"
+                />
               </label>
               <label>
                 Group Name:
-                <input class="form-control" v-model="tempChar.genBlock.groupName" />
+                <input
+                  class="form-control"
+                  v-model="tempChar.genBlock.groupName"
+                />
               </label>
             </b-col>
             <b-col cols class="skillCols">
@@ -80,8 +95,11 @@
       </b-col>
       <b-col>
         <p style="font-style: italic; font-size: 14px">
-          Attributes 5/4/3 • Skills 11/7/4 (+3 Specialties) • Merits 7 • Health = Stamina + Size • Willpower = Resolve + Composure • Size = 5 for adult humans
-          Defense = Lowest of Dexterity or Wits + Athletics• Initiative Mod = Dexterity + Composure • Speed = Strength + Dexterity +5 • Starting Integrity = 7
+          Attributes 5/4/3 • Skills 11/7/4 (+3 Specialties) • Merits 7 • Health
+          = Stamina + Size • Willpower = Resolve + Composure • Size = 5 for
+          adult humans Defense = Lowest of Dexterity or Wits + Athletics•
+          Initiative Mod = Dexterity + Composure • Speed = Strength + Dexterity
+          +5 • Starting Integrity = 7
         </p>
       </b-col>
     </b-row>
@@ -100,52 +118,124 @@
               <b-row>
                 <b-col class="skillCols">
                   <label class="inline-label">Intelligence:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.int">
-                    <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.attributes.int"
+                  >
+                    <option
+                      v-for="(num, index) in score"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                   <br />
                   <label class="inline-label">Wits:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.wits">
-                    <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.attributes.wits"
+                  >
+                    <option
+                      v-for="(num, index) in score"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                   <br />
                   <label class="inline-label">Resolve:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.resolve">
-                    <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.attributes.resolve"
+                  >
+                    <option
+                      v-for="(num, index) in score"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                   <br />
                 </b-col>
                 <b-col class="skillCols">
                   <label class="inline-label">Strength:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.str">
-                    <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.attributes.str"
+                  >
+                    <option
+                      v-for="(num, index) in score"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                   <br />
                   <label class="inline-label">Dexterity:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.dex">
-                    <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.attributes.dex"
+                  >
+                    <option
+                      v-for="(num, index) in score"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                   <br />
                   <label class="inline-label">Stamina:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.stam">
-                    <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.attributes.stam"
+                  >
+                    <option
+                      v-for="(num, index) in score"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                   <br />
                 </b-col>
                 <b-col class="skillCols">
                   <label class="inline-label">Presence:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.pres">
-                    <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.attributes.pres"
+                  >
+                    <option
+                      v-for="(num, index) in score"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                   <br />
                   <label class="inline-label">Manipulation:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.manip">
-                    <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.attributes.manip"
+                  >
+                    <option
+                      v-for="(num, index) in score"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                   <br />
                   <label class="inline-label">Composure:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.comp">
-                    <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.attributes.comp"
+                  >
+                    <option
+                      v-for="(num, index) in score"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                   <br />
                 </b-col>
@@ -160,20 +250,44 @@
               <b-row>
                 <b-col>
                   <label class="inline-label">Health:</label>
-                  <select class="form-control codSelect" v-model="tempChar.combatStats.health">
-                    <option v-for="(num, index) in health" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.combatStats.health"
+                  >
+                    <option
+                      v-for="(num, index) in health"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                 </b-col>
                 <b-col>
                   <label class="inline-label">Willpower:</label>
-                  <select class="form-control codSelect" v-model="tempChar.combatStats.willpower">
-                    <option v-for="(num, index) in willInteg" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.combatStats.willpower"
+                  >
+                    <option
+                      v-for="(num, index) in willInteg"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                 </b-col>
                 <b-col>
                   <label class="inline-label">Integrity:</label>
-                  <select class="form-control codSelect" v-model="tempChar.combatStats.integrity">
-                    <option v-for="(num, index) in willInteg" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.combatStats.integrity"
+                  >
+                    <option
+                      v-for="(num, index) in willInteg"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                 </b-col>
               </b-row>
@@ -181,30 +295,53 @@
               <b-row>
                 <b-col>
                   <label class="inline-label">Size:</label>
-                  <input class="form-control codSelect" v-model="tempChar.combatStats.size" />
+                  <input
+                    class="form-control codSelect"
+                    v-model="tempChar.combatStats.size"
+                  />
                 </b-col>
                 <b-col>
                   <label class="inline-label">Speed:</label>
-                  <input class="form-control codSelect" v-model="tempChar.combatStats.speed" />
+                  <input
+                    class="form-control codSelect"
+                    v-model="tempChar.combatStats.speed"
+                  />
                 </b-col>
                 <b-col>
                   <label class="inline-label">Defense:</label>
-                  <input class="form-control codSelect" v-model="tempChar.combatStats.defense" />
+                  <input
+                    class="form-control codSelect"
+                    v-model="tempChar.combatStats.defense"
+                  />
                 </b-col>
                 <b-col>
                   <label class="inline-label">Armor:</label>
-                  <input class="form-control codSelect" v-model="tempChar.combatStats.armor" />
+                  <input
+                    class="form-control codSelect"
+                    v-model="tempChar.combatStats.armor"
+                  />
                 </b-col>
               </b-row>
               <b-row>
                 <b-col>
                   <label class="inline-label">Initiative Mod:</label>
-                  <input class="form-control codSelect" v-model="tempChar.combatStats.initMod" />
+                  <input
+                    class="form-control codSelect"
+                    v-model="tempChar.combatStats.initMod"
+                  />
                 </b-col>
                 <b-col>
                   <label class="inline-label">Beats:</label>
-                  <select class="form-control codSelect" v-model="tempChar.combatStats.beats">
-                    <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                  <select
+                    class="form-control codSelect"
+                    v-model="tempChar.combatStats.beats"
+                  >
+                    <option
+                      v-for="(num, index) in score"
+                      :key="index"
+                      :value="num"
+                      >{{ num }}</option
+                    >
                   </select>
                 </b-col>
                 <b-col>
@@ -220,12 +357,21 @@
               <b-row>
                 <b-col>
                   <label class="inline-label">Add Conditions:</label>
-                  <input class="form-control codSelect" style="width:50%;" v-model="tempCond" />
-                  <b-button @click="addCondition" style="margin:10px;">Add to List</b-button>
+                  <input
+                    class="form-control codSelect"
+                    style="width:50%;"
+                    v-model="tempCond"
+                  />
+                  <b-button @click="addCondition" style="margin:10px;"
+                    >Add to List</b-button
+                  >
                   <hr />
                   <p>
                     Conditions
-                    <span style="font-size:10px; font-style: italic;">(click to delete)</span> :
+                    <span style="font-size:10px; font-style: italic;"
+                      >(click to delete)</span
+                    >
+                    :
                   </p>
                   <ul>
                     <li
@@ -233,17 +379,27 @@
                       v-for="(item, index) in tempChar.combatStats.conditions"
                       :key="index"
                       @click="delCondition(index)"
-                    >{{item}}</li>
+                    >
+                      {{ item }}
+                    </li>
                   </ul>
                 </b-col>
                 <b-col>
                   <label class="inline-label">Add Aspirations:</label>
-                  <input class="form-control codSelect" style="width:50%;" v-model="tempAsp" />
-                  <b-button @click="addAspiration" style="margin:10px;">Add to List</b-button>
+                  <input
+                    class="form-control codSelect"
+                    style="width:50%;"
+                    v-model="tempAsp"
+                  />
+                  <b-button @click="addAspiration" style="margin:10px;"
+                    >Add to List</b-button
+                  >
                   <hr />
                   <p>
                     Aspirations
-                    <span style="font-size:10px; font-style: italic;">(click to delete)</span>:
+                    <span style="font-size:10px; font-style: italic;"
+                      >(click to delete)</span
+                    >:
                   </p>
                   <ul>
                     <li
@@ -251,7 +407,9 @@
                       v-for="(item, index) in tempChar.combatStats.aspirations"
                       :key="index"
                       @click="delAspiration(index)"
-                    >{{item}}</li>
+                    >
+                      {{ item }}
+                    </li>
                   </ul>
                 </b-col>
               </b-row>
@@ -268,16 +426,27 @@
               <b-row>
                 <b-col class="skillCols">
                   <p class="sectionLabel">Mental</p>
-                  <div v-for="skill in tempChar.skills.mental" :key="skill.name">
-                    <label
-                      class="inline-label"
-                    >{{ (skill.name.charAt(0).toUpperCase() + skill.name.slice(1)) }}:</label>
+                  <div
+                    v-for="skill in tempChar.skills.mental"
+                    :key="skill.name"
+                  >
+                    <label class="inline-label"
+                      >{{
+                        skill.name.charAt(0).toUpperCase() +
+                          skill.name.slice(1)
+                      }}:</label
+                    >
                     <select
                       class="form-control codSelect"
                       style="margin:0 15px; display: inline;"
                       v-model="skill.score"
                     >
-                      <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                      <option
+                        v-for="(num, index) in score"
+                        :key="index"
+                        :value="num"
+                        >{{ num }}</option
+                      >
                     </select>
                     <br />
                     <span>Proficient:</span>
@@ -291,16 +460,27 @@
                 </b-col>
                 <b-col class="skillCols">
                   <p class="sectionLabel">Physical</p>
-                  <div v-for="skill in tempChar.skills.physical" :key="skill.name">
-                    <label
-                      class="inline-label"
-                    >{{ (skill.name.charAt(0).toUpperCase() + skill.name.slice(1)) }}:</label>
+                  <div
+                    v-for="skill in tempChar.skills.physical"
+                    :key="skill.name"
+                  >
+                    <label class="inline-label"
+                      >{{
+                        skill.name.charAt(0).toUpperCase() +
+                          skill.name.slice(1)
+                      }}:</label
+                    >
                     <select
                       class="form-control codSelect"
                       style="margin:0 15px; display: inline;"
                       v-model="skill.score"
                     >
-                      <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                      <option
+                        v-for="(num, index) in score"
+                        :key="index"
+                        :value="num"
+                        >{{ num }}</option
+                      >
                     </select>
                     <br />
                     <span>Proficient:</span>
@@ -314,16 +494,27 @@
                 </b-col>
                 <b-col class="skillCols">
                   <p class="sectionLabel">Social</p>
-                  <div v-for="skill in tempChar.skills.social" :key="skill.name">
-                    <label
-                      class="inline-label"
-                    >{{ (skill.name.charAt(0).toUpperCase() + skill.name.slice(1)) }}:</label>
+                  <div
+                    v-for="skill in tempChar.skills.social"
+                    :key="skill.name"
+                  >
+                    <label class="inline-label"
+                      >{{
+                        skill.name.charAt(0).toUpperCase() +
+                          skill.name.slice(1)
+                      }}:</label
+                    >
                     <select
                       class="form-control codSelect"
                       style="margin:0 15px; display: inline;"
                       v-model="skill.score"
                     >
-                      <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                      <option
+                        v-for="(num, index) in score"
+                        :key="index"
+                        :value="num"
+                        >{{ num }}</option
+                      >
                     </select>
                     <br />
                     <span>Proficient:</span>
@@ -353,19 +544,28 @@
                       style="margin:10px 15px; width: 50px !important;"
                       v-model="tempMerit.score"
                     >
-                      <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                      <option
+                        v-for="(num, index) in score"
+                        :key="index"
+                        :value="num"
+                        >{{ num }}</option
+                      >
                     </select>
                   </label>
                   <br />
-                  <b-button @click="tempChar.merits.push(tempMerit)">Add Merit</b-button>
+                  <b-button @click="tempChar.merits.push(tempMerit)"
+                    >Add Merit</b-button
+                  >
                   <hr />
                   <ul>
                     <li
                       class="list-item"
                       v-for="(merit, index) in tempChar.merits"
                       :key="index"
-                      @click="tempChar.merits.splice(index,1)"
-                    >Merit Name: {{merit.name}} - Score: {{merit.score}}</li>
+                      @click="tempChar.merits.splice(index, 1)"
+                    >
+                      Merit Name: {{ merit.name }} - Score: {{ merit.score }}
+                    </li>
                   </ul>
                 </b-col>
               </b-row>
@@ -430,8 +630,13 @@
                 <b-col cols="2">
                   <br />
                   <b-button
-                    @click="tempChar.weaponAttks.push(JSON.parse(JSON.stringify(attack)))"
-                  >Add to List</b-button>
+                    @click="
+                      tempChar.weaponAttks.push(
+                        JSON.parse(JSON.stringify(attack))
+                      )
+                    "
+                    >Add to List</b-button
+                  >
                 </b-col>
               </b-row>
               <b-row>
@@ -446,8 +651,9 @@
                     <template v-slot:cell(delete)="row">
                       <b-button
                         size="sm"
-                        @click="tempChar.weaponAttks.splice(row.index,1)"
-                      >Delete Attack</b-button>
+                        @click="tempChar.weaponAttks.splice(row.index, 1)"
+                        >Delete Attack</b-button
+                      >
                     </template>
                   </b-table>
                 </b-col>
@@ -464,19 +670,28 @@
                 <b-col cols="3">
                   <label>
                     Item Name:
-                    <input class="form-control" v-model="tempEquipment.itemName" />
+                    <input
+                      class="form-control"
+                      v-model="tempEquipment.itemName"
+                    />
                   </label>
                 </b-col>
                 <b-col cols="2">
                   <label>
                     Durability:
-                    <input class="form-control" v-model="tempEquipment.durability" />
+                    <input
+                      class="form-control"
+                      v-model="tempEquipment.durability"
+                    />
                   </label>
                 </b-col>
                 <b-col cols="2">
                   <label>
                     Structure:
-                    <input class="form-control" v-model="tempEquipment.structure" />
+                    <input
+                      class="form-control"
+                      v-model="tempEquipment.structure"
+                    />
                   </label>
                 </b-col>
                 <b-col cols="2">
@@ -502,8 +717,13 @@
                 <b-col cols="2">
                   <br />
                   <b-button
-                    @click="tempChar.equipment.push(JSON.parse(JSON.stringify(tempEquipment)))"
-                  >Add to List</b-button>
+                    @click="
+                      tempChar.equipment.push(
+                        JSON.parse(JSON.stringify(tempEquipment))
+                      )
+                    "
+                    >Add to List</b-button
+                  >
                 </b-col>
               </b-row>
               <b-row>
@@ -519,7 +739,8 @@
                       <b-button
                         size="sm"
                         @click="tempChar.equipment.splice(row.index, 1)"
-                      >Delete Item</b-button>
+                        >Delete Item</b-button
+                      >
                     </template>
                   </b-table>
                 </b-col>

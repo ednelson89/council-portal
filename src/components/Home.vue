@@ -3,7 +3,7 @@
     <b-row>
       <b-col cols="8">
         <br />
-        <h1>Council Of Bros Portal</h1>
+        <h1>Council Chambers</h1>
       </b-col>
     </b-row>
     <hr style="width:90%" />
