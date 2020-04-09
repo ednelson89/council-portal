@@ -88,7 +88,7 @@ export default {
       loading: false,
       systemTypes: [
         { value: "D&D5e", text: "Dungeons & Dragons 5e" },
-        { value: "CoDMortal", text: "Chronicles of Darkness" },
+        { value: "CoD", text: "Chronicles of Darkness" },
         { value: "CoDChangeling", text: "Chronicles of Darkness, Changeling" }
 
         /*

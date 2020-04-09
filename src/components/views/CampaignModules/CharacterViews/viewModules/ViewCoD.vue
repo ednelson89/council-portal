@@ -13,15 +13,16 @@
         </p>
         <hr />
         <b-button
-          @click="$router.push({path: '/characters'})"
+          @click="$router.push({path: '/game-characters'})"
           class="cardButton"
           style="margin-top:10px;"
         >Back to Characters</b-button>
         <br />
         <b-button
-          @click="$router.push({path: '/edit-user-character'})"
+          @click="$router.push({path: '/edit-game-character'})"
           class="cardButton"
           style="margin-top:10px;"
+          :disabled="char.charUser !==  userName"
         >Edit Character</b-button>
       </b-col>
       <b-col cols="9">
@@ -399,6 +400,9 @@ export default {
   computed: {
     char() {
       return this.$store.getters.getActiveChar;
+    },
+    userName() {
+      return this.$store.getters.getCurrUserName;
     }
   }
 };
@@ -408,7 +412,6 @@ export default {
 p {
   margin-bottom: 4px !important;
   margin-top: 4px !important;
-  text-align: center !important;
 }
 .charImg {
   width: 350px;

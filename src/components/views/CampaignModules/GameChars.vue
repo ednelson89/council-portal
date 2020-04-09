@@ -17,17 +17,20 @@
     </b-row>
     <hr />
     <dn-d5e-preview v-if="activeGame.gameType === 'D&D5e'"></dn-d5e-preview>
+    <CoDPreview v-if="activeGame.gameType === 'CoD'"></CoDPreview>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import DnD5ePreview from "@/components/views/CampaignModules/CharacterPreviews/PreviewD&D.vue";
+import CoDPreview from "@/components/views/CampaignModules/CharacterPreviews/PreviewCoD.vue";
 import { getCampaigns } from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   components: {
-    DnD5ePreview
+    DnD5ePreview,
+    CoDPreview
   },
   data() {
     return {};

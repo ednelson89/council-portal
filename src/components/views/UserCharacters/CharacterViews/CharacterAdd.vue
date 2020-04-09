@@ -58,7 +58,7 @@ export default {
         /* 
         { value: "D&D4e", text: "Dungeons & Dragons 4e" },
         { value: "D&D2e", text: "Dungeons & Dragons 2e" },
-        { value: "CoDMortal", text: "Chronicles of Darkness, Mortals" },
+        { value: "CoD", text: "Chronicles of Darkness, Mortals" },
         { value: "CoDHunter", text: "Chronicles of Darkness, Hunters" },
         { value: "CoDMage", text: "Chronicles of Darkness, Mage" },
         { value: "CoDVamp", text: "Chronicles of Darkness, Vampire" },
