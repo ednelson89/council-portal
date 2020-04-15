@@ -28,43 +28,53 @@ const charCoDChangeling = () => ({
   },
   skills: {
     mental: {
-      academics: { name: "Academics", score: 0, prof: false },
-      computer: { name: "Computer", score: 0, prof: false },
-      craft: { name: "Craft", score: 0, prof: false },
-      investigation: { name: "investigation", score: 0, prof: false },
-      medicine: { name: "medicine", score: 0, prof: false },
-      occult: { name: "occult", score: 0, prof: false },
-      politics: { name: "politics", score: 0, prof: false },
-      science: { name: "science", score: 0, prof: false }
+      academics: { name: "Academics", score: 0, spec: false, specText: "" },
+      computer: { name: "Computer", score: 0, spec: false, specText: "" },
+      craft: { name: "Craft", score: 0, spec: false, specText: "" },
+      investigation: {
+        name: "investigation",
+        score: 0,
+        spec: false,
+        specText: ""
+      },
+      medicine: { name: "medicine", score: 0, spec: false, specText: "" },
+      occult: { name: "occult", score: 0, spec: false, specText: "" },
+      politics: { name: "politics", score: 0, spec: false, specText: "" },
+      science: { name: "science", score: 0, spec: false, specText: "" }
     },
     physical: {
-      athletics: { name: "athletics", score: 0, prof: false },
-      brawl: { name: "brawl", score: 0, prof: false },
-      drive: { name: "drive", score: 0, prof: false },
-      firearms: { name: "firearms", score: 0, prof: false },
-      larceny: { name: "larceny", score: 0, prof: false },
-      stealth: { name: "stealth", score: 0, prof: false },
-      survival: { name: "survival", score: 0, prof: false },
-      weaponry: { name: "weaponry", score: 0, prof: false }
+      athletics: { name: "athletics", score: 0, spec: false, specText: "" },
+      brawl: { name: "brawl", score: 0, spec: false, specText: "" },
+      drive: { name: "drive", score: 0, spec: false, specText: "" },
+      firearms: { name: "firearms", score: 0, spec: false, specText: "" },
+      larceny: { name: "larceny", score: 0, spec: false, specText: "" },
+      stealth: { name: "stealth", score: 0, spec: false, specText: "" },
+      survival: { name: "survival", score: 0, spec: false, specText: "" },
+      weaponry: { name: "weaponry", score: 0, spec: false, specText: "" }
     },
     social: {
-      animalKen: { name: "animalKen", score: 0, prof: false },
-      empathy: { name: "empathy", score: 0, prof: false },
-      expression: { name: "expression", score: 0, prof: false },
-      intimidation: { name: "intimidation", score: 0, prof: false },
-      persuasion: { name: "persuasion", score: 0, prof: false },
-      socialize: { name: "socialize", score: 0, prof: false },
-      streetwise: { name: "streetwise", score: 0, prof: false },
-      subterfuge: { name: "subterfuge", score: 0, prof: false }
+      animalKen: { name: "animalKen", score: 0, spec: false, specText: "" },
+      empathy: { name: "empathy", score: 0, spec: false, specText: "" },
+      expression: { name: "expression", score: 0, spec: false, specText: "" },
+      intimidation: {
+        name: "intimidation",
+        score: 0,
+        spec: false,
+        specText: ""
+      },
+      persuasion: { name: "persuasion", score: 0, spec: false, specText: "" },
+      socialize: { name: "socialize", score: 0, spec: false, specText: "" },
+      streetwise: { name: "streetwise", score: 0, spec: false, specText: "" },
+      subterfuge: { name: "subterfuge", score: 0, spec: false, specText: "" }
     }
   },
   merits: [],
   combatStats: {
-    health: 0,
-    willpower: 0,
-    wyrd: 1,
-    glamour: 0,
-    clarity: 0,
+    health: { total: 0, boxes: [] },
+    willpower: { total: 0, boxes: [] },
+    wyrd: { total: 0, boxes: [] },
+    glamour: { total: 0, boxes: [] },
+    clarity: { total: 0, boxes: [] },
     touchstones: [],
     favRegalia: [],
     frailties: [],
@@ -85,7 +95,21 @@ const charCoDChangeling = () => ({
     { name: "", durability: "", structure: "", size: "", cost: "", qnty: "" }
   ],
   backstory: [""],
-  notes: [""]
+  notes: [""],
+  contracts: [],
+  pledges: [],
+  expandedMerits: {
+    faeMounts: [],
+    mantles: [],
+    hollows: [],
+    tokens: []
+  },
+  otherTraits: {
+    seemingBless: [],
+    seemingCurse: [],
+    kithBless: [],
+    goblinDebt: []
+  }
 });
 
 var generateID = function() {

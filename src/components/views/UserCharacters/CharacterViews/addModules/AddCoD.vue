@@ -90,7 +90,7 @@
     </b-row>
     <hr />
     <b-tabs content-class="mt-3">
-      <b-tab :title="'Core Stats & Attributes'" active>
+      <b-tab :title="'Attributes & Skills'" active>
         <!-- Abilities -->
         <b-row>
           <b-col>
@@ -154,6 +154,96 @@
                 </b-col>
               </b-row>
             </b-card>
+
+            <b-card class="b-cards">
+              <p class="sectionLabel">Skills</p>
+              <b-row>
+                <b-col class="skillCols">
+                  <p class="sectionLabel">Mental</p>
+                  <div v-for="skill in tempChar.skills.mental" :key="skill.name">
+                    <label class="inline-label">
+                      {{
+                      skill.name.charAt(0).toUpperCase() +
+                      skill.name.slice(1)
+                      }}:
+                    </label>
+                    <select
+                      class="form-control codSelect"
+                      style="margin:0 15px; display: inline;"
+                      v-model="skill.score"
+                    >
+                      <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                    </select>
+                    <br />
+                    <span>Proficient:</span>
+                    <input
+                      type="checkbox"
+                      class="form-control"
+                      style="margin:10px 15px; display: inline; width: 20px; height: 20px;"
+                      v-model="skill.prof"
+                    />
+                  </div>
+                </b-col>
+                <b-col class="skillCols">
+                  <p class="sectionLabel">Physical</p>
+                  <div v-for="skill in tempChar.skills.physical" :key="skill.name">
+                    <label class="inline-label">
+                      {{
+                      skill.name.charAt(0).toUpperCase() +
+                      skill.name.slice(1)
+                      }}:
+                    </label>
+                    <select
+                      class="form-control codSelect"
+                      style="margin:0 15px; display: inline;"
+                      v-model="skill.score"
+                    >
+                      <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                    </select>
+                    <br />
+                    <span>Proficient:</span>
+                    <input
+                      type="checkbox"
+                      class="form-control"
+                      style="margin:10px 15px; display: inline; width: 20px; height: 20px;"
+                      v-model="skill.prof"
+                    />
+                  </div>
+                </b-col>
+                <b-col class="skillCols">
+                  <p class="sectionLabel">Social</p>
+                  <div v-for="skill in tempChar.skills.social" :key="skill.name">
+                    <label class="inline-label">
+                      {{
+                      skill.name.charAt(0).toUpperCase() +
+                      skill.name.slice(1)
+                      }}:
+                    </label>
+                    <select
+                      class="form-control codSelect"
+                      style="margin:0 15px; display: inline;"
+                      v-model="skill.score"
+                    >
+                      <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
+                    </select>
+                    <br />
+                    <span>Proficient:</span>
+                    <input
+                      type="checkbox"
+                      class="form-control"
+                      style="margin:10px 15px; display: inline; width: 20px; height: 20px;"
+                      v-model="skill.prof"
+                    />
+                  </div>
+                </b-col>
+              </b-row>
+            </b-card>
+          </b-col>
+        </b-row>
+      </b-tab>
+      <b-tab :title="'General Traits & Merits'">
+        <b-row>
+          <b-col>
             <b-card class="b-cards">
               <b-row>
                 <b-col>
@@ -257,96 +347,6 @@
                       @click="delAspiration(index)"
                     >{{ item }}</li>
                   </ul>
-                </b-col>
-              </b-row>
-            </b-card>
-          </b-col>
-        </b-row>
-      </b-tab>
-      <b-tab :title="'Skills & Merits'">
-        <!-- Skills Block -->
-        <b-row>
-          <b-col>
-            <b-card class="b-cards">
-              <p class="sectionLabel">Skills</p>
-              <b-row>
-                <b-col class="skillCols">
-                  <p class="sectionLabel">Mental</p>
-                  <div v-for="skill in tempChar.skills.mental" :key="skill.name">
-                    <label class="inline-label">
-                      {{
-                      skill.name.charAt(0).toUpperCase() +
-                      skill.name.slice(1)
-                      }}:
-                    </label>
-                    <select
-                      class="form-control codSelect"
-                      style="margin:0 15px; display: inline;"
-                      v-model="skill.score"
-                    >
-                      <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
-                    </select>
-                    <br />
-                    <span>Proficient:</span>
-                    <input
-                      type="checkbox"
-                      class="form-control"
-                      style="margin:10px 15px; display: inline; width: 20px; height: 20px;"
-                      v-model="skill.prof"
-                    />
-                  </div>
-                </b-col>
-                <b-col class="skillCols">
-                  <p class="sectionLabel">Physical</p>
-                  <div v-for="skill in tempChar.skills.physical" :key="skill.name">
-                    <label class="inline-label">
-                      {{
-                      skill.name.charAt(0).toUpperCase() +
-                      skill.name.slice(1)
-                      }}:
-                    </label>
-                    <select
-                      class="form-control codSelect"
-                      style="margin:0 15px; display: inline;"
-                      v-model="skill.score"
-                    >
-                      <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
-                    </select>
-                    <br />
-                    <span>Proficient:</span>
-                    <input
-                      type="checkbox"
-                      class="form-control"
-                      style="margin:10px 15px; display: inline; width: 20px; height: 20px;"
-                      v-model="skill.prof"
-                    />
-                  </div>
-                </b-col>
-                <b-col class="skillCols">
-                  <p class="sectionLabel">Social</p>
-                  <div v-for="skill in tempChar.skills.social" :key="skill.name">
-                    <label class="inline-label">
-                      {{
-                      skill.name.charAt(0).toUpperCase() +
-                      skill.name.slice(1)
-                      }}:
-                    </label>
-                    <select
-                      class="form-control codSelect"
-                      style="margin:0 15px; display: inline;"
-                      v-model="skill.score"
-                    >
-                      <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
-                    </select>
-                    <br />
-                    <span>Proficient:</span>
-                    <input
-                      type="checkbox"
-                      class="form-control"
-                      style="margin:10px 15px; display: inline; width: 20px; height: 20px;"
-                      v-model="skill.prof"
-                    />
-                  </div>
                 </b-col>
               </b-row>
             </b-card>
@@ -483,7 +483,7 @@
                 <b-col cols="3">
                   <label>
                     Item Name:
-                    <input class="form-control" v-model="tempEquipment.itemName" />
+                    <input class="form-control" v-model="tempEquipment.name" />
                   </label>
                 </b-col>
                 <b-col cols="2">

@@ -5,20 +5,20 @@
       <b-col cols="3">
         <label>
           Character Name:
-          <input v-model="tempChar.genBlock.charName " class="form-control" />
+          <input v-model="char.genBlock.charName " class="form-control" />
         </label>
         <p>
           User:
-          <span class="italics">{{tempChar.charUser}}</span>
+          <span class="italics">{{char.charUser}}</span>
         </p>
         <hr />
         <b-button
-          @click="addNewChar"
+          @click="saveCharEdits"
           class="cardButton"
           style="margin-top:10px;"
           :disabled="loading"
         >
-          {{ !loading ? "Save New Character" : "Loading..." }}
+          {{ !loading ? "Save Character Edits" : "Loading..." }}
           <b-spinner label="Loading..." v-if="loading"></b-spinner>
         </b-button>
       </b-col>
@@ -29,45 +29,45 @@
               <!-- general content -->
               <label>
                 Age:
-                <input class="form-control" v-model="tempChar.genBlock.age" />
+                <input class="form-control" v-model="char.genBlock.age" />
               </label>
               <label>
                 Needle:
-                <input class="form-control" v-model="tempChar.genBlock.needle" />
+                <input class="form-control" v-model="char.genBlock.needle" />
               </label>
               <label>
                 Thread:
-                <input class="form-control" v-model="tempChar.genBlock.thread" />
+                <input class="form-control" v-model="char.genBlock.thread" />
               </label>
               <label>
                 Concept:
-                <input class="form-control" v-model="tempChar.genBlock.concept" />
+                <input class="form-control" v-model="char.genBlock.concept" />
               </label>
             </b-col>
             <b-col cols="3">
               <label>
                 Chronicle:
-                <input class="form-control" v-model="tempChar.genBlock.chronicle" />
+                <input class="form-control" v-model="char.genBlock.chronicle" />
               </label>
               <label>
                 Seeming:
-                <input class="form-control" v-model="tempChar.genBlock.seeming" />
+                <input class="form-control" v-model="char.genBlock.seeming" />
               </label>
               <label>
                 Kith:
-                <input class="form-control" v-model="tempChar.genBlock.kith" />
+                <input class="form-control" v-model="char.genBlock.kith" />
               </label>
               <label>
                 Court:
-                <input class="form-control" v-model="tempChar.genBlock.court" />
+                <input class="form-control" v-model="char.genBlock.court" />
               </label>
             </b-col>
             <b-col cols class="skillCols">
               <img
                 class="charImg"
                 style="margin: 25px 0px;"
-                :src="tempChar.portraitSrc"
-                :alt="'Image of ' + tempChar.genBlock.charName"
+                :src="char.portraitSrc"
+                :alt="'Image of ' + char.genBlock.charName"
               />
             </b-col>
           </b-row>
@@ -76,7 +76,7 @@
             <b-col>
               <label>
                 Image Source URL:
-                <input v-model="tempChar.portraitSrc" class="form-control" />
+                <input v-model="char.portraitSrc" class="form-control" />
               </label>
             </b-col>
           </b-row>
@@ -105,51 +105,51 @@
               <b-row>
                 <b-col class="skillCols">
                   <label class="inline-label">Intelligence:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.int">
+                  <select class="form-control codSelect" v-model="char.attributes.int">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <br />
                   <label class="inline-label">Wits:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.wits">
+                  <select class="form-control codSelect" v-model="char.attributes.wits">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <br />
                   <label class="inline-label">Resolve:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.resolve">
+                  <select class="form-control codSelect" v-model="char.attributes.resolve">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <br />
                 </b-col>
                 <b-col class="skillCols">
                   <label class="inline-label">Strength:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.str">
+                  <select class="form-control codSelect" v-model="char.attributes.str">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <br />
                   <label class="inline-label">Dexterity:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.dex">
+                  <select class="form-control codSelect" v-model="char.attributes.dex">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <br />
                   <label class="inline-label">Stamina:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.stam">
+                  <select class="form-control codSelect" v-model="char.attributes.stam">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <br />
                 </b-col>
                 <b-col class="skillCols">
                   <label class="inline-label">Presence:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.pres">
+                  <select class="form-control codSelect" v-model="char.attributes.pres">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <br />
                   <label class="inline-label">Manipulation:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.manip">
+                  <select class="form-control codSelect" v-model="char.attributes.manip">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <br />
                   <label class="inline-label">Composure:</label>
-                  <select class="form-control codSelect" v-model="tempChar.attributes.comp">
+                  <select class="form-control codSelect" v-model="char.attributes.comp">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <br />
@@ -162,7 +162,7 @@
               <b-row>
                 <b-col class="skillCols">
                   <p class="sectionLabel">Mental</p>
-                  <div v-for="skill in tempChar.skills.mental" :key="skill.name">
+                  <div v-for="skill in char.skills.mental" :key="skill.name">
                     <label
                       class="inline-label"
                     >{{ (skill.name.charAt(0).toUpperCase() + skill.name.slice(1)) }}:</label>
@@ -189,7 +189,7 @@
                 </b-col>
                 <b-col class="skillCols">
                   <p class="sectionLabel">Physical</p>
-                  <div v-for="skill in tempChar.skills.physical" :key="skill.name">
+                  <div v-for="skill in char.skills.physical" :key="skill.name">
                     <label
                       class="inline-label"
                     >{{ (skill.name.charAt(0).toUpperCase() + skill.name.slice(1)) }}:</label>
@@ -216,7 +216,7 @@
                 </b-col>
                 <b-col class="skillCols">
                   <p class="sectionLabel">Social</p>
-                  <div v-for="skill in tempChar.skills.social" :key="skill.name">
+                  <div v-for="skill in char.skills.social" :key="skill.name">
                     <label
                       class="inline-label"
                     >{{ (skill.name.charAt(0).toUpperCase() + skill.name.slice(1)) }}:</label>
@@ -261,14 +261,14 @@
                   <label class="inline-label">Health:</label>
                   <select
                     class="form-control codSelect"
-                    v-model="tempChar.combatStats.health.total"
+                    v-model="char.combatStats.health.total"
                     @change="updateBoxCount('health')"
                   >
                     <option v-for="(num, index) in health" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <b-row>
                     <b-col
-                      v-for="(box, index) in tempChar.combatStats.health.boxes"
+                      v-for="(box, index) in char.combatStats.health.boxes"
                       :key="'healthBox'+index"
                       style="margin: 2px; padding:2px;"
                     >
@@ -285,14 +285,14 @@
                   <label class="inline-label">Willpower:</label>
                   <select
                     class="form-control codSelect"
-                    v-model="tempChar.combatStats.willpower.total"
+                    v-model="char.combatStats.willpower.total"
                     @change="updateBoxCount('willpower')"
                   >
                     <option v-for="(num, index) in willInteg" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <b-row>
                     <b-col
-                      v-for="(box, index) in tempChar.combatStats.willpower.boxes"
+                      v-for="(box, index) in char.combatStats.willpower.boxes"
                       :key="'willBox'+index"
                       style="margin: 2px; padding:2px;"
                     >
@@ -308,14 +308,14 @@
                   <label class="inline-label">Wyrd:</label>
                   <select
                     class="form-control codSelect"
-                    v-model="tempChar.combatStats.wyrd.total"
+                    v-model="char.combatStats.wyrd.total"
                     @change="updateBoxCount('wyrd')"
                   >
                     <option v-for="(num, index) in willInteg" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <b-row>
                     <b-col
-                      v-for="(box, index) in tempChar.combatStats.wyrd.boxes"
+                      v-for="(box, index) in char.combatStats.wyrd.boxes"
                       :key="'wyrdBox'+index"
                       style="margin: 2px; padding:2px;"
                     >
@@ -331,14 +331,14 @@
                   <label class="inline-label">Glamour:</label>
                   <select
                     class="form-control codSelect"
-                    v-model="tempChar.combatStats.glamour.total"
+                    v-model="char.combatStats.glamour.total"
                     @change="updateBoxCount('glamour')"
                   >
                     <option v-for="(num, index) in glamInteg" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <b-row>
                     <b-col
-                      v-for="(box, index) in tempChar.combatStats.glamour.boxes"
+                      v-for="(box, index) in char.combatStats.glamour.boxes"
                       :key="'glamourBox'+index"
                       style="margin: 2px; padding:2px;"
                     >
@@ -354,14 +354,14 @@
                   <label class="inline-label">Clarity:</label>
                   <select
                     class="form-control codSelect"
-                    v-model="tempChar.combatStats.clarity.total"
+                    v-model="char.combatStats.clarity.total"
                     @change="updateBoxCount('clarity')"
                   >
                     <option v-for="(num, index) in willInteg" :key="index" :value="num">{{ num }}</option>
                   </select>
                   <b-row>
                     <b-col
-                      v-for="(box, index) in tempChar.combatStats.clarity.boxes"
+                      v-for="(box, index) in char.combatStats.clarity.boxes"
                       :key="'clarityBox'+index"
                       style="margin: 2px; padding:2px;"
                     >
@@ -378,29 +378,29 @@
               <b-row>
                 <b-col>
                   <label class="inline-label">Size:</label>
-                  <input class="form-control codSelect" v-model="tempChar.combatStats.size" />
+                  <input class="form-control codSelect" v-model="char.combatStats.size" />
                 </b-col>
                 <b-col>
                   <label class="inline-label">Speed:</label>
-                  <input class="form-control codSelect" v-model="tempChar.combatStats.speed" />
+                  <input class="form-control codSelect" v-model="char.combatStats.speed" />
                 </b-col>
                 <b-col>
                   <label class="inline-label">Defense:</label>
-                  <input class="form-control codSelect" v-model="tempChar.combatStats.defense" />
+                  <input class="form-control codSelect" v-model="char.combatStats.defense" />
                 </b-col>
                 <b-col>
                   <label class="inline-label">Armor:</label>
-                  <input class="form-control codSelect" v-model="tempChar.combatStats.armor" />
+                  <input class="form-control codSelect" v-model="char.combatStats.armor" />
                 </b-col>
               </b-row>
               <b-row>
                 <b-col>
                   <label class="inline-label">Initiative Mod:</label>
-                  <input class="form-control codSelect" v-model="tempChar.combatStats.initMod" />
+                  <input class="form-control codSelect" v-model="char.combatStats.initMod" />
                 </b-col>
                 <b-col>
                   <label class="inline-label">Beats:</label>
-                  <select class="form-control codSelect" v-model="tempChar.combatStats.beats">
+                  <select class="form-control codSelect" v-model="char.combatStats.beats">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
                   </select>
                 </b-col>
@@ -409,7 +409,7 @@
                   <input
                     class="form-control codSelect"
                     style="width:50%;"
-                    v-model="tempChar.combatStats.experiences"
+                    v-model="char.combatStats.experiences"
                   />
                 </b-col>
               </b-row>
@@ -434,7 +434,7 @@
                   <ul>
                     <li
                       class="list-item"
-                      v-for="(item, index) in tempChar.combatStats.conditions"
+                      v-for="(item, index) in char.combatStats.conditions"
                       :key="index"
                       @click="delCondition(index)"
                     >Clarity: {{item.clarity}} | Description: {{item.desc}}</li>
@@ -452,7 +452,7 @@
                   <ul>
                     <li
                       class="list-item"
-                      v-for="(item, index) in tempChar.combatStats.aspirations"
+                      v-for="(item, index) in char.combatStats.aspirations"
                       :key="index"
                       @click="delAspiration(index)"
                     >{{item}}</li>
@@ -472,7 +472,7 @@
                   <ul>
                     <li
                       class="list-item"
-                      v-for="(item, index) in tempChar.combatStats.favRegalia"
+                      v-for="(item, index) in char.combatStats.favRegalia"
                       :key="index"
                       @click="delRegalia(index)"
                     >{{item}}</li>
@@ -490,7 +490,7 @@
                   <ul>
                     <li
                       class="list-item"
-                      v-for="(item, index) in tempChar.combatStats.frailties"
+                      v-for="(item, index) in char.combatStats.frailties"
                       :key="index"
                       @click="delFrailty(index)"
                     >{{item}}</li>
@@ -510,7 +510,7 @@
                   <ol>
                     <li
                       class="list-item"
-                      v-for="(item, index) in tempChar.combatStats.touchstones"
+                      v-for="(item, index) in char.combatStats.touchstones"
                       :key="index"
                       @click="delTouchstone(index)"
                     >{{item}}</li>
@@ -538,14 +538,14 @@
                     </select>
                   </label>
                   <br />
-                  <b-button @click="tempChar.merits.push(tempMerit)">Add Merit</b-button>
+                  <b-button @click="char.merits.push(tempMerit)">Add Merit</b-button>
                   <hr />
                   <ul>
                     <li
                       class="list-item"
-                      v-for="(merit, index) in tempChar.merits"
+                      v-for="(merit, index) in char.merits"
                       :key="index"
-                      @click="tempChar.merits.splice(index,1)"
+                      @click="char.merits.splice(index,1)"
                     >Merit Name: {{merit.name}} - Score: {{merit.score}}</li>
                   </ul>
                 </b-col>
@@ -611,7 +611,7 @@
                 <b-col cols="2">
                   <br />
                   <b-button
-                    @click="tempChar.weaponAttks.push(JSON.parse(JSON.stringify(attack)))"
+                    @click="char.weaponAttks.push(JSON.parse(JSON.stringify(attack)))"
                   >Add to List</b-button>
                 </b-col>
               </b-row>
@@ -621,13 +621,13 @@
                     striped
                     hover
                     :fields="attacksTableFields"
-                    :items="tempChar.weaponAttks"
+                    :items="char.weaponAttks"
                     stacked="md"
                   >
                     <template v-slot:cell(delete)="row">
                       <b-button
                         size="sm"
-                        @click="tempChar.weaponAttks.splice(row.index,1)"
+                        @click="char.weaponAttks.splice(row.index,1)"
                       >Delete Attack</b-button>
                     </template>
                   </b-table>
@@ -683,7 +683,7 @@
                 <b-col cols="2">
                   <br />
                   <b-button
-                    @click="tempChar.equipment.push(JSON.parse(JSON.stringify(tempEquipment)))"
+                    @click="char.equipment.push(JSON.parse(JSON.stringify(tempEquipment)))"
                   >Add to List</b-button>
                 </b-col>
               </b-row>
@@ -693,14 +693,11 @@
                     striped
                     hover
                     :fields="equipmentTableFields"
-                    :items="tempChar.equipment"
+                    :items="char.equipment"
                     stacked="md"
                   >
                     <template v-slot:cell(delete)="row">
-                      <b-button
-                        size="sm"
-                        @click="tempChar.equipment.splice(row.index, 1)"
-                      >Delete Item</b-button>
+                      <b-button size="sm" @click="char.equipment.splice(row.index, 1)">Delete Item</b-button>
                     </template>
                   </b-table>
                 </b-col>
@@ -789,12 +786,12 @@
                 <b-table
                   striped
                   hover
-                  :items="tempChar.contracts"
+                  :items="char.contracts"
                   :fields="contractTableFields"
                   stacked="md"
                 >
                   <template v-slot:cell(delete)="row">
-                    <b-button size="sm" @click="tempChar.contracts.splice(row.index, 1)">Delete Item</b-button>
+                    <b-button size="sm" @click="char.contracts.splice(row.index, 1)">Delete Item</b-button>
                   </template>
                 </b-table>
               </b-row>
@@ -833,12 +830,12 @@
                 <b-table
                   striped
                   hover
-                  :items="tempChar.pledges"
+                  :items="char.pledges"
                   :fields="pledgeTableFields"
                   stacked="md"
                 >
                   <template v-slot:cell(delete)="row">
-                    <b-button size="sm" @click="tempChar.pledges.splice(row.index, 1)">Delete Item</b-button>
+                    <b-button size="sm" @click="char.pledges.splice(row.index, 1)">Delete Item</b-button>
                   </template>
                 </b-table>
               </b-row>
@@ -872,7 +869,7 @@
                       <ul>
                         <li
                           class="list-item"
-                          v-for="(item, index) in tempChar.expandedMerits.faeMounts"
+                          v-for="(item, index) in char.expandedMerits.faeMounts"
                           :key="index"
                           @click="delMount(index)"
                         >{{item}}</li>
@@ -890,7 +887,7 @@
                       <ul>
                         <li
                           class="list-item"
-                          v-for="(item, index) in tempChar.expandedMerits.mantles"
+                          v-for="(item, index) in char.expandedMerits.mantles"
                           :key="index"
                           @click="delMantle(index)"
                         >{{item}}</li>
@@ -910,7 +907,7 @@
                       <ul>
                         <li
                           class="list-item"
-                          v-for="(item, index) in tempChar.expandedMerits.hollows"
+                          v-for="(item, index) in char.expandedMerits.hollows"
                           :key="index"
                           @click="delHollow(index)"
                         >{{item}}</li>
@@ -928,7 +925,7 @@
                       <ul>
                         <li
                           class="list-item"
-                          v-for="(item, index) in tempChar.expandedMerits.tokens"
+                          v-for="(item, index) in char.expandedMerits.tokens"
                           :key="index"
                           @click="delToken(index)"
                         >{{item}}</li>
@@ -967,7 +964,7 @@
                       <ul>
                         <li
                           class="list-item"
-                          v-for="(item, index) in tempChar.otherTraits.seemingBless"
+                          v-for="(item, index) in char.otherTraits.seemingBless"
                           :key="index"
                           @click="delSeemingBlessing(index)"
                         >{{item}}</li>
@@ -991,7 +988,7 @@
                       <ul>
                         <li
                           class="list-item"
-                          v-for="(item, index) in tempChar.otherTraits.seemingCurse"
+                          v-for="(item, index) in char.otherTraits.seemingCurse"
                           :key="index"
                           @click="delSeemingCurse(index)"
                         >{{item}}</li>
@@ -1017,7 +1014,7 @@
                       <ul>
                         <li
                           class="list-item"
-                          v-for="(item, index) in tempChar.otherTraits.kithBless"
+                          v-for="(item, index) in char.otherTraits.kithBless"
                           :key="index"
                           @click="delKithBlessing(index)"
                         >{{item}}</li>
@@ -1047,7 +1044,7 @@
                       <ul>
                         <li
                           class="list-item"
-                          v-for="(item, index) in tempChar.otherTraits.goblinDebt"
+                          v-for="(item, index) in char.otherTraits.goblinDebt"
                           :key="index"
                           @click="delGoblinDebt(index)"
                         >
@@ -1111,7 +1108,6 @@
 </template>
 
 <script>
-import { charCoDChangeling } from "@/components/modules/CharacterObjects/characterCoDChange.js";
 import { postUserCharUpdate } from "@/components/modules/utilities/dataFunctions.js";
 import { mapGetters } from "vuex";
 
@@ -1146,7 +1142,6 @@ export default {
         20
       ],
       loading: false,
-      tempChar: charCoDChangeling(),
       tempNotes: "",
       tempBackstory: "",
       tempCond: "",
@@ -1234,44 +1229,39 @@ export default {
       ]
     };
   },
-  computed: {
-    ...mapGetters({
-      appRoute: "getAppRoute",
-      activeUser: "getActiveUser"
-    })
-  },
   methods: {
-    addNewChar() {
+    // Navigation Method
+    saveCharEdits() {
       this.loading = true;
       var localStore = JSON.parse(localStorage.getItem("UserData"));
-
-      this.$store.commit("setNewUserCharacter", this.tempChar);
-      postUserCharUpdate(localStore, 1, this.tempChar).then(data => {
+      postUserCharUpdate(localStore, 3, this.char).then(data => {
         this.activeUser.userChars = data;
         this.loading = false;
-        this.$router.push({ path: "/characters" });
+        this.$router.push({ path: "/view-user-character" });
       });
     },
+    // Edit Text Areas
     saveBackstory() {
-      this.tempChar.backstory = [];
+      this.char.backstory = [];
       var stringArray = document
         .getElementById("charBackstoryList")
         .value.split("\n");
       stringArray.forEach(element => {
-        this.tempChar.backstory.push(element);
+        this.char.backstory.push(element);
       });
     },
     saveNotes() {
-      this.tempChar.notes = [];
+      this.char.notes = [];
       var stringArray = document
         .getElementById("charNotesList")
         .value.split("\n");
       stringArray.forEach(element => {
-        this.tempChar.notes.push(element);
+        this.char.notes.push(element);
       });
     },
+    // Edit General Traits
     addCondition() {
-      this.tempChar.combatStats.conditions.push({
+      this.char.combatStats.conditions.push({
         desc: this.tempCond,
         clarity: this.tempCondTF
       });
@@ -1279,41 +1269,41 @@ export default {
       this.tempCondTF = false;
     },
     delCondition(index) {
-      this.tempChar.combatStats.conditions.splice(index, 1);
+      this.char.combatStats.conditions.splice(index, 1);
     },
     addAspiration() {
-      this.tempChar.combatStats.aspirations.push(this.tempAsp);
+      this.char.combatStats.aspirations.push(this.tempAsp);
       this.tempAsp = "";
     },
     delAspiration(index) {
-      this.tempChar.combatStats.aspirations.splice(index, 1);
+      this.char.combatStats.aspirations.splice(index, 1);
     },
     addRegalia() {
-      this.tempChar.combatStats.favRegalia.push(this.tempReg);
+      this.char.combatStats.favRegalia.push(this.tempReg);
       this.tempReg = "";
     },
     delRegalia(index) {
-      this.tempChar.combatStats.favRegalia.splice(index, 1);
+      this.char.combatStats.favRegalia.splice(index, 1);
     },
     addFrailty() {
-      this.tempChar.combatStats.frailties.push(this.tempFrail);
+      this.char.combatStats.frailties.push(this.tempFrail);
       this.tempFrail = "";
     },
     delFrailty(index) {
-      this.tempChar.combatStats.frailties.splice(index, 1);
+      this.char.combatStats.frailties.splice(index, 1);
     },
     addTouchstone() {
-      if (this.tempChar.combatStats.touchstones.length <= 10) {
-        this.tempChar.combatStats.touchstones.push(this.tempTouch);
+      if (this.char.combatStats.touchstones.length <= 10) {
+        this.char.combatStats.touchstones.push(this.tempTouch);
         this.tempTouch = "";
       }
     },
     delTouchstone(index) {
-      this.tempChar.combatStats.touchstones.splice(index, 1);
+      this.char.combatStats.touchstones.splice(index, 1);
     },
     // Edit Contracts and Pledges
     addContract() {
-      this.tempChar.contracts.push(this.tempContract);
+      this.char.contracts.push(this.tempContract);
       this.tempContract = {
         name: "",
         goblin: false,
@@ -1326,80 +1316,91 @@ export default {
       };
     },
     addPledge() {
-      this.tempChar.pledges.push(this.tempPledge);
+      this.char.pledges.push(this.tempPledge);
       this.tempPledge = { type: "", notes: "" };
     },
     // Edit Expanded Merits
     addMount() {
-      this.tempChar.expandedMerits.faeMounts.push(this.tempFaeMount);
+      this.char.expandedMerits.faeMounts.push(this.tempFaeMount);
       this.tempFaeMount = "";
     },
     delMount(index) {
-      this.tempChar.expandedMerits.faeMounts.splice(index, 1);
+      this.char.expandedMerits.faeMounts.splice(index, 1);
     },
     addMantle() {
-      this.tempChar.expandedMerits.mantles.push(this.tempMantle);
+      this.char.expandedMerits.mantles.push(this.tempMantle);
       this.tempMantle = "";
     },
     delMantle(index) {
-      this.tempChar.expandedMerits.mantles.splice(index, 1);
+      this.char.expandedMerits.mantles.splice(index, 1);
     },
     addHollow() {
-      this.tempChar.expandedMerits.hollows.push(this.tempHollow);
+      this.char.expandedMerits.hollows.push(this.tempHollow);
       this.tempHollow = "";
     },
     delHollow(index) {
-      this.tempChar.expandedMerits.hollows.splice(index, 1);
+      this.char.expandedMerits.hollows.splice(index, 1);
     },
     addToken() {
-      this.tempChar.expandedMerits.tokens.push(this.tempToken);
+      this.char.expandedMerits.tokens.push(this.tempToken);
       this.tempToken = "";
     },
     delToken(index) {
-      this.tempChar.expandedMerits.tokens.splice(index, 1);
+      this.char.expandedMerits.tokens.splice(index, 1);
     },
     //Edit Other Traits
     addSeemingBlessing() {
-      this.tempChar.otherTraits.seemingBless.push(this.tempSeemBless);
+      this.char.otherTraits.seemingBless.push(this.tempSeemBless);
       this.tempSeemBless = "";
     },
     delSeemingBlessing(index) {
-      this.tempChar.otherTraits.seemingBless.splice(index, 1);
+      this.char.otherTraits.seemingBless.splice(index, 1);
     },
     addSeemingCurse() {
-      this.tempChar.otherTraits.seemingCurse.push(this.tempSeemCurse);
+      this.char.otherTraits.seemingCurse.push(this.tempSeemCurse);
       this.tempSeemCurse = "";
     },
     delSeemingCurse(index) {
-      this.tempChar.otherTraits.seemingCurse.splice(index, 1);
+      this.char.otherTraits.seemingCurse.splice(index, 1);
     },
     addKithBlessing() {
-      this.tempChar.otherTraits.kithBless.push(this.tempKithBless);
+      this.char.otherTraits.kithBless.push(this.tempKithBless);
       this.tempKithBless = "";
     },
     delKithBlessing(index) {
-      this.tempChar.otherTraits.kithBless.splice(index, 1);
+      this.char.otherTraits.kithBless.splice(index, 1);
     },
     addGoblinDebt() {
-      this.tempChar.otherTraits.goblinDebt.push(this.tempGoblinDebt);
+      this.char.otherTraits.goblinDebt.push(this.tempGoblinDebt);
       this.tempGoblinDebt = { check: false, notes: "" };
     },
     delGoblinDebt(index) {
-      this.tempChar.otherTraits.goblinDebt.splice(index, 1);
+      this.char.otherTraits.goblinDebt.splice(index, 1);
     },
     // Update boxes
     updateBoxCount(field) {
       // eslint-disable-next-line no-console
       console.log("Update Field: ", field);
-      let localTotal = this.tempChar.combatStats[field].total;
-      this.tempChar.combatStats[field].boxes = [];
+      let localTotal = this.char.combatStats[field].total;
+      this.char.combatStats[field].boxes = [];
       for (var i = 0; i < localTotal; i++) {
-        this.tempChar.combatStats[field].boxes.push({ status: "" });
+        this.char.combatStats[field].boxes.push({ status: "" });
       }
     }
   },
+  computed: {
+    ...mapGetters({
+      activeUser: "getActiveUser",
+      char: "getActiveChar"
+    })
+  },
   mounted() {
-    this.tempChar.charUser = this.$store.getters.getCurrUserName;
+    this.char.backstory.forEach(story => {
+      this.tempBackstory += story + "\n";
+    });
+    this.char.notes.forEach(note => {
+      this.tempNotes += note + "\n";
+    });
   }
 };
 </script>
@@ -1433,16 +1434,6 @@ p {
 }
 .score {
   text-align: center !important;
-}
-.inline-label {
-  white-space: nowrap;
-  max-width: 150px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  float: left;
-}
-.codSelect {
-  width: 25%;
 }
 .list-item:hover {
   cursor: pointer;

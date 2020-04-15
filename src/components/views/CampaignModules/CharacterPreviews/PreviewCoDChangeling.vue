@@ -9,7 +9,7 @@
                 <h3>{{ char.genBlock.charName }}</h3>
                 <p>
                   User:
-                  <span class="italics">{{ char.charUser }}</span>
+                  <span class="italics">{{char.charUser}}</span>
                 </p>
                 <b-row>
                   <b-col cols="5">
@@ -33,18 +33,22 @@
                 </b-row>
               </b-col>
               <b-col cols="4">
-                <p>System: Chronicles of Darkness</p>
+                <p>System: Changeling the Lost, 2nd edt.</p>
                 <p>
                   Chronicle:
-                  <span class="italics">{{ char.genBlock.chronicle }}</span>
+                  <span class="italics">{{char.genBlock.chronicle}}</span>
                 </p>
                 <p>
-                  Faction:
-                  <span class="italics">{{ char.genBlock.faction }}</span>
+                  Seeming:
+                  <span class="italics">{{char.genBlock.seeming}}</span>
                 </p>
                 <p>
-                  Concept:
-                  <span class="italics">{{ char.genBlock.concept }}</span>
+                  Kith:
+                  <span class="italics">{{char.genBlock.kith}}</span>
+                </p>
+                <p>
+                  Court:
+                  <span class="italics">{{char.genBlock.court}}</span>
                 </p>
               </b-col>
               <b-col cols="4">
@@ -62,7 +66,7 @@
     <div v-else>
       <b-row>
         <b-col>
-          <p>There are currently no Chronicles of Darkness characters in the campaign.</p>
+          <p>There are currently no Changeling the Lost, 2nd Edition characters in this campaign.</p>
         </b-col>
       </b-row>
     </div>
@@ -91,6 +95,7 @@
         </b-row>
       </div>
     </b-modal>
+
     <b-modal ref="unassignModal" hide-header hide-footer>
       <div>
         <b-row>

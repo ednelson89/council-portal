@@ -1112,8 +1112,8 @@
 
 <script>
 import { charCoDChangeling } from "@/components/modules/CharacterObjects/characterCoDChange.js";
-import { postUserCharUpdate } from "@/components/modules/utilities/dataFunctions.js";
 import { mapGetters } from "vuex";
+import { updateGameChar } from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   data() {
@@ -1236,20 +1236,23 @@ export default {
   },
   computed: {
     ...mapGetters({
-      appRoute: "getAppRoute",
-      activeUser: "getActiveUser"
-    })
+      appRoute: "getAppRoute"
+    }),
+    activeGame() {
+      return this.$store.getters.getActiveGame;
+    },
+    activeUser() {
+      return this.$store.getters.getCurrUserName;
+    }
   },
   methods: {
+    // Navigation Method
     addNewChar() {
       this.loading = true;
-      var localStore = JSON.parse(localStorage.getItem("UserData"));
-
-      this.$store.commit("setNewUserCharacter", this.tempChar);
-      postUserCharUpdate(localStore, 1, this.tempChar).then(data => {
-        this.activeUser.userChars = data;
+      this.tempChar.charUser = this.activeUser;
+      updateGameChar(1, this.tempChar, this.activeGame.gameID).then(() => {
         this.loading = false;
-        this.$router.push({ path: "/characters" });
+        this.$router.push({ path: "/game-characters" });
       });
     },
     saveBackstory() {
@@ -1397,9 +1400,6 @@ export default {
         this.tempChar.combatStats[field].boxes.push({ status: "" });
       }
     }
-  },
-  mounted() {
-    this.tempChar.charUser = this.$store.getters.getCurrUserName;
   }
 };
 </script>
@@ -1433,23 +1433,5 @@ p {
 }
 .score {
   text-align: center !important;
-}
-.inline-label {
-  white-space: nowrap;
-  max-width: 150px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  float: left;
-}
-.codSelect {
-  width: 25%;
-}
-.list-item:hover {
-  cursor: pointer;
-  background-color: rgba(59, 73, 228, 0.3);
-}
-.customInputBox {
-  height: 36px;
-  width: 36px;
 }
 </style>

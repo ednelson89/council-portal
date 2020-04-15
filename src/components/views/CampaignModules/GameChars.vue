@@ -18,6 +18,7 @@
     <hr />
     <dn-d5e-preview v-if="activeGame.gameType === 'D&D5e'"></dn-d5e-preview>
     <CoDPreview v-if="activeGame.gameType === 'CoD'"></CoDPreview>
+    <ChangelingPreview v-if="activeGame.gameType === 'CoDChangeling'"></ChangelingPreview>
   </div>
 </template>
 
@@ -25,12 +26,14 @@
 import { mapGetters } from "vuex";
 import DnD5ePreview from "@/components/views/CampaignModules/CharacterPreviews/PreviewD&D.vue";
 import CoDPreview from "@/components/views/CampaignModules/CharacterPreviews/PreviewCoD.vue";
+import ChangelingPreview from "@/components/views/CampaignModules/CharacterPreviews/PreviewCoDChangeling.vue";
 import { getCampaigns } from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   components: {
     DnD5ePreview,
-    CoDPreview
+    CoDPreview,
+    ChangelingPreview
   },
   data() {
     return {};

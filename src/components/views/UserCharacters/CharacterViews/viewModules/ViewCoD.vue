@@ -83,7 +83,7 @@
     </b-row>
     <hr />
     <b-tabs content-class="mt-3">
-      <b-tab :title="'Core Stats & Attributes'" active>
+      <b-tab :title="'Attributes & Skills'" active>
         <!-- Abilities -->
         <b-row>
           <b-col>
@@ -129,6 +129,69 @@
                 </b-col>
               </b-row>
             </b-card>
+
+            <b-card class="b-cards">
+              <p class="sectionLabel">Skills</p>
+              <b-row>
+                <b-col class="skillCols">
+                  <p class="sectionLabel">Mental</p>
+                  <div v-for="skill in char.skills.mental" :key="skill.name">
+                    <label class="inline-label">
+                      {{
+                      skill.name.charAt(0).toUpperCase() +
+                      skill.name.slice(1)
+                      }}:
+                    </label>
+                    <p style="margin:0 15px; display: inline;">{{skill.score}}</p>
+                    <br />
+                    <span>Proficient:</span>
+                    <p
+                      style="margin:0 15px; display: inline;"
+                    >{{skill.prof === true ? "Yes" : "No"}}</p>
+                  </div>
+                </b-col>
+                <b-col class="skillCols">
+                  <p class="sectionLabel">Physical</p>
+                  <div v-for="skill in char.skills.physical" :key="skill.name">
+                    <label class="inline-label">
+                      {{
+                      skill.name.charAt(0).toUpperCase() +
+                      skill.name.slice(1)
+                      }}:
+                    </label>
+                    <p style="margin:0 15px; display: inline;">{{skill.score}}</p>
+                    <br />
+                    <span>Proficient:</span>
+                    <p
+                      style="margin:0 15px; display: inline;"
+                    >{{skill.prof === true ? "Yes" : "No"}}</p>
+                  </div>
+                </b-col>
+                <b-col class="skillCols">
+                  <p class="sectionLabel">Social</p>
+                  <div v-for="skill in char.skills.social" :key="skill.name">
+                    <label class="inline-label">
+                      {{
+                      skill.name.charAt(0).toUpperCase() +
+                      skill.name.slice(1)
+                      }}:
+                    </label>
+                    <p style="margin:0 15px; display: inline;">{{skill.score}}</p>
+                    <br />
+                    <span>Proficient:</span>
+                    <p
+                      style="margin:0 15px; display: inline;"
+                    >{{skill.prof === true ? "Yes" : "No"}}</p>
+                  </div>
+                </b-col>
+              </b-row>
+            </b-card>
+          </b-col>
+        </b-row>
+      </b-tab>
+      <b-tab :title="'General Traits & Merits'">
+        <b-row>
+          <b-col>
             <b-card class="b-cards">
               <b-row>
                 <b-col>
@@ -203,69 +266,6 @@
                       :key="index"
                     >{{ item }}</li>
                   </ul>
-                </b-col>
-              </b-row>
-            </b-card>
-          </b-col>
-        </b-row>
-      </b-tab>
-      <b-tab :title="'Skills & Merits'">
-        <!-- Skills Block -->
-        <b-row>
-          <b-col>
-            <b-card class="b-cards">
-              <p class="sectionLabel">Skills</p>
-              <b-row>
-                <b-col class="skillCols">
-                  <p class="sectionLabel">Mental</p>
-                  <div v-for="skill in char.skills.mental" :key="skill.name">
-                    <label class="inline-label">
-                      {{
-                      skill.name.charAt(0).toUpperCase() +
-                      skill.name.slice(1)
-                      }}:
-                    </label>
-                    <p style="margin:0 15px; display: inline;">{{skill.score}}</p>
-                    <br />
-                    <span>Proficient:</span>
-                    <p
-                      style="margin:0 15px; display: inline;"
-                    >{{skill.prof === true ? "Yes" : "No"}}</p>
-                  </div>
-                </b-col>
-                <b-col class="skillCols">
-                  <p class="sectionLabel">Physical</p>
-                  <div v-for="skill in char.skills.physical" :key="skill.name">
-                    <label class="inline-label">
-                      {{
-                      skill.name.charAt(0).toUpperCase() +
-                      skill.name.slice(1)
-                      }}:
-                    </label>
-                    <p style="margin:0 15px; display: inline;">{{skill.score}}</p>
-                    <br />
-                    <span>Proficient:</span>
-                    <p
-                      style="margin:0 15px; display: inline;"
-                    >{{skill.prof === true ? "Yes" : "No"}}</p>
-                  </div>
-                </b-col>
-                <b-col class="skillCols">
-                  <p class="sectionLabel">Social</p>
-                  <div v-for="skill in char.skills.social" :key="skill.name">
-                    <label class="inline-label">
-                      {{
-                      skill.name.charAt(0).toUpperCase() +
-                      skill.name.slice(1)
-                      }}:
-                    </label>
-                    <p style="margin:0 15px; display: inline;">{{skill.score}}</p>
-                    <br />
-                    <span>Proficient:</span>
-                    <p
-                      style="margin:0 15px; display: inline;"
-                    >{{skill.prof === true ? "Yes" : "No"}}</p>
-                  </div>
                 </b-col>
               </b-row>
             </b-card>
@@ -434,5 +434,9 @@ p {
 }
 .score {
   text-align: center !important;
+}
+.list-item:hover {
+  cursor: pointer;
+  background-color: rgba(59, 73, 228, 0.3);
 }
 </style>

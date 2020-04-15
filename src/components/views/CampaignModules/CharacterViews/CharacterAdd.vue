@@ -16,6 +16,7 @@
       <b-col>
         <addDnD5e v-if="activeGame.gameType === 'D&D5e'"></addDnD5e>
         <addCoD v-if="activeGame.gameType === 'CoD'"></addCoD>
+        <addChangeling v-if="activeGame.gameType === 'CoDChangeling'"></addChangeling>
       </b-col>
     </b-row>
   </div>
@@ -25,11 +26,13 @@
 import { mapGetters } from "vuex";
 import addDnD5e from "./addModules/AddDnD5e.vue";
 import addCoD from "./addModules/AddCoD.vue";
+import addChangeling from "./addModules/AddCoDChangeling.vue";
 
 export default {
   components: {
     addDnD5e,
-    addCoD
+    addCoD,
+    addChangeling
   },
   data() {
     return {};

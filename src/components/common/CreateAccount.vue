@@ -25,7 +25,11 @@
       </b-row>
       <b-row>
         <b-col xs="12" md="6">
-          <b-button type="submit" class="cardButton">Create User Account</b-button>
+          <b-button
+            type="submit"
+            class="cardButton"
+            :disabled="userName == activeUserName || (!userName || !passWord)"
+          >Create User Account</b-button>
         </b-col>
       </b-row>
     </form>
@@ -34,12 +38,19 @@
 
 <script>
 import { createAccount } from "@/components/modules/utilities/createAccount.js";
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
       userName: "",
       passWord: ""
     };
+  },
+  computed: {
+    ...mapGetters({
+      activeUserName: "getCurrUserName"
+    })
   },
   methods: {
     create() {
