@@ -83,7 +83,7 @@
       </b-col>
     </b-row>
     <hr />
-    <b-tabs content-class="mt-3">
+    <b-tabs no-key-nav content-class="mt-3">
       <b-tab title="Core Stats" active>
         <!-- Combat Info Block -->
         <b-row>
@@ -862,7 +862,7 @@ export default {
         notes: ""
       },
       attacksTableFields: [
-        { key: "attackName", label: "Attack Name", sortable: true },
+        { key: "attackName", label: "Attack Name", sortable: false },
         { key: "hitMod", label: "Hit Modifier" },
         { key: "dmg", label: "Damage" },
         { key: "notes", label: "Notes" },
@@ -871,7 +871,7 @@ export default {
       // Equipment Table
       tempEquipment: { itemName: "", qty: 0, weight: 0, details: "" },
       equipmentTableFields: [
-        { key: "itemName", label: "Item Name", sortable: true },
+        { key: "itemName", label: "Item Name", sortable: false },
         { key: "qty", label: "Quantity" },
         { key: "weight", label: "Weight" },
         { key: "details", label: "Details" },
@@ -880,7 +880,7 @@ export default {
       // Spell Tables
       tempSpell: { spellName: "", spellDescription: "", lvl: "" },
       spellTableFields: [
-        { key: "spellName", label: "Spell Name", sortable: true },
+        { key: "spellName", label: "Spell Name", sortable: false },
         { key: "spellDescription", label: "Spell Description" },
         { key: "delete", label: "Delete" }
       ]

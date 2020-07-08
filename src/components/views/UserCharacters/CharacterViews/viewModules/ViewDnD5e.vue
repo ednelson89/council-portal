@@ -72,7 +72,7 @@
       </b-col>
     </b-row>
     <hr />
-    <b-tabs content-class="mt-3">
+    <b-tabs no-key-nav content-class="mt-3">
       <b-tab title="Core Stats" active>
         <!-- Combat Info Block -->
         <b-row>
@@ -327,9 +327,18 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Character Backstory:</h4>
-                  <div v-for="(story, index) in char.backstory" :key="index">
-                    <p v-if="story">{{story}}</p>
-                    <br v-else />
+                  <div v-for="(para, index) in char.backstory" :key="index">
+                    <br v-if="!para" />
+                    <p v-else-if="para.includes('img-')">
+                      <img :src="para.substring(4)" style="width: 50% " />
+                    </p>
+                    <a
+                      v-else-if="para.includes('link-')"
+                      :href="para.substring(5)"
+                      style="width: 50% "
+                      target="_blank"
+                    >{{para.substring(5)}}</a>
+                    <p v-else>{{para}}</p>
                   </div>
                 </b-col>
               </b-row>
@@ -344,9 +353,18 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Additional Notes:</h4>
-                  <div v-for="(note, index) in char.notes" :key="index">
-                    <p v-if="note">{{note}}</p>
-                    <br v-else />
+                  <div v-for="(para, index) in char.notes" :key="index">
+                    <br v-if="!para" />
+                    <p v-else-if="para.includes('img-')">
+                      <img :src="para.substring(4)" style="width: 50% " />
+                    </p>
+                    <a
+                      v-else-if="para.includes('link-')"
+                      :href="para.substring(5)"
+                      style="width: 50% "
+                      target="_blank"
+                    >{{para.substring(5)}}</a>
+                    <p v-else>{{para}}</p>
                   </div>
                 </b-col>
               </b-row>
@@ -387,7 +405,7 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Spell Book:</h4>
-                  <b-tabs content-class="mt-3">
+                  <b-tabs no-key-nav content-class="mt-3">
                     <b-tab title="Cantrips" active>
                       <p class="sectionLabel">Cantrips:</p>
                       <b-table

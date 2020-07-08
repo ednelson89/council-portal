@@ -28,8 +28,11 @@
           <b-button
             type="submit"
             class="cardButton"
-            :disabled="userName == activeUserName || (!userName || !passWord)"
-          >Create User Account</b-button>
+            :disabled="userName == activeUserName || (!userName || !passWord) || loading"
+          >
+            {{ !loading ? "Create User Account" : "Loading..." }}
+            <b-spinner label="Loading..." v-if="loading"></b-spinner>
+          </b-button>
         </b-col>
       </b-row>
     </form>
@@ -44,7 +47,8 @@ export default {
   data() {
     return {
       userName: "",
-      passWord: ""
+      passWord: "",
+      loading: false
     };
   },
   computed: {
@@ -54,8 +58,10 @@ export default {
   },
   methods: {
     create() {
+      this.loading = true;
       let data = { username: this.userName, password: this.passWord };
       createAccount(data).then(() => {
+        this.loading = false;
         this.$router.push({ path: "/" });
       });
     }

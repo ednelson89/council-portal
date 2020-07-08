@@ -89,7 +89,7 @@
       </b-col>
     </b-row>
     <hr />
-    <b-tabs content-class="mt-3">
+    <b-tabs no-key-nav content-class="mt-3">
       <b-tab :title="'Attributes & Skills'" active>
         <!-- Abilities -->
         <b-row>
@@ -624,7 +624,7 @@ export default {
         size: ""
       },
       attacksTableFields: [
-        { key: "name", label: "Attack Name", sortable: true },
+        { key: "name", label: "Attack Name", sortable: false },
         { key: "dmg", label: "Damage" },
         { key: "range", label: "Range" },
         { key: "clip", label: "Clip" },
@@ -643,7 +643,7 @@ export default {
         qnty: 0
       },
       equipmentTableFields: [
-        { key: "name", label: "Item Name", sortable: true },
+        { key: "name", label: "Item Name", sortable: false },
         { key: "durability", label: "Durability" },
         { key: "structure", label: "Structure" },
         { key: "size", label: "Size" },
@@ -681,7 +681,9 @@ export default {
       this.char.combatStats.conditions.splice(index, 1);
     },
     addAspiration() {
-      this.char.combatStats.aspirations.push(this.tempAsp);
+      this.char.combatStats.aspirations.push(
+        JSON.parse(JSON.stringify(this.tempAsp))
+      );
     },
     delAspiration(index) {
       this.char.combatStats.aspirations.splice(index, 1);

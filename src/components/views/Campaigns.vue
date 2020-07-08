@@ -18,7 +18,7 @@
     <div>
       <b-row>
         <b-col>
-          <b-tabs content-class="mt-3">
+          <b-tabs no-key-nav content-class="mt-3">
             <b-tab title="My Campaigns" active>
               <div>
                 <b-row>

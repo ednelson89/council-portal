@@ -85,7 +85,7 @@
       </b-col>
     </b-row>
     <hr />
-    <b-tabs content-class="mt-3">
+    <b-tabs no-key-nav content-class="mt-3">
       <b-tab title="Core Stats" active>
         <!-- Combat Info Block -->
         <b-row>
@@ -341,7 +341,35 @@
               <b-row>
                 <b-col>
                   <b-table striped hover :fields="attacksTableFields" :items="char.attacksCantrips">
-                    <template v-slot:cell(delete)="row">
+                    <template v-slot:cell(attackName)="row">
+                      <input
+                        type="text"
+                        class="table-input"
+                        v-model="char.attacksCantrips[row.index].attackName"
+                      />
+                    </template>
+                    <template v-slot:cell(hitMod)="row">
+                      <input
+                        type="text"
+                        class="table-input"
+                        v-model="char.attacksCantrips[row.index].hitMod"
+                      />
+                    </template>
+                    <template v-slot:cell(dmg)="row">
+                      <input
+                        type="text"
+                        class="table-input"
+                        v-model="char.attacksCantrips[row.index].dmg"
+                      />
+                    </template>
+                    <template v-slot:cell(notes)="row">
+                      <input
+                        type="text"
+                        class="table-input"
+                        v-model="char.attacksCantrips[row.index].notes"
+                      />
+                    </template>
+                    <template>
                       <b-button size="sm" @click="deleteFromAttacks(row.index)">Delete Attack</b-button>
                     </template>
                   </b-table>
@@ -487,6 +515,34 @@
               <b-row>
                 <b-col>
                   <b-table striped hover :fields="equipmentTableFields" :items="char.equipment">
+                    <template v-slot:cell(itemName)="row">
+                      <input
+                        type="text"
+                        class="table-input"
+                        v-model="char.equipment[row.index].itemName"
+                      />
+                    </template>
+                    <template v-slot:cell(qty)="row">
+                      <input
+                        type="text"
+                        class="table-input"
+                        v-model="char.equipment[row.index].qty"
+                      />
+                    </template>
+                    <template v-slot:cell(weight)="row">
+                      <input
+                        type="text"
+                        class="table-input"
+                        v-model="char.equipment[row.index].weight"
+                      />
+                    </template>
+                    <template v-slot:cell(details)="row">
+                      <input
+                        type="text"
+                        class="table-input"
+                        v-model="char.equipment[row.index].details"
+                      />
+                    </template>
                     <template v-slot:cell(delete)="row">
                       <b-button size="sm" @click="deleteFromItems(row.index)">Delete Item</b-button>
                     </template>
@@ -739,7 +795,7 @@
               <b-row>
                 <b-col>
                   <h4>Spell Book:</h4>
-                  <b-tabs content-class="mt-3">
+                  <b-tabs no-key-nav content-class="mt-3">
                     <b-tab title="Cantrips" active>
                       <p class="sectionLabel">Cantrips:</p>
                       <b-table
@@ -748,14 +804,20 @@
                         :items="char.spells.cantrips"
                         :fields="spellTableFields"
                       >
-                        <template v-slot:cell(spellDescription)="data">
-                          <div v-for="(para, index) in data.value" :key="index">
-                            <br v-if="!para" />
-                            <p v-else-if="!para.includes('http')">{{para}}</p>
-                            <p v-else-if="para.includes('http')">
-                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
-                            </p>
-                          </div>
+                        <template v-slot:cell(spellName)="row">
+                          <input
+                            type="text"
+                            class="table-input"
+                            v-model="char.spells.cantrips[row.index].spellName"
+                          />
+                        </template>
+                        <template v-slot:cell(spellDescription)="row">
+                          <b-form-textarea
+                            v-model="char.spells.cantrips[row.index].spellDescription"
+                            placeholder="..."
+                            rows="3"
+                            max-rows="10"
+                          ></b-form-textarea>
                         </template>
                         <template v-slot:cell(delete)="row">
                           <b-button
@@ -768,14 +830,20 @@
                     <b-tab title="Level 1">
                       <p class="sectionLabel">Level 1:</p>
                       <b-table striped hover :items="char.spells.lvl1" :fields="spellTableFields">
-                        <template v-slot:cell(spellDescription)="data">
-                          <div v-for="(para, index) in data.value" :key="index">
-                            <br v-if="!para" />
-                            <p v-else-if="!para.includes('http')">{{para}}</p>
-                            <p v-else-if="para.includes('http')">
-                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
-                            </p>
-                          </div>
+                        <template v-slot:cell(spellName)="row">
+                          <input
+                            type="text"
+                            class="table-input"
+                            v-model="char.spells.lvl1[row.index].spellName"
+                          />
+                        </template>
+                        <template v-slot:cell(spellDescription)="row">
+                          <b-form-textarea
+                            v-model="char.spells.lvl1[row.index].spellDescription"
+                            placeholder="..."
+                            rows="3"
+                            max-rows="10"
+                          ></b-form-textarea>
                         </template>
                         <template v-slot:cell(delete)="row">
                           <b-button
@@ -788,14 +856,20 @@
                     <b-tab title="Level 2">
                       <p class="sectionLabel">Level 2:</p>
                       <b-table striped hover :items="char.spells.lvl2" :fields="spellTableFields">
-                        <template v-slot:cell(spellDescription)="data">
-                          <div v-for="(para, index) in data.value" :key="index">
-                            <br v-if="!para" />
-                            <p v-else-if="!para.includes('http')">{{para}}</p>
-                            <p v-else-if="para.includes('http')">
-                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
-                            </p>
-                          </div>
+                        <template v-slot:cell(spellName)="row">
+                          <input
+                            type="text"
+                            class="table-input"
+                            v-model="char.spells.lvl2[row.index].spellName"
+                          />
+                        </template>
+                        <template v-slot:cell(spellDescription)="row">
+                          <b-form-textarea
+                            v-model="char.spells.lvl2[row.index].spellDescription"
+                            placeholder="..."
+                            rows="3"
+                            max-rows="10"
+                          ></b-form-textarea>
                         </template>
                         <template v-slot:cell(delete)="row">
                           <b-button
@@ -808,14 +882,20 @@
                     <b-tab title="Level 3">
                       <p class="sectionLabel">Level 3:</p>
                       <b-table striped hover :items="char.spells.lvl3" :fields="spellTableFields">
-                        <template v-slot:cell(spellDescription)="data">
-                          <div v-for="(para, index) in data.value" :key="index">
-                            <br v-if="!para" />
-                            <p v-else-if="!para.includes('http')">{{para}}</p>
-                            <p v-else-if="para.includes('http')">
-                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
-                            </p>
-                          </div>
+                        <template v-slot:cell(spellName)="row">
+                          <input
+                            type="text"
+                            class="table-input"
+                            v-model="char.spells.lvl3[row.index].spellName"
+                          />
+                        </template>
+                        <template v-slot:cell(spellDescription)="row">
+                          <b-form-textarea
+                            v-model="char.spells.lvl3[row.index].spellDescription"
+                            placeholder="..."
+                            rows="3"
+                            max-rows="10"
+                          ></b-form-textarea>
                         </template>
                         <template v-slot:cell(delete)="row">
                           <b-button
@@ -828,14 +908,20 @@
                     <b-tab title="Level 4">
                       <p class="sectionLabel">Level 4:</p>
                       <b-table striped hover :items="char.spells.lvl4" :fields="spellTableFields">
-                        <template v-slot:cell(spellDescription)="data">
-                          <div v-for="(para, index) in data.value" :key="index">
-                            <br v-if="!para" />
-                            <p v-else-if="!para.includes('http')">{{para}}</p>
-                            <p v-else-if="para.includes('http')">
-                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
-                            </p>
-                          </div>
+                        <template v-slot:cell(spellName)="row">
+                          <input
+                            type="text"
+                            class="table-input"
+                            v-model="char.spells.lvl4[row.index].spellName"
+                          />
+                        </template>
+                        <template v-slot:cell(spellDescription)="row">
+                          <b-form-textarea
+                            v-model="char.spells.lvl4[row.index].spellDescription"
+                            placeholder="..."
+                            rows="3"
+                            max-rows="10"
+                          ></b-form-textarea>
                         </template>
                         <template v-slot:cell(delete)="row">
                           <b-button
@@ -848,14 +934,20 @@
                     <b-tab title="Level 5">
                       <p class="sectionLabel">Level 5:</p>
                       <b-table striped hover :items="char.spells.lvl5" :fields="spellTableFields">
-                        <template v-slot:cell(spellDescription)="data">
-                          <div v-for="(para, index) in data.value" :key="index">
-                            <br v-if="!para" />
-                            <p v-else-if="!para.includes('http')">{{para}}</p>
-                            <p v-else-if="para.includes('http')">
-                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
-                            </p>
-                          </div>
+                        <template v-slot:cell(spellName)="row">
+                          <input
+                            type="text"
+                            class="table-input"
+                            v-model="char.spells.lvl5[row.index].spellName"
+                          />
+                        </template>
+                        <template v-slot:cell(spellDescription)="row">
+                          <b-form-textarea
+                            v-model="char.spells.lvl5[row.index].spellDescription"
+                            placeholder="..."
+                            rows="3"
+                            max-rows="10"
+                          ></b-form-textarea>
                         </template>
                         <template v-slot:cell(delete)="row">
                           <b-button
@@ -868,14 +960,20 @@
                     <b-tab title="Level 6">
                       <p class="sectionLabel">Level 6:</p>
                       <b-table striped hover :items="char.spells.lvl6" :fields="spellTableFields">
-                        <template v-slot:cell(spellDescription)="data">
-                          <div v-for="(para, index) in data.value" :key="index">
-                            <br v-if="!para" />
-                            <p v-else-if="!para.includes('http')">{{para}}</p>
-                            <p v-else-if="para.includes('http')">
-                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
-                            </p>
-                          </div>
+                        <template v-slot:cell(spellName)="row">
+                          <input
+                            type="text"
+                            class="table-input"
+                            v-model="char.spells.lvl6[row.index].spellName"
+                          />
+                        </template>
+                        <template v-slot:cell(spellDescription)="row">
+                          <b-form-textarea
+                            v-model="char.spells.lvl6[row.index].spellDescription"
+                            placeholder="..."
+                            rows="3"
+                            max-rows="10"
+                          ></b-form-textarea>
                         </template>
                         <template v-slot:cell(delete)="row">
                           <b-button
@@ -888,14 +986,20 @@
                     <b-tab title="Level 7">
                       <p class="sectionLabel">Level 7:</p>
                       <b-table striped hover :items="char.spells.lvl7" :fields="spellTableFields">
-                        <template v-slot:cell(spellDescription)="data">
-                          <div v-for="(para, index) in data.value" :key="index">
-                            <br v-if="!para" />
-                            <p v-else-if="!para.includes('http')">{{para}}</p>
-                            <p v-else-if="para.includes('http')">
-                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
-                            </p>
-                          </div>
+                        <template v-slot:cell(spellName)="row">
+                          <input
+                            type="text"
+                            class="table-input"
+                            v-model="char.spells.lvl7[row.index].spellName"
+                          />
+                        </template>
+                        <template v-slot:cell(spellDescription)="row">
+                          <b-form-textarea
+                            v-model="char.spells.lvl7[row.index].spellDescription"
+                            placeholder="..."
+                            rows="3"
+                            max-rows="10"
+                          ></b-form-textarea>
                         </template>
                         <template v-slot:cell(delete)="row">
                           <b-button
@@ -908,14 +1012,20 @@
                     <b-tab title="Level 8">
                       <p class="sectionLabel">Level 8:</p>
                       <b-table striped hover :items="char.spells.lvl8" :fields="spellTableFields">
-                        <template v-slot:cell(spellDescription)="data">
-                          <div v-for="(para, index) in data.value" :key="index">
-                            <br v-if="!para" />
-                            <p v-else-if="!para.includes('http')">{{para}}</p>
-                            <p v-else-if="para.includes('http')">
-                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
-                            </p>
-                          </div>
+                        <template v-slot:cell(spellName)="row">
+                          <input
+                            type="text"
+                            class="table-input"
+                            v-model="char.spells.lvl8[row.index].spellName"
+                          />
+                        </template>
+                        <template v-slot:cell(spellDescription)="row">
+                          <b-form-textarea
+                            v-model="char.spells.lvl8[row.index].spellDescription"
+                            placeholder="..."
+                            rows="3"
+                            max-rows="10"
+                          ></b-form-textarea>
                         </template>
                         <template v-slot:cell(delete)="row">
                           <b-button
@@ -928,14 +1038,20 @@
                     <b-tab title="Level 9">
                       <p class="sectionLabel">Level 9:</p>
                       <b-table striped hover :items="char.spells.lvl9" :fields="spellTableFields">
-                        <template v-slot:cell(spellDescription)="data">
-                          <div v-for="(para, index) in data.value" :key="index">
-                            <br v-if="!para" />
-                            <p v-else-if="!para.includes('http')">{{para}}</p>
-                            <p v-else-if="para.includes('http')">
-                              <a :href="para" style="width: 50% " target="_blank">{{para}}</a>
-                            </p>
-                          </div>
+                        <template v-slot:cell(spellName)="row">
+                          <input
+                            type="text"
+                            class="table-input"
+                            v-model="char.spells.lvl9[row.index].spellName"
+                          />
+                        </template>
+                        <template v-slot:cell(spellDescription)="row">
+                          <b-form-textarea
+                            v-model="char.spells.lvl9[row.index].spellDescription"
+                            placeholder="..."
+                            rows="3"
+                            max-rows="10"
+                          ></b-form-textarea>
                         </template>
                         <template v-slot:cell(delete)="row">
                           <b-button
@@ -982,7 +1098,7 @@ export default {
         notes: ""
       },
       attacksTableFields: [
-        { key: "attackName", label: "Attack Name", sortable: true },
+        { key: "attackName", label: "Attack Name", sortable: false },
         { key: "hitMod", label: "Hit Modifier" },
         { key: "dmg", label: "Damage" },
         { key: "notes", label: "Notes" },
@@ -991,7 +1107,7 @@ export default {
       // Equipment Table
       tempEquipment: { itemName: "", qty: 0, weight: 0, details: "" },
       equipmentTableFields: [
-        { key: "itemName", label: "Item Name", sortable: true },
+        { key: "itemName", label: "Item Name", sortable: false },
         { key: "qty", label: "Quantity" },
         { key: "weight", label: "Weight" },
         { key: "details", label: "Details" },
@@ -1149,8 +1265,12 @@ export default {
     ];
     count.forEach(element => {
       this.char.spells[element].forEach(spell => {
-        if (!Array.isArray(spell.spellDescription)) {
-          spell.spellDescription = spell.spellDescription.split("\n");
+        let temporarySpell = "";
+        if (Array.isArray(spell.spellDescription)) {
+          spell.spellDescription.forEach(line => {
+            temporarySpell = temporarySpell.concat(line, "\n");
+          });
+          spell.spellDescription = temporarySpell;
         }
       });
     });
@@ -1206,5 +1326,11 @@ p {
 }
 .score {
   text-align: center !important;
+}
+.table-input {
+  width: 100%;
+  margin: 2px;
+  border: 1px solid rgb(76, 73, 73);
+  border-radius: 4px;
 }
 </style>

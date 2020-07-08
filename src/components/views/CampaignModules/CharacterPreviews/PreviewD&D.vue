@@ -166,30 +166,31 @@ export default {
           localStore,
           1,
           this.currGame.gameChars[this.delIndex]
-        )
-          .then(() => {
-            // Delete from game
-            updateGameChar(
-              2,
-              this.currGame.gameChars[this.delIndex],
-              this.currGame.gameID
-            ).then(() => {
+        ).then(() => {
+          // Delete from game
+          updateGameChar(
+            2,
+            this.currGame.gameChars[this.delIndex],
+            this.currGame.gameID
+          )
+            .then(() => {
               // update Game
               this.updateGame();
-            });
-          })
-          .then(() => {
-            this.$refs["unassignModal"].hide();
-            this.$forceUpdate();
+            })
+            .then(() => {
+              this.$refs["unassignModal"].hide();
+              this.$forceUpdate();
 
-            this.delIndex = null;
-            this.loading = false;
-            this.charName = "";
-          });
+              this.delIndex = null;
+              this.loading = false;
+              this.charName = "";
+            });
+        });
       } else if (code === 2) {
         this.$refs["unassignModal"].hide();
         this.delIndex = null;
         this.charName = "";
+        this.$forceUpdate();
       }
     },
     deleteCharacter(actionCode) {

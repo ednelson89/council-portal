@@ -9,7 +9,7 @@
     <hr />
     <b-row>
       <b-col>
-        <b-tabs content-class="mt-3">
+        <b-tabs no-key-nav content-class="mt-3">
           <b-tab title="Dungeons and Dragons 5e" active>
             <dnd5eView></dnd5eView>
           </b-tab>

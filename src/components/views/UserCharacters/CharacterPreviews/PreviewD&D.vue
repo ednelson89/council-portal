@@ -211,6 +211,7 @@ export default {
         this.assignIndex = null;
         this.charName = "";
         this.gameSelection = null;
+        this.$forceUpdate();
       }
     }
   },

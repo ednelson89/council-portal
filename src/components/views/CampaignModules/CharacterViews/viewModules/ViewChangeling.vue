@@ -85,7 +85,7 @@
       </b-col>
     </b-row>
     <hr />
-    <b-tabs content-class="mt-3">
+    <b-tabs no-key-nav content-class="mt-3">
       <b-tab :title="'Attributes & Skills'" active>
         <!-- Abilities -->
         <b-row>
@@ -356,7 +356,7 @@
                       class="list-item"
                       v-for="(item, index) in char.combatStats.aspirations"
                       :key="index"
-                    >{{item}}</li>
+                    >{{item.desc}}</li>
                   </ul>
                 </b-col>
               </b-row>
@@ -368,7 +368,7 @@
                       class="list-item"
                       v-for="(item, index) in char.combatStats.favRegalia"
                       :key="index"
-                    >{{item}}</li>
+                    >{{item.desc}}</li>
                   </ul>
                 </b-col>
                 <b-col>
@@ -378,7 +378,7 @@
                       class="list-item"
                       v-for="(item, index) in char.combatStats.frailties"
                       :key="index"
-                    >{{item}}</li>
+                    >{{item.desc}}</li>
                   </ul>
                 </b-col>
               </b-row>
@@ -390,7 +390,7 @@
                       class="list-item"
                       v-for="(item, index) in char.combatStats.touchstones"
                       :key="index"
-                    >{{item}}</li>
+                    >{{item.desc}}</li>
                   </ol>
                 </b-col>
               </b-row>
@@ -504,7 +504,7 @@
                           class="list-item"
                           v-for="(item, index) in char.expandedMerits.faeMounts"
                           :key="index"
-                        >{{item}}</li>
+                        >{{item.desc}}</li>
                       </ul>
                     </b-col>
                     <b-col>
@@ -514,7 +514,7 @@
                           class="list-item"
                           v-for="(item, index) in char.expandedMerits.mantles"
                           :key="index"
-                        >{{item}}</li>
+                        >{{item.desc}}</li>
                       </ul>
                     </b-col>
                   </b-row>
@@ -526,7 +526,7 @@
                           class="list-item"
                           v-for="(item, index) in char.expandedMerits.hollows"
                           :key="index"
-                        >{{item}}</li>
+                        >{{item.desc}}</li>
                       </ul>
                     </b-col>
                     <b-col>
@@ -536,7 +536,7 @@
                           class="list-item"
                           v-for="(item, index) in char.expandedMerits.tokens"
                           :key="index"
-                        >{{item}}</li>
+                        >{{item.desc}}</li>
                       </ul>
                     </b-col>
                   </b-row>
@@ -561,7 +561,7 @@
                           class="list-item"
                           v-for="(item, index) in char.otherTraits.seemingBless"
                           :key="index"
-                        >{{item}}</li>
+                        >{{item.desc}}</li>
                       </ul>
                     </b-col>
                     <b-col>
@@ -571,7 +571,7 @@
                           class="list-item"
                           v-for="(item, index) in char.otherTraits.seemingCurse"
                           :key="index"
-                        >{{item}}</li>
+                        >{{item.desc}}</li>
                       </ul>
                     </b-col>
                   </b-row>
@@ -583,7 +583,7 @@
                           class="list-item"
                           v-for="(item, index) in char.otherTraits.kithBless"
                           :key="index"
-                        >{{item}}</li>
+                        >{{item.desc}}</li>
                       </ul>
                     </b-col>
                     <b-col>
@@ -613,9 +613,18 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Character Backstory:</h4>
-                  <div v-for="(story, index) in char.backstory" :key="index">
-                    <p v-if="story">{{story}}</p>
-                    <br v-else />
+                  <div v-for="(para, index) in char.backstory" :key="index">
+                    <br v-if="!para" />
+                    <p v-else-if="para.includes('img-')">
+                      <img :src="para.substring(4)" style="width: 50% " />
+                    </p>
+                    <a
+                      v-else-if="para.includes('link-')"
+                      :href="para.substring(5)"
+                      style="width: 50% "
+                      target="_blank"
+                    >{{para.substring(5)}}</a>
+                    <p v-else>{{para}}</p>
                   </div>
                 </b-col>
               </b-row>
@@ -630,9 +639,18 @@
               <b-row>
                 <b-col>
                   <h4 style="font-weight:bold;">Additional Notes:</h4>
-                  <div v-for="(note, index) in char.notes" :key="index">
-                    <p v-if="note">{{note}}</p>
-                    <br v-else />
+                  <div v-for="(para, index) in char.notes" :key="index">
+                    <br v-if="!para" />
+                    <p v-else-if="para.includes('img-')">
+                      <img :src="para.substring(4)" style="width: 50% " />
+                    </p>
+                    <a
+                      v-else-if="para.includes('link-')"
+                      :href="para.substring(5)"
+                      style="width: 50% "
+                      target="_blank"
+                    >{{para.substring(5)}}</a>
+                    <p v-else>{{para}}</p>
                   </div>
                 </b-col>
               </b-row>
@@ -730,5 +748,10 @@ p {
 .list-item:hover {
   cursor: pointer;
   background-color: rgba(59, 73, 228, 0.3);
+}
+
+.customInputBox {
+  height: 36px;
+  width: 36px;
 }
 </style>

@@ -204,7 +204,7 @@ export default {
             .then(() => {
               this.$refs["assignModal"].hide();
               this.assignIndex = null;
-              this.delIndex;
+              this.delIndex = null;
               this.gameSelection = null;
               this.loading = false;
               this.charName = "";
@@ -216,6 +216,7 @@ export default {
         this.assignIndex = null;
         this.charName = "";
         this.gameSelection = null;
+        this.$forceUpdate();
       }
     }
   },

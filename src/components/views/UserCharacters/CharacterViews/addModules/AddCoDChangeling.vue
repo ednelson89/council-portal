@@ -91,7 +91,7 @@
       </b-col>
     </b-row>
     <hr />
-    <b-tabs content-class="mt-3">
+    <b-tabs no-key-nav content-class="mt-3">
       <b-tab :title="'Attributes & Skills'" active>
         <!-- Abilities -->
         <b-row>
@@ -538,15 +538,17 @@
                     </select>
                   </label>
                   <br />
-                  <b-button @click="tempChar.merits.push(tempMerit)">Add Merit</b-button>
+                  <b-button
+                    @click="tempChar.merits.push(JSON.parse(JSON.stringify(tempMerit)));"
+                  >Add Merit</b-button>
                   <hr />
                   <ul>
-                    <li
-                      class="list-item"
-                      v-for="(merit, index) in tempChar.merits"
-                      :key="index"
-                      @click="tempChar.merits.splice(index,1)"
-                    >Merit Name: {{merit.name}} - Score: {{merit.score}}</li>
+                    <li class="list-item" v-for="(merit, index) in tempChar.merits" :key="index">
+                      Merit Name:
+                      <input type="text" class="list-input" v-model="merit.name" /> - Score:
+                      <input type="text" class="list-score" v-model="merit.score" />
+                      <b-button @click="char.merits.splice(index,1)">Delete</b-button>
+                    </li>
                   </ul>
                 </b-col>
               </b-row>
@@ -1167,7 +1169,7 @@ export default {
       // Pledge Table
       tempPledge: { type: "", notes: "" },
       pledgeTableFields: [
-        { key: "type", label: "Type", sortable: true },
+        { key: "type", label: "Type", sortable: false },
         { key: "notes", label: "Notes" },
         { key: "delete", label: "Delete" }
       ],
@@ -1183,7 +1185,7 @@ export default {
         seemingBenefit: ""
       },
       contractTableFields: [
-        { key: "name", label: "Name", sortable: true },
+        { key: "name", label: "Name", sortable: false },
         { key: "goblin", label: "Goblin" },
         { key: "cost", label: "Cost" },
         { key: "dice", label: "Dice" },
@@ -1204,7 +1206,7 @@ export default {
         size: ""
       },
       attacksTableFields: [
-        { key: "name", label: "Attack Name", sortable: true },
+        { key: "name", label: "Attack Name", sortable: false },
         { key: "dmg", label: "Damage" },
         { key: "range", label: "Range" },
         { key: "clip", label: "Clip" },
@@ -1223,7 +1225,7 @@ export default {
         qnty: 0
       },
       equipmentTableFields: [
-        { key: "name", label: "Item Name", sortable: true },
+        { key: "name", label: "Item Name", sortable: false },
         { key: "durability", label: "Durability" },
         { key: "structure", label: "Structure" },
         { key: "size", label: "Size" },
@@ -1282,21 +1284,27 @@ export default {
       this.tempChar.combatStats.conditions.splice(index, 1);
     },
     addAspiration() {
-      this.tempChar.combatStats.aspirations.push(this.tempAsp);
+      this.tempChar.combatStats.aspirations.push(
+        JSON.parse(JSON.stringify(this.tempAsp))
+      );
       this.tempAsp = "";
     },
     delAspiration(index) {
       this.tempChar.combatStats.aspirations.splice(index, 1);
     },
     addRegalia() {
-      this.tempChar.combatStats.favRegalia.push(this.tempReg);
+      this.tempChar.combatStats.favRegalia.push(
+        JSON.parse(JSON.stringify(this.tempReg))
+      );
       this.tempReg = "";
     },
     delRegalia(index) {
       this.tempChar.combatStats.favRegalia.splice(index, 1);
     },
     addFrailty() {
-      this.tempChar.combatStats.frailties.push(this.tempFrail);
+      this.tempChar.combatStats.frailties.push(
+        JSON.parse(JSON.stringify(this.tempFrail))
+      );
       this.tempFrail = "";
     },
     delFrailty(index) {
@@ -1304,7 +1312,9 @@ export default {
     },
     addTouchstone() {
       if (this.tempChar.combatStats.touchstones.length <= 10) {
-        this.tempChar.combatStats.touchstones.push(this.tempTouch);
+        this.tempChar.combatStats.touchstones.push(
+          JSON.parse(JSON.stringify(this.tempTouch))
+        );
         this.tempTouch = "";
       }
     },
@@ -1313,7 +1323,9 @@ export default {
     },
     // Edit Contracts and Pledges
     addContract() {
-      this.tempChar.contracts.push(this.tempContract);
+      this.tempChar.contracts.push(
+        JSON.parse(JSON.stringify(this.tempContract))
+      );
       this.tempContract = {
         name: "",
         goblin: false,
@@ -1326,33 +1338,41 @@ export default {
       };
     },
     addPledge() {
-      this.tempChar.pledges.push(this.tempPledge);
+      this.tempChar.pledges.push(JSON.parse(JSON.stringify(this.tempPledge)));
       this.tempPledge = { type: "", notes: "" };
     },
     // Edit Expanded Merits
     addMount() {
-      this.tempChar.expandedMerits.faeMounts.push(this.tempFaeMount);
+      this.tempChar.expandedMerits.faeMounts.push(
+        JSON.parse(JSON.stringify(this.tempFaeMount))
+      );
       this.tempFaeMount = "";
     },
     delMount(index) {
       this.tempChar.expandedMerits.faeMounts.splice(index, 1);
     },
     addMantle() {
-      this.tempChar.expandedMerits.mantles.push(this.tempMantle);
+      this.tempChar.expandedMerits.mantles.push(
+        JSON.parse(JSON.stringify(this.tempMantle))
+      );
       this.tempMantle = "";
     },
     delMantle(index) {
       this.tempChar.expandedMerits.mantles.splice(index, 1);
     },
     addHollow() {
-      this.tempChar.expandedMerits.hollows.push(this.tempHollow);
+      this.tempChar.expandedMerits.hollows.push(
+        JSON.parse(JSON.stringify(this.tempHollow))
+      );
       this.tempHollow = "";
     },
     delHollow(index) {
       this.tempChar.expandedMerits.hollows.splice(index, 1);
     },
     addToken() {
-      this.tempChar.expandedMerits.tokens.push(this.tempToken);
+      this.tempChar.expandedMerits.tokens.push(
+        JSON.parse(JSON.stringify(this.tempToken))
+      );
       this.tempToken = "";
     },
     delToken(index) {
@@ -1360,28 +1380,36 @@ export default {
     },
     //Edit Other Traits
     addSeemingBlessing() {
-      this.tempChar.otherTraits.seemingBless.push(this.tempSeemBless);
+      this.tempChar.otherTraits.seemingBless.push(
+        JSON.parse(JSON.stringify(this.tempSeemBless))
+      );
       this.tempSeemBless = "";
     },
     delSeemingBlessing(index) {
       this.tempChar.otherTraits.seemingBless.splice(index, 1);
     },
     addSeemingCurse() {
-      this.tempChar.otherTraits.seemingCurse.push(this.tempSeemCurse);
+      this.tempChar.otherTraits.seemingCurse.push(
+        JSON.parse(JSON.stringify(this.tempSeemCurse))
+      );
       this.tempSeemCurse = "";
     },
     delSeemingCurse(index) {
       this.tempChar.otherTraits.seemingCurse.splice(index, 1);
     },
     addKithBlessing() {
-      this.tempChar.otherTraits.kithBless.push(this.tempKithBless);
+      this.tempChar.otherTraits.kithBless.push(
+        JSON.parse(JSON.stringify(this.tempKithBless))
+      );
       this.tempKithBless = "";
     },
     delKithBlessing(index) {
       this.tempChar.otherTraits.kithBless.splice(index, 1);
     },
     addGoblinDebt() {
-      this.tempChar.otherTraits.goblinDebt.push(this.tempGoblinDebt);
+      this.tempChar.otherTraits.goblinDebt.push(
+        JSON.parse(JSON.stringify(this.tempGoblinDebt))
+      );
       this.tempGoblinDebt = { check: false, notes: "" };
     },
     delGoblinDebt(index) {

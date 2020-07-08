@@ -13,25 +13,21 @@
                 </p>
                 <b-row>
                   <b-col cols="5">
-                    <b-button class="cardButton" @click="viewCharacter(char)"
-                      >View Character</b-button
-                    >
+                    <b-button class="cardButton" @click="viewCharacter(char)">View Character</b-button>
                   </b-col>
                   <b-col cols="5">
                     <b-button
                       :disabled="activeChar !== char.charUser"
                       class="cardButton"
                       @click="deleteCharacterModal(index)"
-                      >Delete Character</b-button
-                    >
+                    >Delete Character</b-button>
                   </b-col>
                   <b-col cols="5">
                     <b-button
                       :disabled="activeChar !== char.charUser"
                       class="cardButton"
                       @click="assignToGame(index)"
-                      >Assign Character</b-button
-                    >
+                    >Assign Character</b-button>
                   </b-col>
                 </b-row>
               </b-col>
@@ -75,25 +71,21 @@
           <b-col>
             <p>
               Are you sure you want to delete this character (
-              <span style="font-weight:bold">{{ charName }}</span> )?
+              <span
+                style="font-weight:bold"
+              >{{ charName }}</span> )?
             </p>
           </b-col>
         </b-row>
         <b-row>
           <b-col>
-            <b-button
-              class="cardButton"
-              @click="deleteCharacter(1)"
-              :disabled="loading"
-            >
+            <b-button class="cardButton" @click="deleteCharacter(1)" :disabled="loading">
               {{ !loading ? "Yes" : "Loading..." }}
               <b-spinner label="Loading..." v-if="loading"></b-spinner>
             </b-button>
           </b-col>
           <b-col>
-            <b-button class="cardButton" @click="deleteCharacter(2)"
-              >No</b-button
-            >
+            <b-button class="cardButton" @click="deleteCharacter(2)">No</b-button>
           </b-col>
         </b-row>
       </div>
@@ -105,17 +97,15 @@
           <b-col>
             <p>
               To which game would you like to assign this character (
-              <span style="font-weight:bold">{{ charName }}</span> )?
+              <span
+                style="font-weight:bold"
+              >{{ charName }}</span> )?
             </p>
           </b-col>
         </b-row>
         <b-row>
           <b-col>
-            <select
-              id="gameAssign"
-              v-model="gameSelection"
-              class="form-control"
-            >
+            <select id="gameAssign" v-model="gameSelection" class="form-control">
               <option
                 v-for="(game, index) in gameList"
                 :key="index"
@@ -131,26 +121,19 @@
                   !game.gamePlayers.includes(currUser) &&
                     game.gameGM !== currUser
                 "
-                >{{ game.gameName }}</option
-              >
+              >{{ game.gameName }}</option>
             </select>
           </b-col>
         </b-row>
         <b-row>
           <b-col>
-            <b-button
-              class="cardButton"
-              @click="assignCharacter(1)"
-              :disabled="loading"
-            >
+            <b-button class="cardButton" @click="assignCharacter(1)" :disabled="loading">
               {{ !loading ? "Yes" : "Loading..." }}
               <b-spinner label="Loading..." v-if="loading"></b-spinner>
             </b-button>
           </b-col>
           <b-col>
-            <b-button class="cardButton" @click="assignCharacter(2)"
-              >No</b-button
-            >
+            <b-button class="cardButton" @click="assignCharacter(2)">No</b-button>
           </b-col>
         </b-row>
       </div>
@@ -237,6 +220,7 @@ export default {
         this.assignIndex = null;
         this.charName = "";
         this.gameSelection = null;
+        this.$forceUpdate();
       }
     }
   },

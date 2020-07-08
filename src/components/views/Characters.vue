@@ -19,7 +19,7 @@
       </b-col>
     </b-row>
     <hr />
-    <b-tabs>
+    <b-tabs no-key-nav>
       <b-tab :title="'Dungeons & Dragons 5e'">
         <h2>Dungeons & Dragons 5e</h2>
         <DnD5ePreview v-if="hasDND5e"></DnD5ePreview>
