@@ -583,8 +583,8 @@
                     v-model="tempFeatures"
                     @change="saveFeatures()"
                     placeholder="..."
-                    rows="5"
-                    max-rows="20"
+                    rows="15"
+                    max-rows="15"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -604,8 +604,8 @@
                     v-model="tempFeats"
                     @change="saveFeats()"
                     placeholder="..."
-                    rows="5"
-                    max-rows="20"
+                    rows="15"
+                    max-rows="15"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -626,8 +626,8 @@
                     v-model="tempBackstory"
                     @change="saveBackstory"
                     placeholder="..."
-                    rows="5"
-                    max-rows="20"
+                    rows="15"
+                    max-rows="15"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -647,8 +647,8 @@
                     v-model="tempNotes"
                     @change="saveNotes"
                     placeholder="..."
-                    rows="5"
-                    max-rows="20"
+                    rows="15"
+                    max-rows="15"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -860,14 +860,14 @@ export default {
         attackName: "",
         hitMod: "",
         dmg: "",
-        notes: ""
+        notes: "",
       },
       attacksTableFields: [
         { key: "attackName", label: "Attack Name", sortable: false },
         { key: "hitMod", label: "Hit Modifier" },
         { key: "dmg", label: "Damage" },
         { key: "notes", label: "Notes" },
-        { key: "delete", label: "Delete" }
+        { key: "delete", label: "Delete" },
       ],
       // Equipment Table
       tempEquipment: { itemName: "", qty: 0, weight: 0, details: "" },
@@ -876,27 +876,27 @@ export default {
         { key: "qty", label: "Quantity" },
         { key: "weight", label: "Weight" },
         { key: "details", label: "Details" },
-        { key: "delete", label: "Delete" }
+        { key: "delete", label: "Delete" },
       ],
       // Spell Tables
       tempSpell: { spellName: "", spellDescription: "", lvl: "" },
       spellTableFields: [
         { key: "spellName", label: "Spell Name", sortable: false },
         { key: "spellDescription", label: "Spell Description" },
-        { key: "delete", label: "Delete" }
-      ]
+        { key: "delete", label: "Delete" },
+      ],
     };
   },
   computed: {
     ...mapGetters({
-      appRoute: "getAppRoute"
+      appRoute: "getAppRoute",
     }),
     activeGame() {
       return this.$store.getters.getActiveGame;
     },
     activeUser() {
       return this.$store.getters.getCurrUserName;
-    }
+    },
   },
   methods: {
     // The Following all parse the individual textAreas
@@ -905,7 +905,7 @@ export default {
       var stringArray = document
         .getElementById("charPoficieniesList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.tempChar.proficiencies.push(element);
       });
     },
@@ -914,7 +914,7 @@ export default {
       var stringArray = document
         .getElementById("charLanguageList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.tempChar.languages.push(element);
       });
     },
@@ -923,7 +923,7 @@ export default {
       var stringArray = document
         .getElementById("charFeaturesList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.tempChar.features.push(element);
       });
     },
@@ -932,7 +932,7 @@ export default {
       var stringArray = document
         .getElementById("charFeatsList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.tempChar.feats.push(element);
       });
     },
@@ -941,7 +941,7 @@ export default {
       var stringArray = document
         .getElementById("charBackstoryList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.tempChar.backstory.push(element);
       });
     },
@@ -950,7 +950,7 @@ export default {
       var stringArray = document
         .getElementById("charNotesList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.tempChar.notes.push(element);
       });
     },
@@ -970,7 +970,7 @@ export default {
         attackName: "",
         hitMod: "",
         dmg: "",
-        notes: ""
+        notes: "",
       };
     },
     deleteFromAttacks(index) {
@@ -987,15 +987,15 @@ export default {
       var spellLevel = this.tempSpell.lvl;
       this.tempChar.spells[spellLevel].push({
         spellName: this.tempSpell.spellName,
-        spellDescription: this.tempSpell.spellDescription
+        spellDescription: this.tempSpell.spellDescription,
       });
       this.tempSpell = { spellName: "", spellDescription: "", lvl: "" };
     },
     deleteFromSpells(index, level) {
       var spellLevel = level;
       this.tempChar.spells[spellLevel].splice(index, 1);
-    }
-  }
+    },
+  },
 };
 </script>
 

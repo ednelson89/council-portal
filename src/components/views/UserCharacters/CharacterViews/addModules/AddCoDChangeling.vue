@@ -1078,8 +1078,8 @@
                     v-model="tempBackstory"
                     @change="saveBackstory"
                     placeholder="..."
-                    rows="5"
-                    max-rows="20"
+                    rows="15"
+                    max-rows="15"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -1099,8 +1099,8 @@
                     v-model="tempNotes"
                     @change="saveNotes"
                     placeholder="..."
-                    rows="5"
-                    max-rows="20"
+                    rows="15"
+                    max-rows="15"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -1145,7 +1145,7 @@ export default {
         17,
         18,
         19,
-        20
+        20,
       ],
       loading: false,
       tempChar: charCoDChangeling(),
@@ -1171,7 +1171,7 @@ export default {
       pledgeTableFields: [
         { key: "type", label: "Type", sortable: false },
         { key: "notes", label: "Notes" },
-        { key: "delete", label: "Delete" }
+        { key: "delete", label: "Delete" },
       ],
       // Contract table
       tempContract: {
@@ -1182,7 +1182,7 @@ export default {
         action: "",
         duration: "",
         loophole: "",
-        seemingBenefit: ""
+        seemingBenefit: "",
       },
       contractTableFields: [
         { key: "name", label: "Name", sortable: false },
@@ -1193,7 +1193,7 @@ export default {
         { key: "duration", label: "Duration" },
         { key: "loophole", label: "Loophole" },
         { key: "seemingBenefit", label: "Seeming Benefit" },
-        { key: "delete", label: "Delete" }
+        { key: "delete", label: "Delete" },
       ],
       // Attack Table
       attack: {
@@ -1203,7 +1203,7 @@ export default {
         clip: "",
         init: "",
         str: "",
-        size: ""
+        size: "",
       },
       attacksTableFields: [
         { key: "name", label: "Attack Name", sortable: false },
@@ -1213,7 +1213,7 @@ export default {
         { key: "init", label: "Init" },
         { key: "str", label: "Str" },
         { key: "size", label: "Size" },
-        { key: "delete", label: "Delete" }
+        { key: "delete", label: "Delete" },
       ],
       // Equipment Table
       tempEquipment: {
@@ -1222,7 +1222,7 @@ export default {
         structure: "",
         size: "",
         cost: "",
-        qnty: 0
+        qnty: 0,
       },
       equipmentTableFields: [
         { key: "name", label: "Item Name", sortable: false },
@@ -1232,15 +1232,15 @@ export default {
         { key: "details", label: "Details" },
         { key: "cost", label: "Cost" },
         { key: "qnty", label: "Quantity" },
-        { key: "delete", label: "Delete" }
-      ]
+        { key: "delete", label: "Delete" },
+      ],
     };
   },
   computed: {
     ...mapGetters({
       appRoute: "getAppRoute",
-      activeUser: "getActiveUser"
-    })
+      activeUser: "getActiveUser",
+    }),
   },
   methods: {
     addNewChar() {
@@ -1248,7 +1248,7 @@ export default {
       var localStore = JSON.parse(localStorage.getItem("UserData"));
 
       this.$store.commit("setNewUserCharacter", this.tempChar);
-      postUserCharUpdate(localStore, 1, this.tempChar).then(data => {
+      postUserCharUpdate(localStore, 1, this.tempChar).then((data) => {
         this.activeUser.userChars = data;
         this.loading = false;
         this.$router.push({ path: "/characters" });
@@ -1259,7 +1259,7 @@ export default {
       var stringArray = document
         .getElementById("charBackstoryList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.tempChar.backstory.push(element);
       });
     },
@@ -1268,14 +1268,14 @@ export default {
       var stringArray = document
         .getElementById("charNotesList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.tempChar.notes.push(element);
       });
     },
     addCondition() {
       this.tempChar.combatStats.conditions.push({
         desc: this.tempCond,
-        clarity: this.tempCondTF
+        clarity: this.tempCondTF,
       });
       this.tempCond = "";
       this.tempCondTF = false;
@@ -1334,7 +1334,7 @@ export default {
         action: "",
         duration: "",
         loophole: "",
-        seemingBenefit: ""
+        seemingBenefit: "",
       };
     },
     addPledge() {
@@ -1424,11 +1424,11 @@ export default {
       for (var i = 0; i < localTotal; i++) {
         this.tempChar.combatStats[field].boxes.push({ status: "" });
       }
-    }
+    },
   },
   mounted() {
     this.tempChar.charUser = this.$store.getters.getCurrUserName;
-  }
+  },
 };
 </script>
 

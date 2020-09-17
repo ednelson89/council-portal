@@ -561,8 +561,8 @@
                     v-model="tempBackstory"
                     @change="saveBackstory"
                     placeholder="..."
-                    rows="5"
-                    max-rows="20"
+                    rows="15"
+                    max-rows="15"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -582,8 +582,8 @@
                     v-model="tempNotes"
                     @change="saveNotes"
                     placeholder="..."
-                    rows="5"
-                    max-rows="20"
+                    rows="15"
+                    max-rows="15"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -619,7 +619,7 @@ export default {
         clip: "",
         init: "",
         str: "",
-        size: ""
+        size: "",
       },
       attacksTableFields: [
         { key: "name", label: "Attack Name", sortable: false },
@@ -629,7 +629,7 @@ export default {
         { key: "init", label: "Init" },
         { key: "str", label: "Str" },
         { key: "size", label: "Size" },
-        { key: "delete", label: "Delete" }
+        { key: "delete", label: "Delete" },
       ],
       // Equipment Table
       tempEquipment: {
@@ -638,7 +638,7 @@ export default {
         structure: "",
         size: "",
         cost: "",
-        qnty: 0
+        qnty: 0,
       },
       equipmentTableFields: [
         { key: "name", label: "Item Name", sortable: false },
@@ -648,8 +648,8 @@ export default {
         { key: "details", label: "Details" },
         { key: "cost", label: "Cost" },
         { key: "qnty", label: "Quantity" },
-        { key: "delete", label: "Delete" }
-      ]
+        { key: "delete", label: "Delete" },
+      ],
     };
   },
   methods: {
@@ -659,7 +659,7 @@ export default {
       var stringArray = document
         .getElementById("charBackstoryList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.char.backstory.push(element);
       });
     },
@@ -668,7 +668,7 @@ export default {
       var stringArray = document
         .getElementById("charNotesList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.char.notes.push(element);
       });
     },
@@ -690,27 +690,27 @@ export default {
     saveCharEdits() {
       this.loading = true;
       var localStore = JSON.parse(localStorage.getItem("UserData"));
-      postUserCharUpdate(localStore, 3, this.char).then(data => {
+      postUserCharUpdate(localStore, 3, this.char).then((data) => {
         this.activeUser.userChars = data;
         this.loading = false;
         this.$router.push({ path: "/view-user-character" });
       });
-    }
+    },
   },
   computed: {
     ...mapGetters({
       activeUser: "getActiveUser",
-      char: "getActiveChar"
-    })
+      char: "getActiveChar",
+    }),
   },
   mounted() {
-    this.char.backstory.forEach(story => {
+    this.char.backstory.forEach((story) => {
       this.tempBackstory += story + "\n";
     });
-    this.char.notes.forEach(note => {
+    this.char.notes.forEach((note) => {
       this.tempNotes += note + "\n";
     });
-  }
+  },
 };
 </script>
 

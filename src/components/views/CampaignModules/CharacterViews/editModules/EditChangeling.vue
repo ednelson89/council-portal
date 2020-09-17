@@ -1269,8 +1269,8 @@
                     v-model="tempBackstory"
                     @change="saveBackstory"
                     placeholder="..."
-                    rows="5"
-                    max-rows="20"
+                    rows="15"
+                    max-rows="15"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -1290,8 +1290,8 @@
                     v-model="tempNotes"
                     @change="saveNotes"
                     placeholder="..."
-                    rows="5"
-                    max-rows="20"
+                    rows="15"
+                    max-rows="15"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -1306,7 +1306,7 @@
 <script>
 import {
   getCampaigns,
-  updateGameChar
+  updateGameChar,
 } from "@/components/modules/utilities/dataFunctions.js";
 import ChangelingUpdate from "@/components/modules/DataUpdates/ChangelingUpdate.vue";
 
@@ -1339,7 +1339,7 @@ export default {
         17,
         18,
         19,
-        20
+        20,
       ],
       loading: false,
       tempNotes: "",
@@ -1364,7 +1364,7 @@ export default {
       pledgeTableFields: [
         { key: "type", label: "Type", sortable: false },
         { key: "notes", label: "Notes" },
-        { key: "delete", label: "Delete" }
+        { key: "delete", label: "Delete" },
       ],
       // Contract table
       tempContract: {
@@ -1375,7 +1375,7 @@ export default {
         action: "",
         duration: "",
         loophole: "",
-        seemingBenefit: ""
+        seemingBenefit: "",
       },
       contractTableFields: [
         { key: "name", label: "Name", sortable: false },
@@ -1386,7 +1386,7 @@ export default {
         { key: "duration", label: "Duration" },
         { key: "loophole", label: "Loophole" },
         { key: "seemingBenefit", label: "Seeming Benefit" },
-        { key: "delete", label: "Delete" }
+        { key: "delete", label: "Delete" },
       ],
       // Attack Table
       attack: {
@@ -1396,7 +1396,7 @@ export default {
         clip: "",
         init: "",
         str: "",
-        size: ""
+        size: "",
       },
       attacksTableFields: [
         { key: "name", label: "Attack Name", sortable: false },
@@ -1406,7 +1406,7 @@ export default {
         { key: "init", label: "Init" },
         { key: "str", label: "Str" },
         { key: "size", label: "Size" },
-        { key: "delete", label: "Delete" }
+        { key: "delete", label: "Delete" },
       ],
       // Equipment Table
       tempEquipment: {
@@ -1416,7 +1416,7 @@ export default {
         size: "",
         details: "",
         cost: "",
-        qnty: 0
+        qnty: 0,
       },
       equipmentTableFields: [
         { key: "name", label: "Item Name", sortable: false },
@@ -1426,8 +1426,8 @@ export default {
         { key: "details", label: "Details" },
         { key: "cost", label: "Cost" },
         { key: "qnty", label: "Quantity" },
-        { key: "delete", label: "Delete" }
-      ]
+        { key: "delete", label: "Delete" },
+      ],
     };
   },
   methods: {
@@ -1446,9 +1446,9 @@ export default {
     updateGame() {
       let gameList = [];
       getCampaigns()
-        .then(response => {
+        .then((response) => {
           let currGame;
-          response.forEach(entry => {
+          response.forEach((entry) => {
             gameList.push(entry);
             if (entry.gameID === this.activeGame.gameID) {
               currGame = entry;
@@ -1456,7 +1456,7 @@ export default {
           });
           return currGame;
         })
-        .then(game => {
+        .then((game) => {
           game.wikiPosts = game.wikiPosts.reverse();
           this.$store.commit("setActiveGame", game);
           this.$store.commit("setGames", gameList);
@@ -1468,7 +1468,7 @@ export default {
       var stringArray = document
         .getElementById("charBackstoryList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.char.backstory.push(element);
       });
     },
@@ -1477,7 +1477,7 @@ export default {
       var stringArray = document
         .getElementById("charNotesList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.char.notes.push(element);
       });
     },
@@ -1485,7 +1485,7 @@ export default {
     addCondition() {
       this.char.combatStats.conditions.push({
         desc: this.tempCond,
-        clarity: this.tempCondTF
+        clarity: this.tempCondTF,
       });
       this.tempCond.desc = "";
       this.tempCondTF = false;
@@ -1542,7 +1542,7 @@ export default {
         action: "",
         duration: "",
         loophole: "",
-        seemingBenefit: ""
+        seemingBenefit: "",
       };
     },
     addPledge() {
@@ -1632,7 +1632,7 @@ export default {
       for (var i = 0; i < localTotal; i++) {
         this.char.combatStats[field].boxes.push({ status: "" });
       }
-    }
+    },
   },
   computed: {
     char() {
@@ -1643,16 +1643,16 @@ export default {
     },
     activeUser() {
       return this.$store.getters.getCurrUserName;
-    }
+    },
   },
   mounted() {
-    this.char.backstory.forEach(story => {
+    this.char.backstory.forEach((story) => {
       this.tempBackstory += story + "\n";
     });
-    this.char.notes.forEach(note => {
+    this.char.notes.forEach((note) => {
       this.tempNotes += note + "\n";
     });
-  }
+  },
 };
 </script>
 

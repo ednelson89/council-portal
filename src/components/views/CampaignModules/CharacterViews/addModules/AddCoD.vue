@@ -564,8 +564,8 @@
                     v-model="tempBackstory"
                     @change="saveBackstory"
                     placeholder="..."
-                    rows="5"
-                    max-rows="20"
+                    rows="15"
+                    max-rows="15"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -585,8 +585,8 @@
                     v-model="tempNotes"
                     @change="saveNotes"
                     placeholder="..."
-                    rows="5"
-                    max-rows="20"
+                    rows="15"
+                    max-rows="15"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
@@ -624,7 +624,7 @@ export default {
         clip: "",
         init: "",
         str: "",
-        size: ""
+        size: "",
       },
       attacksTableFields: [
         { key: "name", label: "Attack Name", sortable: false },
@@ -634,7 +634,7 @@ export default {
         { key: "init", label: "Init" },
         { key: "str", label: "Str" },
         { key: "size", label: "Size" },
-        { key: "delete", label: "Delete" }
+        { key: "delete", label: "Delete" },
       ],
       // Equipment Table
       tempEquipment: {
@@ -643,7 +643,7 @@ export default {
         structure: "",
         size: "",
         cost: "",
-        qnty: 0
+        qnty: 0,
       },
       equipmentTableFields: [
         { key: "name", label: "Item Name", sortable: false },
@@ -653,20 +653,20 @@ export default {
         { key: "details", label: "Details" },
         { key: "cost", label: "Cost" },
         { key: "qnty", label: "Quantity" },
-        { key: "delete", label: "Delete" }
-      ]
+        { key: "delete", label: "Delete" },
+      ],
     };
   },
   computed: {
     ...mapGetters({
-      appRoute: "getAppRoute"
+      appRoute: "getAppRoute",
     }),
     activeGame() {
       return this.$store.getters.getActiveGame;
     },
     activeUser() {
       return this.$store.getters.getCurrUserName;
-    }
+    },
   },
   methods: {
     saveBackstory() {
@@ -674,7 +674,7 @@ export default {
       var stringArray = document
         .getElementById("charBackstoryList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.tempChar.backstory.push(element);
       });
     },
@@ -683,7 +683,7 @@ export default {
       var stringArray = document
         .getElementById("charNotesList")
         .value.split("\n");
-      stringArray.forEach(element => {
+      stringArray.forEach((element) => {
         this.tempChar.notes.push(element);
       });
     },
@@ -717,7 +717,7 @@ export default {
         attackName: "",
         hitMod: "",
         dmg: "",
-        notes: ""
+        notes: "",
       };
     },
     deleteFromAttacks(index) {
@@ -734,15 +734,15 @@ export default {
       var spellLevel = this.tempSpell.lvl;
       this.tempChar.spells[spellLevel].push({
         spellName: this.tempSpell.spellName,
-        spellDescription: this.tempSpell.spellDescription
+        spellDescription: this.tempSpell.spellDescription,
       });
       this.tempSpell = { spellName: "", spellDescription: "", lvl: "" };
     },
     deleteFromSpells(index, level) {
       var spellLevel = level;
       this.tempChar.spells[spellLevel].splice(index, 1);
-    }
-  }
+    },
+  },
 };
 </script>
 
