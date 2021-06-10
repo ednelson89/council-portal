@@ -31,11 +31,31 @@
     <b-row>
       <b-col>
         <h3>Game Summary:</h3>
-        <p
+        <div v-if="!editingSummary">
+          <p
           style="font-style: italic; "
           v-for="(desc, index) in activeGame.gameDesc"
           :key="index"
         >{{desc}}</p>
+        </div>
+        <div v-else>
+          <b-form-textarea
+              class="form-control"
+              id="summaryTextArea"
+              v-model="tempSummary"
+              @input="toArray"
+              placeholder="..."
+              rows="20"
+              max-rows="20"
+            ></b-form-textarea>
+        </div>
+        <div v-if="gameGM">
+          <b-button v-if="!editingSummary" id="editButton" class="cardButton" @click="editSummary">Edit</b-button>
+          <b-button v-if="editingSummary" class="cardButton" @click="closeEdit" :disabled="loading">
+            {{ !loading ? "Save" : "Loading..." }}
+            <b-spinner label="Loading..." v-if="loading"></b-spinner>  
+          </b-button>
+        </div>
       </b-col>
     </b-row>
     <hr />
@@ -100,23 +120,54 @@
 import { mapGetters } from "vuex";
 import {
   getCampaigns,
-  updateGameUsers
+  updateGameUsers,
+  updateGameSummary
 } from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   data() {
     return {
-      loading: false
+      loading: false,
+      editingSummary: false,
+      tempSummary: ""
     };
   },
   methods: {
+    editSummary() {
+      this.editingSummary = !this.editingSummary
+      this.activeGame.gameDesc.forEach(para => {
+        this.tempSummary += para + "\n";
+      });
+    },
+    closeEdit() {
+      this.loading = true;
+      updateGameSummary(this.activeGame.gameDesc, this.activeGame.gameID)
+        .then(() => {
+          return this.updateGame();
+        })
+        .then(() => {
+          this.tempSummary = "";
+          this.loading = false;
+          this.editingSummary = false
+          this.$forceUpdate();
+        });
+    },
+    toArray() {
+      this.activeGame.gameDesc = [];
+      var stringArray = document
+        .getElementById("summaryTextArea")
+        .value.split("\n");
+      stringArray.forEach(element => {
+        this.activeGame.gameDesc.push(element);
+      });
+    },
     closeModal() {
       this.$refs["joinGameModal"].hide();
       this.loading = false;
     },
     updateGame() {
       let gameList = [];
-      getCampaigns()
+      return getCampaigns()
         .then(response => {
           let currGame;
           response.forEach(entry => {
@@ -137,8 +188,9 @@ export default {
       this.loading = true;
       if (!this.inGame) {
         updateGameUsers(1, this.currUser, this.activeGame.gameID).then(() => {
+          return this.updateGame();
+        }).then(() => {
           this.loading = false;
-          this.updateGame();
           this.$refs["joinGameModal"].hide();
         });
       } else {
@@ -163,9 +215,12 @@ export default {
     },
     inGame() {
       return this.activeGame.gamePlayers.includes(this.currUser);
+    },
+    gameGM(){
+      return this.activeGame.gameGM === this.currUser
     }
   },
-  beforeMount() {
+  async beforeMount() {
     this.updateGame();
   }
 };

@@ -133,6 +133,7 @@
 
             <b-card class="b-cards">
               <p class="sectionLabel">Skills</p>
+              <p>Make note of any specializations in the notes section.</p>
               <b-row>
                 <b-col class="skillCols">
                   <p class="sectionLabel">Mental</p>
@@ -145,7 +146,7 @@
                     </label>
                     <p style="margin:0 15px; display: inline;">{{skill.score}}</p>
                     <br />
-                    <span>Proficient:</span>
+                    <span>Specialization:</span>
                     <p
                       style="margin:0 15px; display: inline;"
                     >{{skill.prof === true ? "Yes" : "No"}}</p>
@@ -162,7 +163,7 @@
                     </label>
                     <p style="margin:0 15px; display: inline;">{{skill.score}}</p>
                     <br />
-                    <span>Proficient:</span>
+                    <span>Specialization:</span>
                     <p
                       style="margin:0 15px; display: inline;"
                     >{{skill.prof === true ? "Yes" : "No"}}</p>
@@ -179,7 +180,7 @@
                     </label>
                     <p style="margin:0 15px; display: inline;">{{skill.score}}</p>
                     <br />
-                    <span>Proficient:</span>
+                    <span>Specialization:</span>
                     <p
                       style="margin:0 15px; display: inline;"
                     >{{skill.prof === true ? "Yes" : "No"}}</p>
@@ -200,17 +201,59 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col>
+                <b-col  style="border-right: 1px black solid;">
                   <label class="inline-label">Health:</label>
-                  <p>{{char.combatStats.health}}</p>
+                  <p>{{char.combatStats.health.total}}</p>
+                  <b-row>
+                    <b-col
+                      v-for="(box, index) in char.combatStats.health.boxes"
+                      :key="'healthBox'+index"
+                      style="margin: 2px; padding:2px;"
+                    >
+                      <select v-model="box.status" class="form-control customInputBox" disabled>
+                        <option value></option>
+                        <option value="/">/</option>
+                        <option value="X">X</option>
+                        <option value="#">#</option>
+                      </select>
+                    </b-col>
+                  </b-row>
                 </b-col>
-                <b-col>
+                <b-col  style="border-right: 1px black solid;">
                   <label class="inline-label">Willpower:</label>
-                  <p>{{char.combatStats.willpower}}</p>
+                  <p>{{char.combatStats.willpower.total}}</p>
+                  <b-row>
+                    <b-col
+                      v-for="(box, index) in char.combatStats.willpower.boxes"
+                      :key="'willpowerBox'+index"
+                      style="margin: 2px; padding:2px;"
+                    >
+                      <select v-model="box.status" class="form-control customInputBox" disabled>
+                        <option value></option>
+                        <option value="/">/</option>
+                        <option value="X">X</option>
+                        <option value="#">#</option>
+                      </select>
+                    </b-col>
+                  </b-row>
                 </b-col>
                 <b-col>
                   <label class="inline-label">Integrity:</label>
-                  <p>{{char.combatStats.integrity}}</p>
+                  <p>{{char.combatStats.integrity.total}}</p>
+                  <b-row>
+                    <b-col
+                      v-for="(box, index) in char.combatStats.integrity.boxes"
+                      :key="'integrityBox'+index"
+                      style="margin: 2px; padding:2px;"
+                    >
+                      <select v-model="box.status" class="form-control customInputBox" disabled>
+                        <option value></option>
+                        <option value="/">/</option>
+                        <option value="X">X</option>
+                        <option value="#">#</option>
+                      </select>
+                    </b-col>
+                  </b-row>
                 </b-col>
               </b-row>
               <hr />

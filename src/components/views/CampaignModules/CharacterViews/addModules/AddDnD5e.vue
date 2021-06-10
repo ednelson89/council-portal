@@ -12,8 +12,6 @@
           <span class="italics">{{tempChar.charUser}}</span>
         </p>
         <hr />
-        <p>Editing is done in real time. There is no need to save.</p>
-        <hr />
         <b-button
           @click="addNewChar"
           class="cardButton"

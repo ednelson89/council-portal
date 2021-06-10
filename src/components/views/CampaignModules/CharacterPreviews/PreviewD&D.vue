@@ -120,6 +120,8 @@
 </template>
 
 <script>
+/* eslint-disable */
+
 import {
   getCampaigns,
   updateGameChar,
@@ -168,14 +170,14 @@ export default {
           this.currGame.gameChars[this.delIndex]
         ).then(() => {
           // Delete from game
-          updateGameChar(
+         updateGameChar(
             2,
             this.currGame.gameChars[this.delIndex],
             this.currGame.gameID
           )
             .then(() => {
               // update Game
-              this.updateGame();
+             return this.updateGame();
             })
             .then(() => {
               this.$refs["unassignModal"].hide();
@@ -184,6 +186,7 @@ export default {
               this.delIndex = null;
               this.loading = false;
               this.charName = "";
+              this.$router.push({path: '/game-hub'})
             });
         });
       } else if (code === 2) {
@@ -202,7 +205,7 @@ export default {
           this.currGame.gameID
         )
           .then(() => {
-            this.updateGame();
+            return this.updateGame();
           })
           .then(() => {
             this.$forceUpdate();
@@ -220,7 +223,7 @@ export default {
     },
     updateGame() {
       let gameList = [];
-      getCampaigns()
+        getCampaigns()
         .then(response => {
           let currGame;
           response.forEach(entry => {

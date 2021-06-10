@@ -156,6 +156,8 @@
             </b-card>
             <b-card class="b-cards">
               <p class="sectionLabel">Skills</p>
+                            <p>Make note of any specializations in the notes section.</p>
+
               <b-row>
                 <b-col class="skillCols">
                   <p class="sectionLabel">Mental</p>
@@ -251,23 +253,65 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col>
+                <b-col  style="border-right: 1px black solid;">
                   <label class="inline-label">Health:</label>
-                  <select class="form-control codSelect" v-model="char.combatStats.health">
+                  <select class="form-control codSelect" v-model="char.combatStats.health.total" @change="updateBoxCount('health')">
                     <option v-for="(num, index) in health" :key="index" :value="num">{{ num }}</option>
                   </select>
+                  <b-row>
+                    <b-col
+                      v-for="(box, index) in char.combatStats.health.boxes"
+                      :key="'healthBox'+index"
+                      style="margin: 2px; padding:2px;"
+                    >
+                      <select v-model="box.status" class="form-control customInputBox">
+                        <option value></option>
+                        <option value="/">/</option>
+                        <option value="X">X</option>
+                        <option value="#">#</option>
+                      </select>
+                    </b-col>
+                  </b-row>
                 </b-col>
-                <b-col>
+                <b-col  style="border-right: 1px black solid;">
                   <label class="inline-label">Willpower:</label>
-                  <select class="form-control codSelect" v-model="char.combatStats.willpower">
+                  <select class="form-control codSelect" v-model="char.combatStats.willpower.total" @change="updateBoxCount('willpower')">
                     <option v-for="(num, index) in willInteg" :key="index" :value="num">{{ num }}</option>
                   </select>
+                  <b-row>
+                    <b-col
+                      v-for="(box, index) in char.combatStats.willpower.boxes"
+                      :key="'willBox'+index"
+                      style="margin: 2px; padding:2px;"
+                    >
+                      <select v-model="box.status" class="form-control customInputBox">
+                        <option value></option>
+                        <option value="/">/</option>
+                        <option value="X">X</option>
+                        <option value="#">#</option>
+                      </select>
+                    </b-col>
+                  </b-row>
                 </b-col>
                 <b-col>
                   <label class="inline-label">Integrity:</label>
-                  <select class="form-control codSelect" v-model="char.combatStats.integrity">
+                  <select class="form-control codSelect" v-model="char.combatStats.integrity.total" @change="updateBoxCount('integrity')">
                     <option v-for="(num, index) in willInteg" :key="index" :value="num">{{ num }}</option>
                   </select>
+                  <b-row>
+                    <b-col
+                      v-for="(box, index) in char.combatStats.integrity.boxes"
+                      :key="'integrity'+index"
+                      style="margin: 2px; padding:2px;"
+                    >
+                      <select v-model="box.status" class="form-control customInputBox">
+                        <option value></option>
+                        <option value="/">/</option>
+                        <option value="X">X</option>
+                        <option value="#">#</option>
+                      </select>
+                    </b-col>
+                  </b-row>
                 </b-col>
               </b-row>
               <hr />
@@ -697,6 +741,16 @@ export default {
       });
       this.$router.push({ path: "/view-game-character" });
     },
+     // Update boxes
+    updateBoxCount(field) {
+      // eslint-disable-next-line no-console
+      console.log("Update Field: ", field);
+      let localTotal = this.char.combatStats[field].total;
+      this.char.combatStats[field].boxes = [];
+      for (var i = 0; i < localTotal; i++) {
+        this.char.combatStats[field].boxes.push({ status: "" });
+      }
+    },
     updateGame() {
       let gameList = [];
       getCampaigns()
@@ -729,6 +783,28 @@ export default {
     },
   },
   mounted() {
+    // Convert combat stats to use boxes
+    if (typeof this.char.combatStats.health === 'number' || !this.char.combatStats.health){
+      let temphealth = {
+      total: this.char.combatStats.health,
+      boxes: []
+      }
+      this.char.combatStats.health = temphealth
+    }
+      if (typeof this.char.combatStats.willpower === 'number' || !this.char.combatStats.willpower){
+      let tempwill = {
+      total: this.char.combatStats.willpower,
+      boxes: []
+      }
+      this.char.combatStats.willpower = tempwill
+    }
+      if (typeof this.char.combatStats.integrity === 'number' || !this.char.combatStats.integrity){
+      let tempint = {
+      total: this.char.combatStats.integrity,
+      boxes: []
+      }
+      this.char.combatStats.integrity = tempint
+    }
     this.char.backstory.forEach((story) => {
       this.tempBackstory += story + "\n";
     });

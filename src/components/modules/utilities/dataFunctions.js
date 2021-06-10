@@ -3,12 +3,31 @@ import axios from "axios";
 
 // CAMPAIGN FUNCTIONS
 var getCampaigns = function() {
-  return axios
+  try{
+    return axios
     .get(process.env.VUE_APP_API_URL + "getCampaignTable?pass=cob2019")
     .then(result => {
       return result.data;
     });
+  }catch(e){
+    return axios
+    .get(process.env.VUE_APP_API_URL + "getCampaignTable?pass=cob2019")
+    .then(result => {
+      return result.data;
+    });
+  }
 };
+
+var updateGameSummary = function(gameSummary, activeID){
+  var message = {
+    data: { data: gameSummary, gameID: activeID }
+  };
+  return axios
+    .post(process.env.VUE_APP_API_URL + "updateGameSummary", message)
+    .then(response => {
+      return response.data;
+    });
+}
 
 var addCampaigns = function(campaignData) {
   var message = { data: campaignData };
@@ -131,5 +150,6 @@ export {
   updateJournals,
   updateGameUsers,
   updateTokens,
-  updateMap
+  updateMap,
+  updateGameSummary
 };

@@ -253,21 +253,66 @@
               <b-row>
                 <b-col>
                   <label class="inline-label">Health:</label>
-                  <select class="form-control codSelect" v-model="tempChar.combatStats.health">
+                  <select class="form-control codSelect" v-model="tempChar.combatStats.health.total" 
+                  @change="updateBoxCount('health')">
                     <option v-for="(num, index) in health" :key="index" :value="num">{{ num }}</option>
                   </select>
+                   <b-row>
+                    <b-col
+                      v-for="(box, index) in tempChar.combatStats.health.boxes"
+                      :key="'healthBox'+index"
+                      style="margin: 2px; padding:2px;"
+                    >
+                      <select v-model="box.status" class="form-control customInputBox">
+                        <option value></option>
+                        <option value="/">/</option>
+                        <option value="X">X</option>
+                        <option value="#">#</option>
+                      </select>
+                    </b-col>
+                  </b-row>
                 </b-col>
                 <b-col>
                   <label class="inline-label">Willpower:</label>
-                  <select class="form-control codSelect" v-model="tempChar.combatStats.willpower">
+                  <select class="form-control codSelect" v-model="tempChar.combatStats.willpower.total" 
+                  @change="updateBoxCount('willpower')">
                     <option v-for="(num, index) in willInteg" :key="index" :value="num">{{ num }}</option>
                   </select>
+                  <b-row>
+                    <b-col
+                      v-for="(box, index) in tempChar.combatStats.willpower.boxes"
+                      :key="'willBox'+index"
+                      style="margin: 2px; padding:2px;"
+                    >
+                      <select v-model="box.status" class="form-control customInputBox">
+                        <option value></option>
+                        <option value="/">/</option>
+                        <option value="X">X</option>
+                        <option value="#">#</option>
+                      </select>
+                    </b-col>
+                  </b-row>
                 </b-col>
                 <b-col>
                   <label class="inline-label">Integrity:</label>
-                  <select class="form-control codSelect" v-model="tempChar.combatStats.integrity">
+                  <select class="form-control codSelect" v-model="tempChar.combatStats.integrity.total" 
+                  @change="updateBoxCount('integrity')">
                     <option v-for="(num, index) in willInteg" :key="index" :value="num">{{ num }}</option>
                   </select>
+                  <b-row>
+                    <b-col
+                      v-for="(box, index) in tempChar.combatStats.integrity.boxes"
+                      :key="'integrity'+index"
+                      style="margin: 2px; padding:2px;"
+                    >
+                      <select v-model="box.status" class="form-control customInputBox">
+                        <option value></option>
+                        <option value="/">/</option>
+                        <option value="X">X</option>
+                        <option value="#">#</option>
+                      </select>
+                    </b-col>
+                  </b-row>
                 </b-col>
               </b-row>
               <hr />
@@ -700,6 +745,16 @@ export default {
     },
     delAspiration(index) {
       this.tempChar.combatStats.aspirations.splice(index, 1);
+    },
+        // Update boxes
+    updateBoxCount(field) {
+      // eslint-disable-next-line no-console
+      console.log("Update Field: ", field);
+      let localTotal = this.tempChar.combatStats[field].total;
+      this.tempChar.combatStats[field].boxes = [];
+      for (var i = 0; i < localTotal; i++) {
+        this.tempChar.combatStats[field].boxes.push({ status: "" });
+      }
     },
     // Navigation Method
     addNewChar() {

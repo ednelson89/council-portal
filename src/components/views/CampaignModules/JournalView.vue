@@ -136,14 +136,6 @@
       size="xl"
     >
       <b-row>
-        <b-col>
-          <b-alert show style="color:#000">
-            *Note: Editing is done in real time to your journal, so there is no
-            need to save.
-          </b-alert>
-        </b-col>
-      </b-row>
-      <b-row>
         <b-col xs="12" md="6">
           <label>
             Title:
@@ -268,7 +260,7 @@ export default {
       this.loading = true;
       updateJournals(3, this.activeJournal, this.activeGame.gameID)
         .then(() => {
-          this.updateGame();
+          return this.updateGame();
         })
         .then(() => {
           this.$refs["editJournalModal"].hide();
@@ -286,7 +278,7 @@ export default {
       this.loading = true;
       updateJournals(1, this.activeJournal, this.activeGame.gameID)
         .then(() => {
-          this.updateGame();
+          return this.updateGame();
         })
         .then(() => {
           this.$refs["addJournalModal"].hide();
@@ -329,7 +321,7 @@ export default {
           this.loading = true;
           updateJournals(2, this.journalList[index], this.activeGame.gameID)
             .then(() => {
-              this.updateGame();
+              return this.updateGame();
             })
             .then(() => {
               this.loading = false;
@@ -342,7 +334,7 @@ export default {
     },
     updateGame() {
       let gameList = [];
-      getCampaigns()
+      return getCampaigns()
         .then(response => {
           let currGame;
           response.forEach(entry => {
@@ -375,7 +367,7 @@ export default {
         this.loading = true;
         updateJournals(4, this.journalList, this.activeGame.gameID)
           .then(() => {
-            this.updateGame();
+            return this.updateGame();
           })
           .then(() => {
             this.activeJournal = {};

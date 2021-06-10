@@ -59,9 +59,18 @@ const charCoD = () => ({
   },
   merits: [{ name: "", score: 0 }],
   combatStats: {
-    health: 0,
-    willpower: 0,
-    integrity: 0,
+    health: {
+      total: 0,
+      boxes: []
+    },
+    willpower: {
+      total: 0,
+      boxes: []
+    },
+    integrity: {
+      total: 0,
+      boxes: []
+    },
     conditions: [],
     aspirations: [],
     size: "",

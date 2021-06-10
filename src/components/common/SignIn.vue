@@ -39,7 +39,7 @@ import { mapGetters } from "vuex";
 import { postSignInOut } from "@/components/modules/utilities/postSignInOut.js";
 import {
   getCampaigns,
-  getUserChars
+  getUserChars,
 } from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
@@ -47,13 +47,13 @@ export default {
     return {
       userName: "",
       passWord: "",
-      loading: false
+      loading: false,
     };
   },
   computed: {
     ...mapGetters({
-      activeUser: "getActiveUser"
-    })
+      activeUser: "getActiveUser",
+    }),
   },
   methods: {
     postSignInOut,
@@ -85,7 +85,7 @@ export default {
       var certs = { username: this.userName, password: this.passWord };
       this.loading = true;
       this.postSignInOut(certs, 1)
-        .then(response => {
+        .then((response) => {
           if (response === true) {
             if (this.checkStore()) {
               // Get username
@@ -93,24 +93,21 @@ export default {
               // Get GamesList
               var gameList = [];
               this.getCampaigns()
-                .then(response => {
-                  response.forEach(entry => {
+                .then((response) => {
+                  response.forEach((entry) => {
                     gameList.push(entry);
                   });
+                  this.$store.commit("setGames", gameList);                  
                 })
-                .then(() => {
-                  this.$store.commit("setGames", gameList);
-                });
-
               this.$store.commit("setCurrUserName", userData);
 
               // Get user Characters
               var localStore = JSON.parse(localStorage.getItem("UserData"));
-              getUserChars(localStore).then(data => {
+              getUserChars(localStore).then((data) => {
                 this.activeUser.userChars = data;
 
                 this.loading = false;
-                this.$router.push({ path: "/characters" });
+                this.$router.push({ path: "/" });
               });
             }
           } else {
@@ -121,8 +118,8 @@ export default {
         .catch(() => {
           this.loading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

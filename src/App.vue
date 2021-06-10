@@ -46,7 +46,7 @@ import charList from "@/components/views/SideBar/CharacterList.vue";
 import gameButtons from "@/components/views/SideBar/GameTableFunctions.vue";
 import {
   getCampaigns,
-  getUserChars
+  getUserChars,
 } from "@/components/modules/utilities/dataFunctions.js";
 import { mapGetters } from "vuex";
 
@@ -78,11 +78,11 @@ export default {
     getUserStore() {
       var store = JSON.parse(localStorage.getItem("UserData"));
       return store.user;
-    }
+    },
   },
   computed: {
     ...mapGetters({
-      activeUser: "getActiveUser"
+      activeUser: "getActiveUser",
     }),
     showSidebar() {
       return (
@@ -96,7 +96,7 @@ export default {
         this.$route.path === "/game-calendar" ||
         this.$route.path === "/game-table"
       );
-    }
+    },
   },
   created() {
     if (this.checkStore()) {
@@ -106,8 +106,8 @@ export default {
       // Get GamesList
       var gameList = [];
       this.getCampaigns()
-        .then(response => {
-          response.forEach(entry => {
+        .then((response) => {
+          response.forEach((entry) => {
             gameList.push(entry);
           });
         })
@@ -119,11 +119,11 @@ export default {
 
       // Get user Characters
       var localStore = JSON.parse(localStorage.getItem("UserData"));
-      getUserChars(localStore).then(data => {
+      getUserChars(localStore).then((data) => {
         this.activeUser.userChars = data;
 
-        if (this.$route.path !== "/characters") {
-          this.$router.push({ path: "/characters" });
+        if (this.$route.path !== "/") {
+          this.$router.push({ path: "/" });
         }
       });
     } else {
@@ -133,7 +133,7 @@ export default {
       }
     }
   },
-  mounted() {}
+  mounted() {},
 };
 </script>
 

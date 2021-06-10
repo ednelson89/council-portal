@@ -130,14 +130,6 @@
       size="xl"
     >
       <b-row>
-        <b-col>
-          <b-alert show style="color:#000">
-            *Note: Editing is done in real time to your journal, so there is no
-            need to save.
-          </b-alert>
-        </b-col>
-      </b-row>
-      <b-row>
         <b-col xs="12" md="6">
           <label>
             Title:
@@ -262,7 +254,7 @@ export default {
       this.loading = true;
       updateWikis(3, this.activeWiki, this.activeGame.gameID)
         .then(() => {
-          this.updateGame();
+         return this.updateGame();
         })
         .then(() => {
           this.$refs["editWikiModal"].hide();
@@ -280,7 +272,7 @@ export default {
       this.loading = true;
       updateWikis(1, this.activeWiki, this.activeGame.gameID)
         .then(() => {
-          this.updateGame();
+          return this.updateGame();
         })
         .then(() => {
           this.$refs["addWikiModal"].hide();
@@ -323,7 +315,7 @@ export default {
           this.loading = true;
           updateWikis(2, this.wikiList[index], this.activeGame.gameID)
             .then(() => {
-              this.updateGame();
+              return this.updateGame();
             })
             .then(() => {
               this.loading = false;
@@ -369,7 +361,7 @@ export default {
         this.loading = true;
         updateWikis(4, this.wikiList, this.activeGame.gameID)
           .then(() => {
-            this.updateGame();
+            return this.updateGame();
           })
           .then(() => {
             this.activeWiki = {};

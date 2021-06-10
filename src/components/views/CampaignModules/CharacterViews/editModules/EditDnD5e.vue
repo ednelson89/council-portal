@@ -5,14 +5,12 @@
       <b-col cols="3">
         <label>
           Character Name:
-          <input v-model=" char.genBlock.charName " class="form-control" />
+          <input v-model="char.genBlock.charName" class="form-control" />
         </label>
         <p>
           User:
-          <span class="italics">{{char.charUser}}</span>
+          <span class="italics">{{ char.charUser }}</span>
         </p>
-        <hr />
-        <p>Editing is done in real time. There is no need to save.</p>
         <hr />
         <b-button
           @click="saveCharEdits"
@@ -38,11 +36,17 @@
               </label>
               <label>
                 Class Level:
-                <input class="form-control" v-model="char.genBlock.charClassLvl" />
+                <input
+                  class="form-control"
+                  v-model="char.genBlock.charClassLvl"
+                />
               </label>
               <label>
                 Background:
-                <input class="form-control" v-model="char.genBlock.charBackground" />
+                <input
+                  class="form-control"
+                  v-model="char.genBlock.charBackground"
+                />
               </label>
             </b-col>
             <b-col cols="3">
@@ -106,7 +110,10 @@
                   <p class="score">
                     <label>
                       Max:
-                      <input class="form-control" v-model="char.combatStats.hitPoints.maxHP" />
+                      <input
+                        class="form-control"
+                        v-model="char.combatStats.hitPoints.maxHP"
+                      />
                     </label>
                   </p>
                   <p class="score">
@@ -132,19 +139,28 @@
                   <p class="skillLabel">
                     <label>
                       Armor Class:
-                      <input class="form-control" v-model="char.combatStats.armorClass" />
+                      <input
+                        class="form-control"
+                        v-model="char.combatStats.armorClass"
+                      />
                     </label>
                   </p>
                   <p class="skillLabel">
                     <label>
                       Initiative:
-                      <input class="form-control" v-model="char.combatStats.initiative" />
+                      <input
+                        class="form-control"
+                        v-model="char.combatStats.initiative"
+                      />
                     </label>
                   </p>
                   <p class="skillLabel">
                     <label>
                       Speed:
-                      <input class="form-control" v-model="char.combatStats.speed" />
+                      <input
+                        class="form-control"
+                        v-model="char.combatStats.speed"
+                      />
                     </label>
                   </p>
                 </b-col>
@@ -235,7 +251,7 @@
                   :key="index"
                 >
                   <label>
-                    {{stat.statName}}
+                    {{ stat.statName }}
                     <input class="form-control" v-model="stat.stat" />
                   </label>
                   <label>
@@ -340,7 +356,12 @@
               </b-row>
               <b-row>
                 <b-col>
-                  <b-table striped hover :fields="attacksTableFields" :items="char.attacksCantrips">
+                  <b-table
+                    striped
+                    hover
+                    :fields="attacksTableFields"
+                    :items="char.attacksCantrips"
+                  >
                     <template v-slot:cell(attackName)="row">
                       <input
                         type="text"
@@ -370,7 +391,9 @@
                       />
                     </template>
                     <template>
-                      <b-button size="sm" @click="deleteFromAttacks(row.index)">Delete Attack</b-button>
+                      <b-button size="sm" @click="deleteFromAttacks(row.index)"
+                        >Delete Attack</b-button
+                      >
                     </template>
                   </b-table>
                 </b-col>
@@ -392,13 +415,18 @@
                     @click="skillsOpen = !skillsOpen"
                   >
                     Skills:
-                    <v-icon v-if="!skillsOpen" role="tab">mdi-chevron-double-right</v-icon>
-                    <v-icon v-else-if="skillsOpen">mdi-chevron-double-down</v-icon>
+                    <v-icon v-if="!skillsOpen" role="tab"
+                      >mdi-chevron-double-right</v-icon
+                    >
+                    <v-icon v-else-if="skillsOpen"
+                      >mdi-chevron-double-down</v-icon
+                    >
                     <span
                       class="italics"
                       style="font-weight:normal;font-size: 12px;"
                       v-if="!skillsOpen"
-                    >(click to expand)</span>
+                      >(click to expand)</span
+                    >
                   </h4>
                 </b-col>
               </b-row>
@@ -412,7 +440,7 @@
                   >
                     <p class="sectionLabel">
                       <label>
-                        {{skill.skName}}:
+                        {{ skill.skName }}:
                         <input class="form-control" v-model="skill.mod" />
                       </label>
                     </p>
@@ -486,7 +514,10 @@
                 <b-col cols="3">
                   <label>
                     Item Name:
-                    <input class="form-control" v-model="tempEquipment.itemName" />
+                    <input
+                      class="form-control"
+                      v-model="tempEquipment.itemName"
+                    />
                   </label>
                 </b-col>
                 <b-col cols="2">
@@ -498,13 +529,19 @@
                 <b-col cols="2">
                   <label>
                     Weight:
-                    <input class="form-control" v-model="tempEquipment.weight" />
+                    <input
+                      class="form-control"
+                      v-model="tempEquipment.weight"
+                    />
                   </label>
                 </b-col>
                 <b-col cols="2">
                   <label>
                     Details:
-                    <input class="form-control" v-model="tempEquipment.details" />
+                    <input
+                      class="form-control"
+                      v-model="tempEquipment.details"
+                    />
                   </label>
                 </b-col>
                 <b-col cols="2">
@@ -514,7 +551,12 @@
               </b-row>
               <b-row>
                 <b-col>
-                  <b-table striped hover :fields="equipmentTableFields" :items="char.equipment">
+                  <b-table
+                    striped
+                    hover
+                    :fields="equipmentTableFields"
+                    :items="char.equipment"
+                  >
                     <template v-slot:cell(itemName)="row">
                       <input
                         type="text"
@@ -544,7 +586,9 @@
                       />
                     </template>
                     <template v-slot:cell(delete)="row">
-                      <b-button size="sm" @click="deleteFromItems(row.index)">Delete Item</b-button>
+                      <b-button size="sm" @click="deleteFromItems(row.index)"
+                        >Delete Item</b-button
+                      >
                     </template>
                   </b-table>
                 </b-col>
@@ -558,19 +602,31 @@
                 <b-col cols="2">
                   <label>
                     Copper:
-                    <input type="text" v-model="char.money[0].copper" class="form-control" />
+                    <input
+                      type="text"
+                      v-model="char.money[0].copper"
+                      class="form-control"
+                    />
                   </label>
                 </b-col>
                 <b-col cols="2">
                   <label>
                     Silver:
-                    <input type="text" v-model="char.money[0].silver" class="form-control" />
+                    <input
+                      type="text"
+                      v-model="char.money[0].silver"
+                      class="form-control"
+                    />
                   </label>
                 </b-col>
                 <b-col cols="2">
                   <label>
                     Gold:
-                    <input type="text" v-model="char.money[0].gold" class="form-control" />
+                    <input
+                      type="text"
+                      v-model="char.money[0].gold"
+                      class="form-control"
+                    />
                   </label>
                 </b-col>
                 <b-col cols="2">
@@ -743,11 +799,15 @@
                 <b-col>
                   <h4 style="font-weight:bold;">Spells:</h4>
                   <p>
-                    Here is a list of your spells; please note that if you delete the last of your spells,
-                    it will be replaced by a blank spell so that the listing system doesnt break. This will
-                    be fixed in a later patch.
+                    Here is a list of your spells; please note that if you
+                    delete the last of your spells, it will be replaced by a
+                    blank spell so that the listing system doesnt break. This
+                    will be fixed in a later patch.
                   </p>
-                  <p>To add a link to the spell description, add the html link on it's own line.</p>
+                  <p>
+                    To add a link to the spell description, add the html link on
+                    it's own line.
+                  </p>
                 </b-col>
               </b-row>
               <b-row>
@@ -813,7 +873,9 @@
                         </template>
                         <template v-slot:cell(spellDescription)="row">
                           <b-form-textarea
-                            v-model="char.spells.cantrips[row.index].spellDescription"
+                            v-model="
+                              char.spells.cantrips[row.index].spellDescription
+                            "
                             placeholder="..."
                             rows="3"
                             max-rows="10"
@@ -823,13 +885,19 @@
                           <b-button
                             size="sm"
                             @click="deleteFromSpells(row.index, 'cantrips')"
-                          >Delete Item</b-button>
+                            >Delete Item</b-button
+                          >
                         </template>
                       </b-table>
                     </b-tab>
                     <b-tab title="Level 1">
                       <p class="sectionLabel">Level 1:</p>
-                      <b-table striped hover :items="char.spells.lvl1" :fields="spellTableFields">
+                      <b-table
+                        striped
+                        hover
+                        :items="char.spells.lvl1"
+                        :fields="spellTableFields"
+                      >
                         <template v-slot:cell(spellName)="row">
                           <input
                             type="text"
@@ -839,7 +907,9 @@
                         </template>
                         <template v-slot:cell(spellDescription)="row">
                           <b-form-textarea
-                            v-model="char.spells.lvl1[row.index].spellDescription"
+                            v-model="
+                              char.spells.lvl1[row.index].spellDescription
+                            "
                             placeholder="..."
                             rows="3"
                             max-rows="10"
@@ -849,13 +919,19 @@
                           <b-button
                             size="sm"
                             @click="deleteFromSpells(row.index, 'lvl1')"
-                          >Delete Item</b-button>
+                            >Delete Item</b-button
+                          >
                         </template>
                       </b-table>
                     </b-tab>
                     <b-tab title="Level 2">
                       <p class="sectionLabel">Level 2:</p>
-                      <b-table striped hover :items="char.spells.lvl2" :fields="spellTableFields">
+                      <b-table
+                        striped
+                        hover
+                        :items="char.spells.lvl2"
+                        :fields="spellTableFields"
+                      >
                         <template v-slot:cell(spellName)="row">
                           <input
                             type="text"
@@ -865,7 +941,9 @@
                         </template>
                         <template v-slot:cell(spellDescription)="row">
                           <b-form-textarea
-                            v-model="char.spells.lvl2[row.index].spellDescription"
+                            v-model="
+                              char.spells.lvl2[row.index].spellDescription
+                            "
                             placeholder="..."
                             rows="3"
                             max-rows="10"
@@ -875,13 +953,19 @@
                           <b-button
                             size="sm"
                             @click="deleteFromSpells(row.index, 'lvl2')"
-                          >Delete Item</b-button>
+                            >Delete Item</b-button
+                          >
                         </template>
                       </b-table>
                     </b-tab>
                     <b-tab title="Level 3">
                       <p class="sectionLabel">Level 3:</p>
-                      <b-table striped hover :items="char.spells.lvl3" :fields="spellTableFields">
+                      <b-table
+                        striped
+                        hover
+                        :items="char.spells.lvl3"
+                        :fields="spellTableFields"
+                      >
                         <template v-slot:cell(spellName)="row">
                           <input
                             type="text"
@@ -891,7 +975,9 @@
                         </template>
                         <template v-slot:cell(spellDescription)="row">
                           <b-form-textarea
-                            v-model="char.spells.lvl3[row.index].spellDescription"
+                            v-model="
+                              char.spells.lvl3[row.index].spellDescription
+                            "
                             placeholder="..."
                             rows="3"
                             max-rows="10"
@@ -901,13 +987,19 @@
                           <b-button
                             size="sm"
                             @click="deleteFromSpells(row.index, 'lvl3')"
-                          >Delete Item</b-button>
+                            >Delete Item</b-button
+                          >
                         </template>
                       </b-table>
                     </b-tab>
                     <b-tab title="Level 4">
                       <p class="sectionLabel">Level 4:</p>
-                      <b-table striped hover :items="char.spells.lvl4" :fields="spellTableFields">
+                      <b-table
+                        striped
+                        hover
+                        :items="char.spells.lvl4"
+                        :fields="spellTableFields"
+                      >
                         <template v-slot:cell(spellName)="row">
                           <input
                             type="text"
@@ -917,7 +1009,9 @@
                         </template>
                         <template v-slot:cell(spellDescription)="row">
                           <b-form-textarea
-                            v-model="char.spells.lvl4[row.index].spellDescription"
+                            v-model="
+                              char.spells.lvl4[row.index].spellDescription
+                            "
                             placeholder="..."
                             rows="3"
                             max-rows="10"
@@ -927,13 +1021,19 @@
                           <b-button
                             size="sm"
                             @click="deleteFromSpells(row.index, 'lvl4')"
-                          >Delete Item</b-button>
+                            >Delete Item</b-button
+                          >
                         </template>
                       </b-table>
                     </b-tab>
                     <b-tab title="Level 5">
                       <p class="sectionLabel">Level 5:</p>
-                      <b-table striped hover :items="char.spells.lvl5" :fields="spellTableFields">
+                      <b-table
+                        striped
+                        hover
+                        :items="char.spells.lvl5"
+                        :fields="spellTableFields"
+                      >
                         <template v-slot:cell(spellName)="row">
                           <input
                             type="text"
@@ -943,7 +1043,9 @@
                         </template>
                         <template v-slot:cell(spellDescription)="row">
                           <b-form-textarea
-                            v-model="char.spells.lvl5[row.index].spellDescription"
+                            v-model="
+                              char.spells.lvl5[row.index].spellDescription
+                            "
                             placeholder="..."
                             rows="3"
                             max-rows="10"
@@ -953,13 +1055,19 @@
                           <b-button
                             size="sm"
                             @click="deleteFromSpells(row.index, 'lvl5')"
-                          >Delete Item</b-button>
+                            >Delete Item</b-button
+                          >
                         </template>
                       </b-table>
                     </b-tab>
                     <b-tab title="Level 6">
                       <p class="sectionLabel">Level 6:</p>
-                      <b-table striped hover :items="char.spells.lvl6" :fields="spellTableFields">
+                      <b-table
+                        striped
+                        hover
+                        :items="char.spells.lvl6"
+                        :fields="spellTableFields"
+                      >
                         <template v-slot:cell(spellName)="row">
                           <input
                             type="text"
@@ -969,7 +1077,9 @@
                         </template>
                         <template v-slot:cell(spellDescription)="row">
                           <b-form-textarea
-                            v-model="char.spells.lvl6[row.index].spellDescription"
+                            v-model="
+                              char.spells.lvl6[row.index].spellDescription
+                            "
                             placeholder="..."
                             rows="3"
                             max-rows="10"
@@ -979,13 +1089,19 @@
                           <b-button
                             size="sm"
                             @click="deleteFromSpells(row.index, 'lvl6')"
-                          >Delete Item</b-button>
+                            >Delete Item</b-button
+                          >
                         </template>
                       </b-table>
                     </b-tab>
                     <b-tab title="Level 7">
                       <p class="sectionLabel">Level 7:</p>
-                      <b-table striped hover :items="char.spells.lvl7" :fields="spellTableFields">
+                      <b-table
+                        striped
+                        hover
+                        :items="char.spells.lvl7"
+                        :fields="spellTableFields"
+                      >
                         <template v-slot:cell(spellName)="row">
                           <input
                             type="text"
@@ -995,7 +1111,9 @@
                         </template>
                         <template v-slot:cell(spellDescription)="row">
                           <b-form-textarea
-                            v-model="char.spells.lvl7[row.index].spellDescription"
+                            v-model="
+                              char.spells.lvl7[row.index].spellDescription
+                            "
                             placeholder="..."
                             rows="3"
                             max-rows="10"
@@ -1005,13 +1123,19 @@
                           <b-button
                             size="sm"
                             @click="deleteFromSpells(row.index, 'lvl7')"
-                          >Delete Item</b-button>
+                            >Delete Item</b-button
+                          >
                         </template>
                       </b-table>
                     </b-tab>
                     <b-tab title="Level 8">
                       <p class="sectionLabel">Level 8:</p>
-                      <b-table striped hover :items="char.spells.lvl8" :fields="spellTableFields">
+                      <b-table
+                        striped
+                        hover
+                        :items="char.spells.lvl8"
+                        :fields="spellTableFields"
+                      >
                         <template v-slot:cell(spellName)="row">
                           <input
                             type="text"
@@ -1021,7 +1145,9 @@
                         </template>
                         <template v-slot:cell(spellDescription)="row">
                           <b-form-textarea
-                            v-model="char.spells.lvl8[row.index].spellDescription"
+                            v-model="
+                              char.spells.lvl8[row.index].spellDescription
+                            "
                             placeholder="..."
                             rows="3"
                             max-rows="10"
@@ -1031,13 +1157,19 @@
                           <b-button
                             size="sm"
                             @click="deleteFromSpells(row.index, 'lvl8')"
-                          >Delete Item</b-button>
+                            >Delete Item</b-button
+                          >
                         </template>
                       </b-table>
                     </b-tab>
                     <b-tab title="Level 9">
                       <p class="sectionLabel">Level 9:</p>
-                      <b-table striped hover :items="char.spells.lvl9" :fields="spellTableFields">
+                      <b-table
+                        striped
+                        hover
+                        :items="char.spells.lvl9"
+                        :fields="spellTableFields"
+                      >
                         <template v-slot:cell(spellName)="row">
                           <input
                             type="text"
@@ -1047,7 +1179,9 @@
                         </template>
                         <template v-slot:cell(spellDescription)="row">
                           <b-form-textarea
-                            v-model="char.spells.lvl9[row.index].spellDescription"
+                            v-model="
+                              char.spells.lvl9[row.index].spellDescription
+                            "
                             placeholder="..."
                             rows="3"
                             max-rows="10"
@@ -1057,7 +1191,8 @@
                           <b-button
                             size="sm"
                             @click="deleteFromSpells(row.index, 'lvl9')"
-                          >Delete Item</b-button>
+                            >Delete Item</b-button
+                          >
                         </template>
                       </b-table>
                     </b-tab>
@@ -1266,12 +1401,14 @@ export default {
     count.forEach((element) => {
       this.char.spells[element].forEach((spell) => {
         let temporarySpell = "";
-        if (Array.isArray(spell.spellDescription)) {
-          spell.spellDescription.forEach((line) => {
-            temporarySpell = temporarySpell.concat(line, "\n");
-          });
-          spell.spellDescription = temporarySpell;
-        }
+        spell.spellDescription.forEach((line, index, array) => {
+          if (index < array.length - 1) {
+            temporarySpell += line + "\n";
+          } else if (index === array.length - 1) {
+            temporarySpell += line;
+          }
+        });
+        spell.spellDescription = temporarySpell;
       });
     });
     // These ensure that the format of the textAreas remains correct

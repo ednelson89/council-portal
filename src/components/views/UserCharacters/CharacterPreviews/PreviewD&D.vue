@@ -118,7 +118,7 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-button class="cardButton" @click="assignCharacter(1)" :disabled="loading">
+            <b-button class="cardButton" @click="assignCharacter(1)" :disabled="loading || !gameSelection">
               {{ !loading ? "Yes" : "Loading..." }}
               <b-spinner label="Loading..." v-if="loading"></b-spinner>
             </b-button>
