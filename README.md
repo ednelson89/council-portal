@@ -10,7 +10,5 @@ journal entries, and wikis to custom games.
 
 ### To Do:
 
-- Allow GMs to edit games.
-- Allow transferring characters to games.
 - Allow assigning users to games.
 - Add responsive sizing.
