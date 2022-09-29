@@ -22,47 +22,27 @@
     <hr style="width:90%;" />
     <b-row v-if="activeUser.userChars[0]">
       <b-col cols>
-        <h2>Upcoming:</h2>
-        <p class="bolded">February-</p>
-        <ul>
-          <li>
-            <p>Saturday 20: Session 0, Mage</p> 
-          </li>
-          <li>
-            <p>Saturday 27: Curse of Strahd</p>
-          </li>
-        </ul>
-        <p class="bolded">March-</p>
-        <ul>
-          <li>
-            <p>Saturday 6,20: Mage</p> 
-          </li>
-          <li>
-            <p>Saturday 13,27: Curse of Strahd</p>
-          </li>
-        </ul>
-        <p class="bolded">April-</p>
-        <ul>
-          <li>
-            <p>Saturday 3,17: Session 0, Mage</p> 
-          </li>
-          <li>
-            <p>Saturday 10,24: Curse of Strahd</p>
-          </li>
-        </ul>
+        <iframe
+          src="https://calendar.google.com/calendar/embed?src=2m8k558h7sv5b6li9ggtg57k78%40group.calendar.google.com&ctz=America%2FNew_York"
+          style="border: 0"
+          width="800"
+          height="600"
+          frameborder="0"
+          scrolling="no"
+        ></iframe>
       </b-col>
     </b-row>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "home",
+  name: 'home',
   computed: {
     ...mapGetters({
-      activeUser: "getActiveUser",
+      activeUser: 'getActiveUser',
     }),
   },
 };
