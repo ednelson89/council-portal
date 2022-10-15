@@ -23,9 +23,9 @@
     <b-row v-if="activeUser.userChars[0]">
       <b-col cols>
         <iframe
-          src="https://calendar.google.com/calendar/embed?src=2m8k558h7sv5b6li9ggtg57k78%40group.calendar.google.com&ctz=America%2FNew_York"
+          src="https://calendar.google.com/calendar/embed?src=2m8k558h7sv5b6li9ggtg57k78%40group.calendar.google.com&ctz=America%2FNew_York&mode=AGENDA"
           style="border: 0"
-          width="800"
+          :width="windowWidth > 600 ? '100%' : ''"
           height="600"
           frameborder="0"
           scrolling="no"
@@ -40,10 +40,28 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'home',
+  data() {
+    return {
+      windowWidth: window.innerWidth,
+    };
+  },
   computed: {
     ...mapGetters({
       activeUser: 'getActiveUser',
     }),
+  },
+  methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize);
   },
 };
 </script>
