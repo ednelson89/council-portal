@@ -25,6 +25,7 @@
               <resourceMin></resourceMin>
               <charList></charList>
               <gameButtons></gameButtons>
+              <game-links></game-links>
             </div>
           </b-col>
         </b-row>
@@ -37,6 +38,7 @@
 import navigation from '@/components/common/Navigation.vue';
 import resourceMin from '@/components/views/SideBar/ResourceMin.vue';
 import charList from '@/components/views/SideBar/CharacterList.vue';
+import gameLinks from '@/components/views/SideBar/GameLink.vue';
 import gameButtons from '@/components/views/SideBar/GameTableFunctions.vue';
 import {
   getCampaigns,
@@ -45,7 +47,7 @@ import {
 import { mapGetters } from 'vuex';
 
 export default {
-  components: { navigation, resourceMin, charList, gameButtons },
+  components: { navigation, resourceMin, charList, gameButtons, gameLinks },
   data() {
     return {};
   },
