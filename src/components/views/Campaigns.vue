@@ -86,6 +86,99 @@
                     </b-card>
                   </b-col>
                 </b-row>
+              </div> </b-tab
+            ><b-tab title="D&D">
+              <div>
+                <b-row>
+                  <b-col
+                    xs="12"
+                    md="6"
+                    v-for="(game, index) in gameList.filter(
+                      (record) => record.gameType === 'D&D5e'
+                    )"
+                    :key="index"
+                  >
+                    <b-card
+                      :title="game.gameName.substring(0, 30)"
+                      style="margin:10px"
+                      class="b-cards"
+                    >
+                      <b-card-text>
+                        Description: {{ game.gameDesc[0].substring(0, 200) }}
+                        <span v-if="game.gameDesc[0].length > 200">...</span>
+                      </b-card-text>
+                      <b-card-text>GM: {{ game.gameGM }}</b-card-text>
+                      <b-card-text
+                        >Date Created: {{ game.gameDate }}</b-card-text
+                      >
+                      <b-button @click="viewGame(game)" class="cardButton"
+                        >Enter Game</b-button
+                      >
+                    </b-card>
+                  </b-col>
+                </b-row>
+              </div> </b-tab
+            ><b-tab title="CoD">
+              <div>
+                <b-row>
+                  <b-col
+                    xs="12"
+                    md="6"
+                    v-for="(game, index) in gameList.filter(
+                      (record) => record.gameType === 'CoD'
+                    )"
+                    :key="index"
+                  >
+                    <b-card
+                      :title="game.gameName.substring(0, 30)"
+                      style="margin:10px"
+                      class="b-cards"
+                    >
+                      <b-card-text>
+                        Description: {{ game.gameDesc[0].substring(0, 200) }}
+                        <span v-if="game.gameDesc[0].length > 200">...</span>
+                      </b-card-text>
+                      <b-card-text>GM: {{ game.gameGM }}</b-card-text>
+                      <b-card-text
+                        >Date Created: {{ game.gameDate }}</b-card-text
+                      >
+                      <b-button @click="viewGame(game)" class="cardButton"
+                        >Enter Game</b-button
+                      >
+                    </b-card>
+                  </b-col>
+                </b-row>
+              </div> </b-tab
+            ><b-tab title="Changeling">
+              <div>
+                <b-row>
+                  <b-col
+                    xs="12"
+                    md="6"
+                    v-for="(game, index) in gameList.filter(
+                      (record) => record.gameType === 'CoDChangeling'
+                    )"
+                    :key="index"
+                  >
+                    <b-card
+                      :title="game.gameName.substring(0, 30)"
+                      style="margin:10px"
+                      class="b-cards"
+                    >
+                      <b-card-text>
+                        Description: {{ game.gameDesc[0].substring(0, 200) }}
+                        <span v-if="game.gameDesc[0].length > 200">...</span>
+                      </b-card-text>
+                      <b-card-text>GM: {{ game.gameGM }}</b-card-text>
+                      <b-card-text
+                        >Date Created: {{ game.gameDate }}</b-card-text
+                      >
+                      <b-button @click="viewGame(game)" class="cardButton"
+                        >Enter Game</b-button
+                      >
+                    </b-card>
+                  </b-col>
+                </b-row>
               </div>
             </b-tab>
           </b-tabs>
