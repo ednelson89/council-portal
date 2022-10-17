@@ -2,7 +2,7 @@
   <div>
     <!-- Summary Block -->
     <b-row>
-      <b-col cols="3">
+      <b-col xs="12" md="3">
         <label>
           Character Name:
           <input v-model="tempChar.genBlock.charName " class="form-control" />
@@ -22,10 +22,10 @@
           <b-spinner label="Loading..." v-if="loading"></b-spinner>
         </b-button>
       </b-col>
-      <b-col cols="9">
+      <b-col xs="12" md="9">
         <b-card class="b-cards">
           <b-row>
-            <b-col cols="3">
+            <b-col xs="12" md="3">
               <!-- general content -->
               <label>
                 Age:
@@ -44,7 +44,7 @@
                 <input class="form-control" v-model="tempChar.genBlock.concept" />
               </label>
             </b-col>
-            <b-col cols="3">
+            <b-col xs="12" md="3">
               <label>
                 Chronicle:
                 <input class="form-control" v-model="tempChar.genBlock.chronicle" />
@@ -72,7 +72,6 @@
             </b-col>
           </b-row>
           <b-row>
-            <b-col cols="6"></b-col>
             <b-col>
               <label>
                 Image Source URL:
@@ -103,7 +102,7 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col class="skillCols">
+                <b-col class="skillCols" xs="12" md="4">
                   <label class="inline-label">Intelligence:</label>
                   <select class="form-control codSelect" v-model="tempChar.attributes.int">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
@@ -120,7 +119,7 @@
                   </select>
                   <br />
                 </b-col>
-                <b-col class="skillCols">
+                <b-col class="skillCols" xs="12" md="4">
                   <label class="inline-label">Strength:</label>
                   <select class="form-control codSelect" v-model="tempChar.attributes.str">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
@@ -137,7 +136,7 @@
                   </select>
                   <br />
                 </b-col>
-                <b-col class="skillCols">
+                <b-col class="skillCols" xs="12" md="4">
                   <label class="inline-label">Presence:</label>
                   <select class="form-control codSelect" v-model="tempChar.attributes.pres">
                     <option v-for="(num, index) in score" :key="index" :value="num">{{ num }}</option>
@@ -160,7 +159,7 @@
             <b-card class="b-cards">
               <p class="sectionLabel">Skills</p>
               <b-row>
-                <b-col class="skillCols">
+                <b-col class="skillCols" xs="12" md="4">
                   <p class="sectionLabel">Mental</p>
                   <div v-for="skill in tempChar.skills.mental" :key="skill.name">
                     <label
@@ -187,7 +186,7 @@
                     </b-row>
                   </div>
                 </b-col>
-                <b-col class="skillCols">
+                <b-col class="skillCols" xs="12" md="4">
                   <p class="sectionLabel">Physical</p>
                   <div v-for="skill in tempChar.skills.physical" :key="skill.name">
                     <label
@@ -214,7 +213,7 @@
                     </b-row>
                   </div>
                 </b-col>
-                <b-col class="skillCols">
+                <b-col class="skillCols" xs="12" md="4">
                   <p class="sectionLabel">Social</p>
                   <div v-for="skill in tempChar.skills.social" :key="skill.name">
                     <label
@@ -257,7 +256,7 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col cols="6" style="border-right: 1px black solid;">
+                <b-col xs="12" md="6" style="border-right: 1px black solid;">
                   <label class="inline-label">Health:</label>
                   <select
                     class="form-control codSelect"
@@ -281,7 +280,7 @@
                     </b-col>
                   </b-row>
                 </b-col>
-                <b-col cols="6" style="border-right: 1px black solid;">
+                <b-col xs="12" md="6" style="border-right: 1px black solid;">
                   <label class="inline-label">Willpower:</label>
                   <select
                     class="form-control codSelect"
@@ -304,7 +303,7 @@
                     </b-col>
                   </b-row>
                 </b-col>
-                <b-col cols="6" style="border-right: 1px black solid;">
+                <b-col xs="12" md="6" style="border-right: 1px black solid;">
                   <label class="inline-label">Wyrd:</label>
                   <select
                     class="form-control codSelect"
@@ -327,7 +326,7 @@
                     </b-col>
                   </b-row>
                 </b-col>
-                <b-col cols="6" style="border-right: 1px black solid;">
+                <b-col xs="12" md="6" style="border-right: 1px black solid;">
                   <label class="inline-label">Glamour:</label>
                   <select
                     class="form-control codSelect"
@@ -350,7 +349,7 @@
                     </b-col>
                   </b-row>
                 </b-col>
-                <b-col cols="6" style="border-right: 1px black solid;">
+                <b-col xs="12" md="6" style="border-right: 1px black solid;">
                   <label class="inline-label">Clarity:</label>
                   <select
                     class="form-control codSelect"
@@ -415,7 +414,7 @@
               </b-row>
               <hr />
               <b-row>
-                <b-col>
+                <b-col xs="12" md="6">
                   <label class="inline-label">Add Conditions:</label>
                   <input class="form-control codSelect" style="width:50%;" v-model="tempCond" />
                   <span class="inline-label">Clarity:</span>
@@ -440,7 +439,7 @@
                     >Clarity: {{item.clarity}} | Description: {{item.desc}}</li>
                   </ul>
                 </b-col>
-                <b-col>
+                <b-col xs="12" md="6">
                   <label class="inline-label">Add Aspirations:</label>
                   <input class="form-control codSelect" style="width:50%;" v-model="tempAsp" />
                   <b-button @click="addAspiration" style="margin:10px;">Add to List</b-button>
@@ -460,7 +459,7 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col>
+                <b-col xs="12" md="6">
                   <label class="inline-label">Add Regalia:</label>
                   <input class="form-control codSelect" style="width:50%;" v-model="tempReg" />
                   <b-button @click="addRegalia" style="margin:10px;">Add to List</b-button>
@@ -478,7 +477,7 @@
                     >{{item}}</li>
                   </ul>
                 </b-col>
-                <b-col>
+                <b-col xs="12" md="6">
                   <label class="inline-label">Add Frailties:</label>
                   <input class="form-control codSelect" style="width:50%;" v-model="tempFrail" />
                   <b-button @click="addFrailty" style="margin:10px;">Add to List</b-button>
@@ -498,7 +497,7 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col>
+                <b-col xs="12" md="6">
                   <label class="inline-label">Add Touchstone:</label>
                   <input class="form-control codSelect" style="width:50%;" v-model="tempTouch" />
                   <b-button @click="addTouchstone" style="margin:10px;">Add to List</b-button>
@@ -566,25 +565,25 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col cols="3">
+                <b-col xs="12" md="3">
                   <label>
                     Attack Name:
                     <input class="form-control" v-model="attack.name" />
                   </label>
                 </b-col>
-                <b-col cols="2">
+                <b-col xs="12" md="2">
                   <label>
                     Damage:
                     <input class="form-control" v-model="attack.dmg" />
                   </label>
                 </b-col>
-                <b-col cols="2">
+                <b-col xs="12" md="2">
                   <label>
                     Range:
                     <input class="form-control" v-model="attack.range" />
                   </label>
                 </b-col>
-                <b-col cols="2">
+                <b-col xs="12" md="2">
                   <label>
                     Clip:
                     <input class="form-control" v-model="attack.clip" />
@@ -592,25 +591,25 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col cols="3">
+                <b-col xs="12" md="3">
                   <label>
                     Init:
                     <input class="form-control" v-model="attack.init" />
                   </label>
                 </b-col>
-                <b-col cols="2">
+                <b-col xs="12" md="2">
                   <label>
                     Str:
                     <input class="form-control" v-model="attack.str" />
                   </label>
                 </b-col>
-                <b-col cols="2">
+                <b-col xs="12" md="2">
                   <label>
                     Size:
                     <input class="form-control" v-model="attack.size" />
                   </label>
                 </b-col>
-                <b-col cols="2">
+                <b-col xs="12" md="2">
                   <br />
                   <b-button
                     @click="tempChar.weaponAttks.push(JSON.parse(JSON.stringify(attack)))"
@@ -644,25 +643,25 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col cols="3">
+                <b-col xs="12" md="3">
                   <label>
                     Item Name:
                     <input class="form-control" v-model="tempEquipment.itemName" />
                   </label>
                 </b-col>
-                <b-col cols="2">
+                <b-col xs="12" md="2">
                   <label>
                     Durability:
                     <input class="form-control" v-model="tempEquipment.durability" />
                   </label>
                 </b-col>
-                <b-col cols="2">
+                <b-col xs="12" md="2">
                   <label>
                     Structure:
                     <input class="form-control" v-model="tempEquipment.structure" />
                   </label>
                 </b-col>
-                <b-col cols="2">
+                <b-col xs="12" md="2">
                   <label>
                     Size:
                     <input class="form-control" v-model="tempEquipment.size" />
@@ -670,19 +669,25 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col cols="3">
+                <b-col xs="12" md="3">
                   <label>
                     Cost:
                     <input class="form-control" v-model="tempEquipment.cost" />
                   </label>
                 </b-col>
-                <b-col cols="2">
+                <b-col xs="12" md="2">
                   <label>
                     Quantity:
                     <input class="form-control" v-model="tempEquipment.qnty" />
                   </label>
                 </b-col>
-                <b-col cols="2">
+                <b-col  xs="12" md="4">
+                  <label>
+                    Details:
+                    <input class="form-control" v-model="tempEquipment.details" />
+                  </label>
+                </b-col>
+                <b-col xs="12" md="2">
                   <br />
                   <b-button
                     @click="tempChar.equipment.push(JSON.parse(JSON.stringify(tempEquipment)))"
@@ -717,13 +722,13 @@
             <b-card class="b-cards">
               <h4>Contracts:</h4>
               <b-row>
-                <b-col cols="3">
+                <b-col xs="12" md="3">
                   <label>
                     Name:
                     <input v-model="tempContract.name" class="form-control" />
                   </label>
                 </b-col>
-                <b-col cols="1">
+                <b-col xs="12" md="2">
                   <label>
                     Goblin:
                     <input
@@ -733,25 +738,25 @@
                     />
                   </label>
                 </b-col>
-                <b-col cols="1">
+                <b-col xs="12" md="2">
                   <label>
                     Cost:
                     <input v-model="tempContract.cost" type="text" class="form-control" />
                   </label>
                 </b-col>
-                <b-col cols="1">
+                <b-col xs="12" md="2">
                   <label>
                     Dice:
                     <input v-model="tempContract.dice" type="text" class="form-control" />
                   </label>
                 </b-col>
-                <b-col cols="1">
+                <b-col xs="12" md="2">
                   <label>
                     Action:
                     <input v-model="tempContract.action" type="text" class="form-control" />
                   </label>
                 </b-col>
-                <b-col cols="1">
+                <b-col xs="12" md="2">
                   <label>
                     Duration:
                     <input
@@ -761,7 +766,7 @@
                     />
                   </label>
                 </b-col>
-                <b-col cols="2">
+                <b-col xs="12" md="2">
                   <label>
                     Loophole:
                     <input
@@ -808,7 +813,7 @@
             <b-card class="b-cards">
               <h4>Pledges:</h4>
               <b-row>
-                <b-col cols="3">
+                <b-col xs="12" md="3">
                   <label>
                     Type:
                     <select v-model="tempPledge.type" class="form-control">
@@ -856,7 +861,7 @@
                 <b-col>
                   <h4>Expanded Merits:</h4>
                   <b-row>
-                    <b-col>
+                    <b-col xs="12" md="6">
                       <label class="inline-label">Fae Mounts:</label>
                       <input
                         class="form-control codSelect"
@@ -880,7 +885,7 @@
                         >{{item}}</li>
                       </ul>
                     </b-col>
-                    <b-col>
+                    <b-col xs="12" md="6">
                       <label class="inline-label">Add Mantles:</label>
                       <input class="form-control codSelect" style="width:50%;" v-model="tempMantle" />
                       <b-button @click="addMantle" style="margin:10px;">Add to List</b-button>
@@ -900,7 +905,7 @@
                     </b-col>
                   </b-row>
                   <b-row>
-                    <b-col>
+                    <b-col xs="12" md="6">
                       <label class="inline-label">Add Hollows:</label>
                       <input class="form-control codSelect" style="width:50%;" v-model="tempHollow" />
                       <b-button @click="addHollow" style="margin:10px;">Add to List</b-button>
@@ -918,7 +923,7 @@
                         >{{item}}</li>
                       </ul>
                     </b-col>
-                    <b-col>
+                    <b-col xs="12" md="6">
                       <label class="inline-label">Add Tokens:</label>
                       <input class="form-control codSelect" style="width:50%;" v-model="tempToken" />
                       <b-button @click="addToken" style="margin:10px;">Add to List</b-button>
@@ -951,7 +956,7 @@
                 <b-col>
                   <h4>Other Traits:</h4>
                   <b-row>
-                    <b-col>
+                    <b-col xs="12" md="6">
                       <label>Add Seeming Blessings:</label>
                       <input
                         class="form-control codSelect"
@@ -975,7 +980,7 @@
                         >{{item}}</li>
                       </ul>
                     </b-col>
-                    <b-col>
+                    <b-col xs="12" md="6">
                       <label>Add Seeming Curses:</label>
                       <input
                         class="form-control codSelect"
@@ -1001,7 +1006,7 @@
                     </b-col>
                   </b-row>
                   <b-row>
-                    <b-col>
+                    <b-col xs="12" md="6">
                       <label>Add Kith Blessings:</label>
                       <input
                         class="form-control codSelect"
@@ -1025,7 +1030,7 @@
                         >{{item}}</li>
                       </ul>
                     </b-col>
-                    <b-col>
+                    <b-col xs="12" md="6">
                       <label>Add Goblin Debts:</label>
                       <input
                         type="checkbox"
