@@ -301,6 +301,7 @@
                         v-for="(record, index) in char.conditionMonitor
                           .physicalDmg.condition"
                         :key="index"
+                        disabled
                         type="checkbox"
                         v-model="record.value"
                       />
@@ -446,6 +447,7 @@ export default {
 
 .grid-wrapper > input {
   aspect-ratio: 1/1;
+  max-width: 120px;
 }
 .shadowRunSectionHead {
   font-weight: bold;
