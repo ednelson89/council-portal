@@ -4,13 +4,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </v-app-bar>
 
-    <v-navigation-drawer
-      v-show="drawer"
-      v-model="drawer"
-      fixed
-      bottom
-      temporary
-    >
+    <v-navigation-drawer v-model="drawer" fixed bottom temporary>
       <v-list-item v-if="currentUser">
         <v-list-item-avatar>
           <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
@@ -115,7 +109,7 @@ export default {
       mdiHomeCity,
       mdiAccount,
       mdiLogout,
-      drawer: true,
+      drawer: false,
       items: [
         { title: 'Campaigns', icon: mdiChessRook, path: '/campaigns' },
         {

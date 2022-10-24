@@ -172,6 +172,7 @@
                       striped
                       hover
                       stacked="md"
+                      :fields="skillsFields"
                       :items="char.skills"
                     ></b-table>
                   </div>
@@ -221,6 +222,7 @@
                         striped
                         hover
                         stacked="md"
+                        :fields="primaryArmorFields"
                         :items="char.coreCombatInfo.primaryArmor"
                       ></b-table>
                     </div>
@@ -233,6 +235,7 @@
                         striped
                         hover
                         stacked="md"
+                        :fields="primaryRangedWeapFields"
                         :items="char.coreCombatInfo.primaryRangedWeap"
                       ></b-table>
                     </div>
@@ -245,6 +248,7 @@
                         striped
                         hover
                         stacked="md"
+                        :fields="primaryMeleeWeapFields"
                         :items="char.coreCombatInfo.primaryMeleeWeap"
                       ></b-table>
                     </div>
@@ -326,6 +330,179 @@
           </b-col>
         </b-row>
       </b-tab>
+      <b-tab :title="'Qualities and Contacts'">
+        <!-- Qualities and Contacts-->
+        <b-row>
+          <b-col>
+            <b-card class="b-cards">
+              <b-row>
+                <b-col cols>
+                  <h3 class="shadowRunSectionHead">
+                    Qualities
+                  </h3>
+                  <div>
+                    <b-table
+                      striped
+                      hover
+                      stacked="md"
+                      :fields="qualitiesFields"
+                      :items="char.qualities"
+                    ></b-table>
+                  </div>
+                </b-col>
+                <hr />
+                <b-col cols>
+                  <h3 class="shadowRunSectionHead">
+                    Contacts
+                  </h3>
+                  <div>
+                    <b-table
+                      striped
+                      hover
+                      stacked="md"
+                      :fields="contactsFields"
+                      :items="char.contacts"
+                    ></b-table>
+                  </div>
+                </b-col>
+              </b-row>
+            </b-card>
+          </b-col>
+        </b-row>
+      </b-tab>
+      <b-tab :title="'Equipment I'">
+        <!-- Equipment-->
+        <b-row>
+          <b-col>
+            <b-card class="b-cards">
+              <b-row>
+                <b-col cols>
+                  <div style=" text-align: left;">
+                    <h3
+                      style="display:inline;"
+                      class="shadowRunSectionHead"
+                      v-b-toggle="'rangeWeapCollapse'"
+                      @click="rangeWeapOpen = !rangeWeapOpen"
+                    >
+                      Ranged Weapons
+                    </h3>
+                    <v-icon v-if="!rangeWeapOpen" role="tab"
+                      >mdi-chevron-double-right</v-icon
+                    >
+                    <v-icon v-else-if="rangeWeapOpen"
+                      >mdi-chevron-double-down</v-icon
+                    >
+                    <span
+                      class="italics"
+                      style="font-weight:normal;font-size: 12px;"
+                      v-if="!rangeWeapOpen"
+                      >(click to expand)</span
+                    >
+                  </div>
+                </b-col>
+              </b-row>
+              <b-collapse id="rangeWeapCollapse">
+                <b-row>
+                  <b-col xs="12">
+                    <div>
+                      <b-table
+                        striped
+                        hover
+                        stacked="md"
+                        :fields="primaryRangedWeapFields"
+                        :items="char.equipment.rngWeap"
+                      ></b-table>
+                    </div>
+                  </b-col>
+                </b-row>
+              </b-collapse>
+              <b-row>
+                <b-col cols>
+                  <div style=" text-align: left;">
+                    <h3
+                      style="display:inline;"
+                      class="shadowRunSectionHead"
+                      v-b-toggle="'meleeWeapCollapse'"
+                      @click="meleeWeapOpen = !meleeWeapOpen"
+                    >
+                      Melee Weapons
+                    </h3>
+                    <v-icon v-if="!meleeWeapOpen" role="tab"
+                      >mdi-chevron-double-right</v-icon
+                    >
+                    <v-icon v-else-if="meleeWeapOpen"
+                      >mdi-chevron-double-down</v-icon
+                    >
+                    <span
+                      class="italics"
+                      style="font-weight:normal;font-size: 12px;"
+                      v-if="!meleeWeapOpen"
+                      >(click to expand)</span
+                    >
+                  </div>
+                </b-col>
+              </b-row>
+              <b-collapse id="meleeWeapCollapse">
+                <b-row>
+                  <b-col xs="12">
+                    <div>
+                      <b-table
+                        striped
+                        hover
+                        stacked="md"
+                        :fields="primaryMeleeWeapFields"
+                        :items="char.equipment.meleeWeap"
+                      ></b-table>
+                    </div>
+                  </b-col>
+                </b-row>
+              </b-collapse>
+              <!-- Copy Point -->
+              <b-row>
+                <b-col cols>
+                  <div style=" text-align: left;">
+                    <h3
+                      style="display:inline;"
+                      class="shadowRunSectionHead"
+                      v-b-toggle="'armorListCollapse'"
+                      @click="armorListOpen = !armorListOpen"
+                    >
+                      Armor
+                    </h3>
+                    <v-icon v-if="!armorListOpen" role="tab"
+                      >mdi-chevron-double-right</v-icon
+                    >
+                    <v-icon v-else-if="armorListOpen"
+                      >mdi-chevron-double-down</v-icon
+                    >
+                    <span
+                      class="italics"
+                      style="font-weight:normal;font-size: 12px;"
+                      v-if="!armorListOpen"
+                      >(click to expand)</span
+                    >
+                  </div>
+                </b-col>
+              </b-row>
+              <b-collapse id="armorListCollapse">
+                <b-row>
+                  <b-col xs="12">
+                    <div>
+                      <b-table
+                        striped
+                        hover
+                        stacked="md"
+                        :fields="armorFields"
+                        :items="char.equipment.armor"
+                      ></b-table>
+                    </div>
+                  </b-col>
+                </b-row>
+              </b-collapse>
+            </b-card>
+          </b-col>
+        </b-row>
+      </b-tab>
       <b-tab :title="'Biography & Notes'">
         <!-- Biography -->
         <b-row>
@@ -391,6 +568,9 @@ export default {
     return {
       combatOpen: false,
       conditionOpen: false,
+      rangeWeapOpen: false,
+      meleeWeapOpen: false,
+      armorListOpen: false,
       attrMap: {
         body: 'Body',
         agility: 'Agility',
@@ -416,6 +596,21 @@ export default {
         mentalLimit: 'Mental Limit',
         socialLimit: 'Social Limit',
       },
+      skillsFields: ['skill', 'rtg', 'type'],
+      qualitiesFields: ['quality', 'notes', 'type'],
+      contactsFields: ['name', 'desc', 'loyalty', 'connect', 'favor'],
+      armorFields: ['name', 'rating', 'notes'],
+      primaryArmorFields: ['name', 'rating'],
+      primaryRangedWeapFields: [
+        'name',
+        'dmg',
+        'acc',
+        'ap',
+        'mode',
+        'rc',
+        'ammo',
+      ],
+      primaryMeleeWeapFields: ['name', 'reach', 'dmg', 'acc', 'ap'],
     };
   },
   computed: {
@@ -442,12 +637,11 @@ export default {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
 }
 
 .grid-wrapper > input {
   aspect-ratio: 1/1;
-  max-width: 120px;
+  max-width: 140px;
 }
 .shadowRunSectionHead {
   font-weight: bold;
@@ -494,6 +688,7 @@ p {
   width: 36px;
 }
 
+/* Styles for custom checkboxes */
 input[type='checkbox'] {
   -webkit-appearance: initial;
   appearance: initial;
