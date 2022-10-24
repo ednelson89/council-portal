@@ -215,8 +215,8 @@ export default {
           this.currGame.gameChars[this.delIndex],
           this.currGame.gameID
         )
-          .then(() => {
-            return this.updateGame();
+          .then(async () => {
+            return await this.updateGame();
           })
           .then(() => {
             this.$forceUpdate();
@@ -231,6 +231,7 @@ export default {
         this.delIndex = null;
         this.charName = '';
       }
+      this.$forceUpdate();
     },
     updateGame() {
       let gameList = [];
@@ -243,11 +244,10 @@ export default {
               currGame = entry;
             }
           });
-          return currGame;
-        })
-        .then((game) => {
-          this.$store.commit('setActiveGame', game);
+          this.$store.commit('setActiveGame', currGame);
           this.$store.commit('setGames', gameList);
+        })
+        .then(() => {
           this.$forceUpdate();
         });
     },
