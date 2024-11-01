@@ -1,18 +1,23 @@
 <template>
   <div>
-    <img :src="activeGame.gameMap" id="mapImg" :style="'width: 100%;'" class="imageBorder" />
+    <img
+      :src="activeGame.gameMap"
+      id="mapImg"
+      :style="'width: 100%;'"
+      class="imageBorder"
+    />
     <VueDragResize
       v-for="(token, index) in gameTokens"
       :key="index"
       :isActive="true"
-      :w="(token.width * (tableWidth)) / token.fieldLength"
-      :h="(token.width * (tableWidth)) / token.fieldLength"
+      :w="(token.width * tableWidth) / token.fieldLength"
+      :h="(token.width * tableWidth) / token.fieldLength"
       :x="(token.left * tableWidth) / token.fieldLength"
       :y="(token.top * tableHeight) / token.fieldHeight"
       :minw="2"
       :minh="2"
       :aspectRatio="true"
-      :parentW="tableWidth "
+      :parentW="tableWidth"
       :parentH="tableHeight"
       :parentLimitation="true"
       @resizing="resize($event, index)"
@@ -22,14 +27,16 @@
     >
       <img
         :src="token.imgSrc"
-        :width="(token.width * (tableWidth)) / token.fieldLength"
-        :height="(token.width * (tableWidth)) / token.fieldLength"
+        :width="(token.width * tableWidth) / token.fieldLength"
+        :height="(token.width * tableWidth) / token.fieldLength"
       />
       <p
         v-if="token.tokenName"
         :width="token.width"
         style="background-color: white"
-      >{{ token.tokenName }}</p>
+      >
+        {{ token.tokenName }}
+      </p>
     </VueDragResize>
   </div>
 </template>
@@ -40,19 +47,19 @@ import { mapGetters } from "vuex";
 
 import {
   getCampaigns,
-  updateTokens
+  updateTokens,
 } from "@/components/modules/utilities/dataFunctions.js";
 
 export default {
   components: {
-    VueDragResize
+    VueDragResize,
   },
   data() {
     return {
       gridOn: true,
       tableHeight: 1100,
       tableWidth: 600,
-      timer: ""
+      timer: "",
     };
   },
   methods: {
@@ -92,9 +99,9 @@ export default {
       console.log("Update Game");
       let gameList = [];
       getCampaigns()
-        .then(response => {
+        .then((response) => {
           let currGame;
-          response.forEach(entry => {
+          response.forEach((entry) => {
             gameList.push(entry);
             if (entry.gameID === this.activeGame.gameID) {
               currGame = entry;
@@ -102,7 +109,7 @@ export default {
           });
           return currGame;
         })
-        .then(game => {
+        .then((game) => {
           this.$store.commit("setActiveGame", game);
           this.$store.commit("setGames", gameList);
 
@@ -113,21 +120,21 @@ export default {
 
           this.$forceUpdate();
         });
-    }
+    },
   },
   computed: {
     ...mapGetters({
       gameTokens: "getActiveGameTokens",
       activeGame: "getActiveGame",
-      deleting: "getDeletingToken"
-    })
+      deleting: "getDeletingToken",
+    }),
   },
   beforeMount() {
     let gameTableEl = document.getElementById("mapImg");
     this.tableWidth = gameTableEl.offsetWidth;
     this.tableHeight = gameTableEl.offsetHeight;
 
-    this.gameTokens.forEach(token => {
+    this.gameTokens.forEach((token) => {
       token.top = (token.top * this.tableHeight) / token.fieldHeight;
       token.left = (token.left * this.tableWidth) / token.fieldLength;
       token.width = (token.width * this.tableWidth) / token.fieldLength;
@@ -141,7 +148,7 @@ export default {
     this.tableWidth = gameTableEl.offsetWidth;
     this.tableHeight = gameTableEl.offsetHeight;
 
-    this.gameTokens.forEach(token => {
+    this.gameTokens.forEach((token) => {
       token.top = (token.top * this.tableHeight) / token.fieldHeight;
       token.left = (token.left * this.tableWidth) / token.fieldLength;
       token.width = (token.width * this.tableWidth) / token.fieldLength;
@@ -155,7 +162,7 @@ export default {
       this.tableWidth = gameTableEl.offsetWidth;
       this.tableHeight = gameTableEl.offsetHeight;
 
-      this.gameTokens.forEach(token => {
+      this.gameTokens.forEach((token) => {
         token.top = (token.top * this.tableHeight) / token.fieldHeight;
         token.left = (token.left * this.tableWidth) / token.fieldLength;
         token.width = (token.width * this.tableWidth) / token.fieldLength;
@@ -167,7 +174,7 @@ export default {
 
     this.timer = setInterval(() => {
       this.updateGame();
-    }, 10000);
+    }, 3000);
     // eslint-disable-next-line no-console
     console.log("Timer Set");
   },
@@ -175,7 +182,7 @@ export default {
     clearInterval(this.timer);
     // eslint-disable-next-line no-console
     console.log("Timer Cleared");
-  }
+  },
 };
 </script>
 
