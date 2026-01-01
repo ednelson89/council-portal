@@ -2,6 +2,8 @@
 
 Tabletop Gaming portal for the Council of Bros
 
+This project is no longer maintained.
+
 ### Design Summary:
 
 This application is a single page app designed to provide a collaboration hub for character sheets and game materials
